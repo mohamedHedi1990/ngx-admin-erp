@@ -1,0 +1,17 @@
+<nb-card>
+  <nb-card-header style="background-color: #ff0000ad; font-family: Open Sans, sans-serif !important;"><h5>{{ title }}</h5></nb-card-header>
+  <nb-card-body style="font-family: Open Sans, sans-serif !important;">
+    <b>{{message}}</b>
+
+  </nb-card-body>
+  <nb-card-footer>
+    <!--
+    <div class="badge badge-pill  float-left">
+      <button type="button" class="btn"  style="background-color: gray"(click)="dismiss()">Annuler</button>
+    </div>
+    -->
+    <div class="badge float-right">
+      <button type="button" class="btn btn-secondary" style="background-color: #ff0000ad; border-color: #ff0000ad" (click)="isDeleted = true; dismiss()">Supprimer</button>
+    </div>
+  </nb-card-footer>
+</nb-card>

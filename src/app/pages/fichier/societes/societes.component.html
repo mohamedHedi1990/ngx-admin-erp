@@ -1,0 +1,120 @@
+<ngx-saisir-societe *ngIf="showCompanyWindow" (cancelcaompanyWindo)="hideCompanyWindow()"
+                    (addNewCompanyEvent)="addNewCompany($event)"
+[company]="company"></ngx-saisir-societe>
+<div class="animated fadeIn" *ngIf="!showCompanyWindow">
+    <td class="row">
+      <div class="col-lg-12">
+        <div class="card" >
+          <div class="card-header" style="background-color: white;">
+            <div class="badge badge-pill  float-right">
+              <button type="button" class="btn btn-secondary" style="background-color: green"
+                      (click)="showCompanyWindow = true">Ajouter une société</button>
+            </div>
+          </div>
+          <!--
+          <div class="card-header" style="background-color: white;">
+            <div style="display: flex;">
+              <div class="input-group mb-4 col-lg-6 col-md-6 col-sm-12 col-12 badge badge-pill  float-left" style="display: flex">
+                <div class="input-group-prepend">
+                  <i class="pi pi-search" style="margin:11px 4px 0 0"></i>
+                </div>
+                <div style="width:90%">
+                  <input type="text" pInputText size="80" placeholder="Trouver une société par nom, adresse, télephone ou identifiant unique" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                         style="width: 100%;height: 36px;border: none !important;">
+                </div>
+              </div>
+
+              <div class="badge badge-pill  float-right" style="margin-left: 32%; height: 100%">
+                <button type="button" class="btn btn-secondary" style="background-color: green"
+                        (click)="showCompanyWindow = true">Ajouter une société</button>
+              </div>
+            </div>
+          </div>
+
+-->
+            <div class="card-body" style="font-size: 12px;">
+<!--
+              <p-table #dt [columns]="cols"[value]="clients" [resizableColumns]="true"
+                       [responsive]="true" [paginator]="true" [rows]="5">
+
+                <ng-template pTemplate="caption" style="background-color: white !important;">
+                  <div >
+                    <div style="display: flex;">
+                      <div class="input-group mb-4 col-lg-8 col-md-6 col-sm-12 col-12 badge badge-pill  float-left" style="display: flex">
+                        <div class="input-group-prepend">
+                          <i class="pi pi-search" style="margin:11px 4px 0 0"></i>
+                        </div>
+                        <div style="width:90%">
+                          <input type="text" pInputText size="80" placeholder="Trouver une société par nom, adresse, télephone ou identifiant unique" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                 style="width: 100%;height: 36px;border: none !important;background-color: #c8c8c80f;font-size: 14px">
+                        </div>
+                      </div>
+
+                      <div class="badge badge-pill  float-right" style="margin-left: 15%; height: 100%">
+                        <button type="button" class="btn btn-secondary" style="background-color: green"
+                                (click)="showCompanyWindow = true">Ajouter une société</button>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+
+
+                <ng-template pTemplate="header" let-columns>
+<tr class="menu-title ng-tns-c108-0" style="text-align: center;">
+  <th pResizableColumn style="width: 180px;">Dénomination client</th>
+  <th pResizableColumn style="width: 180px;">Adresse</th>
+  <th pResizableColumn >Nom du responsable</th>
+  <th pResizableColumn >Contact</th>
+  <th pResizableColumn >Identifiant</th>
+  <th pResizableColumn >Date de création</th>
+  <th pResizableColumn >Date de modification</th>
+  <th pResizableColumn style="width: 100px">Actions</th>
+</tr>
+</ng-template>
+<ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
+
+  <ng-template #showCompaniesTable>
+    <tr style="text-align: center; font-size: 12px;">
+      <td>{{rowData['customerLabel']}}</td>
+      <td>{{rowData['customerAddress']}}</td>
+      <td>{{rowData['customerManagerName']}}</td>
+      <td>{{rowData['customerContactNumber']}}</td>
+      <td>{{rowData['customerUniqueIdentifier']}}</td>
+      <td>{{rowData['createdAt']}}</td>
+      <td>{{rowData['updatedAt']}}</td>
+      <td>
+        <div class="d-flex justify-content-around" style="margin: auto; width: 35%; text-align: center;">
+          <button pButton type="button" class="ui-button-primary" icon="pi pi-pencil" data-toggle="modal" style="margin-right: 5px;"
+                  placement="top" ngbTooltip="Modifier" (click)="modifyCurrentClient(rowData);showClientWindow = true;">
+          </button>
+          <button pButton type="button" class="ui-button-primary" icon="pi pi-trash" data-toggle="modal"
+                  placement="top" ngbTooltip="Supprimer" style="background-color: red; border-color: red"
+                  (click)="modifyCurrentClient(rowData); openDeleteDialog(rowData)">
+          </button>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</ng-template>
+</p-table>
+              -->
+
+              <div *ngIf="companies.length === 0 else showCompaniesTable">
+                Aucune société trouvée!
+              </div>
+              <ng-template #showCompaniesTable>
+                <ngx-details-societe *ngFor="let c of companies" [company]="c"
+                                     (editEvent)="modifyCurrentCompany($event); this.showCompanyWindow = true;"
+                                     (deleteEvent)="openDeleteDialog($event)"></ngx-details-societe>
+              </ng-template>
+
+
+</div>
+
+
+        </div>
+      </div>
+    </td>
+</div>
+
+
