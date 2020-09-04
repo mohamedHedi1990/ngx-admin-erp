@@ -20,45 +20,48 @@
 
     </ng-template>
     <ng-template pTemplate="header">
-      <tr>
+      <tr style="text-align: center; font-size: 15px;">
         <th pSortableColumn="customerLabel">Dénomination client</th>
 		<th pSortableColumn="customerUniqueIdentifier">Identifiant</th>
-        <th pSortableColumn="customerAddress">Adresse</th>
+        <th pSortableColumn="customerAddress" style="width: 200px">Adresse</th>
 		<th pSortableColumn="customerTel">Télephone</th>
 		<th pSortableColumn="customerEmail">Email</th>
-        <th pSortableColumn="customerManagerName"  style="width: 150px">Nom du responsable</th>
+        <th pSortableColumn="customerManagerName"  >Nom du responsable</th>
+        <!--
 		<th pSortableColumn="createdAt">Date de création</th>
 		<th pSortableColumn="updatedAt">Date de modfication</th>
-        <th style="width: 10rem"></th>
+		-->
+        <th style="width: 8rem"></th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-demande>
-      <tr class="p-selectable-row">
+    <ng-template pTemplate="body" let-client>
+      <tr class="p-selectable-row" style="text-align: center; font-size: 15px;">
         <td>
-          {{demande.customerLabel}}
+          {{client.customerLabel}}
         </td>
         <td>
-          {{conge.customerUniqueIdentifier}}
+          {{client.customerUniqueIdentifier}}
         </td>
         <td>
-          {{conge.customerAddress}}
+          {{client.customerAddress}}
         </td>
         <td>
-          {{conge.customerTel}}
+          {{client.customerTel}}
         </td>
         <td>
-          {{conge.customerEmail}}
+          {{client.customerEmail}}
         </td>
         <td>
-          {{conge.customerManagerName}}
+          {{client.customerManagerName}}
+        </td>
+        <!--
+        <td>
+          {{client.createdAt}}
         </td>
         <td>
-          {{conge.createdAt}}
+          {{client.updatedAt}}
         </td>
-        <td>
-          {{conge.updatedAt}}
-        </td>
-
+-->
         <td>
           <div style="display: flex;">
             <button pButton   pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="1"></button>

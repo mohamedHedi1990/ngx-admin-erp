@@ -22,13 +22,11 @@ import {
   NbSelectModule,
   NbUserModule,
 } from '@nebular/theme';
-import {TableModule} from 'primeng/table';
-import {ButtonModule} from 'primeng/button';
 import {FormsModule} from '@angular/forms';
 import { DetailsSocieteComponent } from './details-societe/details-societe.component';
 import { ListClientsComponent } from './list-clients/list-clients.component';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
-import {HttpClientModule} from '@angular/common/http';
+
 @NgModule({
   declarations: [SocietesComponent, SaisirSocieteComponent, DetailsSocieteComponent, ListClientsComponent],
   imports: [
