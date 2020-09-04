@@ -12,7 +12,7 @@
                 </span>
         </div>
 
-        <div style="width:8%; margin-left: 32%">
+        <div style="width:18%; margin-left: 25%">
           <button pButton pRipple label="Nouveau client" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
         </div>
 
@@ -21,40 +21,42 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 15px;">
-        <th pSortableColumn="customerLabel">Dénomination client</th>
-		<th pSortableColumn="customerUniqueIdentifier">Identifiant</th>
-        <th pSortableColumn="customerAddress" style="width: 200px">Adresse</th>
-		<th pSortableColumn="customerTel">Télephone</th>
-		<th pSortableColumn="customerEmail">Email</th>
-        <th pSortableColumn="customerManagerName"  >Nom du responsable</th>
+        <th pSortableColumn="customerLabel" style="text-align: center; font-size: 15px;">Dénomination client</th>
+		<th pSortableColumn="customerUniqueIdentifier" style="text-align: center; font-size: 15px;">Identifiant</th>
+        <th pSortableColumn="customerAddress" style="width: 200px; text-align: center;">Adresse</th>
+		<th pSortableColumn="customerTel" style="text-align: center; font-size: 15px;">Télephone</th>
+		<th pSortableColumn="customerEmail" style="text-align: center; font-size: 15px;">Email</th>
         <!--
-		<th pSortableColumn="createdAt">Date de création</th>
-		<th pSortableColumn="updatedAt">Date de modfication</th>
-		-->
-        <th style="width: 8rem"></th>
+       <th pSortableColumn="customerManagerName"  style="text-align: center; font-size: 15px;">Nom du responsable</th>
+
+   <th pSortableColumn="createdAt">Date de création</th>
+   <th pSortableColumn="updatedAt">Date de modfication</th>
+   -->
+        <th style="width: 10rem"></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-client>
       <tr class="p-selectable-row" style="text-align: center; font-size: 15px;">
-        <td>
+        <td  style="text-align: center;">
           {{client.customerLabel}}
         </td>
-        <td>
+        <td style="text-align: center;">
           {{client.customerUniqueIdentifier}}
         </td>
-        <td>
+        <td style="text-align: center;">
           {{client.customerAddress}}
         </td>
-        <td>
+        <td style="text-align: center;">
           {{client.customerTel}}
         </td>
-        <td>
+        <td style="text-align: center;">
           {{client.customerEmail}}
         </td>
-        <td>
+        <!--
+        <td style="text-align: center;">
           {{client.customerManagerName}}
         </td>
-        <!--
+
         <td>
           {{client.createdAt}}
         </td>
@@ -62,8 +64,9 @@
           {{client.updatedAt}}
         </td>
 -->
-        <td>
+        <td style="text-align: center;">
           <div style="display: flex;">
+            <button pButton   pRipple icon="pi pi-eye" class="p-button-rounded p-button-info p-mr-2" style="margin-right: 7px;" (click)="1"></button>
             <button pButton   pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="1"></button>
             <button pButton   pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="1"></button>
           </div>

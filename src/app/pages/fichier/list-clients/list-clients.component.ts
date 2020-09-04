@@ -73,6 +73,13 @@ export class ListClientsComponent implements OnInit {
   ngOnInit(): void {
     this.clients = [
       {customerLabel: 'Client A', customerUniqueIdentifier: 'HYUIO8CO9', customerAddress: 'Jardins de l\'aouina 2046 Tunis', customerTel: '+21623262528', customerEmail: 'clientA@gmail.com' , customerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06'},
+      {customerLabel: 'Client A', customerUniqueIdentifier: 'HYUIO8CO9', customerAddress: 'Jardins de l\'aouina 2046 Tunis', customerTel: '+21623262528', customerEmail: 'clientA@gmail.com' , customerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06'},
+      {customerLabel: 'Client A', customerUniqueIdentifier: 'HYUIO8CO9', customerAddress: 'Jardins de l\'aouina 2046 Tunis', customerTel: '+21623262528', customerEmail: 'clientA@gmail.com' , customerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06'},
+      {customerLabel: 'Client A', customerUniqueIdentifier: 'HYUIO8CO9', customerAddress: 'Jardins de l\'aouina 2046 Tunis', customerTel: '+21623262528', customerEmail: 'clientA@gmail.com' , customerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06'},
+      {customerLabel: 'Client A', customerUniqueIdentifier: 'HYUIO8CO9', customerAddress: 'Jardins de l\'aouina 2046 Tunis', customerTel: '+21623262528', customerEmail: 'clientA@gmail.com' , customerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06'},
+      {customerLabel: 'Client A', customerUniqueIdentifier: 'HYUIO8CO9', customerAddress: 'Jardins de l\'aouina 2046 Tunis', customerTel: '+21623262528', customerEmail: 'clientA@gmail.com' , customerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06'},
+      {customerLabel: 'Client A', customerUniqueIdentifier: 'HYUIO8CO9', customerAddress: 'Jardins de l\'aouina 2046 Tunis', customerTel: '+21623262528', customerEmail: 'clientA@gmail.com' , customerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06'},
+
     ]
   }
 
