@@ -1,14 +1,14 @@
 <div class="card">
   <p-table #dt [value]="clients" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
-           [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
-           [paginator]="true" currentPageReportTemplate="Visualiser de {first} à {last} pour {totalRecords} clients"
+           [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+           [paginator]="true" currentPageReportTemplate=""
            [filterDelay]="0" [globalFilterFields]="['customerLabel','customerUniqueIdentifier','customerAddress','customerTel','customerEmail','customerManagerName','createdAt', 'updatedAt']">
     <ng-template pTemplate="caption" >
       <div style="display: flex; width: 100%">
         <div class="p-d-flex p-ai-center p-jc-between" style="width: 60%">
         <span class="p-input-icon-left" style="width: 100%">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" style="margin-left: 5%; width: 93%;"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher un client.." />
+                    <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher un client.." />
                 </span>
         </div>
 
@@ -21,22 +21,43 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 15px;">
-        <th pSortableColumn="customerLabel" style="text-align: center; font-size: 15px;">Dénomination client</th>
+        <th pSortableColumn="customerLabel" style="text-align: center; font-size: 15px;">Dénomination</th>
 		<th pSortableColumn="customerUniqueIdentifier" style="text-align: center; font-size: 15px;">Identifiant</th>
-        <th pSortableColumn="customerAddress" style="width: 200px; text-align: center;">Adresse</th>
+        <th pSortableColumn="customerAddress" style="width: 300px; text-align: center;font-size: 15px;">Adresse</th>
+        <!--
 		<th pSortableColumn="customerTel" style="text-align: center; font-size: 15px;">Télephone</th>
 		<th pSortableColumn="customerEmail" style="text-align: center; font-size: 15px;">Email</th>
-        <!--
-       <th pSortableColumn="customerManagerName"  style="text-align: center; font-size: 15px;">Nom du responsable</th>
+		!-->
 
-   <th pSortableColumn="createdAt">Date de création</th>
-   <th pSortableColumn="updatedAt">Date de modfication</th>
-   -->
+       <th pSortableColumn="customerManagerName"  style="text-align: center; font-size: 15px;">Nom du responsable</th>
+        <!--
+          <th pSortableColumn="createdAt">Date de création</th>
+          <th pSortableColumn="updatedAt">Date de modfication</th>
+          -->
         <th style="width: 10rem"></th>
       </tr>
+      <!--
+      <tr>
+        <th>
+          <input pInputText type="text" (input)="dt.filter($event.target.value, 'customerLabel', 'contains')" placeholder="Chercher par nom" class="p-column-filter">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt.filter($event.target.value, 'customerUniqueIdentifier', 'contains')" placeholder="Chercher par identifiant" class="p-column-filter">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt.filter($event.target.value, 'customerAddress', 'contains')" placeholder="Chercher par adresse" class="p-column-filter">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt.filter($event.target.value, 'customerTel', 'contains')" placeholder="Chercher par télephone" class="p-column-filter">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt.filter($event.target.value, 'customerEmail', 'contains')" placeholder="Chercher par email" class="p-column-filter">
+        </th>
+      </tr>
+      -->
     </ng-template>
     <ng-template pTemplate="body" let-client>
-      <tr class="p-selectable-row" style="text-align: center; font-size: 15px;">
+      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
         <td  style="text-align: center;">
           {{client.customerLabel}}
         </td>
@@ -46,29 +67,31 @@
         <td style="text-align: center;">
           {{client.customerAddress}}
         </td>
+        <!--
         <td style="text-align: center;">
           {{client.customerTel}}
         </td>
         <td style="text-align: center;">
           {{client.customerEmail}}
         </td>
-        <!--
+        -->
+
         <td style="text-align: center;">
           {{client.customerManagerName}}
         </td>
-
-        <td>
-          {{client.createdAt}}
-        </td>
-        <td>
-          {{client.updatedAt}}
-        </td>
--->
+        <!--
+                <td>
+                  {{client.createdAt}}
+                </td>
+                <td>
+                  {{client.updatedAt}}
+                </td>
+        -->
         <td style="text-align: center;">
           <div style="display: flex;">
-            <button pButton   pRipple icon="pi pi-eye" class="p-button-rounded p-button-info p-mr-2" style="margin-right: 7px;" (click)="1"></button>
-            <button pButton   pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="1"></button>
-            <button pButton   pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="1"></button>
+            <button pButton   placement="top" ngbTooltip="Contacter" pRipple icon="pi pi-users" class="p-button-rounded p-button-info p-mr-2" style="margin-right: 7px;" (click)="1"></button>
+            <button pButton   placement="top" ngbTooltip="Modifier" pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="1"></button>
+            <button pButton   placement="top" ngbTooltip="Supprimer" pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="1"></button>
           </div>
 
         </td>
