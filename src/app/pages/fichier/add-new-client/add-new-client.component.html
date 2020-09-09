@@ -1,0 +1,78 @@
+<h5>Nouveau client</h5>
+<div style="width: 70%;
+    margin: auto;">
+  <form >
+    <div class="p-grid p-fluid">
+      <div style="display: flex">
+        <div class="mb-1 col-md-6 col-12">
+          <label for="clientLabel" class="p-float-label">Dénomination client</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-check"></i></span>
+            <input type="text" class="form-control" placeholder="-- Dénomination client --" id="clientLabel"
+                   [(ngModel)]="client.customerLabel" [ngClass]="{
+        'is-invalid': client.customerLabel == null || client.customerLabel == '' ,
+        'is-valid': client.customerLabel != null && client.customerLabel != ''
+      }">
+          </div>
+        </div>
+        <div class="mb-1 col-md-6 col-12">
+          <label for="identifiant" class="p-float-label">Identifiant</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-check"></i></span>
+            <input type="text" class="form-control" placeholder="-- Identifiant unique --" id="identifiant"
+                   [(ngModel)]="client.customerUniqueIdentifier " [ngClass]="{
+        'is-invalid': client.customerUniqueIdentifier  == null || client.customerUniqueIdentifier  == '' ,
+        'is-valid': client.customerUniqueIdentifier  != null && client.customerUniqueIdentifier  != ''
+      }">
+          </div>
+        </div>
+      </div>
+
+      <div class="p-col-12 p-md-4">
+        <label for="tel" class="p-float-label">Téléphone </label>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-check"></i></span>
+          <input type="number" class="form-control" placeholder="-- Téléphone  --" id="tel"
+                 [(ngModel)]="client.customerTel " [ngClass]="{
+        'is-invalid': client.customerTel  == null || client.customerTel  == '' ,
+        'is-valid': client.customerTel  != null && client.customerTel  != ''
+      }">
+        </div>
+      </div>
+      <div class="p-col-12 p-md-4">
+        <label for="mail" class="p-float-label">Email </label>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-check"></i></span>
+          <input type="text" class="form-control" placeholder="-- Email  --" id="mail"
+                 [(ngModel)]="client.customerEmail " [ngClass]="{
+        'is-invalid': client.customerEmail  == null || client.customerEmail  == '' ,
+        'is-valid': client.customerEmail  != null && client.customerEmail  != ''
+      }">
+        </div>
+      </div>
+      <div class="p-col-12 p-md-4">
+        <label for="manager" class="p-float-label">Responsable </label>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-check"></i></span>
+          <input type="text" class="form-control" placeholder="-- Email  --" id="manager"
+                 [(ngModel)]="client.customerManagerName " [ngClass]="{
+        'is-invalid': client.customerManagerName  == null || client.customerManagerName  == '' ,
+        'is-valid': client.customerManagerName  != null && client.customerManagerName  != ''
+      }">
+        </div>
+      </div>
+
+      <div class="p-col-12 p-md-4">
+        <label for="adress" class="p-float-label">Adresse </label>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-list"></i></span>
+          <textarea id="story" name="story" rows="3"  pInputText placeholder="Taches à faire" style="width: 100%;"  id ="adress" [(ngModel)]="client.customerAddress " [ngClass]="{
+        'is-invalid': client.customerAddress  == null || client.customerAddress  == '' ,
+        'is-valid': client.customerAddress  != null && client.customerAddress  != ''
+      }"></textarea>
+        </div>
+      </div>
+      <button type="submit" [disabled]="" class="btn btn-primary" style="margin-left: 87%;">Envoyer</button>
+    </div>
+  </form>
+</div>
