@@ -1,3 +1,4 @@
+import { ListContactsComponent } from './list-contacts/list-contacts.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -11,6 +12,7 @@ import {UtilsServiceService} from '../../utils-service.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SaisirSocieteComponent } from './saisir-societe/saisir-societe.component';
 import {ModalModule} from 'ngx-bootstrap/modal';
+import {ListContactsComponent} from './list-contacts/list-contacts.component'
 import {
   NbActionsModule,
   NbButtonModule,
@@ -28,7 +30,7 @@ import { ListClientsComponent } from './list-clients/list-clients.component';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
 
 @NgModule({
-  declarations: [SocietesComponent, SaisirSocieteComponent, DetailsSocieteComponent, ListClientsComponent],
+  declarations: [SocietesComponent, SaisirSocieteComponent, DetailsSocieteComponent, ListClientsComponent, ListContactsComponent],
   imports: [
     CommonModule,
     FichierRoutingModule,
