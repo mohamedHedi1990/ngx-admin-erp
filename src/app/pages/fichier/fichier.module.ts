@@ -28,9 +28,11 @@ import { DetailsSocieteComponent } from './details-societe/details-societe.compo
 import { ListClientsComponent } from './list-clients/list-clients.component';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {AddNewClientComponent} from './add-new-client/add-new-client.component';
+import {PanelModule} from "primeng/panel";
+import { NewContactComponent } from './new-contact/new-contact.component';
 
 @NgModule({
-  declarations: [SocietesComponent, SaisirSocieteComponent, DetailsSocieteComponent, ListClientsComponent, ListContactsComponent, AddNewClientComponent],
+  declarations: [SocietesComponent, SaisirSocieteComponent, DetailsSocieteComponent, ListClientsComponent, ListContactsComponent, AddNewClientComponent, NewContactComponent],
   imports: [
     CommonModule,
     FichierRoutingModule,
@@ -49,7 +51,7 @@ import {AddNewClientComponent} from './add-new-client/add-new-client.component';
     NbSelectModule,
     HttpClientModule,
     NbUserModule, FormsModule,
-    ModalModule.forRoot(), Ng2SmartTableModule,
+    ModalModule.forRoot(), Ng2SmartTableModule, PanelModule,
   ],
   providers: [UtilsServiceService],
 })

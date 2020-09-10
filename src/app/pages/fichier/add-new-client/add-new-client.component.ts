@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'ngx-add-new-client',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-new-client.component.scss'],
 })
 export class AddNewClientComponent implements OnInit {
-  client = {
+  @Input() client = {
     customerId: null,
     customerLabel: '',
     customerAddress: '',
@@ -14,11 +14,19 @@ export class AddNewClientComponent implements OnInit {
     customerManagerName: '',
     customerTel: '',
     customerEmail: '',
-    customerContacts: null,
+    customerContacts: [],
   };
   constructor() { }
 
   ngOnInit(): void {
+  }
+  addNewContact() {
+    this.client.customerContacts.push({
+      contactName : '',
+      contactPost : '',
+      contactTel : '',
+      contactEmail : '',
+    });
   }
 
 }
