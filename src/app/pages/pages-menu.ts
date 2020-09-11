@@ -29,8 +29,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/fichier/clients',
       },
       {
-        title: 'Fournissuers',
-        link: '/pages/layout/accordion',
+        title: 'Fournisseurs',
+        link: '/pages/fichier/fournisseurs',
       },
       {
         title: 'Comptes bancaires',
@@ -47,7 +47,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/forms/inputs',
       },
       {
-        title: 'Factures fournissuers',
+        title: 'Factures fournisseurs',
         link: '/pages/forms/layouts',
       },
     ],
