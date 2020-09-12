@@ -8,11 +8,11 @@
         <div class="p-d-flex p-ai-center p-jc-between" style="width: 60%">
         <span class="p-input-icon-left" style="width: 100%">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher un client.." />
+                    <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher un fournisseur.." />
                 </span>
         </div>
 
-        <div style="width:18%; margin-left: 25%">
+        <div style="width:23%; margin-left: 25%">
           <button pButton pRipple label="Nouveau fournisseur" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
         </div>
 
@@ -21,9 +21,9 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 15px;">
-        <th pSortableColumn="providerLabel" style="text-align: center; font-size: 15px;">Dénomination</th>
-        <th pSortableColumn="providerUniqueIdentifier" style="text-align: center; font-size: 15px;">Identifiant</th>
-        <th pSortableColumn="providerAddress" style="width: 300px; text-align: center;font-size: 15px;">Adresse</th>
+        <th pSortableColumn="providerLabel" style="text-align: center; font-size: 15px;">Dénomination<p-sortIcon field="providerLabel"></p-sortIcon></th>
+        <th pSortableColumn="providerUniqueIdentifier" style="text-align: center; font-size: 15px;">Identifiant<p-sortIcon field="providerUniqueIdentifier"></p-sortIcon></th>
+        <th pSortableColumn="providerAddress" style="width: 300px; text-align: center;font-size: 15px;">Adresse<p-sortIcon field="providerAddress"></p-sortIcon></th>
         <!--
 		<th pSortableColumn="customerTel" style="text-align: center; font-size: 15px;">Télephone</th>
 		<th pSortableColumn="customerEmail" style="text-align: center; font-size: 15px;">Email</th>
