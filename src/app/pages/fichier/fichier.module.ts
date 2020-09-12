@@ -32,9 +32,13 @@ import {PanelModule} from 'primeng/panel';
 import { NewContactComponent } from './new-contact/new-contact.component';
 import {ListFournisseursComponent} from './list-fournisseurs/list-fournisseurs.component';
 import { AddNewProviderComponent } from './add-new-provider/add-new-provider.component';
+import { ListeContactsComponent } from './liste-contacts/liste-contacts.component';
+import {DialogModule} from 'primeng/dialog';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import { ListeTarifsBancaireComponent } from './liste-tarifs-bancaire/liste-tarifs-bancaire.component';
 
 @NgModule({
-  declarations: [SocietesComponent, SaisirSocieteComponent, DetailsSocieteComponent, ListClientsComponent, ListContactsComponent, AddNewClientComponent, NewContactComponent, ListFournisseursComponent, AddNewProviderComponent],
+  declarations: [SocietesComponent, SaisirSocieteComponent, DetailsSocieteComponent, ListClientsComponent, ListContactsComponent, AddNewClientComponent, NewContactComponent, ListFournisseursComponent, AddNewProviderComponent, ListeContactsComponent, ListeTarifsBancaireComponent],
   imports: [
     CommonModule,
     FichierRoutingModule,
@@ -52,8 +56,9 @@ import { AddNewProviderComponent } from './add-new-provider/add-new-provider.com
     NbRadioModule,
     NbSelectModule,
     HttpClientModule,
+    DynamicDialogModule,
     NbUserModule, FormsModule,
-    ModalModule.forRoot(), Ng2SmartTableModule, PanelModule,
+    ModalModule.forRoot(), Ng2SmartTableModule, PanelModule, DialogModule,
   ],
   providers: [UtilsServiceService],
 })
