@@ -32,9 +32,10 @@ import {PanelModule} from 'primeng/panel';
 import { NewContactComponent } from './new-contact/new-contact.component';
 import {ListFournisseursComponent} from './list-fournisseurs/list-fournisseurs.component';
 import { AddNewProviderComponent } from './add-new-provider/add-new-provider.component';
+import { ListComptesComponent } from './list-comptes/list-comptes.component';
 
 @NgModule({
-  declarations: [SocietesComponent, SaisirSocieteComponent, DetailsSocieteComponent, ListClientsComponent, ListContactsComponent, AddNewClientComponent, NewContactComponent, ListFournisseursComponent, AddNewProviderComponent],
+  declarations: [SocietesComponent, SaisirSocieteComponent, DetailsSocieteComponent, ListClientsComponent, ListContactsComponent, AddNewClientComponent, NewContactComponent, ListFournisseursComponent, AddNewProviderComponent, ListComptesComponent],
   imports: [
     CommonModule,
     FichierRoutingModule,
