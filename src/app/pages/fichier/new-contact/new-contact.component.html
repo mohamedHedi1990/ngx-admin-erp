@@ -1,0 +1,52 @@
+<div class="p-grid p-fluid">
+  <div style="display: flex">
+    <div class="mb-1 col-md-6 col-12 p-field">
+      <label for="clientLabel" class="p-float-label">Nom</label>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+        <input type="text" class="form-control p-field" id="clientLabel"
+               [(ngModel)]="contact.contactName" [ngClass]="{
+        'is-invalid': contact.contactName == null || contact.contactName == '' ,
+        'is-valid': contact.contactName != null && contact.contactName != ''
+      }">
+      </div>
+    </div>
+    <div class="mb-1 col-md-6 col-12">
+      <label for="identifiant" class="p-float-label">Poste</label>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-briefcase"></i></span>
+        <input type="text" class="form-control p-field"  id="identifiant"
+               [(ngModel)]="contact.contactPost " [ngClass]="{
+        'is-invalid': contact.contactPost  == null || contact.contactPost  == '' ,
+        'is-valid': contact.contactPost  != null && contact.contactPost != ''
+      }">
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex">
+    <div class="mb-1 col-md-6 col-12">
+      <label for="tel" class="p-float-label ">Téléphone </label>
+      <div class="p-inputgroup p-fluid">
+        <span class="p-inputgroup-addon"><i class="pi pi-mobile"></i></span>
+        <input type="number" class="form-control p-fluid"  id="tel"
+               [(ngModel)]="contact.contactTel " [ngClass]="{
+    'is-invalid': contact.contactTel  == null || contact.contactTel  == '' ,
+    'is-valid': contact.contactTel  != null && contact.contactTel  != ''
+  }">
+      </div>
+    </div>
+    <div class="mb-1 col-md-6 col-12">
+      <label for="mail" class="p-float-label">Email </label>
+      <div class="p-inputgroup p-fluid">
+        <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
+        <input type="text" class="form-control p-fluid"  id="mail"
+               [(ngModel)]="contact.contactEmail " [ngClass]="{
+    'is-invalid': contact.contactEmail  == null || contact.contactEmail == '' ,
+    'is-valid': contact.contactEmail != null && contact.contactEmail  != ''
+  }">
+      </div>
+    </div>
+  </div>
+
+</div>

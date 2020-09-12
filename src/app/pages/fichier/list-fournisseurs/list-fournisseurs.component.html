@@ -1,19 +1,19 @@
-<div *ngIf="!showClientWindow" class="card">
-  <p-table #dt [value]="clients" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+<div class="card" *ngIf="!showProviderWindow">
+  <p-table #dt [value]="providers" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
            [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
            [paginator]="true" currentPageReportTemplate=""
-           [filterDelay]="0" [globalFilterFields]="['customerLabel','customerUniqueIdentifier','customerAddress','customerTel','customerEmail','customerManagerName','createdAt', 'updatedAt']">
+           [filterDelay]="0" [globalFilterFields]="['providerLabel','providerUniqueIdentifier','providerAddress','providerTel','providerEmail','providerManagerName','createdAt', 'updatedAt']">
     <ng-template pTemplate="caption" >
       <div style="display: flex; width: 100%">
         <div class="p-d-flex p-ai-center p-jc-between" style="width: 60%">
         <span class="p-input-icon-left" style="width: 100%">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher un client.." />
+                    <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher un fournisseur.." />
                 </span>
         </div>
 
-        <div style="width:18%; margin-left: 25%">
-          <button pButton pRipple label="Nouveau client" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="showClientWindow = true"></button>
+        <div style="width:23%; margin-left: 25%">
+          <button pButton pRipple label="Nouveau fournisseur" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="showProviderWindow=true"></button>
         </div>
 
       </div>
@@ -21,15 +21,15 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 15px;">
-        <th pSortableColumn="customerLabel" style="text-align: center; font-size: 15px;">Dénomination<p-sortIcon field="customerLabel"></p-sortIcon></th>
-		<th pSortableColumn="customerUniqueIdentifier" style="text-align: center; font-size: 15px;">Identifiant<p-sortIcon field="customerUniqueIdentifier"></p-sortIcon></th>
-        <th pSortableColumn="customerAddress" style="width: 300px; text-align: center;font-size: 15px;">Adresse<p-sortIcon field="customerAddress"></p-sortIcon></th>
+        <th pSortableColumn="providerLabel" style="text-align: center; font-size: 15px;">Dénomination<p-sortIcon field="providerLabel"></p-sortIcon></th>
+        <th pSortableColumn="providerUniqueIdentifier" style="text-align: center; font-size: 15px;">Identifiant<p-sortIcon field="providerUniqueIdentifier"></p-sortIcon></th>
+        <th pSortableColumn="providerAddress" style="width: 300px; text-align: center;font-size: 15px;">Adresse<p-sortIcon field="providerAddress"></p-sortIcon></th>
         <!--
 		<th pSortableColumn="customerTel" style="text-align: center; font-size: 15px;">Télephone</th>
 		<th pSortableColumn="customerEmail" style="text-align: center; font-size: 15px;">Email</th>
 		!-->
 
-       <th pSortableColumn="customerManagerName"  style="text-align: center; font-size: 15px;">Nom du responsable</th>
+        <th pSortableColumn="providerManagerName"  style="text-align: center; font-size: 15px;">Nom du responsable</th>
         <!--
           <th pSortableColumn="createdAt">Date de création</th>
           <th pSortableColumn="updatedAt">Date de modfication</th>
@@ -56,16 +56,16 @@
       </tr>
       -->
     </ng-template>
-    <ng-template pTemplate="body" let-client>
+    <ng-template pTemplate="body" let-provider>
       <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
         <td  style="text-align: center;">
-          {{client.customerLabel}}
+          {{provider.providerLabel}}
         </td>
         <td style="text-align: center;">
-          {{client.customerUniqueIdentifier}}
+          {{provider.providerUniqueIdentifier}}
         </td>
         <td style="text-align: center;">
-          {{client.customerAddress}}
+          {{provider.providerAddress}}
         </td>
         <!--
         <td style="text-align: center;">
@@ -77,16 +77,9 @@
         -->
 
         <td style="text-align: center;">
-          {{client.customerManagerName}}
+          {{provider.providerManagerName}}
         </td>
-        <!--
-                <td>
-                  {{client.createdAt}}
-                </td>
-                <td>
-                  {{client.updatedAt}}
-                </td>
-        -->
+
         <td style="text-align: center;">
           <div style="display: flex;">
             <button pButton   placement="top" ngbTooltip="Contacter" pRipple icon="pi pi-users" class="p-button-rounded p-button-info p-mr-2" style="margin-right: 7px;" (click)="1"></button>
@@ -99,11 +92,10 @@
     </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td colspan="8">Aucun client trouvé!</td>
+        <td colspan="8">Aucun fournisseur trouvé!</td>
       </tr>
     </ng-template>
   </p-table>
 </div>
 
-<ngx-add-new-client *ngIf="showClientWindow" [client]="client" (addNewClientEvent)="saveNewClient($event)"
-(cancelEvent)="hideClientWindow(); initClient();"></ngx-add-new-client>
+<ngx-add-new-provider *ngIf="showProviderWindow" [provider]="provider" (addNewProviderEvent)="saveNewProvider($event)" (cancelEvent)="hideProviderWindow(); initprovider();"></ngx-add-new-provider>

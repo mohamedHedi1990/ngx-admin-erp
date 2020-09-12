@@ -1,0 +1,101 @@
+<h5>Nouveau fournisseur</h5>
+<div style="width: 90%;
+    margin: auto;">
+  <p-panel header="Configuration génerale" [toggleable]="false">
+      <div class="p-grid p-fluid">
+        <div style="display: flex">
+          <div class="mb-1 col-md-6 col-12 p-field">
+            <label for="providerLabel" class="p-float-label">Dénomination fournisseur</label>
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+              <input type="text" class="form-control p-field" id="providerLabel"
+                     [(ngModel)]="provider.providerLabel" [ngClass]="{
+        'is-invalid': provider.providerLabel == null || provider.providerLabel == '' ,
+        'is-valid': provider.providerLabel != null && provider.providerLabel != ''
+      }">
+            </div>
+          </div>
+          <div class="mb-1 col-md-6 col-12">
+            <label for="identifiant" class="p-float-label">Identifiant unique</label>
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+              <input type="text" class="form-control p-field"  id="identifiant"
+                     [(ngModel)]="provider.providerUniqueIdentifier " [ngClass]="{
+        'is-invalid': provider.providerUniqueIdentifier  == null || provider.providerUniqueIdentifier  == '' ,
+        'is-valid': provider.providerUniqueIdentifier  != null && provider.providerUniqueIdentifier  != ''
+      }">
+            </div>
+          </div>
+        </div>
+        <!--
+        <div style="display: flex">
+          <div class="mb-1 col-md-6 col-12">
+            <label for="tel" class="p-float-label">Téléphone </label>
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-check"></i></span>
+              <input type="number" class="form-control" placeholder="-- Téléphone  --" id="tel"
+                     [(ngModel)]="provider.providerTel " [ngClass]="{
+          'is-invalid': provider.providerTel  == null || provider.providerTel  == '' ,
+          'is-valid': provider.providerTel  != null && provider.providerTel  != ''
+        }">
+            </div>
+          </div>
+          <div class="mb-1 col-md-6 col-12">
+            <label for="mail" class="p-float-label">Email </label>
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-check"></i></span>
+              <input type="text" class="form-control" placeholder="-- Email  --" id="mail"
+                     [(ngModel)]="provider.providerEmail " [ngClass]="{
+          'is-invalid': provider.providerEmail  == null || provider.providerEmail  == '' ,
+          'is-valid': provider.providerEmail  != null && provider.providerEmail  != ''
+        }">
+            </div>
+          </div>
+        </div>
+  -->
+
+        <div class="p-col-12 mb-1 col-md-12 p-field">
+          <label for="manager" class="p-float-label">Responsable </label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+            <input type="text" class="form-control p-field"  id="manager"
+                   [(ngModel)]="provider.providerManagerName " [ngClass]="{
+        'is-invalid': provider.providerManagerName  == null || provider.providerManagerName  == '' ,
+        'is-valid': provider.providerManagerName  != null && provider.providerManagerName  != ''
+      }">
+          </div>
+        </div>
+
+        <div class="p-col-12 mb-1 col-md-12 p-field">
+          <label for="adress" class="p-float-label">Adresse </label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-list"></i></span>
+            <textarea id="story" name="story" rows="3" class="form-control p-field"  pInputText  style="width: 100%;"  id ="adress" [(ngModel)]="provider.providerAddress " [ngClass]="{
+        'is-invalid': provider.providerAddress  == null || provider.providerAddress  == '' ,
+        'is-valid': provider.providerAddress  != null && provider.providerAddress  != ''
+      }"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+  </p-panel>
+  <br>
+  <p-panel header="Configuration des contacts" [toggleable]="true" collapsed="true">
+    <div style="width: 20%;
+    margin-left: 80%;">
+      <button pButton pRipple label="Nouveau contact" icon="pi pi-user-plus" class="p-mr-2"
+              (click)="addNewContact()" style="background: #dee2e6;
+    color: black;
+    border: #dee2e6;"></button>
+    </div>
+    <div *ngFor="let contact of provider.providerContacts" style="padding-bottom: 50px;">
+      <ngx-new-contact [contact]="contact"></ngx-new-contact>
+    </div>
+  </p-panel>
+  <div class="p-panel p-panel-header" style="margin-top: 20px;">
+    <button [disabled]="" class="btn btn-secondary" style="margin-left: 1%;" click="cancel()">Annuler</button>
+    <button  [disabled]="" class="btn btn-success" style="margin-left: 74%;">Enregistrer</button>
+  </div>
+
+
+</div>
