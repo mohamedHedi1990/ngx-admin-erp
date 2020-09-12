@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" *ngIf="!showProviderWindow">
   <p-table #dt [value]="providers" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
            [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
            [paginator]="true" currentPageReportTemplate=""
@@ -13,7 +13,7 @@
         </div>
 
         <div style="width:23%; margin-left: 25%">
-          <button pButton pRipple label="Nouveau fournisseur" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+          <button pButton pRipple label="Nouveau fournisseur" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="showProviderWindow=true"></button>
         </div>
 
       </div>
@@ -97,3 +97,5 @@
     </ng-template>
   </p-table>
 </div>
+
+<ngx-add-new-provider *ngIf="showProviderWindow" [provider]="provider" (addNewProviderEvent)="saveNewProvider($event)" (cancelEvent)="hideProviderWindow(); initprovider();"></ngx-add-new-provider>

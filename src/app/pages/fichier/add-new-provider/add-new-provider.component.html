@@ -1,12 +1,11 @@
-<h5>Nouveau provider</h5>
+<h5>Nouveau fournisseur</h5>
 <div style="width: 90%;
     margin: auto;">
   <p-panel header="Configuration génerale" [toggleable]="false">
-    <form >
       <div class="p-grid p-fluid">
         <div style="display: flex">
           <div class="mb-1 col-md-6 col-12 p-field">
-            <label for="providerLabel" class="p-float-label">Dénomination provider</label>
+            <label for="providerLabel" class="p-float-label">Dénomination fournisseur</label>
             <div class="p-inputgroup">
               <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
               <input type="text" class="form-control p-field" id="providerLabel"
@@ -79,7 +78,6 @@
           </div>
         </div>
       </div>
-    </form>
   </p-panel>
   <br>
   <p-panel header="Configuration des contacts" [toggleable]="true" collapsed="true">
@@ -95,7 +93,7 @@
     </div>
   </p-panel>
   <div class="p-panel p-panel-header" style="margin-top: 20px;">
-    <button [disabled]="" class="btn btn-secondary" style="margin-left: 1%;">Annuler</button>
+    <button [disabled]="" class="btn btn-secondary" style="margin-left: 1%;" click="cancel()">Annuler</button>
     <button  [disabled]="" class="btn btn-success" style="margin-left: 74%;">Enregistrer</button>
   </div>
 

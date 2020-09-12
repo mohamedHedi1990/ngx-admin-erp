@@ -17,6 +17,7 @@ export class AddNewClientComponent implements OnInit {
     customerContacts: [],
   };
   @Output() addNewClientEvent = new EventEmitter();
+  @Output() cancelEvent = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
@@ -31,6 +32,10 @@ export class AddNewClientComponent implements OnInit {
   }
   saveClient() {
     this.addNewClientEvent.emit(this.client);
+  }
+
+  cancel() {
+    this.cancelEvent.emit();
   }
 
 }

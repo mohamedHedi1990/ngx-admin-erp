@@ -105,4 +105,5 @@
   </p-table>
 </div>
 
-<ngx-add-new-client *ngIf="showClientWindow" [client]="client" (addNewClientEvent)="saveNewClient($event)"></ngx-add-new-client>
+<ngx-add-new-client *ngIf="showClientWindow" [client]="client" (addNewClientEvent)="saveNewClient($event)"
+(cancelEvent)="hideClientWindow(); initClient();"></ngx-add-new-client>

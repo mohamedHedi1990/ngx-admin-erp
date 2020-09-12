@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {SmartTableData} from '../../../@core/data/smart-table';
+import {UtilsServiceService} from '../../../utils-service.service';
 
 @Component({
   selector: 'ngx-list-fournisseurs',
@@ -8,7 +10,12 @@ import { Component, OnInit } from '@angular/core';
 export class ListFournisseursComponent implements OnInit {
   providers: any[];
   loading = false;
-  ngOnInit(): void {
+  showProviderWindow = false;
+  provider = null;
+  constructor(private service: SmartTableData, private UtilsService: UtilsServiceService) {
+  }
+    ngOnInit(): void {
+    this.initprovider();
     this.providers = [
       {providerLabel: 'Fournisseur A', providerUniqueIdentifier: 'HYUIO8CO9', providerAddress: 'Jardins de l\'aouina 2046 Tunis', providerTel: '+21623262528', providerEmail: 'clientA@gmail.com' , providerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06', providerContacts : []},
       {providerLabel: 'Fournisseur B', providerUniqueIdentifier: 'HYUIO8CO9', providerAddress: 'Jardins de l\'aouina 2046 Tunis', providerTel: '+21623262528', providerEmail: 'clientA@gmail.com' , providerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06', providerContacts : []},
@@ -19,6 +26,30 @@ export class ListFournisseursComponent implements OnInit {
       {providerLabel: 'Fournisseur G', providerUniqueIdentifier: 'HYUIO8CO9', providerAddress: 'Jardins de l\'aouina 2046 Tunis', providerTel: '+21623262528', providerEmail: 'clientA@gmail.com' , providerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06', providerContacts : []},
 
     ];
+  }
+
+  saveNewProvider(provider) {
+    this.hideProviderWindow();
+    this.UtilsService.showToast('success',
+      'Fournisseur ajoutée avec succés',
+      `Le fournisseur  ${this.provider.providerLabel} a été ajouté avec succcés`);
+  }
+
+  hideProviderWindow() {
+    this.showProviderWindow = false;
+  }
+
+  initprovider() {
+    this.provider = {
+      providerId: null,
+      providerLabel: '',
+      providerAddress: '',
+      providerUniqueIdentifier: '',
+      providerManagerName: '',
+      providerTel: '',
+      providerEmail: '',
+      providerContacts: [],
+    };
   }
 
 }

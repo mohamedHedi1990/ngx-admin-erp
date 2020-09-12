@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'ngx-add-new-provider',
@@ -16,6 +16,8 @@ export class AddNewProviderComponent implements OnInit {
     providerEmail: '',
     providerContacts: [],
   };
+  @Output() addNewProviderEvent = new EventEmitter();
+  @Output() cancelEvent = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
@@ -27,6 +29,9 @@ export class AddNewProviderComponent implements OnInit {
       contactTel : '',
       contactEmail : '',
     });
+  }
+  cancel() {
+    this.cancelEvent.emit();
   }
 
 }

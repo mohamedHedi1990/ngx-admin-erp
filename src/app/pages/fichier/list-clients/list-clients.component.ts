@@ -12,16 +12,8 @@ export class ListClientsComponent implements OnInit {
   clients: any[];
   loading = false;
   showClientWindow = false;
-  client = {
-    customerId: null,
-    customerLabel: '',
-    customerAddress: '',
-    customerUniqueIdentifier: '',
-    customerManagerName: '',
-    customerTel: '',
-    customerEmail: '',
-    customerContacts: [],
-  };
+  client = null;
+
   /*
   settings = {
     add: {
@@ -83,6 +75,7 @@ export class ListClientsComponent implements OnInit {
   }
 */
   ngOnInit(): void {
+    this.initClient();
     this.clients = [
       {customerLabel: 'Client A', customerUniqueIdentifier: 'HYUIO8CO9', customerAddress: 'Jardins de l\'aouina 2046 Tunis', customerTel: '+21623262528', customerEmail: 'clientA@gmail.com' , customerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06', customerContacts : []},
       {customerLabel: 'APAC', customerUniqueIdentifier: 'APACO8CO9', customerAddress: 'Heberges de lac 2', customerTel: '+21623262528', customerEmail: 'apac@gmail.com' , customerManagerName: 'Helmi Dammak', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06'},
@@ -100,11 +93,24 @@ export class ListClientsComponent implements OnInit {
     this.hideClientWindow();
     this.UtilsService.showToast('success',
       'Client ajoutée avec succés',
-      `Le client  ${this.client.customerLabel} a été ajoutée avec succcés`);
+      `Le client  ${this.client.customerLabel} a été ajouté avec succcés`);
   }
 
   hideClientWindow() {
     this.showClientWindow = false;
+  }
+
+  initClient() {
+    this.client = {
+      customerId: null,
+      customerLabel: '',
+      customerAddress: '',
+      customerUniqueIdentifier: '',
+      customerManagerName: '',
+      customerTel: '',
+      customerEmail: '',
+      customerContacts: [],
+    };
   }
 
 }
