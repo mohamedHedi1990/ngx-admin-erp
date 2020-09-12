@@ -1,4 +1,4 @@
-<div class="card">
+<div *ngIf="!showClientWindow" class="card">
   <p-table #dt [value]="clients" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
            [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
            [paginator]="true" currentPageReportTemplate=""
@@ -13,7 +13,7 @@
         </div>
 
         <div style="width:18%; margin-left: 25%">
-          <button pButton pRipple label="Nouveau client" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+          <button pButton pRipple label="Nouveau client" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="showClientWindow = true"></button>
         </div>
 
       </div>
@@ -104,3 +104,5 @@
     </ng-template>
   </p-table>
 </div>
+
+<ngx-add-new-client *ngIf="showClientWindow" [client]="client" (addNewClientEvent)="saveNewClient($event)"></ngx-add-new-client>

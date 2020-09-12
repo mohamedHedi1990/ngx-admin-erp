@@ -12,7 +12,7 @@
               <input type="text" class="form-control p-field" id="clientLabel"
                      [(ngModel)]="client.customerLabel" [ngClass]="{
         'is-invalid': client.customerLabel == null || client.customerLabel == '' ,
-        'is-valid': client.customerLabel != null && client.customerLabel != ''
+        'is-valid': client.customerLabel != null && client.customerLabel !== ''
       }">
             </div>
           </div>
@@ -23,7 +23,7 @@
               <input type="text" class="form-control p-field"  id="identifiant"
                      [(ngModel)]="client.customerUniqueIdentifier " [ngClass]="{
         'is-invalid': client.customerUniqueIdentifier  == null || client.customerUniqueIdentifier  == '' ,
-        'is-valid': client.customerUniqueIdentifier  != null && client.customerUniqueIdentifier  != ''
+        'is-valid': client.customerUniqueIdentifier  != null && client.customerUniqueIdentifier  !== ''
       }">
             </div>
           </div>
@@ -62,7 +62,7 @@
             <input type="text" class="form-control p-field"  id="manager"
                    [(ngModel)]="client.customerManagerName " [ngClass]="{
         'is-invalid': client.customerManagerName  == null || client.customerManagerName  == '' ,
-        'is-valid': client.customerManagerName  != null && client.customerManagerName  != ''
+        'is-valid': client.customerManagerName  != null && client.customerManagerName  !== ''
       }">
           </div>
         </div>
@@ -96,7 +96,7 @@
   </p-panel>
   <div class="p-panel p-panel-header" style="margin-top: 20px;">
     <button [disabled]="" class="btn btn-secondary" style="margin-left: 1%;">Annuler</button>
-    <button  [disabled]="" class="btn btn-success" style="margin-left: 74%;">Enregistrer</button>
+    <button  [disabled]="" class="btn btn-success" style="margin-left: 74%;" (click)="saveClient()">Enregistrer</button>
   </div>
 
 

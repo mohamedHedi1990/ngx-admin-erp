@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LocalDataSource} from 'ng2-smart-table';
 import {SmartTableData} from '../../../@core/data/smart-table';
+import {UtilsServiceService} from '../../../utils-service.service';
 
 @Component({
   selector: 'ngx-list-clients',
@@ -10,6 +11,17 @@ import {SmartTableData} from '../../../@core/data/smart-table';
 export class ListClientsComponent implements OnInit {
   clients: any[];
   loading = false;
+  showClientWindow = false;
+  client = {
+    customerId: null,
+    customerLabel: '',
+    customerAddress: '',
+    customerUniqueIdentifier: '',
+    customerManagerName: '',
+    customerTel: '',
+    customerEmail: '',
+    customerContacts: [],
+  };
   /*
   settings = {
     add: {
@@ -56,7 +68,7 @@ export class ListClientsComponent implements OnInit {
 
   source: LocalDataSource = new LocalDataSource();
 */
-  constructor(private service: SmartTableData) {
+  constructor(private service: SmartTableData, private UtilsService: UtilsServiceService) {
     // const data = this.service.getData();
    //  this.source.load(data);
   }
@@ -82,6 +94,17 @@ export class ListClientsComponent implements OnInit {
       {customerLabel: 'Client A', customerUniqueIdentifier: 'HYUIO8CO9', customerAddress: 'Jardins de l\'aouina 2046 Tunis', customerTel: '+21623262528', customerEmail: 'clientA@gmail.com' , customerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06', customerContacts : []},
 
     ];
+  }
+
+  saveNewClient(client) {
+    this.hideClientWindow();
+    this.UtilsService.showToast('success',
+      'Client ajoutée avec succés',
+      `Le client  ${this.client.customerLabel} a été ajoutée avec succcés`);
+  }
+
+  hideClientWindow() {
+    this.showClientWindow = false;
   }
 
 }

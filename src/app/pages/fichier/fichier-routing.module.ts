@@ -6,7 +6,7 @@ import {AddNewClientComponent} from './add-new-client/add-new-client.component';
 
 const routes: Routes = [{
   path: '',
-  component: AddNewClientComponent,
+  component: ListClientsComponent,
   children: [
     {
       path: 'societes',
@@ -21,6 +21,7 @@ const routes: Routes = [{
       component: AddNewClientComponent,
     },
   ],
+
 }];
 
 @NgModule({

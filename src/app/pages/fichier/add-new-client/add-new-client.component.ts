@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'ngx-add-new-client',
@@ -16,6 +16,7 @@ export class AddNewClientComponent implements OnInit {
     customerEmail: '',
     customerContacts: [],
   };
+  @Output() addNewClientEvent = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
@@ -27,6 +28,9 @@ export class AddNewClientComponent implements OnInit {
       contactTel : '',
       contactEmail : '',
     });
+  }
+  saveClient() {
+    this.addNewClientEvent.emit(this.client);
   }
 
 }
