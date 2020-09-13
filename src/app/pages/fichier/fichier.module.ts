@@ -38,9 +38,10 @@ import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import { ListeTarifsBancaireComponent } from './liste-tarifs-bancaire/liste-tarifs-bancaire.component';
 import { AddNewTarifsBancaireComponent } from './add-new-tarifs-bancaire/add-new-tarifs-bancaire.component';
 import { AddNewEchanchierComponent } from './add-new-echanchier/add-new-echanchier.component';
+import { ListeEchenaciersComponent } from './liste-echenaciers/liste-echenaciers.component';
 
 @NgModule({
-  declarations: [SocietesComponent, SaisirSocieteComponent, DetailsSocieteComponent, ListClientsComponent, ListContactsComponent, AddNewClientComponent, NewContactComponent, ListFournisseursComponent, AddNewProviderComponent, ListeContactsComponent, ListeTarifsBancaireComponent, AddNewTarifsBancaireComponent, AddNewEchanchierComponent],
+  declarations: [SocietesComponent, SaisirSocieteComponent, DetailsSocieteComponent, ListClientsComponent, ListContactsComponent, AddNewClientComponent, NewContactComponent, ListFournisseursComponent, AddNewProviderComponent, ListeContactsComponent, ListeTarifsBancaireComponent, AddNewTarifsBancaireComponent, AddNewEchanchierComponent, ListeEchenaciersComponent],
   imports: [
     CommonModule,
     FichierRoutingModule,

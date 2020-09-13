@@ -55,7 +55,7 @@
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
             <input type="text" class="form-control p-field" id="nc"
-                   [(ngModel)]="timeLine.timeLineCreditNumber" disabled="true" [ngClass]="{
+                   [(ngModel)]="timeLine.timeLineCreditNumber"  [ngClass]="{
         'is-invalid': timeLine.timeLineCreditNumber== null || timeLine.timeLineCreditNumber == '' ,
         'is-valid': timeLine.timeLineCreditNumber != null && timeLine.timeLineCreditNumber!== ''
       }">
@@ -64,38 +64,191 @@
       </div>
 
       <div style="display: flex">
+      <div class="mb-1 col-md-6 col-12 p-field">
+        <label for="mi" class="p-float-label">Montant initial</label>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+          <input type="number" class="form-control p-field" id="mi"
+                 [(ngModel)]="timeLine.timeLineInitialAmount"  [ngClass]="{
+        'is-invalid': timeLine.timeLineInitialAmount== null ,
+        'is-valid': timeLine.timeLineInitialAmount != null
+      }">
+        </div>
+      </div>
+      <div class="mb-1 col-md-6 col-12 p-field">
+        <label for="ir" class="p-float-label">Taux intéret (en %)</label>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+          <input type="number" class="form-control p-field" id="ir"
+                 [(ngModel)]="timeLine.timeLineInterestRate"  [ngClass]="{
+        'is-invalid': timeLine.timeLineInterestRate== null ,
+        'is-valid': timeLine.timeLineInterestRate != null
+      }">
+        </div>
+      </div>
+    </div>
+
+      <div style="display: flex">
         <div class="mb-1 col-md-6 col-12 p-field">
-          <label for="mi" class="p-float-label">Montant initial</label>
+          <label for="y" class="p-float-label">Nombre d'années</label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-            <input type="text" class="form-control p-field" id="mi"
-                   [(ngModel)]="timeLine.timeLineInitialAmount" disabled="true"  [ngClass]="{
-        'is-invalid': timeLine.timeLineInitialAmount== null || timeLine.timeLineInitialAmount == '' ,
-        'is-valid': timeLine.timeLineInitialAmount != null && timeLine.timeLineInitialAmount!== ''
+            <input type="number" class="form-control p-field" id="y"
+                   [(ngModel)]="timeLine.timeLineYearNumber"   [ngClass]="{
+        'is-invalid': timeLine.timeLineYearNumber== null,
+        'is-valid': timeLine.timeLineYearNumber != null
       }">
           </div>
         </div>
         <div class="mb-1 col-md-6 col-12 p-field">
-          <label for="ir" class="p-float-label">Taux intéret</label>
+          <label for="an" class="p-float-label">Anuuintée</label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-            <input type="text" class="form-control p-field" id="ir"
-                   [(ngModel)]="timeLine.timeLineInterestRate" disabled="true" [ngClass]="{
-        'is-invalid': timeLine.timeLineInterestRate== null || timeLine.timeLineInterestRate == '' ,
-        'is-valid': timeLine.timeLineInterestRate != null && timeLine.timeLineInterestRate!== ''
-      }">
+            <select class="form-control p-field" name="side" [(ngModel)]="timeLine.timeLineAnnuity" [ngClass]="{
+        'is-invalid': timeLine.timeLineAnnuity == null ,
+        'is-valid':timeLine.timeLineAnnuity != null}" id="an">
+              <option value="null">-- Anuuintée --</option>
+              <option value="Mensuelle">Mensuelle</option>
+              <option value="Trimesterielle">Trimesterielle</option>
+              <option value="Semesterielle">Semesterielle</option>
+              <option value="Annuelle">Annuelle</option>
+            </select>
           </div>
         </div>
       </div>
     </div>
   </p-panel>
   <br>
-  <p-panel header="Configuration des contacts" [toggleable]="true" collapsed="true">
+  <p-panel header="Tableau d'échéancier" [toggleable]="true" collapsed="true">
+    <div class="card">
+      <p-table #dt [value]="timeLine.timeLineTable" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+               [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]"
+               [paginator]="true" currentPageReportTemplate="">
+        <ng-template pTemplate="header">
+          <tr style="text-align: center; font-size: 13px;">
+            <th   style="text-align: center; font-size: 13px; width: 23%;" >Date échéance</th>
+            <th  style="text-align: center; font-size: 13px; width: 25%;">Echéance principale</th>
+            <th  style="text-align: center; font-size: 13px;width: 13%">Intérets</th>
+            <th  style="text-align: center;font-size: 13px;width: 11%">TVA</th>
+            <th   style="text-align: center; font-size: 13px; width: 20%">Toatal anuiité</th>
+            <th style="width:9%" ></th>
+          </tr>
+
+                    <tr>
+                      <th style="font-size: 13px;">
+                         <input style="font-size: 13px;" pInputText type="date" placeholder="Date" class="form-control p-field"
+                         [(ngModel)]="line.lineDate">
+                      </th>
+                      <th  style="font-size: 13px;">
+                        <input style="font-size: 13px;" pInputText type="number" placeholder="Echéance principale"
+                               class="form-control p-field" [(ngModel)]="line.initialAmount">
+                      </th>
+                      <th  style="font-size: 13px;">
+                        <input style="font-size: 13px;" pInputText type="number" placeholder="Intérets"
+                               class="form-control p-field" [(ngModel)]="line.interests">
+                      </th>
+                      <th  style="font-size: 13px;">
+                        <input style="font-size: 13px;" pInputText type="number" placeholder="TVA"
+                               class="form-control p-field" [(ngModel)]="line.tva">
+                      </th>
+                      <th  style="font-size: 13px;">
+                        <input style="font-size: 13px;" pInputText type="number" placeholder="Toatal anuiité"
+                               class="form-control p-field" [(ngModel)]="line.total">
+                      </th>
+                      <th>
+                        <button pButton   placement="top" ngbTooltip="Ajouter" pRipple icon="pi pi-plus" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;"
+                        (click)="addLine()"></button>
+                      </th>
+                    </tr>
+
+        </ng-template>
+        <ng-template pTemplate="body" let-line>
+          <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
+            <td pEditableColumn style="text-align: center;">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input style="font-size: 13px;" pInputText type="date"
+                         class="form-control p-field" [(ngModel)]="line.lineDate">
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{line.lineDate}}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td pEditableColumn style="text-align: center;">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input style="font-size: 13px;" pInputText type="number"
+                         class="form-control p-field" [(ngModel)]="line.initialAmount">
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{line.initialAmount}}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+
+            <td pEditableColumn style="text-align: center;">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input style="font-size: 13px;" pInputText type="number"
+                         class="form-control p-field" [(ngModel)]="line.interests">
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{line.interests}}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+
+            <td pEditableColumn style="text-align: center;">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input style="font-size: 13px;" pInputText type="number"
+                         class="form-control p-field" [(ngModel)]="line.tva">
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{line.tva}}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+
+
+            <td pEditableColumn style="text-align: center;">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input style="font-size: 13px;" pInputText type="number"
+                         class="form-control p-field" [(ngModel)]="line.total">
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{line.total}}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+
+
+            <td style="text-align: center;">
+              <div style="display: flex;">
+                <!--
+                <button pButton   placement="top" ngbTooltip="Modifier" pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="1"></button>
+                -->
+                <button pButton   placement="top" ngbTooltip="Supprimer" pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="1"></button>
+              </div>
+
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="8">Aucun line trouvé!</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
 
   </p-panel>
   <div class="p-panel p-panel-header" style="margin-top: 20px;">
-    <button [disabled]="" class="btn btn-secondary" style="margin-left: 1%;" (click)="cancel()">Annuler</button>
-    <button  [disabled]="" class="btn btn-success" style="margin-left: 74%;" (click)="saveClient()">Enregistrer</button>
+    <button [disabled]="" class="btn btn-secondary" style="margin-left: 1%;" >Annuler</button>
+    <button  [disabled]="" class="btn btn-success" style="margin-left: 74%;" >Enregistrer</button>
   </div>
 
 

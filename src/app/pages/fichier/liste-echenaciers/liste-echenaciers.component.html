@@ -1,0 +1,74 @@
+<div *ngIf="!showEchancierWindow" class="card">
+  <p-table #dt [value]="echanciers" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+           [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+           [paginator]="true" currentPageReportTemplate=""
+           [filterDelay]="0">
+    <ng-template pTemplate="caption" >
+      <div style="display: flex; width: 100%">
+        <div class="p-d-flex p-ai-center p-jc-between" style="width: 60%">
+
+        </div>
+
+        <div style="width:22%; margin-left: 25%">
+          <button pButton pRipple label="Nouveau échancier" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="showClientWindow = true"></button>
+        </div>
+
+      </div>
+
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr style="text-align: center; font-size: 15px;">
+        <th pSortableColumn="customerLabel" style="text-align: center; font-size: 13px;    width: 15%;">Echéanchier</th>
+        <th pSortableColumn="customerUniqueIdentifier" style="text-align: center; font-size: 13px;    width: 15%;">Compte bancaire</th>
+        <th pSortableColumn="customerAddress" style=" text-align: center;font-size: 13px;    width: 15%;">Numéro de crédit</th>
+        <th pSortableColumn="customerAddress" style=" text-align: center;font-size: 13px;    width: 15%;">Montant initial</th>
+        <th pSortableColumn="customerAddress" style=" text-align: center;font-size: 13px;    width: 15%;">Taux intéret (en %)</th>
+        <th pSortableColumn="customerAddress" style=" text-align: center;font-size: 13px;    width: 15%;">Nombre des années</th>
+        <th style="width: 10rem"></th>
+      </tr>
+
+    </ng-template>
+    <ng-template pTemplate="body" let-line>
+      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
+        <td  style="text-align: center;">
+          {{line.timeLineLabel}}
+        </td>
+        <td style="text-align: center;">
+          {{line.timeLineAccount.accountLabel}}
+        </td>
+        <td style="text-align: center;">
+          {{line.timeLineCreditNumber}}
+        </td>
+        <td style="text-align: center;">
+          {{line.timeLineInitialAmount}}
+        </td>
+        <td style="text-align: center;">
+          {{line.timeLineInterestRate}}
+        </td>
+        <td style="text-align: center;">
+          {{line.timeLineYearNumber}}
+        </td>
+
+        <td style="text-align: center;">
+          <div style="display: flex;">
+            <!--
+            <button pButton   placement="top" ngbTooltip="Contacter" pRipple icon="pi pi-users" class="p-button-rounded p-button-info p-mr-2" style="margin-right: 7px;" (click)="showContacts(client)"></button>
+            -->
+            <button pButton   placement="top" ngbTooltip="Modifier" pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="1"></button>
+            <button pButton   placement="top" ngbTooltip="Supprimer" pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="1"></button>
+          </div>
+
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="8" style="font-size: 13px;">Aucun échancier trouvé!</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<ngx-add-new-echanchier *ngIf="showEchancierWindow" [timeLine]="timeLine"></ngx-add-new-echanchier>
+
+
