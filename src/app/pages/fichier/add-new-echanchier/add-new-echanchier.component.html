@@ -1,0 +1,102 @@
+<h5>Nouveau échancier</h5>
+<div style="width: 90%;
+    margin: auto;">
+  <p-panel header="Configuration génerale" [toggleable]="false">
+    <div class="p-grid p-fluid">
+      <div style="display: flex">
+        <div class="mb-1 col-md-6 col-12 p-field">
+          <label for="label" class="p-float-label">Label</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field" id="label"
+                   [(ngModel)]="timeLine.timeLineLabel" [ngClass]="{
+        'is-invalid': timeLine.timeLineLabel== null || timeLine.timeLineLabel == '' ,
+        'is-valid': timeLine.timeLineLabel != null && timeLine.timeLineLabel!== ''
+      }">
+          </div>
+        </div>
+        <div class="mb-1 col-md-6 col-12">
+          <label for="cb" class="p-float-label">Compte bancaire</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <select class="form-control p-field" name="side" [(ngModel)]="timeLine.timeLineAccount.accountLabel" [ngClass]="{
+        'is-invalid': timeLine.timeLineAccount == null ,
+        'is-valid':timeLine.timeLineAccount != null
+      }" id="cb">
+              <option [ngValue]="null">-- Compte bancaire --</option>
+              <option [ngValue]="'Compte courant BIAT'">Compte courant BIAT</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex">
+        <div class="mb-1 col-md-6 col-12 p-field">
+          <label for="ncb" class="p-float-label">Numéro compte bancaire</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field" id="numCompte"
+                   [(ngModel)]="timeLine.timeLineAccount.accountNumber" disabled="true" id="ncb">
+          </div>
+        </div>
+        <div class="mb-1 col-md-6 col-12 p-field">
+          <label for="d" class="p-float-label">Devise</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field" id="devise"
+                   [(ngModel)]="timeLine.timeLineAccount.accountCurrency" disabled="true" id="d">
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex">
+        <div class="mb-1 col-md-12 col-12 p-field">
+          <label for="nc" class="p-float-label">Numéro de crédit</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field" id="nc"
+                   [(ngModel)]="timeLine.timeLineCreditNumber" disabled="true" [ngClass]="{
+        'is-invalid': timeLine.timeLineCreditNumber== null || timeLine.timeLineCreditNumber == '' ,
+        'is-valid': timeLine.timeLineCreditNumber != null && timeLine.timeLineCreditNumber!== ''
+      }">
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex">
+        <div class="mb-1 col-md-6 col-12 p-field">
+          <label for="mi" class="p-float-label">Montant initial</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field" id="mi"
+                   [(ngModel)]="timeLine.timeLineInitialAmount" disabled="true"  [ngClass]="{
+        'is-invalid': timeLine.timeLineInitialAmount== null || timeLine.timeLineInitialAmount == '' ,
+        'is-valid': timeLine.timeLineInitialAmount != null && timeLine.timeLineInitialAmount!== ''
+      }">
+          </div>
+        </div>
+        <div class="mb-1 col-md-6 col-12 p-field">
+          <label for="ir" class="p-float-label">Taux intéret</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field" id="ir"
+                   [(ngModel)]="timeLine.timeLineInterestRate" disabled="true" [ngClass]="{
+        'is-invalid': timeLine.timeLineInterestRate== null || timeLine.timeLineInterestRate == '' ,
+        'is-valid': timeLine.timeLineInterestRate != null && timeLine.timeLineInterestRate!== ''
+      }">
+          </div>
+        </div>
+      </div>
+    </div>
+  </p-panel>
+  <br>
+  <p-panel header="Configuration des contacts" [toggleable]="true" collapsed="true">
+
+  </p-panel>
+  <div class="p-panel p-panel-header" style="margin-top: 20px;">
+    <button [disabled]="" class="btn btn-secondary" style="margin-left: 1%;" (click)="cancel()">Annuler</button>
+    <button  [disabled]="" class="btn btn-success" style="margin-left: 74%;" (click)="saveClient()">Enregistrer</button>
+  </div>
+
+
+</div>
