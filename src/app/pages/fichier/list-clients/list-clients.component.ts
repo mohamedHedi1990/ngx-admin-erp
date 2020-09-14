@@ -2,17 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import {LocalDataSource} from 'ng2-smart-table';
 import {SmartTableData} from '../../../@core/data/smart-table';
 import {UtilsServiceService} from '../../../utils-service.service';
+import {DialogService} from 'primeng/dynamicdialog';
+import {ListContactsComponent} from '../list-contacts/list-contacts.component';
 
 @Component({
   selector: 'ngx-list-clients',
   templateUrl: './list-clients.component.html',
   styleUrls: ['./list-clients.component.scss'],
+  providers: [DialogService],
 })
 export class ListClientsComponent implements OnInit {
   clients: any[];
   loading = false;
   showClientWindow = false;
   client = null;
+  showContactList = false;
+  contactModalheader = 'List des contacts pour le client ';
 
   /*
   settings = {
@@ -60,7 +65,8 @@ export class ListClientsComponent implements OnInit {
 
   source: LocalDataSource = new LocalDataSource();
 */
-  constructor(private service: SmartTableData, private UtilsService: UtilsServiceService) {
+  constructor(private service: SmartTableData, private UtilsService: UtilsServiceService,
+              public dialogService: DialogService) {
     // const data = this.service.getData();
    //  this.source.load(data);
   }
@@ -111,6 +117,17 @@ export class ListClientsComponent implements OnInit {
       customerEmail: '',
       customerContacts: [],
     };
+  }
+
+  showContacts(client) {
+    this.contactModalheader = this.contactModalheader + client.customerLabel;
+    const ref = this.dialogService.open(ListContactsComponent, {
+      data: {
+        contacts: client.customerContacts,
+      },
+      header: this.contactModalheader,
+      width: '70%',
+    });
   }
 
 }

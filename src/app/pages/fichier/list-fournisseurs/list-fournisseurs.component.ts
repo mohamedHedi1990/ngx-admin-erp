@@ -1,18 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import {SmartTableData} from '../../../@core/data/smart-table';
 import {UtilsServiceService} from '../../../utils-service.service';
+import {ListContactsComponent} from '../list-contacts/list-contacts.component';
+import {DialogService} from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'ngx-list-fournisseurs',
   templateUrl: './list-fournisseurs.component.html',
   styleUrls: ['./list-fournisseurs.component.scss'],
+  providers: [DialogService],
 })
 export class ListFournisseursComponent implements OnInit {
   providers: any[];
   loading = false;
   showProviderWindow = false;
   provider = null;
-  constructor(private service: SmartTableData, private UtilsService: UtilsServiceService) {
+  contactModalheader = 'List des contacts pour le fournisseur ';
+  constructor(private service: SmartTableData, private UtilsService: UtilsServiceService,
+              public dialogService: DialogService) {
   }
     ngOnInit(): void {
     this.initprovider();
@@ -50,6 +55,17 @@ export class ListFournisseursComponent implements OnInit {
       providerEmail: '',
       providerContacts: [],
     };
+  }
+
+  showContacts(provider) {
+    this.contactModalheader = this.contactModalheader + provider.providerLabel;
+    const ref = this.dialogService.open(ListContactsComponent, {
+      data: {
+        contacts: provider.providerContacts,
+      },
+      header: this.contactModalheader,
+      width: '70%',
+    });
   }
 
 }
