@@ -22,7 +22,7 @@
             <select class="form-control p-field" name="side" [(ngModel)]="timeLine.timeLineAccount.accountLabel" [ngClass]="{
         'is-invalid': timeLine.timeLineAccount == null ,
         'is-valid':timeLine.timeLineAccount != null
-      }" id="cb">
+      }" id="cb" (change)="onChangeCompteLabel()">
               <option [ngValue]="null">-- Compte bancaire --</option>
               <option [ngValue]="'Compte courant BIAT'">Compte courant BIAT</option>
             </select>
@@ -141,19 +141,19 @@
                       </th>
                       <th  style="font-size: 13px;">
                         <input style="font-size: 13px;" pInputText type="number" placeholder="Echéance principale"
-                               class="form-control p-field" [(ngModel)]="line.initialAmount">
+                               class="form-control p-field" [(ngModel)]="line.initialAmount" (input)="updateTotalAmount()">
                       </th>
                       <th  style="font-size: 13px;">
                         <input style="font-size: 13px;" pInputText type="number" placeholder="Intérets"
-                               class="form-control p-field" [(ngModel)]="line.interests">
+                               class="form-control p-field" [(ngModel)]="line.interests" (change)="updateTotalAmount()">
                       </th>
                       <th  style="font-size: 13px;">
                         <input style="font-size: 13px;" pInputText type="number" placeholder="TVA"
-                               class="form-control p-field" [(ngModel)]="line.tva">
+                               class="form-control p-field" [(ngModel)]="line.tva" (change)="updateTotalAmount()">
                       </th>
                       <th  style="font-size: 13px;">
                         <input style="font-size: 13px;" pInputText type="number" placeholder="Toatal anuiité"
-                               class="form-control p-field" [(ngModel)]="line.total">
+                               class="form-control p-field" [(ngModel)]="line.total" disabled="true">
                       </th>
                       <th>
                         <button pButton   placement="top" ngbTooltip="Ajouter" pRipple icon="pi pi-plus" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;"
@@ -179,7 +179,7 @@
               <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input style="font-size: 13px;" pInputText type="number"
-                         class="form-control p-field" [(ngModel)]="line.initialAmount">
+                         class="form-control p-field" [(ngModel)]="line.initialAmount" (change)="updateTotalAmount(line)">
                 </ng-template>
                 <ng-template pTemplate="output">
                   {{line.initialAmount}}
@@ -191,7 +191,7 @@
               <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input style="font-size: 13px;" pInputText type="number"
-                         class="form-control p-field" [(ngModel)]="line.interests">
+                         class="form-control p-field" [(ngModel)]="line.interests" (change)="updateTotalAmount(line)">
                 </ng-template>
                 <ng-template pTemplate="output">
                   {{line.interests}}
@@ -203,7 +203,7 @@
               <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input style="font-size: 13px;" pInputText type="number"
-                         class="form-control p-field" [(ngModel)]="line.tva">
+                         class="form-control p-field" [(ngModel)]="line.tva" (change)="updateTotalAmount(line)">
                 </ng-template>
                 <ng-template pTemplate="output">
                   {{line.tva}}
@@ -216,7 +216,7 @@
               <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input style="font-size: 13px;" pInputText type="number"
-                         class="form-control p-field" [(ngModel)]="line.total">
+                         class="form-control p-field" [(ngModel)]="line.total"disabled="true">
                 </ng-template>
                 <ng-template pTemplate="output">
                   {{line.total}}
@@ -247,8 +247,8 @@
 
   </p-panel>
   <div class="p-panel p-panel-header" style="margin-top: 20px;">
-    <button [disabled]="" class="btn btn-secondary" style="margin-left: 1%;" >Annuler</button>
-    <button  [disabled]="" class="btn btn-success" style="margin-left: 74%;" >Enregistrer</button>
+    <button [disabled]="" class="btn btn-secondary" style="margin-left: 1%;" (click)="cancel()">Annuler</button>
+    <button  [disabled]="" class="btn btn-success" style="margin-left: 74%;" (click)="saveEcenachier()">Enregistrer</button>
   </div>
 
 

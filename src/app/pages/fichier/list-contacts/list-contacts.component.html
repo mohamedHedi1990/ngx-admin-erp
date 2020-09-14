@@ -4,32 +4,32 @@
            [paginator]="true" currentPageReportTemplate=""
            [filterDelay]="0" >
     <ng-template pTemplate="header">
-      <tr style="text-align: center; font-size: 15px;">
-        <th pSortableColumn="contactName" style="text-align: center; font-size: 15px;">Nom complet<p-sortIcon field="contactName"></p-sortIcon></th>
-        <th pSortableColumn="contactPost" style="text-align: center; font-size: 15px;">Poste<p-sortIcon field="contactPost"></p-sortIcon></th>
-        <th pSortableColumn="contactTel" style="text-align: center;font-size: 15px;">Télephone<p-sortIcon field="contactTel"></p-sortIcon></th>
-        <th pSortableColumn="contactEmail" style="text-align: center;font-size: 15px;">Email<p-sortIcon field="contactEmail"></p-sortIcon></th>
+      <tr style="text-align: center; font-size: 13px;">
+        <th pSortableColumn="contactName" style="text-align: center; font-size: 13px;">Nom complet<p-sortIcon field="contactName"></p-sortIcon></th>
+        <th pSortableColumn="contactPost" style="text-align: center; font-size: 13px;">Poste<p-sortIcon field="contactPost"></p-sortIcon></th>
+        <th pSortableColumn="contactTel" style="text-align: center;font-size: 13px;">Télephone<p-sortIcon field="contactTel"></p-sortIcon></th>
+        <th pSortableColumn="contactEmail" style="text-align: center;font-size: 13px;">Email<p-sortIcon field="contactEmail"></p-sortIcon></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-contact>
       <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
-        <td  style="text-align: center;">
+        <td  style="text-align: center;font-size: 13px;">
           {{contact.contactName}}
         </td>
-        <td style="text-align: center;">
+        <td style="text-align: center;font-size: 13px;">
           {{contact.contactPost}}
         </td>
-        <td style="text-align: center;">
+        <td style="text-align: center;font-size: 13px;">
           {{contact.contactTel}}
         </td>
-        <td style="text-align: center;">
+        <td style="text-align: center;font-size: 13px;">
           {{contact.contactEmail}}
         </td>
       </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td colspan="8">Aucun client trouvé!</td>
+        <td colspan="8">Aucun contact trouvé!</td>
       </tr>
     </ng-template>
   </p-table>

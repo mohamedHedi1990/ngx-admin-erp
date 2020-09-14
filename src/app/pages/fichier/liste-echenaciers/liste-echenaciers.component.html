@@ -10,7 +10,7 @@
         </div>
 
         <div style="width:22%; margin-left: 25%">
-          <button pButton pRipple label="Nouveau échancier" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="showClientWindow = true"></button>
+          <button pButton pRipple label="Nouveau échancier" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="showEchancierWindow = true"></button>
         </div>
 
       </div>
@@ -30,31 +30,31 @@
     </ng-template>
     <ng-template pTemplate="body" let-line>
       <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
-        <td  style="text-align: center;">
+        <td  style="text-align: center;font-size: 13px;">
           {{line.timeLineLabel}}
         </td>
-        <td style="text-align: center;">
+        <td style="text-align: center;font-size: 13px;">
           {{line.timeLineAccount.accountLabel}}
         </td>
-        <td style="text-align: center;">
+        <td style="text-align: center;font-size: 13px;">
           {{line.timeLineCreditNumber}}
         </td>
-        <td style="text-align: center;">
+        <td style="text-align: center;font-size: 13px;">
           {{line.timeLineInitialAmount}}
         </td>
-        <td style="text-align: center;">
+        <td style="text-align: center;font-size: 13px;">
           {{line.timeLineInterestRate}}
         </td>
-        <td style="text-align: center;">
+        <td style="text-align: center;font-size: 13px;">
           {{line.timeLineYearNumber}}
         </td>
 
-        <td style="text-align: center;">
+        <td style="text-align: center;font-size: 13px;">
           <div style="display: flex;">
             <!--
             <button pButton   placement="top" ngbTooltip="Contacter" pRipple icon="pi pi-users" class="p-button-rounded p-button-info p-mr-2" style="margin-right: 7px;" (click)="showContacts(client)"></button>
             -->
-            <button pButton   placement="top" ngbTooltip="Modifier" pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="1"></button>
+            <button pButton   placement="top" ngbTooltip="Modifier" pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="editEcheancier(line)"></button>
             <button pButton   placement="top" ngbTooltip="Supprimer" pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="1"></button>
           </div>
 
@@ -69,6 +69,7 @@
   </p-table>
 </div>
 
-<ngx-add-new-echanchier *ngIf="showEchancierWindow" [timeLine]="timeLine"></ngx-add-new-echanchier>
+<ngx-add-new-echanchier *ngIf="showEchancierWindow" [timeLine]="timeLine"
+(addNewEchenacierEvent)="saveNewEchancier($event)" (cancelEvent)="hideEchenacierWindow();initTimeLine();"></ngx-add-new-echanchier>
 
 

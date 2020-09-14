@@ -1,4 +1,4 @@
-<div class="card" *ngIf="!showAccountWindow">
+<div class="card" *ngIf="!showTarifBancaireWindow">
   <p-table #dt [value]="tarifs" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
            [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
            [paginator]="true" currentPageReportTemplate=""
@@ -19,7 +19,7 @@
 
         <div style="width:36%; margin-left: 25%">
           <button pButton pRipple label="Nouvelle configuration de tarfis" icon="pi pi-plus"
-                  class="p-button-success p-mr-2" (click)="showAccountWindow=true"></button>
+                  class="p-button-success p-mr-2" (click)="showTarifBancaireWindow=true"></button>
         </div>
 
       </div>
@@ -28,11 +28,11 @@
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 15px;">
         <th style="width: 3rem"></th>
-        <th pSortableColumn="tarifLabel" style="text-align: center; font-size: 15px;">Tarif bancaire
+        <th pSortableColumn="tarifLabel" style="text-align: center; font-size: 13px; width: 30%">Tarif bancaire
         </th>
-        <th pSortableColumn="tarifAccount.accountLabel" style="text-align: center; font-size: 15px;">Compte bancaire
+        <th pSortableColumn="tarifAccount.accountLabel" style="text-align: center; font-size: 13px;width: 30%">Compte bancaire
         </th>
-        <th pSortableColumn="tarifAccount.accountNumber" style="text-align: center; font-size: 15px;">Numéro de compte bancaire
+        <th pSortableColumn="tarifAccount.accountNumber" style="text-align: center; font-size: 13px;width: 35%">Numéro de compte bancaire
         </th>
         <!--
         <th pSortableColumn="check_remittance_commission" style=" text-align: center;font-size: 15px;">Commision de
@@ -54,7 +54,7 @@
           <p-sortIcon field="providerAddress"></p-sortIcon>
         </th>
 !-->
-        <th style="width: 10rem"></th>
+        <th style="width: 15%"></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-tarif let-expanded="expanded">
@@ -64,13 +64,13 @@
                   class="p-button-text p-button-rounded p-button-plain"
                   [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
         </td>
-        <td style="text-align: center;">
+        <td style="text-align: center;font-size: 13px;">
           {{tarif.tarifLabel}}
         </td>
-        <td style="text-align: center;">
+        <td style="text-align: center;font-size: 13px;  ">
           {{tarif.tarifAccount.accountLabel}}
         </td>
-        <td style="text-align: center;">
+        <td style="text-align: center;font-size: 13px;">
           {{tarif.tarifAccount.accountNumber}}
         </td>
         <!--
@@ -94,7 +94,7 @@
         <td style="text-align: center;">
           <div style="display: flex;">
             <button pButton placement="top" ngbTooltip="Modifier" pRipple icon="pi pi-pencil"
-                    class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="1"></button>
+                    class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="editTarif(tarif)"></button>
             <button pButton placement="top" ngbTooltip="Supprimer" pRipple icon="pi pi-trash"
                     class="p-button-rounded p-button-danger" (click)="1"></button>
           </div>
@@ -137,9 +137,12 @@
     </ng-template>
 <ng-template pTemplate="emptymessage">
   <tr>
-    <td colspan="8">Aucune configuration de tarifs bancaires trouvée!</td>
+    <td colspan="8" style="font-size: 13px;">Aucune configuration de tarifs bancaires trouvée!</td>
   </tr>
 </ng-template>
 </p-table>
 </div>
+
+<ngx-add-new-tarifs-bancaire *ngIf="showTarifBancaireWindow" [tarif]="tarif" (cancelEvent)="hideTarifBancaireWindow(); initTarifBancaire()"
+(addNewTarifEvent)="saveNewTarif($event)"></ngx-add-new-tarifs-bancaire>
 

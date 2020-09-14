@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DatepickerComponent} from '../../forms/datepicker/datepicker.component';
 
 @Component({
@@ -7,6 +7,8 @@ import {DatepickerComponent} from '../../forms/datepicker/datepicker.component';
   styleUrls: ['./add-new-echanchier.component.scss'],
 })
 export class AddNewEchanchierComponent implements OnInit {
+  @Output() addNewEchenacierEvent = new EventEmitter();
+  @Output() cancelEvent = new EventEmitter();
 @Input() timeLine = {
   timeLineLabel: '',
   timeLineAccount: {
@@ -97,4 +99,20 @@ line = {
     this.timeLine.timeLineTable.push(this.line);
     this.initiateLine();
  }
+  saveEcenachier() {
+    this.addNewEchenacierEvent.emit(this.timeLine);
+  }
+
+  cancel() {
+    this.cancelEvent.emit();
+  }
+
+  onChangeCompteLabel() {
+    this.timeLine.timeLineAccount.accountCurrency = 'TND';
+    this.timeLine.timeLineAccount.accountNumber = '12345TYU7';
+  }
+updateTotalAmount(line?) {
+    if (line == null) line = this.line;
+    line.total = line.initialAmount + line.interests + line.tva;
+}
 }
