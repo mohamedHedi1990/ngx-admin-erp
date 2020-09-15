@@ -34,7 +34,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'Comptes bancaires',
-        link: '/pages/layout/stepper',
+        link: '/pages/fichier/account',
       },
     ],
   },
