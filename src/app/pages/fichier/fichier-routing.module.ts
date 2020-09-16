@@ -12,8 +12,8 @@ import {AddNewEchanchierComponent} from './add-new-echanchier/add-new-echanchier
 import {ListeEchenaciersComponent} from './liste-echenaciers/liste-echenaciers.component';
 
 const routes: Routes = [{
-  path: 'account',
-   component: AddNewCompteComponent,
+  path: '',
+   // component: AddNewCompteComponent,
   children: [
     {
       path: 'societes',
@@ -38,6 +38,10 @@ const routes: Routes = [{
     {
       path: 'echeanciers',
       component: ListeEchenaciersComponent,
+    },
+    {
+      path: 'comptes',
+      component: ListComptesComponent,
     },
   ],
 

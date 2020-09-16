@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" *ngIf="!showAccountWindow">
   <p-table #dt [value]="accounts" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
            [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
            [paginator]="true" currentPageReportTemplate=""
@@ -12,8 +12,8 @@
                 </span>
         </div>
 
-        <div style="width:18%; margin-left: 25%">
-          <button pButton pRipple label="Nouveau Compte" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+        <div style="width:25%; margin-left: 25%">
+          <button pButton pRipple label="Nouveau Compte" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="showAccountWindow = true"></button>
         </div>
 
       </div>
@@ -21,23 +21,22 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 15px;">
-        <th pSortableColumn="accountLabel" style="text-align: center; font-size: 15px;">Compte Label</th>
-        <th pSortableColumn="accountNumber" style="text-align: center; font-size: 15px;">Num compte</th>
-        <th pSortableColumn="accountBank" style="width: 120px; text-align: center;font-size: 15px;"> Compte Bancaire</th>
-        <th pSortableColumn="accountAgency" style="text-align: center; font-size: 15px;">Agence</th>
-        <th pSortableColumn="accountCurrency" style="width: 150px; text-align: center;font-size: 15px;">  Devise </th>
+        <th pSortableColumn="accountLabel" style="text-align: center; font-size: 13px; width: 20%">Compte Bancaire</th>
+        <th pSortableColumn="accountNumber" style="text-align: center; font-size: 13px;width: 20%">Num compte</th>
+        <th pSortableColumn="accountBank" style=" text-align: center;font-size: 13px;width: 10%">Banque</th>
+        <th pSortableColumn="accountAgency" style="text-align: center; font-size: 13px;width: 20%">Agence</th>
+        <th pSortableColumn="accountCurrency" style="text-align: center;font-size: 13px;width: 10%">Devise</th>
 
         <!--
 		<th pSortableColumn="accountChargeCustomerPhoneNumber" style="text-align: center; font-size: 15px;">Télephone</th>
 		<th pSortableColumn="accountCurrency" style="text-align: center; font-size: 15px;">Solde</th>
 		!-->
 
-        <th pSortableColumn=""  style="text-align: center; font-size: 15px;">Action</th>
         <!--
           <th pSortableColumn="createdAt">Date de création</th>
           <th pSortableColumn="updatedAt">Date de modfication</th>
           -->
-        <th style="width: 10rem"></th>
+        <th style="width: 20%"></th>
       </tr>
       <!--
       <tr>
@@ -113,3 +112,6 @@
     </ng-template>
   </p-table>
 </div>
+<ngx-add-new-compte *ngIf="showAccountWindow" (addNewAccountEvent)="saveAccount($event)"
+(cancelEvent)="hideAccountWindow()"></ngx-add-new-compte>
+

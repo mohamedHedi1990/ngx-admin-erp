@@ -4,7 +4,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 @Component({
   selector: 'ngx-add-new-compte',
   templateUrl: './add-new-compte.component.html',
-  styleUrls: ['./add-new-compte.component.scss']
+  styleUrls: ['./add-new-compte.component.scss'],
 })
 export class AddNewCompteComponent implements OnInit {
 
@@ -21,7 +21,7 @@ export class AddNewCompteComponent implements OnInit {
     accountNumber: '',
     accountRIB: '',
     accountCurrency: '',
-    accountContacts: []
+    accountContacts: [],
   };
   @Output() addNewAccountEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();
