@@ -1,0 +1,201 @@
+<h5>Nouveau Compte</h5>
+<div style="width: 90%;
+    margin: auto;">
+  <p-panel header="Configuration Génerale" [toggleable]="false">
+    <p-panel header="Informations sur la banque" [toggleable]="true">
+    <div class="p-grid p-fluid">
+      <div style="display: flex">
+        <div class="mb-1 col-md-6 col-12 p-field">
+          <label for="accountBank" class="p-float-label">Banque:</label>
+
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field" id="accountBank"
+                   [(ngModel)]="account.accountBank" [ngClass]="{
+        'is-invalid': account.accountBank == null || account.accountBank == '' ,
+        'is-valid': account.accountBank != null && account.accountBank !== ''
+      }">
+          </div>
+        </div>
+        <div class="mb-1 col-md-6 col-12">
+          <label for="accountBankAdress" class="p-float-label">Adresse</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field"  id="accountBankAdress"
+                   [(ngModel)]="account.accountBankAdress " [ngClass]="{
+        'is-invalid': account.accountBankAdress  == null || account.accountBankAdress  == '' ,
+        'is-valid': account.accountBankAdress != null && account.accountBankAdress  !== ''
+      }">
+          </div>
+        </div>
+
+
+      </div>
+    </div></p-panel>
+    <p-panel header="Informations sur l'agence" [toggleable]="true">
+        <div class="p-grid p-fluid">
+          <div style="display: flex">
+            <div class="mb-1 col-md-6 col-12">
+              <label for="accountAgency" class="p-float-label">Agence:</label>
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                <input type="text" class="form-control p-field"  id="accountAgency"
+                       [(ngModel)]="account.accountAgency " [ngClass]="{
+        'is-invalid': account.accountAgency  == null || account.accountAgency  == '' ,
+        'is-valid': account.accountAgency != null && account.accountAgency  !== ''
+      }">
+              </div>
+            </div>
+            <div class="mb-1 col-md-6 col-12 p-field">
+              <label for="accountAgencyAdress" class="p-float-label"> Adresse: </label>
+
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                <input type="text" class="form-control p-field" id="accountAgencyAdress"
+                       [(ngModel)]="account.accountAgencyAdress" [ngClass]="{
+        'is-invalid': account.accountAgencyAdress == null || account.accountAgencyAdress == '' ,
+        'is-valid': account.accountAgencyAdress != null && account.accountAgencyAdress !== ''
+      }">
+              </div>
+            </div>
+
+
+
+          </div></div>
+      <div class="p-grid p-fluid">
+        <div style="display: flex">
+          <div class="mb-1 col-md-12 col-12">
+            <label for="CustomerName" class="p-float-label">Nom chargé clientéle:</label>
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+              <input type="text" class="form-control p-field"  id="CustomerName"
+                     [(ngModel)]="account.accountChargeCustomerName " [ngClass]="{
+        'is-invalid': account.accountChargeCustomerName  == null || account.accountChargeCustomerName  == '' ,
+        'is-valid': account.accountChargeCustomerName != null && account.accountChargeCustomerName  !== ''
+      }">
+            </div>
+          </div>
+
+
+        </div>
+        </div>
+      <div class="p-grid p-fluid">
+        <div style="display: flex">
+          <div class="mb-1 col-md-6 col-12 p-field">
+            <label for="accountChargeCustomerPhoneNumber" class="p-float-label">Numero Tel :</label>
+
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+              <input type="text" class="form-control p-field" id="accountChargeCustomerPhoneNumber"
+                     [(ngModel)]="account.accountChargeCustomerPhoneNumber" [ngClass]="{
+        'is-invalid': account.accountChargeCustomerPhoneNumber == null || account.accountChargeCustomerPhoneNumber == '' ,
+        'is-valid': account.accountChargeCustomerPhoneNumber != null && account.accountChargeCustomerPhoneNumber !== ''
+      }">
+            </div>
+
+          </div>
+          <div class="mb-1 col-md-6 col-12 p-field">
+            <label for="accountChargeCustomerEmail" class="p-float-label">Email :</label>
+
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+              <input type="text" class="form-control p-field" id="accountChargeCustomerEmail"
+                     [(ngModel)]="account.accountChargeCustomerEmail" [ngClass]="{
+        'is-invalid': account.accountChargeCustomerEmail == null || account.accountChargeCustomerEmail == '' ,
+        'is-valid': account.accountChargeCustomerEmail != null && account.accountChargeCustomerEmail !== ''
+      }">
+            </div>
+          </div>
+
+
+
+
+        </div></div>
+
+    </p-panel>
+
+    <p-panel header="Informations sur le compte bancaire" [toggleable]="true">
+      <div class="p-grid p-fluid">
+        <div style="display: flex">
+          <div class="mb-1 col-md-6 col-12">
+            <label for="accountLabel" class="p-float-label">Label Compte</label>
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+              <input type="text" class="form-control p-field"  id="accountLabel"
+                     [(ngModel)]="account.accountLabel " [ngClass]="{
+        'is-invalid': account.accountLabel  == null || account.accountLabel  == '' ,
+        'is-valid': account.accountLabel != null && account.accountLabel  !== ''
+      }">
+            </div>
+          </div>
+          <div class="mb-1 col-md-6 col-12 p-field">
+            <label for="accountBank" class="p-float-label">Numero Compte:</label>
+
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+              <input type="text" class="form-control p-field" id="accountNumber"
+                     [(ngModel)]="account.accountAgencyAdress" [ngClass]="{
+        'is-invalid': account.accountNumber == null || account.accountNumber == '' ,
+        'is-valid': account.accountNumber != null && account.accountNumber !== ''
+      }">
+            </div>
+          </div>
+
+
+
+        </div></div>
+      <div class="p-grid p-fluid">
+        <div style="display: flex">
+          <div class="mb-1 col-md-6 col-12">
+            <label for="accountRIB" class="p-float-label">Numero RIB:</label>
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+              <input type="text" class="form-control p-field"  id="accountRIB"
+                     [(ngModel)]="account.accountRIB " [ngClass]="{
+        'is-invalid': account.accountRIB  == null || account.accountRIB  == '' ,
+        'is-valid': account.accountRIB != null && account.accountRIB  !== ''
+      }">
+            </div>
+          </div>
+          <div class="mb-1 col-md-6 col-12 p-field">
+            <label for="accountCurrency" class="p-float-label">Devise :</label>
+
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+              <input type="text" class="form-control p-field" id="accountCurrency"
+                     [(ngModel)]="account.accountCurrency" [ngClass]="{
+        'is-invalid': account.accountCurrency == null || account.accountCurrency == '' ,
+        'is-valid': account.accountCurrency != null && account.accountCurrency !== ''
+      }">
+            </div>
+          </div>
+
+
+
+
+
+        </div></div>
+
+    </p-panel>
+  <br>
+  <p-panel header="Configuration des contacts" [toggleable]="true" collapsed="true">
+    <div style="width: 20%;
+    margin-left: 80%;">
+      <button pButton pRipple label="Nouveau contact" icon="pi pi-user-plus" class="p-mr-2"
+              (click)="addNewContact()" style="background: #dee2e6;
+    color: black;
+    border: #dee2e6;"></button>
+    </div>
+    <div *ngFor="let contact of account.accountContacts" style="padding-bottom: 50px;">
+      <ngx-new-contact [contact]="contact"></ngx-new-contact>
+    </div>
+  </p-panel>
+  <div class="p-panel p-panel-header" style="margin-top: 20px;">
+    <button [disabled]="" class="btn btn-secondary" style="margin-left: 1%;" (click)="cancel()">Annuler</button>
+    <button  [disabled]="" class="btn btn-success" style="margin-left: 74%;" (click)="saveAccount()">Enregistrer</button>
+  </div>
+
+
+</p-panel></div>
+
+

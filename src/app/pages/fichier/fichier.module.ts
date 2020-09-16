@@ -32,6 +32,8 @@ import {PanelModule} from 'primeng/panel';
 import { NewContactComponent } from './new-contact/new-contact.component';
 import {ListFournisseursComponent} from './list-fournisseurs/list-fournisseurs.component';
 import { AddNewProviderComponent } from './add-new-provider/add-new-provider.component';
+import { ListComptesComponent } from './list-comptes/list-comptes.component';
+import { AddNewCompteComponent } from './add-new-compte/add-new-compte.component';
 import { ListeContactsComponent } from './liste-contacts/liste-contacts.component';
 import {DialogModule} from 'primeng/dialog';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
@@ -41,7 +43,8 @@ import { AddNewEchanchierComponent } from './add-new-echanchier/add-new-echanchi
 import { ListeEchenaciersComponent } from './liste-echenaciers/liste-echenaciers.component';
 
 @NgModule({
-  declarations: [SocietesComponent, SaisirSocieteComponent, DetailsSocieteComponent, ListClientsComponent, ListContactsComponent, AddNewClientComponent, NewContactComponent, ListFournisseursComponent, AddNewProviderComponent, ListeContactsComponent, ListeTarifsBancaireComponent, AddNewTarifsBancaireComponent, AddNewEchanchierComponent, ListeEchenaciersComponent],
+  declarations: [SocietesComponent, SaisirSocieteComponent, DetailsSocieteComponent, ListClientsComponent, ListContactsComponent, AddNewClientComponent, NewContactComponent, ListFournisseursComponent, AddNewProviderComponent, ListeContactsComponent, ListeTarifsBancaireComponent, AddNewTarifsBancaireComponent, AddNewEchanchierComponent,
+          ListeEchenaciersComponent, ListComptesComponent, AddNewCompteComponent],
   imports: [
     CommonModule,
     FichierRoutingModule,
