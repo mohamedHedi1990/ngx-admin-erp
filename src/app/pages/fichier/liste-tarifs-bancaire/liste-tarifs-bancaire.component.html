@@ -1,0 +1,148 @@
+<div class="card" *ngIf="!showTarifBancaireWindow">
+  <p-table #dt [value]="tarifs" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+           [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+           [paginator]="true" currentPageReportTemplate=""
+           [filterDelay]="0"
+           [globalFilterFields]="['providerLabel','providerUniqueIdentifier','providerAddress','providerTel','providerEmail','providerManagerName','createdAt', 'updatedAt']">
+    <ng-template pTemplate="caption">
+      <div style="display: flex; width: 100%">
+        <div class="p-d-flex p-ai-center p-jc-between" style="width: 60%">
+          <!--
+        <span class="p-input-icon-left" style="width: 100%">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"
+                           (input)="dt.filterGlobal($event.target.value, 'contains')"
+                           placeholder="Chercher une configuration de tarifs bancaires.."/>
+                </span>
+                -->
+        </div>
+
+        <div style="width:36%; margin-left: 25%">
+          <button pButton pRipple label="Nouvelle configuration de tarfis" icon="pi pi-plus"
+                  class="p-button-success p-mr-2" (click)="showTarifBancaireWindow=true"></button>
+        </div>
+
+      </div>
+
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr style="text-align: center; font-size: 15px;">
+        <th style="width: 3rem"></th>
+        <th pSortableColumn="tarifLabel" style="text-align: center; font-size: 13px; width: 30%">Tarif bancaire
+        </th>
+        <th pSortableColumn="tarifAccount.accountLabel" style="text-align: center; font-size: 13px;width: 30%">Compte bancaire
+        </th>
+        <th pSortableColumn="tarifAccount.accountNumber" style="text-align: center; font-size: 13px;width: 35%">Numéro de compte bancaire
+        </th>
+        <!--
+        <th pSortableColumn="check_remittance_commission" style=" text-align: center;font-size: 15px;">Commision de
+          remise des chèques
+          <p-sortIcon field="providerAddress"></p-sortIcon>
+        </th>
+        <th pSortableColumn="remittance_of_bills_for_collection_commission"
+            style=" text-align: center;font-size: 15px;">Commission de remise remise effets à l'encaissement
+          <p-sortIcon field="providerAddress"></p-sortIcon>
+        </th>
+        <th pSortableColumn="discount_commission" style=" text-align: center;font-size: 15px;">Commission de remise
+          remise effets à l'escompte
+          <p-sortIcon field="providerAddress"></p-sortIcon>
+        </th>
+        <th pSortableColumn="transfer_commission" style="text-align: center;font-size: 15px;">Virement
+          <p-sortIcon field="providerAddress"></p-sortIcon>
+        </th>
+        <th pSortableColumn="interest_rate" style=" text-align: center;font-size: 15px;">Taux d\'intérêt
+          <p-sortIcon field="providerAddress"></p-sortIcon>
+        </th>
+!-->
+        <th style="width: 15%"></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-tarif let-expanded="expanded">
+      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
+        <td>
+          <button type="button" pButton pRipple [pRowToggler]="tarif"
+                  class="p-button-text p-button-rounded p-button-plain"
+                  [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+        </td>
+        <td style="text-align: center;font-size: 13px;">
+          {{tarif.tarifLabel}}
+        </td>
+        <td style="text-align: center;font-size: 13px;  ">
+          {{tarif.tarifAccount.accountLabel}}
+        </td>
+        <td style="text-align: center;font-size: 13px;">
+          {{tarif.tarifAccount.accountNumber}}
+        </td>
+        <!--
+        <td style="text-align: center;">
+          {{tarif.check_remittance_commission}}
+        </td>
+
+        <td style="text-align: center;">
+          {{tarif.remittance_of_bills_for_collection_commission}}
+        </td>
+        <td style="text-align: center;">
+          {{tarif.discount_commission}}
+        </td>
+        <td style="text-align: center;">
+          {{tarif.transfer_commission}}
+        </td>
+        <td style="text-align: center;">
+          {{tarif.interest_rate}}
+        </td>
+-->
+        <td style="text-align: center;">
+          <div style="display: flex;">
+            <button pButton placement="top" ngbTooltip="Modifier" pRipple icon="pi pi-pencil"
+                    class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="editTarif(tarif)"></button>
+            <button pButton placement="top" ngbTooltip="Supprimer" pRipple icon="pi pi-trash"
+                    class="p-button-rounded p-button-danger" (click)="1"></button>
+          </div>
+
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-tarif>
+      <tr>
+        <td colspan="5">
+          <div class="p-p-3">
+
+
+            <table style="font-size: 13px;">
+                <tr>
+                  <td style="width: 50%">Commision de remise des chèques</td>
+                  <td>{{tarif.check_remittance_commission}}</td>
+                </tr>
+                <tr>
+                  <td>Commission de remise remise effets à l'encaissement</td>
+                  <td>{{tarif.remittance_of_bills_for_collection_commission}}</td>
+                </tr>
+                <tr>
+                  <td>Commission de remise remise effets à l'escompte</td>
+                  <td>{{tarif.discount_commission}}</td>
+                </tr>
+                <tr>
+                  <td>Commission de virement</td>
+                  <td>{{tarif.transfer_commission}}</td>
+                </tr>
+                <tr>
+                  <td>Taux interet (en %)</td>
+                  <td>{{tarif.interest_rate}}</td>
+                </tr>
+            </table>
+
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+<ng-template pTemplate="emptymessage">
+  <tr>
+    <td colspan="8" style="font-size: 13px;">Aucune configuration de tarifs bancaires trouvée!</td>
+  </tr>
+</ng-template>
+</p-table>
+</div>
+
+<ngx-add-new-tarifs-bancaire *ngIf="showTarifBancaireWindow" [tarif]="tarif" (cancelEvent)="hideTarifBancaireWindow(); initTarifBancaire()"
+(addNewTarifEvent)="saveNewTarif($event)"></ngx-add-new-tarifs-bancaire>
+

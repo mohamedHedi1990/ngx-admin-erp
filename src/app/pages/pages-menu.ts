@@ -3,7 +3,7 @@ import { NbMenuItem } from '@nebular/theme';
 export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Acceuil',
-    icon: 'shopping-cart-outline',
+    icon: 'home-outline',
     link: '/pages/dashboard',
     home: true,
   },
@@ -18,23 +18,37 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },*/
   {
     title: 'Fichier',
-    icon: 'layout-outline',
+    icon: 'file-outline',
     children: [
       {
         title: 'Sociétés',
         link: '/pages/fichier/societes',
+        icon: 'briefcase-outline',
       },
       {
         title: 'Clients',
         link: '/pages/fichier/clients',
+        icon: 'award-outline',
       },
       {
         title: 'Fournisseurs',
         link: '/pages/fichier/fournisseurs',
+        icon: 'car-outline',
       },
       {
         title: 'Comptes bancaires',
-        link: '/pages/fichier/account',
+        link: '/pages/fichier/comptes',
+        icon: 'activity-outline',
+      },
+      {
+        title: 'echeanciers',
+        link: '/pages/fichier/echeanciers',
+        icon: 'calendar-outline',
+      },
+      {
+        title: 'tarifs-bancaires',
+        link: '/pages/fichier/tarifs-bancaires',
+        icon: 'percent-outline',
       },
     ],
   },

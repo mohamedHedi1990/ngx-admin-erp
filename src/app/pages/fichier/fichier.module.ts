@@ -34,9 +34,17 @@ import {ListFournisseursComponent} from './list-fournisseurs/list-fournisseurs.c
 import { AddNewProviderComponent } from './add-new-provider/add-new-provider.component';
 import { ListComptesComponent } from './list-comptes/list-comptes.component';
 import { AddNewCompteComponent } from './add-new-compte/add-new-compte.component';
+import { ListeContactsComponent } from './liste-contacts/liste-contacts.component';
+import {DialogModule} from 'primeng/dialog';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import { ListeTarifsBancaireComponent } from './liste-tarifs-bancaire/liste-tarifs-bancaire.component';
+import { AddNewTarifsBancaireComponent } from './add-new-tarifs-bancaire/add-new-tarifs-bancaire.component';
+import { AddNewEchanchierComponent } from './add-new-echanchier/add-new-echanchier.component';
+import { ListeEchenaciersComponent } from './liste-echenaciers/liste-echenaciers.component';
 
 @NgModule({
-  declarations: [SocietesComponent, SaisirSocieteComponent, DetailsSocieteComponent, ListClientsComponent, ListContactsComponent, AddNewClientComponent, NewContactComponent, ListFournisseursComponent, AddNewProviderComponent, ListComptesComponent, AddNewCompteComponent],
+  declarations: [SocietesComponent, SaisirSocieteComponent, DetailsSocieteComponent, ListClientsComponent, ListContactsComponent, AddNewClientComponent, NewContactComponent, ListFournisseursComponent, AddNewProviderComponent, ListeContactsComponent, ListeTarifsBancaireComponent, AddNewTarifsBancaireComponent, AddNewEchanchierComponent,
+          ListeEchenaciersComponent, ListComptesComponent, AddNewCompteComponent],
   imports: [
     CommonModule,
     FichierRoutingModule,
@@ -54,8 +62,9 @@ import { AddNewCompteComponent } from './add-new-compte/add-new-compte.component
     NbRadioModule,
     NbSelectModule,
     HttpClientModule,
+    DynamicDialogModule,
     NbUserModule, FormsModule,
-    ModalModule.forRoot(), Ng2SmartTableModule, PanelModule,
+    ModalModule.forRoot(), Ng2SmartTableModule, PanelModule, DialogModule,
   ],
   providers: [UtilsServiceService],
 })

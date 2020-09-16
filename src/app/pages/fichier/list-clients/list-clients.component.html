@@ -21,15 +21,15 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 15px;">
-        <th pSortableColumn="customerLabel" style="text-align: center; font-size: 15px;">Dénomination<p-sortIcon field="customerLabel"></p-sortIcon></th>
-		<th pSortableColumn="customerUniqueIdentifier" style="text-align: center; font-size: 15px;">Identifiant<p-sortIcon field="customerUniqueIdentifier"></p-sortIcon></th>
-        <th pSortableColumn="customerAddress" style="width: 300px; text-align: center;font-size: 15px;">Adresse<p-sortIcon field="customerAddress"></p-sortIcon></th>
+        <th pSortableColumn="customerLabel" style="text-align: center; font-size: 13px;">Dénomination<p-sortIcon field="customerLabel"></p-sortIcon></th>
+		<th pSortableColumn="customerUniqueIdentifier" style="text-align: center; font-size: 13px;">Identifiant<p-sortIcon field="customerUniqueIdentifier"></p-sortIcon></th>
+        <th pSortableColumn="customerAddress" style="width: 300px; text-align: center;font-size: 13px;">Adresse<p-sortIcon field="customerAddress"></p-sortIcon></th>
         <!--
 		<th pSortableColumn="customerTel" style="text-align: center; font-size: 15px;">Télephone</th>
 		<th pSortableColumn="customerEmail" style="text-align: center; font-size: 15px;">Email</th>
 		!-->
 
-       <th pSortableColumn="customerManagerName"  style="text-align: center; font-size: 15px;">Nom du responsable</th>
+       <th pSortableColumn="customerManagerName"  style="text-align: center; font-size: 13px;">Nom du responsable</th>
         <!--
           <th pSortableColumn="createdAt">Date de création</th>
           <th pSortableColumn="updatedAt">Date de modfication</th>
@@ -58,13 +58,13 @@
     </ng-template>
     <ng-template pTemplate="body" let-client>
       <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
-        <td  style="text-align: center;">
+        <td  style="text-align: center;font-size: 13px;">
           {{client.customerLabel}}
         </td>
-        <td style="text-align: center;">
+        <td style="text-align: center;font-size: 13px;">
           {{client.customerUniqueIdentifier}}
         </td>
-        <td style="text-align: center;">
+        <td style="text-align: center;font-size: 13px;">
           {{client.customerAddress}}
         </td>
         <!--
@@ -76,7 +76,7 @@
         </td>
         -->
 
-        <td style="text-align: center;">
+        <td style="text-align: center;font-size: 13px;">
           {{client.customerManagerName}}
         </td>
         <!--
@@ -89,9 +89,9 @@
         -->
         <td style="text-align: center;">
           <div style="display: flex;">
-            <button pButton   placement="top" ngbTooltip="Contacter" pRipple icon="pi pi-users" class="p-button-rounded p-button-info p-mr-2" style="margin-right: 7px;" (click)="1"></button>
-            <button pButton   placement="top" ngbTooltip="Modifier" pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="1"></button>
-            <button pButton   placement="top" ngbTooltip="Supprimer" pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="1"></button>
+            <button pButton   placement="top" ngbTooltip="Contacter" pRipple icon="pi pi-users" class="p-button-rounded p-button-info p-mr-2" style="margin-right: 7px;" (click)="showContacts(client)"></button>
+            <button pButton   placement="top" ngbTooltip="Modifier" pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="editClient(client)"></button>
+            <button pButton   placement="top" ngbTooltip="Supprimer" pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteClient(client)"></button>
           </div>
 
         </td>
@@ -107,3 +107,9 @@
 
 <ngx-add-new-client *ngIf="showClientWindow" [client]="client" (addNewClientEvent)="saveNewClient($event)"
 (cancelEvent)="hideClientWindow(); initClient();"></ngx-add-new-client>
+
+<p-dialog [(visible)]="showContactList" [style]="{width: '650px'}" [header]="contactModalheader"  styleClass="p-fluid">
+  <ng-template pTemplate="content">
+    <ngx-list-contacts [contacts]="client.customerContacts"></ngx-list-contacts>
+  </ng-template>
+</p-dialog>
