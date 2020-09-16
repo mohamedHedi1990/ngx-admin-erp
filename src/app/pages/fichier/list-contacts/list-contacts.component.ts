@@ -15,6 +15,7 @@ loading = false;
 
 
   ngOnInit(): void {
+    /*
     this.contacts = [
       { contactName: 'Mohamed El Hedi Boussada', contactPost: 'Ingénieur', contactTel: '25274902', contactEmail: 'mohamedelhadiboussada@gmail.com'},
       { contactName: 'Mohamed El Hedi Boussada', contactPost: 'Ingénieur', contactTel: '25274902', contactEmail: 'mohamedelhadiboussada@gmail.com'},
@@ -23,6 +24,7 @@ loading = false;
 
 
     ];
+    */
 
   }
 

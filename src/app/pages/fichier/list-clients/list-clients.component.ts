@@ -82,6 +82,7 @@ export class ListClientsComponent implements OnInit {
 */
   ngOnInit(): void {
     this.initClient();
+    /*
     this.clients = [
       {customerLabel: 'Client A', customerUniqueIdentifier: 'HYUIO8CO9', customerAddress: 'Jardins de l\'aouina 2046 Tunis', customerTel: '+21623262528', customerEmail: 'clientA@gmail.com' , customerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06', customerContacts : []},
       {customerLabel: 'APAC', customerUniqueIdentifier: 'APACO8CO9', customerAddress: 'Heberges de lac 2', customerTel: '+21623262528', customerEmail: 'apac@gmail.com' , customerManagerName: 'Helmi Dammak', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06'},
@@ -93,13 +94,79 @@ export class ListClientsComponent implements OnInit {
       {customerLabel: 'Client A', customerUniqueIdentifier: 'HYUIO8CO9', customerAddress: 'Jardins de l\'aouina 2046 Tunis', customerTel: '+21623262528', customerEmail: 'clientA@gmail.com' , customerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06', customerContacts : []},
 
     ];
+    */
+     this.getAllClients();
   }
-
+/*
   saveNewClient(client) {
     this.hideClientWindow();
     this.UtilsService.showToast('success',
       'Client ajoutée avec succés',
       `Le client  ${this.client.customerLabel} a été ajouté avec succcés`);
+  }
+*/
+  saveNewClient() {
+
+    const context = this;
+    this.UtilsService.post(UtilsServiceService.API_CLIENT, this.client).subscribe( response => {
+        this.hideClientWindow();
+        if ( context.client.customerId == null) {
+          this.UtilsService.showToast('success',
+            'Client ajouté avec succés',
+            `Le client  ${this.client.customerLabel} a été ajouté avec succcés`);
+        } else {
+          this.UtilsService.showToast('success',
+            'Client modfié avec succés',
+            `Le client  ${this.client.customerLabel} a été modifié avec succcés`);
+        }
+        context.getAllClients();
+        context.initClient();
+      },
+      error => {this.UtilsService.showToast('danger',
+        'Erreur interne',
+        `Un erreur interne a été produit lors de la souvegarde du client ${this.client.customerLabel}`); });
+
+  }
+
+  getAllClients() {
+
+    const context = this;
+    this.UtilsService.get(UtilsServiceService.API_CLIENT).subscribe( response => {
+        context.clients = response;
+        },
+      error => {
+        this.UtilsService.showToast('danger',
+          'Erreur interne',
+          `Un erreur interne a été produit lors du chargement des clients`);
+      });
+
+  }
+  editClient(client) {
+    this.client = client;
+    this.saveNewClient();
+  }
+
+  deleteClient(client) {
+    this.client = client;
+    this.delClient();
+  }
+
+  delClient() {
+    const context = this;
+    this.UtilsService.delete(`${UtilsServiceService.API_CLIENT}\${this.client.customerId}`).subscribe( response => {
+        context.clients = response;
+        this.UtilsService.showToast('success',
+          'Client supprimé avec succés',
+          `Le client  ${this.client.customerLabel} a été supprimé avec succcés`);
+        this.initClient();
+      },
+      error => {this.UtilsService.showToast('danger',
+        'Erreur interne',
+        `Un erreur interne a été produit lors de la suppression du client ${this.client.customerLabel}`);
+        this.initClient(); });
+
+
+
   }
 
   hideClientWindow() {
