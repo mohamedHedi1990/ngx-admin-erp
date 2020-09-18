@@ -15,12 +15,14 @@ export class ListFournisseursComponent implements OnInit {
   loading = false;
   showProviderWindow = false;
   provider = null;
+  showProviderList = false;
   contactModalheader = 'List des contacts pour le fournisseur ';
   constructor(private service: SmartTableData, private UtilsService: UtilsServiceService,
               public dialogService: DialogService) {
   }
     ngOnInit(): void {
-    this.initprovider();
+    this.initProvider();
+    /*
     this.providers = [
       {providerLabel: 'Fournisseur A', providerUniqueIdentifier: 'HYUIO8CO9', providerAddress: 'Jardins de l\'aouina 2046 Tunis', providerTel: '+21623262528', providerEmail: 'clientA@gmail.com' , providerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06', providerContacts : []},
       {providerLabel: 'Fournisseur B', providerUniqueIdentifier: 'HYUIO8CO9', providerAddress: 'Jardins de l\'aouina 2046 Tunis', providerTel: '+21623262528', providerEmail: 'clientA@gmail.com' , providerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06', providerContacts : []},
@@ -30,21 +32,79 @@ export class ListFournisseursComponent implements OnInit {
       {providerLabel: 'Fournisseur F', providerUniqueIdentifier: 'HYUIO8CO9', providerAddress: 'Jardins de l\'aouina 2046 Tunis', providerTel: '+21623262528', providerEmail: 'clientA@gmail.com' , providerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06', providerContacts : []},
       {providerLabel: 'Fournisseur G', providerUniqueIdentifier: 'HYUIO8CO9', providerAddress: 'Jardins de l\'aouina 2046 Tunis', providerTel: '+21623262528', providerEmail: 'clientA@gmail.com' , providerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06', providerContacts : []},
 
-    ];
+    ];*/
+      this.getAllProviders();
   }
 
-  saveNewProvider(provider) {
-    this.hideProviderWindow();
-    this.UtilsService.showToast('success',
-      'Fournisseur ajoutée avec succés',
-      `Le fournisseur  ${this.provider.providerLabel} a été ajouté avec succcés`);
+  saveNewProvider() {
+
+    const context = this;
+    this.UtilsService.post(UtilsServiceService.API_PROVIDER, this.provider).subscribe( response => {
+        this.hideProviderWindow();
+        if ( context.provider.providerUniqueIdentifier == null) {
+          this.UtilsService.showToast('success',
+            'Fournisseur ajouté avec succés',
+            `Le Fournisseur  ${this.provider.providerLabel} a été ajouté avec succcés`);
+        } else {
+          this.UtilsService.showToast('success',
+            'Fournisseur modfié avec succés',
+            `Le Fournisseur  ${this.provider.providerLabel} a été modifié avec succcés`);
+        }
+        context.getAllProviders();
+        context.initProvider();
+      },
+      error => {this.UtilsService.showToast('danger',
+        'Erreur interne',
+        `Un erreur interne a été produit lors de la souvegarde du Fournisseur ${this.provider.providerLabel}`); });
+
+  }
+
+  getAllProviders() {
+
+    const context = this;
+    this.UtilsService.get(UtilsServiceService.API_PROVIDER).subscribe( response => {
+        context.providers = response;
+      },
+      error => {
+        this.UtilsService.showToast('danger',
+          'Erreur interne',
+          `Un erreur interne a été produit lors du chargement des fournisseurs`);
+      });
+
+  }
+  editProvider(provider) {
+    this.provider = provider;
+    this.saveNewProvider();
+  }
+
+  deleteProvider(provider) {
+    this.provider = provider;
+    this.delProvider();
+  }
+
+  delProvider() {
+    const context = this;
+    this.UtilsService.delete(`${UtilsServiceService.API_PROVIDER}\${this.provider.providerUniqueIdentifier`).subscribe( response => {
+        context.providers = response;
+        this.UtilsService.showToast('success',
+          'Fournisseur supprimé avec succés',
+          `Le fournisseur  ${this.provider.providerLabel} a été supprimé avec succcés`);
+        this.initProvider();
+      },
+      error => {this.UtilsService.showToast('danger',
+        'Erreur interne',
+        `Un erreur interne a été produit lors de la suppression du fournisseur ${this.provider.providerLabel}`);
+        this.initProvider(); });
+
+
+
   }
 
   hideProviderWindow() {
     this.showProviderWindow = false;
   }
 
-  initprovider() {
+  initProvider() {
     this.provider = {
       providerId: null,
       providerLabel: '',

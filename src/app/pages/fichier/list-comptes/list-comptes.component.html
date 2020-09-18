@@ -97,9 +97,9 @@
         -->
         <td style="text-align: center;">
           <div style="display: flex;">
-            <button pButton   placement="top" ngbTooltip="Contacter" pRipple icon="pi pi-users" class="p-button-rounded p-button-info p-mr-2" style="margin-right: 7px;" (click)="1"></button>
-            <button pButton   placement="top" ngbTooltip="Modifier" pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="1"></button>
-            <button pButton   placement="top" ngbTooltip="Supprimer" pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="1"></button>
+            <button pButton   placement="top" ngbTooltip="Contacter" pRipple icon="pi pi-users" class="p-button-rounded p-button-info p-mr-2" style="margin-right: 7px;" (click)="showContacts(account)"></button>
+            <button pButton   placement="top" ngbTooltip="Modifier" pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="editAccount(account)"></button>
+            <button pButton   placement="top" ngbTooltip="Supprimer" pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteAccount(account)"></button>
           </div>
 
         </td>
@@ -112,6 +112,13 @@
     </ng-template>
   </p-table>
 </div>
-<ngx-add-new-compte *ngIf="showAccountWindow" (addNewAccountEvent)="saveAccount($event)"
-(cancelEvent)="hideAccountWindow()"></ngx-add-new-compte>
+<ngx-add-new-compte *ngIf="showAccountWindow" [account]="account" (addNewAccountEvent)="saveNewAccount($event)"
+(cancelEvent)="hideAccountWindow(); initAccount();"></ngx-add-new-compte>
+
+<p-dialog [(visible)]="showContactList" [style]="{width: '650px'}" [header]="contactModalheader"  styleClass="p-fluid">
+  <ng-template pTemplate="content">
+    <ngx-list-contacts [contacts]="account.accountContacts"></ngx-list-contacts>
+  </ng-template>
+</p-dialog>
+
 
