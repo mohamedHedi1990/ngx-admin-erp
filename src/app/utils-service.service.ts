@@ -13,6 +13,7 @@ export class UtilsServiceService {
   public static API_ACCOUNT = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/account';
   public static API_CLIENT = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/client';
   public static API_TARIF = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/tarif';
+  public static API_TIME_LINE = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/timeLine';
 
 
   constructor(private toastrService: NbToastrService, private httpClient: HttpClient) {

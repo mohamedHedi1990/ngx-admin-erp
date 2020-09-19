@@ -6,7 +6,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   styleUrls: ['./add-new-tarifs-bancaire.component.scss'],
 })
 export class AddNewTarifsBancaireComponent implements OnInit {
-@Input() tarif = {tarifLabel: '', tarifAccount: {accountLabel: null,
+@Input() tarif = {tarifId: null, tarifLabel: '', tarifAccount: {accountLabel: null,
     accountNumber: '', accountCurrency: ''}, comissions: []};
   @Output() addNewTarifEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();

@@ -10,6 +10,7 @@ export class AddNewEchanchierComponent implements OnInit {
   @Output() addNewEchenacierEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();
 @Input() timeLine = {
+  timeLineId: null,
   timeLineLabel: '',
   timeLineAccount: {
     accountNumber: '',
