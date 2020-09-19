@@ -83,8 +83,8 @@
         <td style="text-align: center;">
           <div style="display: flex;">
             <button pButton   placement="top" ngbTooltip="Contacter" pRipple icon="pi pi-users" class="p-button-rounded p-button-info p-mr-2" style="margin-right: 7px;" (click)="showContacts(provider)"></button>
-            <button pButton   placement="top" ngbTooltip="Modifier" pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="1"></button>
-            <button pButton   placement="top" ngbTooltip="Supprimer" pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="1"></button>
+            <button pButton   placement="top" ngbTooltip="Modifier" pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="editProvider(provider)"></button>
+            <button pButton   placement="top" ngbTooltip="Supprimer" pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteProvider(provider)"></button>
           </div>
 
         </td>
@@ -98,4 +98,10 @@
   </p-table>
 </div>
 
-<ngx-add-new-provider *ngIf="showProviderWindow" [provider]="provider" (addNewProviderEvent)="saveNewProvider($event)" (cancelEvent)="hideProviderWindow(); initprovider();"></ngx-add-new-provider>
+<ngx-add-new-provider *ngIf="showProviderWindow" [provider]="provider" (addNewProviderEvent)="saveNewProvider($event)" (cancelEvent)="hideProviderWindow(); initProvider();"></ngx-add-new-provider>
+
+<p-dialog [(visible)]="showProviderList" [style]="{width: '650px'}" [header]="contactModalheader"  styleClass="p-fluid">
+  <ng-template pTemplate="content">
+    <ngx-list-contacts [contacts]="provider.customerContacts"></ngx-list-contacts>
+  </ng-template>
+</p-dialog>

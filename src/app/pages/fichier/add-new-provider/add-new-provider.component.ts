@@ -33,5 +33,8 @@ export class AddNewProviderComponent implements OnInit {
   cancel() {
     this.cancelEvent.emit();
   }
+  saveProvider() {
+    this.addNewProviderEvent.emit(this.provider);
+  }
 
 }

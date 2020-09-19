@@ -32,6 +32,10 @@ const routes: Routes = [{
       component: ListFournisseursComponent,
     },
     {
+      path: 'comptes',
+      component: ListComptesComponent,
+    },
+    {
       path: 'tarifs-bancaires',
       component: ListeTarifsBancaireComponent,
     },
@@ -39,10 +43,7 @@ const routes: Routes = [{
       path: 'echeanciers',
       component: ListeEchenaciersComponent,
     },
-    {
-      path: 'comptes',
-      component: ListComptesComponent,
-    },
+
   ],
 
 }];
