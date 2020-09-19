@@ -10,6 +10,7 @@ export class AddNewCompteComponent implements OnInit {
 
 
   @Input() account = {
+    accountId: null,
     accountLabel : '',
     accountBank: '',
     accountBankAdress : '',

@@ -23,7 +23,7 @@
       <tr style="text-align: center; font-size: 15px;">
         <th pSortableColumn="customerLabel" style="text-align: center; font-size: 13px;width: 20%">Dénomination<p-sortIcon field="customerLabel"></p-sortIcon></th>
 		<th pSortableColumn="customerUniqueIdentifier" style="text-align: center; font-size: 13px;width: 20%">Identifiant<p-sortIcon field="customerUniqueIdentifier"></p-sortIcon></th>
-        <th pSortableColumn="customerAddress" style="width: 300px; text-align: center;font-size: 13px;width: 30%">Adresse<p-sortIcon field="customerAddress"></p-sortIcon></th>
+        <th pSortableColumn="customerAddress" style="width: 300px; text-align: center;font-size: 13px;width: 25%">Adresse<p-sortIcon field="customerAddress"></p-sortIcon></th>
         <!--
 		<th pSortableColumn="customerTel" style="text-align: center; font-size: 15px;">Télephone</th>
 		<th pSortableColumn="customerEmail" style="text-align: center; font-size: 15px;">Email</th>
@@ -34,7 +34,7 @@
           <th pSortableColumn="createdAt">Date de création</th>
           <th pSortableColumn="updatedAt">Date de modfication</th>
           -->
-        <th style="width: 10%">Actions</th>
+        <th style="width: 15%">Actions</th>
       </tr>
       <!--
       <tr>
@@ -108,8 +108,3 @@
 <ngx-add-new-client *ngIf="showClientWindow" [client]="client" (addNewClientEvent)="saveNewClient($event)"
 (cancelEvent)="hideClientWindow(); initClient();"></ngx-add-new-client>
 
-<p-dialog [(visible)]="showContactList" [style]="{width: '650px'}" [header]="contactModalheader"  styleClass="p-fluid">
-  <ng-template pTemplate="content">
-    <ngx-list-contacts [contacts]="client.customerContacts"></ngx-list-contacts>
-  </ng-template>
-</p-dialog>

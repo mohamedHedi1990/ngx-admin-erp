@@ -17,7 +17,6 @@ export class ListClientsComponent implements OnInit {
   showClientWindow = false;
   client = null;
   showContactList = false;
-  contactModalheader = 'List des contacts pour le client ';
 
   /*
   settings = {
@@ -143,27 +142,24 @@ export class ListClientsComponent implements OnInit {
   }
   editClient(client) {
     this.client = client;
-    this.saveNewClient();
+    this.showClientWindow = true;
   }
+
 
   deleteClient(client) {
-    this.client = client;
-    this.delClient();
-  }
-
-  delClient() {
     const context = this;
-    this.UtilsService.delete(`${UtilsServiceService.API_CLIENT}\${this.client.customerId}`).subscribe( response => {
+    const url = UtilsServiceService.API_CLIENT + '/' + client.customerId;
+    this.UtilsService.delete(`${UtilsServiceService.API_CLIENT}/${client.customerId}`).subscribe( response => {
         context.clients = response;
         this.UtilsService.showToast('success',
           'Client supprimé avec succés',
-          `Le client  ${this.client.customerLabel} a été supprimé avec succcés`);
-        this.initClient();
+          `Le client  ${client.customerLabel} a été supprimé avec succcés`);
+        context.getAllClients();
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
         `Un erreur interne a été produit lors de la suppression du client ${this.client.customerLabel}`);
-        this.initClient(); });
+     });
 
 
 
@@ -187,12 +183,12 @@ export class ListClientsComponent implements OnInit {
   }
 
   showContacts(client) {
-    this.contactModalheader = this.contactModalheader + client.customerLabel;
+    const contactModalheader = 'Liste des contacts pour le client ' + client.customerLabel;
     const ref = this.dialogService.open(ListContactsComponent, {
       data: {
         contacts: client.customerContacts,
       },
-      header: this.contactModalheader,
+      header: contactModalheader,
       width: '70%',
     });
   }

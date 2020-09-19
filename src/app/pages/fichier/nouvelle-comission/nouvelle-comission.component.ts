@@ -7,6 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class NouvelleComissionComponent implements OnInit {
 @Input() comission= {
+  comissionId: null,
   comissionLabel : '',
   comissionOperation: null,
   comissionValue: 0,

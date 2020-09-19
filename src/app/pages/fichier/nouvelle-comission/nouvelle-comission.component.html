@@ -20,11 +20,11 @@
         'is-valid':comission.comissionOperation != null
       }">
           <option [ngValue]="null">-- Opération --</option>
-          <option [ngValue]="'Remise des chèques'">Remise des chèques</option>
-          <option [ngValue]="'Remise effets à l\'encaissement'">Remise effets à l'encaissement</option>
-          <option [ngValue]="'Remise effets à l\'escompte'">Remise effets à l'escompte</option>
-          <option [ngValue]="'Virement'">Virement</option>
-          <option [ngValue]="'Taux d\'intèret'">Taux d'intèret</option>
+          <option [ngValue]="'REMISE_CHHEQUE'">Remise des chèques</option>
+          <option [ngValue]="'REMISE_EFFETS_ENCAISSEMENT'">Remise effets à l'encaissement</option>
+          <option [ngValue]="'REMISE_EFFETS_ESCOMPTE'">Remise effets à l'escompte</option>
+          <option [ngValue]="'VIREMENT'">Virement</option>
+          <option [ngValue]="'INTERET'">Taux d'intèret</option>
         </select>
       </div>
     </div>
@@ -51,8 +51,8 @@
         'is-valid':comission.commissionType != null
       }">
           <option [ngValue]="null">-- Type --</option>
-          <option [ngValue]="'Numéro'">Numéro </option>
-          <option [ngValue]="'Pourcentage'">Pourcentage</option>
+          <option [ngValue]="'NUMBER'">Numéro </option>
+          <option [ngValue]="'RATE'">Pourcentage</option>
 
         </select>
       </div>
