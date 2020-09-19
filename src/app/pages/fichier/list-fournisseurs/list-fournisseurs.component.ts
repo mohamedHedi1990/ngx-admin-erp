@@ -74,7 +74,7 @@ export class ListFournisseursComponent implements OnInit {
   }
   editProvider(provider) {
     this.provider = provider;
-    this.saveNewProvider();
+   this.showProviderWindow = true;
   }
 
   deleteProvider(provider) {

@@ -134,7 +134,7 @@
             <div class="p-inputgroup">
               <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
               <input type="text" class="form-control p-field" id="accountNumber"
-                     [(ngModel)]="account.accountAgencyAdress" [ngClass]="{
+                     [(ngModel)]="account.accountNumber" [ngClass]="{
         'is-invalid': account.accountNumber == null || account.accountNumber == '' ,
         'is-valid': account.accountNumber != null && account.accountNumber !== ''
       }">
@@ -179,8 +179,8 @@
     </p-panel>
   <br>
   <p-panel header="Configuration des contacts" [toggleable]="true" collapsed="true">
-    <div style="width: 20%;
-    margin-left: 80%;">
+    <div style="width: 21%;
+    margin-left: 79%;">
       <button pButton pRipple label="Nouveau contact" icon="pi pi-user-plus" class="p-mr-2"
               (click)="addNewContact()" style="background: #dee2e6;
     color: black;

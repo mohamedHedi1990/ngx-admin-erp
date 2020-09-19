@@ -69,24 +69,18 @@ export class ListeTarifsBancaireComponent implements OnInit {
       });
 
   }
-
   deleteTarif(tarif) {
-    this.tarif = tarif;
-    this.delTarif();
-  }
-
-  delTarif() {
     const context = this;
-    this.UtilsService.delete(`${UtilsServiceService.API_TARIF}\${this.tarif.tarifId}`).subscribe( response => {
+    this.UtilsService.delete(`${UtilsServiceService.API_TARIF}/${tarif.tarifId}`).subscribe( response => {
         context.tarifs = response;
         this.UtilsService.showToast('success',
           'Tarification bancaire supprimée avec succés',
-          `La tarification bancaire  ${this.tarif.tarifLabel} a été supprimée avec succcés`);
+          `La tarification bancaire  ${tarif.tarifLabel} a été supprimée avec succcés`);
         this.initTarifBancaire();
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
-        `Un erreur interne a été produit lors de la suppression de la tarification bancaire ${this.tarif.tarifLabel}`);
+        `Un erreur interne a été produit lors de la suppression de la tarification bancaire ${tarif.tarifLabel}`);
         this.initTarifBancaire(); });
 
 

@@ -78,26 +78,21 @@ export class ListComptesComponent implements OnInit {
   }
   editAccount(account) {
     this.account = account;
-    this.saveNewAccount();
+    this.showAccountWindow = true;
   }
 
   deleteAccount(account) {
-    this.account = account;
-    this.delAccount();
-  }
-
-  delAccount() {
     const context = this;
-    this.UtilsService.delete(`${UtilsServiceService.API_ACCOUNT}\${this.account.accountNumber}`).subscribe( response => {
+    this.UtilsService.delete(`${UtilsServiceService.API_ACCOUNT}/${account.accountId}`).subscribe( response => {
         context.accounts = response;
         this.UtilsService.showToast('success',
           'Compte supprimé avec succés',
-          `Le compte  ${this.account.accountLabel} a été supprimé avec succcés`);
+          `Le compte  ${account.accountLabel} a été supprimé avec succcés`);
         this.initAccount();
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
-        `Un erreur interne a été produit lors de la suppression du compte ${this.account.accountLabel}`);
+        `Un erreur interne a été produit lors de la suppression du compte ${account.accountLabel}`);
         this.initAccount(); });
 
 

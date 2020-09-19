@@ -95,23 +95,19 @@ export class ListeEchenaciersComponent implements OnInit {
 
   }
 
-  deleteTimeLine(timeLine) {
-    this.timeLine = timeLine;
-    this.delTimeLine();
-  }
 
-  delTimeLine() {
+  deleteTimeLine(timeLine) {
     const context = this;
-    this.UtilsService.delete(`${UtilsServiceService.API_TIME_LINE}\${this.timeLine.timeLineId}`).subscribe( response => {
+    this.UtilsService.delete(`${UtilsServiceService.API_TIME_LINE}/${timeLine.timeLineId}`).subscribe( response => {
         context.echanciers = response;
         this.UtilsService.showToast('success',
           'Echéancier supprimé avec succés',
-          `L'échéancier  ${this.timeLine.timeLineLabel} a été supprimé avec succcés`);
+          `L'échéancier  ${timeLine.timeLineLabel} a été supprimé avec succcés`);
         this.initTimeLine();
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
-        `Un erreur interne a été produit lors de la suppression de l'échéancier ${this.timeLine.timeLineLabel}`);
+        `Un erreur interne a été produit lors de la suppression de l'échéancier ${timeLine.timeLineLabel}`);
         this.initTimeLine(); });
 
 
