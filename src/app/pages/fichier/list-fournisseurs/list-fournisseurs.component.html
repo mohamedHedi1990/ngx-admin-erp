@@ -20,21 +20,21 @@
 
     </ng-template>
     <ng-template pTemplate="header">
-      <tr style="text-align: center; font-size: 15px;">
-        <th pSortableColumn="providerLabel" style="text-align: center; font-size: 15px;">Dénomination<p-sortIcon field="providerLabel"></p-sortIcon></th>
-        <th pSortableColumn="providerUniqueIdentifier" style="text-align: center; font-size: 15px;">Identifiant<p-sortIcon field="providerUniqueIdentifier"></p-sortIcon></th>
-        <th pSortableColumn="providerAddress" style="width: 300px; text-align: center;font-size: 15px;">Adresse<p-sortIcon field="providerAddress"></p-sortIcon></th>
+      <tr style="text-align: center; font-size: 13px;">
+        <th pSortableColumn="providerLabel" style="text-align: center; font-size: 13px;width: 20%">Dénomination<p-sortIcon field="providerLabel"></p-sortIcon></th>
+        <th pSortableColumn="providerUniqueIdentifier" style="text-align: center; font-size: 13px; width: 20%">Identifiant<p-sortIcon field="providerUniqueIdentifier"></p-sortIcon></th>
+        <th pSortableColumn="providerAddress" style="width: 300px; text-align: center;font-size: 13px; width: 30%">Adresse<p-sortIcon field="providerAddress"></p-sortIcon></th>
         <!--
 		<th pSortableColumn="customerTel" style="text-align: center; font-size: 15px;">Télephone</th>
 		<th pSortableColumn="customerEmail" style="text-align: center; font-size: 15px;">Email</th>
 		!-->
 
-        <th pSortableColumn="providerManagerName"  style="text-align: center; font-size: 15px;">Nom du responsable</th>
+        <th pSortableColumn="providerManagerName"  style="text-align: center; font-size: 13px; width: 20%">Nom du responsable</th>
         <!--
           <th pSortableColumn="createdAt">Date de création</th>
           <th pSortableColumn="updatedAt">Date de modfication</th>
           -->
-        <th style="width: 10rem"></th>
+        <th style="width: 10%"></th>
       </tr>
       <!--
       <tr>
@@ -91,7 +91,7 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">
-      <tr>
+      <tr style="font-size: 13px">
         <td colspan="8">Aucun fournisseur trouvé!</td>
       </tr>
     </ng-template>

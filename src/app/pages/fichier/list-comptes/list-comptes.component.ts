@@ -9,6 +9,7 @@ import {ListContactsComponent} from '../list-contacts/list-contacts.component';
   selector: 'ngx-list-comptes',
   templateUrl: './list-comptes.component.html',
   styleUrls: ['./list-comptes.component.scss'],
+  providers: [DialogService],
 })
 export class ListComptesComponent implements OnInit {
   accounts: any[];

@@ -18,7 +18,7 @@
         </div>
 
         <div style="width:36%; margin-left: 25%">
-          <button pButton pRipple label="Nouvelle configuration de tarfis" icon="pi pi-plus"
+          <button pButton pRipple label="Nouvelle tarification bancaire" icon="pi pi-plus"
                   class="p-button-success p-mr-2" (click)="showTarifBancaireWindow=true"></button>
         </div>
 
@@ -96,7 +96,7 @@
             <button pButton placement="top" ngbTooltip="Modifier" pRipple icon="pi pi-pencil"
                     class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="editTarif(tarif)"></button>
             <button pButton placement="top" ngbTooltip="Supprimer" pRipple icon="pi pi-trash"
-                    class="p-button-rounded p-button-danger" (click)="1"></button>
+                    class="p-button-rounded p-button-danger" (click)="deleteTarif()"></button>
           </div>
 
         </td>
@@ -104,32 +104,41 @@
     </ng-template>
     <ng-template pTemplate="rowexpansion" let-tarif>
       <tr>
-        <td colspan="5">
+        <td colspan="4">
           <div class="p-p-3">
+            <p-table #dt [value]="tarif.comissions" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true">
+              <ng-template pTemplate="header">
+      <tr style="text-align: center; font-size: 13px;">
+        <th pSortableColumn="providerLabel" style="text-align: center; font-size: 13px;width: 30%">Label</th>
+        <th pSortableColumn="providerUniqueIdentifier" style="text-align: center; font-size: 13px; width: 30%">Opération</th>
+        <th pSortableColumn="providerAddress" style="text-align: center;font-size: 13px; width: 20%">Valeur</th>
+      <th pSortableColumn="providerAddress" style="text-align: center;font-size: 13px; width: 20%">Type</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-comission>
+      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
+        <td  style="text-align: center;">
+          {{comission.comissionLabel}}
+        </td>
+        <td  style="text-align: center;">
+          {{comission.comissionOperation}}
+        </td>
+        <td  style="text-align: center;">
+          {{comission.comissionValue}}
+        </td>
+        <td  style="text-align: center;">
+          {{comission.commissionType}}
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr style="font-size: 13px">
+        <td colspan="8">Aucune commission trouvée!</td>
+      </tr>
+    </ng-template>
+  </p-table>
 
 
-            <table style="font-size: 13px;">
-                <tr>
-                  <td style="width: 50%">Commision de remise des chèques</td>
-                  <td>{{tarif.check_remittance_commission}}</td>
-                </tr>
-                <tr>
-                  <td>Commission de remise remise effets à l'encaissement</td>
-                  <td>{{tarif.remittance_of_bills_for_collection_commission}}</td>
-                </tr>
-                <tr>
-                  <td>Commission de remise remise effets à l'escompte</td>
-                  <td>{{tarif.discount_commission}}</td>
-                </tr>
-                <tr>
-                  <td>Commission de virement</td>
-                  <td>{{tarif.transfer_commission}}</td>
-                </tr>
-                <tr>
-                  <td>Taux interet (en %)</td>
-                  <td>{{tarif.interest_rate}}</td>
-                </tr>
-            </table>
 
           </div>
         </td>
@@ -137,7 +146,7 @@
     </ng-template>
 <ng-template pTemplate="emptymessage">
   <tr>
-    <td colspan="8" style="font-size: 13px;">Aucune configuration de tarifs bancaires trouvée!</td>
+    <td colspan="8" style="font-size: 13px;">Aucune tarification bancaire trouvée!</td>
   </tr>
 </ng-template>
 </p-table>

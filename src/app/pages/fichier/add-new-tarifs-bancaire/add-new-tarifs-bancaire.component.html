@@ -1,4 +1,4 @@
-<h5>Nouvelle configuration de tarifs bancaires</h5>
+<h5>Nouvelle tarification bancaire</h5>
 <div style="width: 90%;margin: auto;">
   <div class="p-grid p-fluid">
     <div style="display: flex">
@@ -42,12 +42,26 @@
       <div class="mb-1 col-md-6 col-12 p-field">
         <label for="providerLabel" class="p-float-label">Devise</label>
         <div class="p-inputgroup">
-          <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+          <span class="p-inputgroup-addon"><i class="pi pi-dollar"></i></span>
           <input type="text" class="form-control p-field" id="devise"
                  [(ngModel)]="tarif.tarifAccount.accountCurrency" disabled="true">
         </div>
       </div>
     </div>
+    <br>
+    <p-panel header="Configration des comissions" [toggleable]="false">
+      <div style="width: 25%;
+    margin-left: 75%;">
+        <button pButton pRipple label="Ajouter une comission" icon="pi pi-money-bill" class="p-mr-2"
+                (click)="addNewComission()" style="background: #dee2e6;
+    color: black;
+    border: #dee2e6;"></button>
+      </div>
+      <div *ngFor="let commission of tarif.comissions" style="padding-bottom: 50px;">
+        <ngx-nouvelle-comission [comission]="commission"></ngx-nouvelle-comission>
+      </div>
+    </p-panel>
+    <!--
     <div style="display: flex">
       <div class="mb-1 col-md-6 col-12 p-field">
         <label for="providerLabel" class="p-float-label">Commision de remise des chèques</label>
@@ -114,7 +128,7 @@
 
     </div>
 
-
+-->
   </div>
 
 

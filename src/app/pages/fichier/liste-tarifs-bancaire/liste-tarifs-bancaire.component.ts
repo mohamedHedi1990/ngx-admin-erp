@@ -10,22 +10,13 @@ export class ListeTarifsBancaireComponent implements OnInit {
   showAccountWindow = false;
   tarifs = [];
   loading = false;
-  tarif = {tarifLabel: '', check_remittance_commission: 0, remittance_of_bills_for_collection_commission: 0, discount_commission: 0,
-    transfer_commission: 0, interest_rate: 0, tarifAccount: {accountLabel: '',
-      accountNumber: '', accountCurrency: ''}};
+  tarif = {tarifId: null, tarifLabel: '', tarifAccount: {accountLabel: '',
+      accountNumber: '', accountCurrency: ''}, comissions: []};
   showTarifBancaireWindow = false;
   constructor(private UtilsService: UtilsServiceService) { }
 
   ngOnInit(): void {
-  }
-
-  saveNewTarif(tarif) {
-    this.hideTarifBancaireWindow();
-    this.tarifs.push(tarif);
-    this.UtilsService.showToast('success',
-      'Tarifs bancaires ajoutés avec succés',
-      `La configuration  ${tarif.tarifLabel} a été ajoutée avec succcés`);
-    this.initTarifBancaire();
+    this.getAllTarifs();
   }
 
   hideTarifBancaireWindow() {
@@ -33,14 +24,73 @@ export class ListeTarifsBancaireComponent implements OnInit {
   }
 
   initTarifBancaire() {
-    this.tarif = {tarifLabel: '', check_remittance_commission: 0, remittance_of_bills_for_collection_commission: 0, discount_commission: 0,
-      transfer_commission: 0, interest_rate: 0, tarifAccount: {accountLabel: '',
-        accountNumber: '', accountCurrency: ''}};
+    this.tarif = {tarifId: null, tarifLabel: '',  tarifAccount: {accountLabel: '',
+        accountNumber: '', accountCurrency: ''}, comissions: []};
   }
 
   editTarif(tarif) {
     this.tarif = tarif;
     this.showTarifBancaireWindow = true;
+  }
+
+  saveNewTarif(tarif) {
+
+    const context = this;
+    this.UtilsService.post(UtilsServiceService.API_TARIF, this.tarif).subscribe( response => {
+        this.hideTarifBancaireWindow();
+        if ( context.tarif.tarifId == null) {
+          this.UtilsService.showToast('success',
+            'Tarification bancaire ajoutée avec succés',
+            `La tarification  ${this.tarif.tarifLabel} a été ajouté avec succcés`);
+        } else {
+          this.UtilsService.showToast('success',
+            'Tarification bancaire modifiée avec succés',
+            `La tarification  ${this.tarif.tarifLabel} a été modifiée avec succcés`);
+        }
+        context.getAllTarifs();
+        context.initTarifBancaire();
+      },
+      error => {this.UtilsService.showToast('danger',
+        'Erreur interne',
+        `Un erreur interne a été produit lors de la souvegarde de la tarification ${this.tarif.tarifLabel}`); });
+
+  }
+
+  getAllTarifs() {
+
+    const context = this;
+    this.UtilsService.get(UtilsServiceService.API_TARIF).subscribe( response => {
+        context.tarifs = response;
+      },
+      error => {
+        this.UtilsService.showToast('danger',
+          'Erreur interne',
+          `Un erreur interne a été produit lors du chargement des tarifications bancaires`);
+      });
+
+  }
+
+  deleteTarif(tarif) {
+    this.tarif = tarif;
+    this.delTarif();
+  }
+
+  delTarif() {
+    const context = this;
+    this.UtilsService.delete(`${UtilsServiceService.API_TARIF}\${this.tarif.tarifId}`).subscribe( response => {
+        context.tarifs = response;
+        this.UtilsService.showToast('success',
+          'Tarification bancaire supprimée avec succés',
+          `La tarification bancaire  ${this.tarif.tarifLabel} a été supprimée avec succcés`);
+        this.initTarifBancaire();
+      },
+      error => {this.UtilsService.showToast('danger',
+        'Erreur interne',
+        `Un erreur interne a été produit lors de la suppression de la tarification bancaire ${this.tarif.tarifLabel}`);
+        this.initTarifBancaire(); });
+
+
+
   }
 
 }

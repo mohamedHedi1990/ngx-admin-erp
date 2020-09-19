@@ -1,0 +1,62 @@
+<div class="p-grid p-fluid">
+  <div style="display: flex">
+    <div class="mb-1 col-md-6 col-12 p-field">
+      <label for="clientLabel" class="p-float-label">Label</label>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+        <input type="text" class="form-control p-field" id="clientLabel"
+               [(ngModel)]="comission.comissionLabel" [ngClass]="{
+        'is-invalid': comission.comissionLabel== null || comission.comissionLabel == '' ,
+        'is-valid':comission.comissionLabel != null && comission.comissionLabel != ''
+      }">
+      </div>
+    </div>
+    <div class="mb-1 col-md-6 col-12">
+      <label for="op" class="p-float-label">Opération</label>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+        <select class="form-control p-field" id="op" name="side" [(ngModel)]="comission.comissionOperation" [ngClass]="{
+        'is-invalid': comission.comissionOperation == null ,
+        'is-valid':comission.comissionOperation != null
+      }">
+          <option [ngValue]="null">-- Opération --</option>
+          <option [ngValue]="'Remise des chèques'">Remise des chèques</option>
+          <option [ngValue]="'Remise effets à l\'encaissement'">Remise effets à l'encaissement</option>
+          <option [ngValue]="'Remise effets à l\'escompte'">Remise effets à l'escompte</option>
+          <option [ngValue]="'Virement'">Virement</option>
+          <option [ngValue]="'Taux d\'intèret'">Taux d'intèret</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex">
+    <div class="mb-1 col-md-6 col-12">
+      <label for="val" class="p-float-label ">Valeur </label>
+      <div class="p-inputgroup p-fluid">
+        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+        <input type="number" class="form-control p-fluid"  id="val"
+               [(ngModel)]="comission.comissionValue " [ngClass]="{
+    'is-invalid': comission.comissionValue  == null ,
+    'is-valid': comission.comissionValue  != null
+  }">
+      </div>
+    </div>
+    <div class="mb-1 col-md-6 col-12">
+      <label for="type" class="p-float-label">Type </label>
+      <div class="p-inputgroup p-fluid">
+        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+        <select class="form-control p-field" id="type" name="side" [(ngModel)]="comission.commissionType" [ngClass]="{
+        'is-invalid': comission.commissionType == null ,
+        'is-valid':comission.commissionType != null
+      }">
+          <option [ngValue]="null">-- Type --</option>
+          <option [ngValue]="'Numéro'">Numéro </option>
+          <option [ngValue]="'Pourcentage'">Pourcentage</option>
+
+        </select>
+      </div>
+    </div>
+  </div>
+
+</div>

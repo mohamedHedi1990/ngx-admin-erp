@@ -20,7 +20,7 @@
         <div class="mb-1 col-md-6 col-12">
           <label for="accountBankAdress" class="p-float-label">Adresse</label>
           <div class="p-inputgroup">
-            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <span class="p-inputgroup-addon"><i class="pi pi-list"></i></span>
             <input type="text" class="form-control p-field"  id="accountBankAdress"
                    [(ngModel)]="account.accountBankAdress " [ngClass]="{
         'is-invalid': account.accountBankAdress  == null || account.accountBankAdress  == '' ,
@@ -50,7 +50,7 @@
               <label for="accountAgencyAdress" class="p-float-label"> Adresse: </label>
 
               <div class="p-inputgroup">
-                <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                <span class="p-inputgroup-addon"><i class="pi pi-list"></i></span>
                 <input type="text" class="form-control p-field" id="accountAgencyAdress"
                        [(ngModel)]="account.accountAgencyAdress" [ngClass]="{
         'is-invalid': account.accountAgencyAdress == null || account.accountAgencyAdress == '' ,
@@ -67,7 +67,7 @@
           <div class="mb-1 col-md-12 col-12">
             <label for="CustomerName" class="p-float-label">Nom chargé clientéle:</label>
             <div class="p-inputgroup">
-              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+              <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
               <input type="text" class="form-control p-field"  id="CustomerName"
                      [(ngModel)]="account.accountChargeCustomerName " [ngClass]="{
         'is-invalid': account.accountChargeCustomerName  == null || account.accountChargeCustomerName  == '' ,
@@ -85,7 +85,7 @@
             <label for="accountChargeCustomerPhoneNumber" class="p-float-label">Numero Tel :</label>
 
             <div class="p-inputgroup">
-              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+              <span class="p-inputgroup-addon"><i class="pi pi-mobile"></i></span>
               <input type="text" class="form-control p-field" id="accountChargeCustomerPhoneNumber"
                      [(ngModel)]="account.accountChargeCustomerPhoneNumber" [ngClass]="{
         'is-invalid': account.accountChargeCustomerPhoneNumber == null || account.accountChargeCustomerPhoneNumber == '' ,
@@ -98,7 +98,7 @@
             <label for="accountChargeCustomerEmail" class="p-float-label">Email :</label>
 
             <div class="p-inputgroup">
-              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+              <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
               <input type="text" class="form-control p-field" id="accountChargeCustomerEmail"
                      [(ngModel)]="account.accountChargeCustomerEmail" [ngClass]="{
         'is-invalid': account.accountChargeCustomerEmail == null || account.accountChargeCustomerEmail == '' ,
@@ -161,7 +161,7 @@
             <label for="accountCurrency" class="p-float-label">Devise :</label>
 
             <div class="p-inputgroup">
-              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+              <span class="p-inputgroup-addon"><i class="pi pi-dollar"></i></span>
               <input type="text" class="form-control p-field" id="accountCurrency"
                      [(ngModel)]="account.accountCurrency" [ngClass]="{
         'is-invalid': account.accountCurrency == null || account.accountCurrency == '' ,
