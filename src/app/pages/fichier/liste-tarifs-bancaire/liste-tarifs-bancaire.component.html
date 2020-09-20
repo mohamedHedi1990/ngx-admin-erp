@@ -1,3 +1,4 @@
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
 <div class="card" *ngIf="!showTarifBancaireWindow">
   <p-table #dt [value]="tarifs" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
            [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
@@ -96,7 +97,7 @@
             <button pButton placement="top" ngbTooltip="Modifier" pRipple icon="pi pi-pencil"
                     class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="editTarif(tarif)"></button>
             <button pButton placement="top" ngbTooltip="Supprimer" pRipple icon="pi pi-trash"
-                    class="p-button-rounded p-button-danger" (click)="deleteTarif()"></button>
+                    class="p-button-rounded p-button-danger" (click)="deleteTarif(tarif)"></button>
           </div>
 
         </td>

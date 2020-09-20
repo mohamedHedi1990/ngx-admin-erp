@@ -42,12 +42,14 @@ import {AddNewTarifsBancaireComponent} from './add-new-tarifs-bancaire/add-new-t
 import {AddNewEchanchierComponent} from './add-new-echanchier/add-new-echanchier.component';
 import {ListeContactsComponent} from './liste-contacts/liste-contacts.component';
 import { NouvelleComissionComponent } from './nouvelle-comission/nouvelle-comission.component';
-
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
 @NgModule({
   declarations: [SocietesComponent, SaisirSocieteComponent, DetailsSocieteComponent, ListClientsComponent, ListContactsComponent, AddNewClientComponent, NewContactComponent, ListFournisseursComponent, AddNewProviderComponent, ListeContactsComponent, ListeTarifsBancaireComponent, AddNewTarifsBancaireComponent, AddNewEchanchierComponent,
           ListeEchenaciersComponent, ListComptesComponent, AddNewCompteComponent, NouvelleComissionComponent],
   imports: [
     CommonModule,
+    ConfirmDialogModule,
     FichierRoutingModule,
     TableModule,
     CheckboxModule,
@@ -67,6 +69,6 @@ import { NouvelleComissionComponent } from './nouvelle-comission/nouvelle-comiss
     NbUserModule, FormsModule,
     ModalModule.forRoot(), Ng2SmartTableModule, PanelModule, DialogModule,
   ],
-  providers: [UtilsServiceService],
+  providers: [UtilsServiceService, ConfirmationService],
 })
 export class FichierModule { }

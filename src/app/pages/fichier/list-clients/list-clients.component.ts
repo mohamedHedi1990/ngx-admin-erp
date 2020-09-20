@@ -4,6 +4,7 @@ import {SmartTableData} from '../../../@core/data/smart-table';
 import {UtilsServiceService} from '../../../utils-service.service';
 import {DialogService} from 'primeng/dynamicdialog';
 import {ListContactsComponent} from '../list-contacts/list-contacts.component';
+import {ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'ngx-list-clients',
@@ -65,7 +66,7 @@ export class ListClientsComponent implements OnInit {
   source: LocalDataSource = new LocalDataSource();
 */
   constructor(private service: SmartTableData, private UtilsService: UtilsServiceService,
-              public dialogService: DialogService) {
+              public dialogService: DialogService, private confirmationService: ConfirmationService) {
     // const data = this.service.getData();
    //  this.source.load(data);
   }
@@ -81,19 +82,6 @@ export class ListClientsComponent implements OnInit {
 */
   ngOnInit(): void {
     this.initClient();
-    /*
-    this.clients = [
-      {customerLabel: 'Client A', customerUniqueIdentifier: 'HYUIO8CO9', customerAddress: 'Jardins de l\'aouina 2046 Tunis', customerTel: '+21623262528', customerEmail: 'clientA@gmail.com' , customerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06', customerContacts : []},
-      {customerLabel: 'APAC', customerUniqueIdentifier: 'APACO8CO9', customerAddress: 'Heberges de lac 2', customerTel: '+21623262528', customerEmail: 'apac@gmail.com' , customerManagerName: 'Helmi Dammak', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06'},
-      {customerLabel: 'Client A', customerUniqueIdentifier: 'HYUIO8CO9', customerAddress: 'Jardins de l\'aouina 2046 Tunis', customerTel: '+21623262528', customerEmail: 'clientA@gmail.com' , customerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06', customerContacts : []},
-      {customerLabel: 'Client A', customerUniqueIdentifier: 'HYUIO8CO9', customerAddress: 'Jardins de l\'aouina 2046 Tunis', customerTel: '+21623262528', customerEmail: 'clientA@gmail.com' , customerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06', customerContacts : []},
-      {customerLabel: 'Client A', customerUniqueIdentifier: 'HYUIO8CO9', customerAddress: 'Jardins de l\'aouina 2046 Tunis', customerTel: '+21623262528', customerEmail: 'clientA@gmail.com' , customerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06', customerContacts : []},
-      {customerLabel: 'Client A', customerUniqueIdentifier: 'HYUIO8CO9', customerAddress: 'Jardins de l\'aouina 2046 Tunis', customerTel: '+21623262528', customerEmail: 'clientA@gmail.com' , customerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06', customerContacts : []},
-      {customerLabel: 'Client A', customerUniqueIdentifier: 'HYUIO8CO9', customerAddress: 'Jardins de l\'aouina 2046 Tunis', customerTel: '+21623262528', customerEmail: 'clientA@gmail.com' , customerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06', customerContacts : []},
-      {customerLabel: 'Client A', customerUniqueIdentifier: 'HYUIO8CO9', customerAddress: 'Jardins de l\'aouina 2046 Tunis', customerTel: '+21623262528', customerEmail: 'clientA@gmail.com' , customerManagerName: 'Manager of manager', createdAt: '18-05-2020 12:15:30', updatedAt: '20-05-2020 15:30:06', customerContacts : []},
-
-    ];
-    */
      this.getAllClients();
   }
 /*
@@ -145,8 +133,7 @@ export class ListClientsComponent implements OnInit {
     this.showClientWindow = true;
   }
 
-
-  deleteClient(client) {
+  delClient(client) {
     const context = this;
     const url = UtilsServiceService.API_CLIENT + '/' + client.customerId;
     this.UtilsService.delete(`${UtilsServiceService.API_CLIENT}/${client.customerId}`).subscribe( response => {
@@ -159,9 +146,23 @@ export class ListClientsComponent implements OnInit {
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
         `Un erreur interne a été produit lors de la suppression du client ${this.client.customerLabel}`);
-     });
+      });
 
 
+  }
+
+  deleteClient(client) {
+    this.confirmationService.confirm({
+      message: `Voulez vous vraiment supprimer le client ${client.customerLabel}?`,
+      acceptLabel: 'Supprimer',
+      rejectLabel: 'Annuler',
+      header: `Supprimer un client`,
+      acceptButtonStyleClass: 'p-button-danger',
+      rejectButtonStyleClass: 'p-button-secondary',
+      accept: () => {
+        this.delClient(client);
+      },
+    });
 
   }
 

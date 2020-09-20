@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UtilsServiceService} from '../../../utils-service.service';
+import {ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'ngx-liste-tarifs-bancaire',
@@ -12,7 +13,8 @@ export class ListeTarifsBancaireComponent implements OnInit {
   loading = false;
   tarif = {tarifId: null, tarifLabel: '', tarifAccount: null, comissions: []};
   showTarifBancaireWindow = false;
-  constructor(private UtilsService: UtilsServiceService) { }
+  constructor(private UtilsService: UtilsServiceService,
+              private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
     this.getAllTarifs();
@@ -68,6 +70,20 @@ export class ListeTarifsBancaireComponent implements OnInit {
 
   }
   deleteTarif(tarif) {
+    this.confirmationService.confirm({
+      message: `Voulez vous vraiment supprimer la tarification bancaire ${tarif.tarifLabel}?`,
+      acceptLabel: 'Supprimer',
+      rejectLabel: 'Annuler',
+      header: `Supprimer une tarification bancaire`,
+      acceptButtonStyleClass: 'p-button-danger',
+      rejectButtonStyleClass: 'p-button-secondary',
+      accept: () => {
+        this.delTarif(tarif);
+      },
+    });
+
+  }
+  delTarif(tarif) {
     const context = this;
     this.UtilsService.delete(`${UtilsServiceService.API_TARIF}/${tarif.tarifId}`).subscribe( response => {
         context.tarifs = response;

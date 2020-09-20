@@ -3,7 +3,7 @@ import {SmartTableData} from '../../../@core/data/smart-table';
 import {UtilsServiceService} from '../../../utils-service.service';
 import {ListContactsComponent} from '../list-contacts/list-contacts.component';
 import {DialogService} from 'primeng/dynamicdialog';
-
+import {ConfirmationService} from 'primeng/api';
 @Component({
   selector: 'ngx-list-fournisseurs',
   templateUrl: './list-fournisseurs.component.html',
@@ -18,7 +18,7 @@ export class ListFournisseursComponent implements OnInit {
   showProviderList = false;
   contactModalheader = 'List des contacts pour le fournisseur ';
   constructor(private service: SmartTableData, private UtilsService: UtilsServiceService,
-              public dialogService: DialogService) {
+              public dialogService: DialogService, private confirmationService: ConfirmationService) {
   }
     ngOnInit(): void {
     this.initProvider();
@@ -77,23 +77,33 @@ export class ListFournisseursComponent implements OnInit {
    this.showProviderWindow = true;
   }
 
-  deleteProvider(provider) {
-    this.provider = provider;
-    this.delProvider();
-  }
 
-  delProvider() {
+  deleteProvider(provider) {
+    this.confirmationService.confirm({
+      message: `Voulez vous vraiment supprimer le fournisseur ${provider.providerLabel}?`,
+      acceptLabel: 'Supprimer',
+      rejectLabel: 'Annuler',
+      header: `Supprimer un fournisseur`,
+      acceptButtonStyleClass: 'p-button-danger',
+      rejectButtonStyleClass: 'p-button-secondary',
+      accept: () => {
+        this.delProvider(provider);
+      },
+    });
+
+  }
+  delProvider(provider) {
     const context = this;
-    this.UtilsService.delete(`${UtilsServiceService.API_PROVIDER}\${this.provider.providerUniqueIdentifier`).subscribe( response => {
+    this.UtilsService.delete(`${UtilsServiceService.API_PROVIDER}/${provider.providerId}`).subscribe( response => {
         context.providers = response;
         this.UtilsService.showToast('success',
           'Fournisseur supprimé avec succés',
-          `Le fournisseur  ${this.provider.providerLabel} a été supprimé avec succcés`);
+          `Le fournisseur  ${provider.providerLabel} a été supprimé avec succcés`);
         this.initProvider();
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
-        `Un erreur interne a été produit lors de la suppression du fournisseur ${this.provider.providerLabel}`);
+        `Un erreur interne a été produit lors de la suppression du fournisseur ${provider.providerLabel}`);
         this.initProvider(); });
 
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UtilsServiceService} from '../../../utils-service.service';
+import {ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'ngx-liste-echenaciers',
@@ -21,7 +22,8 @@ export class ListeEchenaciersComponent implements OnInit {
     timeLineInterestRate: 0,
     timeLineTable: [],
   };
-  constructor(private UtilsService: UtilsServiceService) { }
+  constructor(private UtilsService: UtilsServiceService,
+              private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
     this.getAllTimeLines();
@@ -86,9 +88,22 @@ export class ListeEchenaciersComponent implements OnInit {
       });
 
   }
-
-
   deleteTimeLine(timeLine) {
+    this.confirmationService.confirm({
+      message: `Voulez vous vraiment supprimer l'échéancier ${timeLine.timeLineLabel}?`,
+      acceptLabel: 'Supprimer',
+      rejectLabel: 'Annuler',
+      header: `Supprimer un échéancier`,
+      acceptButtonStyleClass: 'p-button-danger',
+      rejectButtonStyleClass: 'p-button-secondary',
+      accept: () => {
+        this.delTimeLine(timeLine);
+      },
+    });
+
+  }
+
+  delTimeLine(timeLine) {
     const context = this;
     this.UtilsService.delete(`${UtilsServiceService.API_TIME_LINE}/${timeLine.timeLineId}`).subscribe( response => {
         context.echanciers = response;

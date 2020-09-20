@@ -3,6 +3,7 @@ import {SmartTableData} from '../../../@core/data/smart-table';
 import {UtilsServiceService} from '../../../utils-service.service';
 import {DialogService} from 'primeng/dynamicdialog';
 import {ListContactsComponent} from '../list-contacts/list-contacts.component';
+import {ConfirmationService} from 'primeng/api';
 
 
 @Component({
@@ -35,7 +36,7 @@ export class ListComptesComponent implements OnInit {
     this.getAllAccounts();
   }
   constructor(private service: SmartTableData, private UtilsService: UtilsServiceService,
-              public dialogService: DialogService) {
+              public dialogService: DialogService, private confirmationService: ConfirmationService) {
     // const data = this.service.getData();
     //  this.source.load(data);
   }
@@ -80,8 +81,21 @@ export class ListComptesComponent implements OnInit {
     this.account = account;
     this.showAccountWindow = true;
   }
-
   deleteAccount(account) {
+    this.confirmationService.confirm({
+      message: `Voulez vous vraiment supprimer le compte bancaire ${account.accountLabel}?`,
+      acceptLabel: 'Supprimer',
+      rejectLabel: 'Annuler',
+      header: `Supprimer un compte bancaire`,
+      acceptButtonStyleClass: 'p-button-danger',
+      rejectButtonStyleClass: 'p-button-secondary',
+      accept: () => {
+        this.delAccount(account);
+      },
+    });
+
+  }
+  delAccount(account) {
     const context = this;
     this.UtilsService.delete(`${UtilsServiceService.API_ACCOUNT}/${account.accountId}`).subscribe( response => {
         context.accounts = response;
@@ -92,7 +106,7 @@ export class ListComptesComponent implements OnInit {
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
-        `Un erreur interne a été produit lors de la suppression du compte ${account.accountLabel}`);
+        `Un erreur interne a été produit lors de la suppression du compte ${account.accountLabel}. \n Verifiez s'il existe d'autres données reliées à ce compte bancaire avant de le supprimer!`);
         this.initAccount(); });
 
 
