@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DatepickerComponent} from '../../forms/datepicker/datepicker.component';
+import {UtilsServiceService} from '../../../utils-service.service';
 
 @Component({
   selector: 'ngx-add-new-echanchier',
@@ -12,11 +13,7 @@ export class AddNewEchanchierComponent implements OnInit {
 @Input() timeLine = {
   timeLineId: null,
   timeLineLabel: '',
-  timeLineAccount: {
-    accountNumber: '',
-    accountLabel: '',
-    accountCurrency: '',
-  },
+  timeLineAccount: null,
   timeLineCreditNumber: null,
   timeLineInitialAmount: 0,
   timeLineYearNumber: 1,
@@ -81,10 +78,25 @@ line = {
       },
     },
   };
-  constructor() { }
+  accounts = [];
+  constructor(private UtilsService: UtilsServiceService) { }
 
   ngOnInit(): void {
     this.initiateLine();
+    this.getAllAccounts();
+  }
+  getAllAccounts() {
+
+    const context = this;
+    this.UtilsService.get(UtilsServiceService.API_ACCOUNT).subscribe( response => {
+        context.accounts = response;
+      },
+      error => {
+        this.UtilsService.showToast('danger',
+          'Erreur interne',
+          `Un erreur interne a été produit lors du chargement des comptes`);
+      });
+
   }
  initiateLine() {
    this.line = {

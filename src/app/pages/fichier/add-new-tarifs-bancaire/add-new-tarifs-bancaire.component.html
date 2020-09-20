@@ -17,20 +17,17 @@
         <label for="identifiant" class="p-float-label">Compte bancaire</label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-          <select class="form-control p-field" name="side" [(ngModel)]="tarif.tarifAccount.accountLabel" [ngClass]="{
-        'is-invalid': tarif.tarifAccount == null ,
+          <select class="form-control p-field" name="side" [(ngModel)]="tarif.tarifAccount" [ngClass]="{
+        'is-invalid': tarif.tarifAccount== null ,
         'is-valid':tarif.tarifAccount != null
-      }" (change)=" onChangeCompteLabel()">
+      }" >
             <option [ngValue]="null">-- Compte bancaire --</option>
-            <!--
-            <option *ngFor="let b of bankAccounts;" [ngValue]="b">{{b.bankAccountNumber}}</option>
-            -->
-            <option [ngValue]="'Compte courant BIAT'">-- Compte courant BIAT --</option>
+            <option *ngFor="let a of accounts;" [ngValue]="a">{{a.accountLabel}}</option>
           </select>
         </div>
       </div>
     </div>
-    <div style="display: flex">
+    <div style="display: flex" *ngIf="tarif.tarifAccount != null">
       <div class="mb-1 col-md-6 col-12 p-field">
         <label for="providerLabel" class="p-float-label">Numéro compte bancaire</label>
         <div class="p-inputgroup">

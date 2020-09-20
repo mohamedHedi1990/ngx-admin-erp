@@ -19,18 +19,18 @@
           <label for="cb" class="p-float-label">Compte bancaire</label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-            <select class="form-control p-field" name="side" [(ngModel)]="timeLine.timeLineAccount.accountLabel" [ngClass]="{
-        'is-invalid': timeLine.timeLineAccount == null ,
-        'is-valid':timeLine.timeLineAccount != null
-      }" id="cb" (change)="onChangeCompteLabel()">
+            <select class="form-control p-field" name="side" [(ngModel)]="timeLine.timeLineAccount" [ngClass]="{
+        'is-invalid': timeLine.timeLineAccount== null ,
+        'is-valid':timeLine.timeLineAccount!= null
+      }" id="cb">
               <option [ngValue]="null">-- Compte bancaire --</option>
-              <option [ngValue]="'Compte courant BIAT'">Compte courant BIAT</option>
+              <option *ngFor="let a of accounts;" [ngValue]="a">{{a.accountLabel}}</option>
             </select>
           </div>
         </div>
       </div>
 
-      <div style="display: flex">
+      <div style="display: flex" *ngIf="timeLine.timeLineAccount != null">
         <div class="mb-1 col-md-6 col-12 p-field">
           <label for="ncb" class="p-float-label">Numéro compte bancaire</label>
           <div class="p-inputgroup">

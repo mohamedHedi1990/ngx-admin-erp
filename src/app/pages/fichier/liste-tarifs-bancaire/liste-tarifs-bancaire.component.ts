@@ -10,8 +10,7 @@ export class ListeTarifsBancaireComponent implements OnInit {
   showAccountWindow = false;
   tarifs = [];
   loading = false;
-  tarif = {tarifId: null, tarifLabel: '', tarifAccount: {accountLabel: '',
-      accountNumber: '', accountCurrency: ''}, comissions: []};
+  tarif = {tarifId: null, tarifLabel: '', tarifAccount: null, comissions: []};
   showTarifBancaireWindow = false;
   constructor(private UtilsService: UtilsServiceService) { }
 
@@ -24,8 +23,7 @@ export class ListeTarifsBancaireComponent implements OnInit {
   }
 
   initTarifBancaire() {
-    this.tarif = {tarifId: null, tarifLabel: '',  tarifAccount: {accountLabel: '',
-        accountNumber: '', accountCurrency: ''}, comissions: []};
+    this.tarif = {tarifId: null, tarifLabel: '',  tarifAccount: null, comissions: []};
   }
 
   editTarif(tarif) {

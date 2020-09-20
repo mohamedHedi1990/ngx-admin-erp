@@ -13,11 +13,7 @@ export class ListeEchenaciersComponent implements OnInit {
   timeLine = {
     timeLineId: null,
     timeLineLabel: '',
-    timeLineAccount: {
-      accountNumber: '',
-      accountLabel: '',
-      accountCurrency: '',
-    },
+    timeLineAccount: null,
     timeLineCreditNumber: null,
     timeLineInitialAmount: 0,
     timeLineYearNumber: 1,
@@ -39,11 +35,7 @@ export class ListeEchenaciersComponent implements OnInit {
     this.timeLine = {
       timeLineId: null,
       timeLineLabel: '',
-      timeLineAccount: {
-        accountNumber: '',
-        accountLabel: '',
-        accountCurrency: '',
-      },
+      timeLineAccount: null,
       timeLineCreditNumber: null,
       timeLineInitialAmount: 0,
       timeLineYearNumber: 1,
