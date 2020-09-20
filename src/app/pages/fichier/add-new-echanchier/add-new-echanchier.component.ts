@@ -128,4 +128,11 @@ updateTotalAmount(line?) {
     if (line == null) line = this.line;
     line.total = line.initialAmount + line.interests + line.tva;
 }
+
+checkTimeLineValid(): boolean {
+    return this.timeLine.timeLineAccount == null || this.timeLine.timeLineAnnuity == null ||
+      this.timeLine.timeLineInterestRate == null || this.timeLine.timeLineInitialAmount == null || this.timeLine.timeLineCreditNumber == null
+  && this.timeLine.timeLineCreditNumber === '' || this.timeLine.timeLineLabel == null || this.timeLine.timeLineLabel === '' ||
+      this.timeLine.timeLineYearNumber == null;
+}
 }

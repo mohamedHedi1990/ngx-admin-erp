@@ -38,4 +38,8 @@ export class AddNewClientComponent implements OnInit {
     this.cancelEvent.emit();
   }
 
+  checkClientValid(): boolean {
+    return this.client.customerLabel == null || this.client.customerLabel === '' &&
+      this.client.customerUniqueIdentifier == null || this.client.customerUniqueIdentifier === '';
+  }
 }

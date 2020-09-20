@@ -100,11 +100,14 @@ export class ListFournisseursComponent implements OnInit {
           'Fournisseur supprimé avec succés',
           `Le fournisseur  ${provider.providerLabel} a été supprimé avec succcés`);
         this.initProvider();
+        this.getAllProviders();
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
         `Un erreur interne a été produit lors de la suppression du fournisseur ${provider.providerLabel}`);
-        this.initProvider(); });
+        this.initProvider();
+    this.getAllProviders();
+    });
 
 
 

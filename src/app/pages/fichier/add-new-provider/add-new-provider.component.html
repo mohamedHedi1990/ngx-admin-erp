@@ -59,10 +59,7 @@
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
             <input type="text" class="form-control p-field"  id="manager"
-                   [(ngModel)]="provider.providerManagerName " [ngClass]="{
-        'is-invalid': provider.providerManagerName  == null || provider.providerManagerName  == '' ,
-        'is-valid': provider.providerManagerName  != null && provider.providerManagerName  != ''
-      }">
+                   [(ngModel)]="provider.providerManagerName ">
           </div>
         </div>
 
@@ -70,10 +67,8 @@
           <label for="adress" class="p-float-label">Adresse </label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-list"></i></span>
-            <textarea id="story" name="story" rows="3" class="form-control p-field"  pInputText  style="width: 100%;"  id ="adress" [(ngModel)]="provider.providerAddress " [ngClass]="{
-        'is-invalid': provider.providerAddress  == null || provider.providerAddress  == '' ,
-        'is-valid': provider.providerAddress  != null && provider.providerAddress  != ''
-      }"
+            <textarea id="story" name="story" rows="3" class="form-control p-field"  pInputText  style="width: 100%;"  id ="adress" [(ngModel)]="provider.providerAddress "
+
             ></textarea>
           </div>
         </div>
@@ -94,7 +89,7 @@
   </p-panel>
   <div class="p-panel p-panel-header" style="margin-top: 20px;">
     <button [disabled]="" class="btn btn-secondary" style="margin-left: 1%;" (click)="cancel()">Annuler</button>
-     <button  [disabled]="" class="btn btn-success" style="margin-left: 74%;" (click)="saveProvider()">Enregistrer</button>
+     <button  [disabled]="provider.providerLabel == null || provider.providerLabel === '' || provider.providerUniqueIdentifier == null || provider.providerUniqueIdentifier === ''" class="btn btn-success" style="margin-left: 74%;" (click)="saveProvider()">Enregistrer</button>
 
   </div>
 

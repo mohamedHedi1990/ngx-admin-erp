@@ -47,4 +47,7 @@ export class AddNewTarifsBancaireComponent implements OnInit {
       commissionType: null,
     });
   }
+  checkTarifValid(): boolean {
+    return this.tarif.tarifAccount == null || this.tarif.tarifLabel == null || this.tarif.tarifLabel === '';
+  }
 }

@@ -38,6 +38,14 @@ export class AddNewCompteComponent implements OnInit {
       contactEmail : '',
     });
   }
+  checkAccountValid (): boolean {
+    return this.account.accountAgency == null || this.account.accountAgency === '' ||
+    this.account.accountBank == null || this.account.accountBank === '' ||
+      this.account.accountCurrency == null || this.account.accountCurrency === '' ||
+      this.account.accountNumber == null || this.account.accountNumber === '' ||
+      this.account.accountRIB == null || this.account.accountRIB === '' ||
+      this.account.accountLabel == null || this.account.accountLabel === '';
+  }
   saveAccount() {
     this.addNewAccountEvent.emit(this.account);
   }

@@ -132,7 +132,7 @@
 
   <div class="p-panel p-panel-header" style="margin-top: 20px;">
     <button [disabled]="" class="btn btn-secondary" style="margin-left: 1%;" (click)="cancel()">Annuler</button>
-    <button  [disabled]="" class="btn btn-success" style="margin-left: 74%;" (click)="saveTarif()">Enregistrer</button>
+    <button  [disabled]="checkTarifValid()" class="btn btn-success" style="margin-left: 74%;" (click)="saveTarif()">Enregistrer</button>
   </div>
 
 

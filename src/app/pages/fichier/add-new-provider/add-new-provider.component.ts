@@ -36,5 +36,8 @@ export class AddNewProviderComponent implements OnInit {
   saveProvider() {
     this.addNewProviderEvent.emit(this.provider);
   }
-
+checkProviderValid(): boolean {
+    return this.provider.providerLabel != null && this.provider.providerLabel !== ''
+  && this.provider.providerUniqueIdentifier != null && this.provider.providerUniqueIdentifier !== '';
+}
 }

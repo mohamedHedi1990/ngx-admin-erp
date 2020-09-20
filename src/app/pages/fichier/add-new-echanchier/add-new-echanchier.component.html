@@ -107,7 +107,7 @@
             <select class="form-control p-field" name="side" [(ngModel)]="timeLine.timeLineAnnuity" [ngClass]="{
         'is-invalid': timeLine.timeLineAnnuity == null ,
         'is-valid':timeLine.timeLineAnnuity != null}" id="an">
-              <option value="null">-- Anuuintée --</option>
+              <option [ngValue]="null">-- Anuuintée --</option>
               <option value="Mensuelle">Mensuelle</option>
               <option value="Trimesterielle">Trimesterielle</option>
               <option value="Semesterielle">Semesterielle</option>
@@ -248,7 +248,7 @@
   </p-panel>
   <div class="p-panel p-panel-header" style="margin-top: 20px;">
     <button [disabled]="" class="btn btn-secondary" style="margin-left: 1%;" (click)="cancel()">Annuler</button>
-    <button  [disabled]="" class="btn btn-success" style="margin-left: 74%;" (click)="saveEcenachier()">Enregistrer</button>
+    <button  [disabled]="checkTimeLineValid()" class="btn btn-success" style="margin-left: 74%;" (click)="saveEcenachier()">Enregistrer</button>
   </div>
 
 

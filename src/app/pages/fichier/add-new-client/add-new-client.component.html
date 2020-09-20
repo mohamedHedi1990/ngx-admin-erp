@@ -59,10 +59,7 @@
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
             <input type="text" class="form-control p-field"  id="manager"
-                   [(ngModel)]="client.customerManagerName " [ngClass]="{
-        'is-invalid': client.customerManagerName  == null || client.customerManagerName  == '' ,
-        'is-valid': client.customerManagerName  != null && client.customerManagerName  !== ''
-      }">
+                   [(ngModel)]="client.customerManagerName ">
           </div>
         </div>
 
@@ -70,10 +67,7 @@
           <label for="adress" class="p-float-label">Adresse </label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-list"></i></span>
-            <textarea id="story" name="story" rows="3" class="form-control p-field"  pInputText  style="width: 100%;"  id ="adress" [(ngModel)]="client.customerAddress " [ngClass]="{
-        'is-invalid': client.customerAddress  == null || client.customerAddress  == '' ,
-        'is-valid': client.customerAddress  != null && client.customerAddress  != ''
-      }"
+            <textarea id="story" name="story" rows="3" class="form-control p-field"  pInputText  style="width: 100%;"  id ="adress" [(ngModel)]="client.customerAddress "
             ></textarea>
           </div>
         </div>
@@ -94,7 +88,7 @@
   </p-panel>
   <div class="p-panel p-panel-header" style="margin-top: 20px;">
     <button [disabled]="" class="btn btn-secondary" style="margin-left: 1%;" (click)="cancel()">Annuler</button>
-    <button  [disabled]="" class="btn btn-success" style="margin-left: 74%;" (click)="saveClient()">Enregistrer</button>
+    <button  [disabled]="checkClientValid()" class="btn btn-success" style="margin-left: 74%;" (click)="saveClient()">Enregistrer</button>
   </div>
 
 
