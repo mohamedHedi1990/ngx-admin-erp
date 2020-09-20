@@ -35,7 +35,7 @@ import { AddNewProviderComponent } from './add-new-provider/add-new-provider.com
 import { ListComptesComponent } from './list-comptes/list-comptes.component';
 import { AddNewCompteComponent } from './add-new-compte/add-new-compte.component';
 import {DialogModule} from 'primeng/dialog';
-import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import {DialogService, DynamicDialogModule} from 'primeng/dynamicdialog';
 import {ListeEchenaciersComponent} from './liste-echenaciers/liste-echenaciers.component';
 import {ListeTarifsBancaireComponent} from './liste-tarifs-bancaire/liste-tarifs-bancaire.component';
 import {AddNewTarifsBancaireComponent} from './add-new-tarifs-bancaire/add-new-tarifs-bancaire.component';
@@ -71,6 +71,6 @@ import { AddNewSocieteComponent } from './add-new-societe/add-new-societe.compon
     NbUserModule, FormsModule,
     ModalModule.forRoot(), Ng2SmartTableModule, PanelModule, DialogModule,
   ],
-  providers: [UtilsServiceService, ConfirmationService],
+  providers: [UtilsServiceService, ConfirmationService, DialogService],
 })
 export class FichierModule { }

@@ -13,8 +13,8 @@
                 </span>
         </div>
 
-        <div style="width:18%; margin-left: 25%">
-          <button pButton pRipple label="Nouveau societé" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="showSocieteWindow = true"></button>
+        <div style="width:19%; margin-left: 25%">
+          <button pButton pRipple label="Nouvelle societé" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="showSocieteWindow = true"></button>
         </div>
 
       </div>
@@ -27,7 +27,7 @@
         <th pSortableColumn="campanyAddress" style="text-align: center;font-size: 13px;width: 25%">Adresse<p-sortIcon field="customerAddress"></p-sortIcon></th>
 
 
-        <th pSortableColumn="campanyPhoneNumber"  style="text-align: center; font-size: 13px;width: 20%">Nom du responsable</th>
+        <th pSortableColumn="companyManagerName"  style="text-align: center; font-size: 13px;width: 20%">Nom du responsable</th>
 
         <th style="width: 15%">Actions</th>
       </tr>
@@ -46,7 +46,7 @@
 
 
         <td style="text-align: center;font-size: 13px;">
-          {{societe.campanyPhoneNumber}}
+          {{societe.companyManagerName}}
         </td>
 
         <td style="text-align: center;">
@@ -60,7 +60,7 @@
     </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr style="font-size: 13px">
-        <td colspan="8">societe trouvé!</td>
+        <td colspan="8">Aucune societé trouvée!</td>
       </tr>
     </ng-template>
   </p-table>

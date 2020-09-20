@@ -14,6 +14,7 @@ export class AddNewSocieteComponent implements OnInit {
     campanyPhoneNumber: '',
     companyIllustration: '',
     campanyEmail: '',
+    companyManagerName: '',
     companyPictureUrl: [],
   };
   @Output() addNewSocieteEvent = new EventEmitter();

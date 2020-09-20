@@ -36,12 +36,12 @@ export class ListSocietesComponent implements OnInit {
         this.hideSocieteWindow();
         if ( context.societe.campanyId == null) {
           this.UtilsService.showToast('success',
-            'societe ajouté avec succés',
-            `Le societe  ${this.societe.campanyName} a été ajouté avec succcés`);
+            'societe ajoutée avec succés',
+            `Le societe  ${this.societe.campanyName} a été ajoutée avec succcés`);
         } else {
           this.UtilsService.showToast('success',
-            'societe modfié avec succés',
-            `Le societe  ${this.societe.campanyName} a été modifié avec succcés`);
+            'societe modfiée avec succés',
+            `Le societe  ${this.societe.campanyName} a été modifiée avec succcés`);
         }
         context.getAllSocietes();
         context.initSociete();
@@ -98,6 +98,7 @@ export class ListSocietesComponent implements OnInit {
     this.societe = {
       campanyId: null,
       campanyName: '',
+      companyManagerName: '',
       customerAddress: '',
       campanyUniqueIdentifier: '',
       campanyPhoneNumber: '',
