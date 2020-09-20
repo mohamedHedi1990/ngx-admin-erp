@@ -44,9 +44,11 @@ import {ListeContactsComponent} from './liste-contacts/liste-contacts.component'
 import { NouvelleComissionComponent } from './nouvelle-comission/nouvelle-comission.component';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
+import { ListSocietesComponent } from './list-societes/list-societes.component';
+import { AddNewSocieteComponent } from './add-new-societe/add-new-societe.component';
 @NgModule({
   declarations: [SocietesComponent, SaisirSocieteComponent, DetailsSocieteComponent, ListClientsComponent, ListContactsComponent, AddNewClientComponent, NewContactComponent, ListFournisseursComponent, AddNewProviderComponent, ListeContactsComponent, ListeTarifsBancaireComponent, AddNewTarifsBancaireComponent, AddNewEchanchierComponent,
-          ListeEchenaciersComponent, ListComptesComponent, AddNewCompteComponent, NouvelleComissionComponent],
+          ListeEchenaciersComponent, ListComptesComponent, AddNewCompteComponent, NouvelleComissionComponent, ListSocietesComponent, AddNewSocieteComponent],
   imports: [
     CommonModule,
     ConfirmDialogModule,

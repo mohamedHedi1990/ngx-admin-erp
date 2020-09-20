@@ -7,6 +7,7 @@ import {ListFournisseursComponent} from './list-fournisseurs/list-fournisseurs.c
 import {ListComptesComponent} from './list-comptes/list-comptes.component';
 import {ListeTarifsBancaireComponent} from './liste-tarifs-bancaire/liste-tarifs-bancaire.component';
 import {ListeEchenaciersComponent} from './liste-echenaciers/liste-echenaciers.component';
+import {ListSocietesComponent} from './list-societes/list-societes.component';
 
 const routes: Routes = [{
   path: '',
@@ -14,7 +15,7 @@ const routes: Routes = [{
   children: [
     {
       path: 'societes',
-      component: SocietesComponent,
+      component: ListSocietesComponent,
     },
     {
       path: 'clients',
