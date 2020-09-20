@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {SmartTableData} from '../../../@core/data/smart-table';
+import {DynamicDialogConfig, DynamicDialogRef} from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'ngx-list-contacts',
@@ -9,7 +10,8 @@ import {SmartTableData} from '../../../@core/data/smart-table';
 export class ListContactsComponent implements OnInit {
 @Input() contacts = [];
 loading = false;
-  constructor(private service: SmartTableData) {
+  constructor(private service: SmartTableData, public ref: DynamicDialogRef,
+              public config: DynamicDialogConfig) {
 
   }
 
@@ -25,7 +27,7 @@ loading = false;
 
     ];
     */
-
+    this.contacts = this.config.data.contacts;
   }
 
 }
