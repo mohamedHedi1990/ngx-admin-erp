@@ -32,6 +32,12 @@ export class AddNewSocieteComponent implements OnInit {
     this.cancelEvent.emit();
   }
 
+  checkCompanyValid(): boolean {
+    return this.societe.campanyAddress == null || this.societe.campanyAddress === '' ||
+      this.societe.campanyName == null || this.societe.campanyName === '' ||
+      this.societe.campanyUniqueIdentifier == null || this.societe.campanyUniqueIdentifier === '' ||
+      this.societe.companyManagerName == null || this.societe.companyManagerName === '';
+  }
 
 
 
