@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UtilsServiceService} from '../../../utils-service.service';
 import {SmartTableData} from '../../../@core/data/smart-table';
 import {DialogService} from 'primeng/dynamicdialog';
+import {ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'ngx-list-societes',
@@ -18,7 +19,8 @@ export class ListSocietesComponent implements OnInit {
 
 
   constructor(private service: SmartTableData, private UtilsService: UtilsServiceService,
-              public dialogService: DialogService) {
+              public dialogService: DialogService,
+               private confirmationService: ConfirmationService) {
 
   }
 
@@ -69,16 +71,29 @@ export class ListSocietesComponent implements OnInit {
     this.societe = societe;
     this.showSocieteWindow = true;
   }
-
-
   deleteSociete(societe) {
+    this.confirmationService.confirm({
+      message: `Voulez vous vraiment supprimer la société ${societe.campanyName}?`,
+      acceptLabel: 'Supprimer',
+      rejectLabel: 'Annuler',
+      header: `Supprimer une societé`,
+      acceptButtonStyleClass: 'p-button-danger',
+      rejectButtonStyleClass: 'p-button-secondary',
+      accept: () => {
+        this.delSociete(societe);
+      },
+    });
+
+  }
+
+  delSociete(societe) {
     const context = this;
     const url = UtilsServiceService.API_COMPANY + '/' + societe.campanyId;
     this.UtilsService.delete(`${UtilsServiceService.API_COMPANY}/${societe.campanyId}`).subscribe( response => {
         context.societes = response;
         this.UtilsService.showToast('success',
-          'societe supprimé avec succés',
-          `Le societe  ${societe.campanyName} a été supprimé avec succcés`);
+          'societe supprimée avec succés',
+          `Le societe  ${societe.campanyName} a été supprimée avec succcés`);
         context.getAllSocietes();
       },
       error => {this.UtilsService.showToast('danger',
