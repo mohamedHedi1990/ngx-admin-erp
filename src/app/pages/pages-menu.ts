@@ -58,11 +58,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Factures clients',
-        link: '/pages/forms/inputs',
+        link: '/pages/factures/factures-clients',
       },
       {
         title: 'Factures fournisseurs',
-        link: '/pages/forms/layouts',
+        link: '/pages/factures/factures-fournisseurs',
       },
     ],
   },

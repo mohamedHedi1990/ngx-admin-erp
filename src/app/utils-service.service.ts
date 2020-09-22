@@ -14,6 +14,9 @@ export class UtilsServiceService {
   public static API_CLIENT = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/customer';
   public static API_TARIF = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/tarif';
   public static API_TIME_LINE = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/timeLine';
+  public static API_PROVIDER_INVOICE = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/invoice-provider';
+  public static API_PROVIDER_CUSTOMER = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/invoice-customer';
+
 
 
   constructor(private toastrService: NbToastrService, private httpClient: HttpClient) {

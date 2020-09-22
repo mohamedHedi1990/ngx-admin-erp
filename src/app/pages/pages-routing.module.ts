@@ -17,6 +17,11 @@ const routes: Routes = [{
         .then(m => m.FichierModule),
     },
     {
+      path: 'factures',
+      loadChildren: () => import('./factures/factures.module')
+        .then(m => m.FacturesModule),
+    },
+    {
       path: 'dashboard',
       component: ECommerceComponent,
     },
