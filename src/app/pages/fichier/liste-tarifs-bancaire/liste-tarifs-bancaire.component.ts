@@ -91,11 +91,14 @@ export class ListeTarifsBancaireComponent implements OnInit {
           'Tarification bancaire supprimée avec succés',
           `La tarification bancaire  ${tarif.tarifLabel} a été supprimée avec succcés`);
         this.initTarifBancaire();
+        this.getAllTarifs();
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
         `Un erreur interne a été produit lors de la suppression de la tarification bancaire ${tarif.tarifLabel}`);
-        this.initTarifBancaire(); });
+        this.initTarifBancaire();
+        this.getAllTarifs();
+    });
 
 
 

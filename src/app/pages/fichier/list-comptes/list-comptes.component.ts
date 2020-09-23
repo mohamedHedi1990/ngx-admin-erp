@@ -46,7 +46,7 @@ export class ListComptesComponent implements OnInit {
     const context = this;
     this.UtilsService.post(UtilsServiceService.API_ACCOUNT, this.account).subscribe( response => {
         this.hideAccountWindow();
-        if ( context.account.accountNumber == null) {
+        if ( context.account.accountId == null) {
           this.UtilsService.showToast('success',
             'Compte ajouté avec succés',
             `Le compte  ${this.account.accountLabel} a été ajouté avec succcés`);
@@ -103,11 +103,13 @@ export class ListComptesComponent implements OnInit {
           'Compte supprimé avec succés',
           `Le compte  ${account.accountLabel} a été supprimé avec succcés`);
         this.initAccount();
+        this.getAllAccounts();
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
         `Un erreur interne a été produit lors de la suppression du compte ${account.accountLabel}. \n Verifiez s'il existe d'autres données reliées à ce compte bancaire avant de le supprimer!`);
-        this.initAccount(); });
+        this.initAccount();
+    this.getAllAccounts(); });
 
 
 
@@ -119,6 +121,7 @@ export class ListComptesComponent implements OnInit {
 
   initAccount() {
     this.account = {
+      accountId: null,
         accountLabel : '',
         accountBank: '',
         accountBankAdress : '',

@@ -41,7 +41,7 @@ export class ListFournisseursComponent implements OnInit {
     const context = this;
     this.UtilsService.post(UtilsServiceService.API_PROVIDER, this.provider).subscribe( response => {
         this.hideProviderWindow();
-        if ( context.provider.providerUniqueIdentifier == null) {
+        if ( context.provider.providerId == null) {
           this.UtilsService.showToast('success',
             'Fournisseur ajouté avec succés',
             `Le Fournisseur  ${this.provider.providerLabel} a été ajouté avec succcés`);

@@ -38,19 +38,19 @@ export class ListSocietesComponent implements OnInit {
         this.hideSocieteWindow();
         if ( context.societe.campanyId == null) {
           this.UtilsService.showToast('success',
-            'societe ajoutée avec succés',
-            `Le societe  ${this.societe.campanyName} a été ajoutée avec succcés`);
+            'Societe ajoutée avec succés',
+            `Le societé  ${this.societe.campanyName} a été ajoutée avec succcés`);
         } else {
           this.UtilsService.showToast('success',
-            'societe modfiée avec succés',
-            `Le societe  ${this.societe.campanyName} a été modifiée avec succcés`);
+            'Societé modfiée avec succés',
+            `Le societé  ${this.societe.campanyName} a été modifiée avec succcés`);
         }
         context.getAllSocietes();
         context.initSociete();
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
-        `Un erreur interne a été produit lors de la souvegarde du societe ${this.societe.campanyName}`); });
+        `Un erreur interne a été produit lors de la souvegarde du societé ${this.societe.campanyName}`); });
 
   }
 
@@ -63,7 +63,7 @@ export class ListSocietesComponent implements OnInit {
       error => {
         this.UtilsService.showToast('danger',
           'Erreur interne',
-          `Un erreur interne a été produit lors du chargement des societes`);
+          `Un erreur interne a été produit lors du chargement des societés`);
       });
 
   }
@@ -73,7 +73,7 @@ export class ListSocietesComponent implements OnInit {
   }
   deleteSociete(societe) {
     this.confirmationService.confirm({
-      message: `Voulez vous vraiment supprimer la société ${societe.campanyName}?`,
+      message: `Voulez vous vraiment supprimer la societé ${societe.campanyName}?`,
       acceptLabel: 'Supprimer',
       rejectLabel: 'Annuler',
       header: `Supprimer une societé`,
@@ -92,13 +92,13 @@ export class ListSocietesComponent implements OnInit {
     this.UtilsService.delete(`${UtilsServiceService.API_COMPANY}/${societe.campanyId}`).subscribe( response => {
         context.societes = response;
         this.UtilsService.showToast('success',
-          'societe supprimée avec succés',
+          'Societe supprimée avec succés',
           `Le societe  ${societe.campanyName} a été supprimée avec succcés`);
         context.getAllSocietes();
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
-        `Un erreur interne a été produit lors de la suppression du societe ${this.societe.campanyName}`);
+        `Un erreur interne a été produit lors de la suppression de la societé ${this.societe.campanyName}`);
       });
 
 
