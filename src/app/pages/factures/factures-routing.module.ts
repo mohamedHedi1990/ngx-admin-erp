@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {ListeFacturesFournisseursComponent} from './liste-factures-fournisseurs/liste-factures-fournisseurs.component';
+import {ListeFacturesClientsComponent} from './liste-factures-clients/liste-factures-clients.component';
 
 const routes: Routes = [{
   path: '',
@@ -8,7 +9,7 @@ const routes: Routes = [{
   children: [
     {
       path: 'factures-clients',
-      // component: ListSocietesComponent,
+      component: ListeFacturesClientsComponent,
     },
     {
       path: 'factures-fournisseurs',
