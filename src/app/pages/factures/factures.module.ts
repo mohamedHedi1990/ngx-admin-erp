@@ -29,11 +29,12 @@ import {ConfirmationService} from 'primeng/api';
 import {FacturesRoutingModule} from './factures-routing.module';
 import { ListeFacturesFournisseursComponent } from './liste-factures-fournisseurs/liste-factures-fournisseurs.component';
 import { ListeFacturesClientsComponent } from './liste-factures-clients/liste-factures-clients.component';
+import { AddNewFactureClientComponent } from './add-new-facture-client/add-new-facture-client.component';
 
 
 
 @NgModule({
-  declarations: [ListeFacturesFournisseursComponent, ListeFacturesClientsComponent],
+  declarations: [ListeFacturesFournisseursComponent, ListeFacturesClientsComponent, AddNewFactureClientComponent],
   imports: [
     CommonModule,
     ConfirmDialogModule,

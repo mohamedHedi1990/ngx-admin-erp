@@ -9,7 +9,6 @@ import {ConfirmationService} from 'primeng/api';
   styleUrls: ['./liste-factures-clients.component.scss'],
 })
 export class ListeFacturesClientsComponent implements OnInit {
-
   showCustomerInvoiceWindow = false;
   invoices = [];
   loading = false;
@@ -24,7 +23,7 @@ export class ListeFacturesClientsComponent implements OnInit {
   saveInvoice() {
 
     const context = this;
-    this.UtilsService.post(UtilsServiceService.API_PROVIDER_INVOICE, this.invoice).subscribe( response => {
+    this.UtilsService.post(UtilsServiceService.API_PROVIDER_CUSTOMER, this.invoice).subscribe( response => {
         this.hideInvoiceWindow();
         if ( context.invoice.invoiceId == null) {
           this.UtilsService.showToast('success',
@@ -49,7 +48,7 @@ export class ListeFacturesClientsComponent implements OnInit {
 
   getAllInvoices() {
     const context = this;
-    this.UtilsService.get(UtilsServiceService.API_PROVIDER_INVOICE).subscribe( response => {
+    this.UtilsService.get(UtilsServiceService.API_PROVIDER_CUSTOMER).subscribe( response => {
         context.invoices = response;
       },
       error => {
@@ -66,8 +65,8 @@ export class ListeFacturesClientsComponent implements OnInit {
 
   delInvoice(invoice) {
     const context = this;
-    const url = UtilsServiceService.API_PROVIDER_INVOICE + '/' + invoice.invoiceId;
-    this.UtilsService.delete(`${UtilsServiceService.API_PROVIDER_INVOICE}/${invoice.invoiceId}`).subscribe( response => {
+    const url = UtilsServiceService.API_PROVIDER_CUSTOMER + '/' + invoice.invoiceId;
+    this.UtilsService.delete(`${UtilsServiceService.API_PROVIDER_CUSTOMER}/${invoice.invoiceId}`).subscribe( response => {
         this.UtilsService.showToast('success',
           'Facture supprimée avec succés',
           `La facture client numéro  ${invoice.invoiceNumber} a été supprimée avec succcés`);
