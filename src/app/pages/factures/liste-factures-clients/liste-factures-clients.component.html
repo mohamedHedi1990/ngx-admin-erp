@@ -74,3 +74,5 @@
     </ng-template>
   </p-table>
 </div>
+<ngx-add-new-facture-client *ngIf="showCustomerInvoiceWindow" [customer]="invoice" (addNewCustomerEvent)="saveInvoice($event)"
+                    (cancelEvent)="hideInvoiceWindow(); initInvoice();"></ngx-add-new-facture-client>

@@ -16,20 +16,24 @@
           </div>
         </div>
         <div class="mb-1 col-md-6 col-12">
-          <label for="client" class="p-float-label">Client</label>
-          <div class="p-inputgroup">
+          <label for="type" class="p-float-label">Client</label>
+          <div class="p-inputgroup p-fluid">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-            <input type="text" class="form-control p-field"  id="client"
-                   [(ngModel)]="customer.invoiceCustomer " [ngClass]="{
-        'is-invalid': customer.invoiceCustomer  == null || customer.invoiceCustomer  == '' ,
-        'is-valid': customer.invoiceCustomer  != null && customer.invoiceCustomer  !== ''
+            <select class="form-control p-field" id="type" name="side" [(ngModel)]="customer.invoiceCustomer" [ngClass]="{
+        'is-invalid': customer.invoiceCustomer == null ,
+        'is-valid':customer.invoiceCustomer != null
       }">
+              <option [ngValue]="null">-- Type --</option>
+             <option [ngValue]="'NUMBER'">Numéro </option>
+
+            </select>
           </div>
         </div>
       </div>
+      <div class="p-grid p-fluid">
+        <div style="display: flex">
 
-
-      <div class="p-col-12 mb-1 col-md-12 p-field">
+      <div class="mb-1 col-md-6 col-12">
         <label for="manager" class="p-float-label">Date </label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
@@ -38,8 +42,8 @@
         </div>
       </div>
 
-      <div class="p-col-12 mb-1 col-md-12 p-field">
-        <label for="fin" class="p-float-label">Date de fin </label>
+      <div class="mb-12 col-md-6 col-12">
+        <label for="fin" class="p-float-label">Date de écheance </label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
           <input type="date" placeholder="Date" class="form-control p-field"  id="fin"
@@ -47,9 +51,12 @@
         </div>
       </div>
 
-
+        </div>
+        </div>
     </div>
-    <div class="mb-1 col-md-6 col-12">
+    <div class="p-grid p-fluid">
+      <div style="display: flex">
+    <div class="mb-1 col-md-4 col-12">
       <label for="NET" class="p-float-label">NET</label>
       <div class="p-inputgroup">
         <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
@@ -60,7 +67,7 @@
       }">
       </div>
     </div>
-    <div class="mb-1 col-md-6 col-12">
+    <div class="mb-12 col-md-4 col-12">
       <label for="rs" class="p-float-label">RS</label>
       <div class="p-inputgroup">
         <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
@@ -72,24 +79,8 @@
       </div>
     </div>
 
-
-    <div class="mb-1 col-md-6 col-12">
-      <label for="type" class="p-float-label">Type </label>
-      <div class="p-inputgroup p-fluid">
-        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-        <select class="form-control p-field" id="type" name="side" [(ngModel)]="customer.invoiceRsType" [ngClass]="{
-        'is-invalid': customer.invoiceRsType == null ,
-        'is-valid':customer.invoiceRsType != null
-      }">
-          <option [ngValue]="null">-- Type --</option>
-          <option [ngValue]="'NUMBER'">Numéro </option>
-          <option [ngValue]="'RATE'">Pourcentage</option>
-
-        </select>
-      </div>
-    </div>
-    <div class="mb-1 col-md-6 col-12">
-      <label for="amount" class="p-float-label">RS</label>
+    <div class="mb-12 col-md-4 col-12">
+      <label for="amount" class="p-float-label">Montant total</label>
       <div class="p-inputgroup">
         <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
         <input type="text" class="form-control p-field"  id="amount"
@@ -98,7 +89,7 @@
         'is-valid': customer.invoiceTotalAmount  != null && customer.invoiceTotalAmount  !== ''
       }">
       </div>
-    </div>
+    </div></div></div>
   </p-panel>
   <br>
 
