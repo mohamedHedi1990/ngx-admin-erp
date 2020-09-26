@@ -20,10 +20,10 @@ export class ListeFacturesClientsComponent implements OnInit {
     this.initInvoice();
     this.getAllInvoices();
   }
-  saveInvoice() {
+  saveInvoice(invoice) {
 
     const context = this;
-    this.UtilsService.post(UtilsServiceService.API_PROVIDER_CUSTOMER, this.invoice).subscribe( response => {
+    this.UtilsService.post(UtilsServiceService.API_CUSTOMER_INVOICE, this.invoice).subscribe( response => {
         this.hideInvoiceWindow();
         if ( context.invoice.invoiceId == null) {
           this.UtilsService.showToast('success',
@@ -48,7 +48,7 @@ export class ListeFacturesClientsComponent implements OnInit {
 
   getAllInvoices() {
     const context = this;
-    this.UtilsService.get(UtilsServiceService.API_PROVIDER_CUSTOMER).subscribe( response => {
+    this.UtilsService.get(UtilsServiceService.API_CUSTOMER_INVOICE).subscribe( response => {
         context.invoices = response;
       },
       error => {
@@ -65,8 +65,8 @@ export class ListeFacturesClientsComponent implements OnInit {
 
   delInvoice(invoice) {
     const context = this;
-    const url = UtilsServiceService.API_PROVIDER_CUSTOMER + '/' + invoice.invoiceId;
-    this.UtilsService.delete(`${UtilsServiceService.API_PROVIDER_CUSTOMER}/${invoice.invoiceId}`).subscribe( response => {
+    const url = UtilsServiceService.API_CUSTOMER_INVOICE + '/' + invoice.invoiceId;
+    this.UtilsService.delete(`${UtilsServiceService.API_CUSTOMER_INVOICE}/${invoice.invoiceId}`).subscribe( response => {
         this.UtilsService.showToast('success',
           'Facture supprimée avec succés',
           `La facture client numéro  ${invoice.invoiceNumber} a été supprimée avec succcés`);
@@ -96,19 +96,16 @@ export class ListeFacturesClientsComponent implements OnInit {
   initInvoice() {
     this.invoice = {
       invoiceId: null,
-      invoiceNumber: null,
-      invoiceDeadlineInNumberOfDays: 0,
-      invoiceDeadlineDate: new Date(),
-      invoiceDate: new Date(),
-      invoiceTotalAmount: 0,
-      invoiceRs: 0,
-      invoiceRsType: 'VALUE',
-      invoiceNet: 0,
-      invoicePayment: 0,
-      invoiceStatus: 'OPENED',
-      invoicePaymentRules: [],
-      provider : null,
-    };
+        invoiceNumber: '',
+        customer: null,
+        invoiceDate: null,
+        invoiceDeadlineDate: null,
+        invoiceNet: 0,
+        invoiceRs: 0,
+        invoiceRsType: 'VALUE',
+        invoiceTotalAmount: 0,
+
+      };
   }
 
 }
