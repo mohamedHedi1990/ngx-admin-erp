@@ -1,4 +1,6 @@
-<h5>Nouvelle facture client</h5>
+<h5 *ngIf="invoice.invoiceId == null">Nouvelle facture client</h5>
+<h5 *ngIf="invoice.invoiceId != null">Modifier la facture client {{invoice.invoiceNumber}}</h5>
+
 <div style="width: 90%;
     margin: auto;">
   <p-panel  [toggleable]="false">
@@ -19,7 +21,9 @@
           <label for="type" class="p-float-label">Client</label>
           <div class="p-inputgroup p-fluid">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-            <select class="form-control p-field" id="type" name="side" [(ngModel)]="invoice.customer" [ngClass]="{
+            <input *ngIf="invoice.invoiceId!= null" type="text" placeholder="Date" class="form-control p-field"  id="manager"
+                   [(ngModel)]="invoice.customer.customerLabel " style="font-size: 13px" disabled="true">
+            <select *ngIf="invoice.invoiceId == null" class="form-control p-field" id="type" name="side" [(ngModel)]="invoice.customer" [ngClass]="{
         'is-invalid': invoice.customer == null ,
         'is-valid':invoice.customer != null
       }" style="font-size: 13px">
