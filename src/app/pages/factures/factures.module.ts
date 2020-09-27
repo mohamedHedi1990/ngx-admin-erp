@@ -28,11 +28,14 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 import {FacturesRoutingModule} from './factures-routing.module';
 import { ListeFacturesFournisseursComponent } from './liste-factures-fournisseurs/liste-factures-fournisseurs.component';
+import { ListeFacturesClientsComponent } from './liste-factures-clients/liste-factures-clients.component';
+import { AddNewFactureClientComponent } from './add-new-facture-client/add-new-facture-client.component';
+import { AddNewFactureFournisseurComponent } from './add-new-facture-fournisseur/add-new-facture-fournisseur.component';
 
 
 
 @NgModule({
-  declarations: [ListeFacturesFournisseursComponent],
+  declarations: [ListeFacturesFournisseursComponent, ListeFacturesClientsComponent, AddNewFactureClientComponent, AddNewFactureFournisseurComponent],
   imports: [
     CommonModule,
     ConfirmDialogModule,

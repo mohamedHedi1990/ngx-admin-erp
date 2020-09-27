@@ -4,12 +4,12 @@ import {DialogService} from 'primeng/dynamicdialog';
 import {ConfirmationService} from 'primeng/api';
 
 @Component({
-  selector: 'ngx-liste-factures-fournisseurs',
-  templateUrl: './liste-factures-fournisseurs.component.html',
-  styleUrls: ['./liste-factures-fournisseurs.component.scss'],
+  selector: 'ngx-liste-factures-clients',
+  templateUrl: './liste-factures-clients.component.html',
+  styleUrls: ['./liste-factures-clients.component.scss'],
 })
-export class ListeFacturesFournisseursComponent implements OnInit {
-  showProviderInvoiceWindow = false;
+export class ListeFacturesClientsComponent implements OnInit {
+  showCustomerInvoiceWindow = false;
   invoices = [];
   loading = false;
   invoice = null;
@@ -23,32 +23,32 @@ export class ListeFacturesFournisseursComponent implements OnInit {
   saveInvoice(invoice) {
 
     const context = this;
-    this.UtilsService.post(UtilsServiceService.API_PROVIDER_INVOICE, invoice).subscribe( response => {
+    this.UtilsService.post(UtilsServiceService.API_CUSTOMER_INVOICE, invoice).subscribe( response => {
         this.hideInvoiceWindow();
         if ( invoice.invoiceId == null) {
           this.UtilsService.showToast('success',
             'Facture ajoutée avec succés',
-            `La facture fournisseur numéro  ${invoice.invoiceNumber} a été ajoutée avec succcés`);
+            `La facture client numéro  ${invoice.invoiceNumber} a été ajoutée avec succcés`);
         } else {
           this.UtilsService.showToast('success',
             'Facture modfiée avec succés',
-            `La facture fournisseur numéro  ${invoice.invoiceNumber} a été modifiée avec succcés`);
+            `La facture client numéro  ${invoice.invoiceNumber} a été modifiée avec succcés`);
         }
         context.getAllInvoices();
         context.initInvoice();
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
-        `Un erreur interne a été produit lors de la souvegar de facture fournisseur numéro  ${invoice.invoiceNumber}`); });
+        `Un erreur interne a été produit lors de la souvegar de facture client numéro  ${invoice.invoiceNumber}`); });
 
   }
   hideInvoiceWindow() {
-    this.showProviderInvoiceWindow = false;
+    this.showCustomerInvoiceWindow = false;
   }
 
   getAllInvoices() {
     const context = this;
-    this.UtilsService.get(UtilsServiceService.API_PROVIDER_INVOICE).subscribe( response => {
+    this.UtilsService.get(UtilsServiceService.API_CUSTOMER_INVOICE).subscribe( response => {
         context.invoices = response;
       },
       error => {
@@ -60,21 +60,21 @@ export class ListeFacturesFournisseursComponent implements OnInit {
 
   editInvoice(invoice) {
     this.invoice = invoice;
-    this.showProviderInvoiceWindow = true;
+    this.showCustomerInvoiceWindow = true;
   }
 
   delInvoice(invoice) {
     const context = this;
     const url = UtilsServiceService.API_INVOICE + '/' + invoice.invoiceId;
-    this.UtilsService.delete(`${UtilsServiceService.API_PROVIDER_INVOICE}/${invoice.invoiceId}`).subscribe( response => {
+    this.UtilsService.delete(`${UtilsServiceService.API_CUSTOMER_INVOICE}/${invoice.invoiceId}`).subscribe( response => {
         this.UtilsService.showToast('success',
           'Facture supprimée avec succés',
-          `La facture fournisseur numéro  ${invoice.invoiceNumber} a été supprimée avec succcés`);
+          `La facture client numéro  ${invoice.invoiceNumber} a été supprimée avec succcés`);
         context.getAllInvoices();
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
-        `Un erreur interne a été produit lors de la suppression de facture fournisseur numéro  ${invoice.invoiceNumber}`);
+        `Un erreur interne a été produit lors de la suppression de facture client numéro  ${invoice.invoiceNumber}`);
       });
 
 
@@ -82,7 +82,7 @@ export class ListeFacturesFournisseursComponent implements OnInit {
 
   deleteInvoice(invoice) {
     this.confirmationService.confirm({
-      message: `Voulez vous vraiment supprimer la facture fournisseur numéro  ${invoice.invoiceNumber}?`,
+      message: `Voulez vous vraiment supprimer la facture client numéro  ${invoice.invoiceNumber}?`,
       acceptLabel: 'Supprimer',
       rejectLabel: 'Annuler',
       header: `Supprimer une facture`,
@@ -96,14 +96,16 @@ export class ListeFacturesFournisseursComponent implements OnInit {
   initInvoice() {
     this.invoice = {
       invoiceId: null,
-      invoiceNumber: '',
-      provider: null,
-      invoiceDate: null,
-      invoiceDeadlineDate: null,
-      invoiceNet: 0,
-      invoiceRs: 0,
-      invoiceRsType: 'VALUE',
-      invoiceTotalAmount: 0,
-    };
+        invoiceNumber: '',
+        customer: null,
+        invoiceDate: null,
+        invoiceDeadlineDate: null,
+        invoiceNet: 0,
+        invoiceRs: 0,
+        invoiceRsType: 'VALUE',
+        invoiceTotalAmount: 0,
+
+      };
   }
-  }
+
+}
