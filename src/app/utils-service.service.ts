@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrService} from '@nebular/theme';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {DatePipe} from '@angular/common';
 @Injectable({
   providedIn: 'root',
 })
@@ -20,7 +21,8 @@ export class UtilsServiceService {
 
 
 
-  constructor(private toastrService: NbToastrService, private httpClient: HttpClient) {
+  constructor(private toastrService: NbToastrService, private httpClient: HttpClient,
+              private datePipe: DatePipe) {
   }
 
   public showToast(type: NbComponentStatus, title: string, body: string) {
@@ -54,4 +56,16 @@ export class UtilsServiceService {
     return this.httpClient.delete(url);
   }
 
+  now(format: string): string {
+
+    return this.datePipe.transform(new Date().toLocaleDateString('en-US', { timeZone: 'Africa/Tunis' }) +
+      ' ' + new Date().toLocaleTimeString('en-US', { timeZone: 'Africa/Tunis' }), format, 'Africa/Tunis');
+
+  }
+
+  getDate(date: any, format: string): string {
+    return this.datePipe.transform(date, format, 'Africa/Tunis');
+  }
+
 }
+

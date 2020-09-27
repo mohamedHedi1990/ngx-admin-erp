@@ -76,11 +76,12 @@
             <input type="number" class="form-control p-field"  id="rs"
                    [(ngModel)]="invoice.invoiceRs " style="font-size: 13px" (change)="updateTotalAmount()">
           </div>
+          <span *ngIf="invoice.invoiceRsType === 'POURCENTAGE'" style="font-size: 12px;"><i>Soit valeur de {{rsAmount}}</i></span>
         </div>
         <div class="mb-12 col-md-4 col-12">
           <label for="rs" class="p-float-label">RS type</label>
           <select class="form-control p-field" id="type" name="side" [(ngModel)]="invoice.invoiceRsType"
-                  (change)="updateTotalAmount()">
+                  (change)="updateTotalAmount()" style="font-size: 13px;">
             <option [ngValue]="'VALUE'">Valeur</option>
             <option [ngValue]="'POURCENTAGE'">Pourcentage</option>
 
