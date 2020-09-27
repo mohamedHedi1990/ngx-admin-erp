@@ -78,4 +78,5 @@
 <ngx-add-new-client *ngIf="showClientWindow" [client]="client" (addNewClientEvent)="saveNewClient($event)"
                     (cancelEvent)="hideClientWindow(); initClient();"></ngx-add-new-client>
                     -->
-
+<ngx-add-new-facture-fournisseur *ngIf="showProviderInvoiceWindow" [invoice]="invoice" (addNewProviderInvoiceEvent)="saveInvoice($event)"
+                            (cancelEvent)="hideInvoiceWindow(); initInvoice();"></ngx-add-new-facture-fournisseur>

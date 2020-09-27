@@ -23,23 +23,23 @@ export class ListeFacturesClientsComponent implements OnInit {
   saveInvoice(invoice) {
 
     const context = this;
-    this.UtilsService.post(UtilsServiceService.API_CUSTOMER_INVOICE, this.invoice).subscribe( response => {
+    this.UtilsService.post(UtilsServiceService.API_CUSTOMER_INVOICE, invoice).subscribe( response => {
         this.hideInvoiceWindow();
-        if ( context.invoice.invoiceId == null) {
+        if ( invoice.invoiceId == null) {
           this.UtilsService.showToast('success',
             'Facture ajoutée avec succés',
-            `La facture client numéro  ${this.invoice.invoiceNumber} a été ajoutée avec succcés`);
+            `La facture client numéro  ${invoice.invoiceNumber} a été ajoutée avec succcés`);
         } else {
           this.UtilsService.showToast('success',
             'Facture modfiée avec succés',
-            `La facture client numéro  ${this.invoice.invoiceNumber} a été modifiée avec succcés`);
+            `La facture client numéro  ${invoice.invoiceNumber} a été modifiée avec succcés`);
         }
         context.getAllInvoices();
         context.initInvoice();
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
-        `Un erreur interne a été produit lors de la souvegar de facture client numéro  ${this.invoice.invoiceNumber}`); });
+        `Un erreur interne a été produit lors de la souvegar de facture client numéro  ${invoice.invoiceNumber}`); });
 
   }
   hideInvoiceWindow() {
@@ -65,7 +65,7 @@ export class ListeFacturesClientsComponent implements OnInit {
 
   delInvoice(invoice) {
     const context = this;
-    const url = UtilsServiceService.API_CUSTOMER_INVOICE + '/' + invoice.invoiceId;
+    const url = UtilsServiceService.API_INVOICE + '/' + invoice.invoiceId;
     this.UtilsService.delete(`${UtilsServiceService.API_CUSTOMER_INVOICE}/${invoice.invoiceId}`).subscribe( response => {
         this.UtilsService.showToast('success',
           'Facture supprimée avec succés',

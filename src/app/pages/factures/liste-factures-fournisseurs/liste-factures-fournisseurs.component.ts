@@ -20,26 +20,26 @@ export class ListeFacturesFournisseursComponent implements OnInit {
     this.initInvoice();
     this.getAllInvoices();
   }
-  saveInvoice() {
+  saveInvoice(invoice) {
 
     const context = this;
-    this.UtilsService.post(UtilsServiceService.API_PROVIDER_INVOICE, this.invoice).subscribe( response => {
+    this.UtilsService.post(UtilsServiceService.API_PROVIDER_INVOICE, invoice).subscribe( response => {
         this.hideInvoiceWindow();
-        if ( context.invoice.invoiceId == null) {
+        if ( invoice.invoiceId == null) {
           this.UtilsService.showToast('success',
             'Facture ajoutée avec succés',
-            `La facture fournisseur numéro  ${this.invoice.invoiceNumber} a été ajoutée avec succcés`);
+            `La facture fournisseur numéro  ${invoice.invoiceNumber} a été ajoutée avec succcés`);
         } else {
           this.UtilsService.showToast('success',
             'Facture modfiée avec succés',
-            `La facture fournisseur numéro  ${this.invoice.invoiceNumber} a été modifiée avec succcés`);
+            `La facture fournisseur numéro  ${invoice.invoiceNumber} a été modifiée avec succcés`);
         }
         context.getAllInvoices();
         context.initInvoice();
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
-        `Un erreur interne a été produit lors de la souvegar de facture fournisseur numéro  ${this.invoice.invoiceNumber}`); });
+        `Un erreur interne a été produit lors de la souvegar de facture fournisseur numéro  ${invoice.invoiceNumber}`); });
 
   }
   hideInvoiceWindow() {
@@ -65,7 +65,7 @@ export class ListeFacturesFournisseursComponent implements OnInit {
 
   delInvoice(invoice) {
     const context = this;
-    const url = UtilsServiceService.API_PROVIDER_INVOICE + '/' + invoice.invoiceId;
+    const url = UtilsServiceService.API_INVOICE + '/' + invoice.invoiceId;
     this.UtilsService.delete(`${UtilsServiceService.API_PROVIDER_INVOICE}/${invoice.invoiceId}`).subscribe( response => {
         this.UtilsService.showToast('success',
           'Facture supprimée avec succés',
@@ -96,18 +96,14 @@ export class ListeFacturesFournisseursComponent implements OnInit {
   initInvoice() {
     this.invoice = {
       invoiceId: null,
-      invoiceNumber: null,
-      invoiceDeadlineInNumberOfDays: 0,
-      invoiceDeadlineDate: new Date(),
-      invoiceDate: new Date(),
-      invoiceTotalAmount: 0,
+      invoiceNumber: '',
+      provider: null,
+      invoiceDate: null,
+      invoiceDeadlineDate: null,
+      invoiceNet: 0,
       invoiceRs: 0,
       invoiceRsType: 'VALUE',
-      invoiceNet: 0,
-      invoicePayment: 0,
-      invoiceStatus: 'OPENED',
-      invoicePaymentRules: [],
-      provider : null,
+      invoiceTotalAmount: 0,
     };
   }
   }

@@ -16,6 +16,7 @@ export class UtilsServiceService {
   public static API_TIME_LINE = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/timeLine';
   public static API_PROVIDER_INVOICE = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/invoice-provider';
   public static API_CUSTOMER_INVOICE = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/invoice-customer';
+  public static API_INVOICE = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/invoice';
 
 
 

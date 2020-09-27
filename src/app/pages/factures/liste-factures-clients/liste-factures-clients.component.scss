@@ -17,3 +17,41 @@
   padding-left: 7px !important;
   font-size: 13px !important;
 }
+.customer-badge {
+  border-radius: 2px;
+  padding: .25em .5em;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .3px;
+
+  &.status-active {
+    background-color: #C8E6C9;
+    color: #256029;
+  }
+
+  &.status-blocked {
+    background-color: #FFCDD2;
+    color: #C63737;
+  }
+
+  &.status-negotiation {
+    background-color: #FEEDAF;
+    color: #8A5340;
+  }
+
+  &.status-new {
+    background-color: #B3E5FC;
+    color: #23547B;
+  }
+
+  &.status-renewal {
+    background-color: #ECCFFF;
+    color: #694382;
+  }
+
+  &.status-progress {
+    background-color: #FFD8B2;
+    color: #805B36;
+  }
+}
