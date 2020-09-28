@@ -1,0 +1,83 @@
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
+<div class="card">
+  <p-table #dt [value]="invoices" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+           [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+           [paginator]="true" currentPageReportTemplate=""
+           [filterDelay]="0" [globalFilterFields]="['invoiceNumber','invoiceTotalAmount','invoiceDate','invoiceDeadlineDate','invoiceNet','provider.providerLabel','provider.providerUniqueIdentifier', 'createdAt', 'updatedAt']"
+           [(selection)]="selectedInvoices">
+    <ng-template pTemplate="caption" >
+      <div style="display: flex; width: 100%">
+        <div class="p-d-flex p-ai-center p-jc-between" style="width: 60%">
+        <span class="p-input-icon-left" style="width: 100%">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher une facture fournisseur.." />
+                </span>
+        </div>
+
+        <div style="width:19%; margin-left: 25%">
+          <button pButton pRipple label="Payer" class="p-button-success p-mr-2"></button>
+        </div>
+
+      </div>
+
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr style="text-align: center; font-size: 15px;">
+        <th style="width: 2rem">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th pSortableColumn="invoiceNumber" style="text-align: center; font-size: 13px;width: 10%">Numéro</th>
+        <th pSortableColumn="provider.providerLabel" style="text-align: center; font-size: 13px;width: 11%">Fournisseur</th>
+        <th pSortableColumn="invoiceDate" style="text-align: center; font-size: 13px;width: 15%">Date facture<p-sortIcon field="invoiceDate"></p-sortIcon></th>
+        <th pSortableColumn="invoiceDeadlineDate" style="text-align: center;font-size: 13px;width: 17%">Date d'échéance<p-sortIcon field="invoiceDeadlineDate"></p-sortIcon></th>
+        <th pSortableColumn="invoiceTotalAmount" style="text-align: center; font-size: 13px;width: 13%">Montant total<p-sortIcon field="invoiceTotalAmount"></p-sortIcon></th>
+        <th pSortableColumn="invoicePayment" style="text-align: center; font-size: 13px;width: 13%">Montant payé<p-sortIcon field="invoicePayment"></p-sortIcon></th>
+        <th pSortableColumn="invoiceStatus"  style="text-align: center; font-size: 13px;width: 11%">Statut</th>
+        <th style="width: 10%;font-size: 13px">Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-invoice>
+      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
+        <td>
+          <p-tableCheckbox [value]="invoice"></p-tableCheckbox>
+        </td>
+        <td  style="text-align: center;font-size: 13px;">
+          {{invoice.invoiceNumber}}
+        </td>
+        <td style="text-align: center;font-size: 13px;">
+          {{invoice.provider.providerLabel}}
+        </td>
+        <td style="text-align: center;font-size: 13px;">
+          {{invoice.invoiceDate}}
+        </td>
+        <td style="text-align: center;font-size: 13px;">
+          {{invoice.invoiceDeadlineDate}}
+        </td>
+        <td style="text-align: center;">
+          {{invoice.invoiceTotalAmount}}
+        </td>
+        <td style="text-align: center;">
+          {{invoice.invoicePayment}}
+        </td>
+        <td style="text-align: center;">
+          <span *ngIf="invoice.invoiceStatus === 'CLOSED'" class="customer-badge status-active">Fermée</span>
+          <span *ngIf="invoice.invoiceStatus === 'OPENED'" class="customer-badge status-progress">Ouverte</span>
+        </td>
+
+
+        <td style="text-align: center;">
+          <div style="display: flex;">
+            <button pButton   placement="top" ngbTooltip="Ajouter un réglement" pRipple icon="pi pi-plus" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" ></button>
+            <button pButton   placement="top" ngbTooltip="Voir les réglements" pRipple icon="pi pi-eye" class="p-button-rounded p-button-danger" ></button>
+          </div>
+
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr style="font-size: 13px">
+        <td colspan="8">Aucune facture fournisseur trouvée!</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

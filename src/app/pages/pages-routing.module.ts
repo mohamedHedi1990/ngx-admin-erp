@@ -22,8 +22,9 @@ const routes: Routes = [{
         .then(m => m.FacturesModule),
     },
     {
-      path: 'dashboard',
-      component: ECommerceComponent,
+      path: 'saisie-tresorerie',
+      loadChildren: () => import('./saisie-encaissments/saisie-encaissments.module')
+        .then(m => m.SaisieEncaissmentsModule),
     },
     {
       path: 'iot-dashboard',

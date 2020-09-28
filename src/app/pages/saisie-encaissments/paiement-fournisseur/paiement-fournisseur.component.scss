@@ -1,0 +1,57 @@
+.searchInput {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-size: 13px !important;
+  color: #495057;
+  background: #ffffff;
+  padding: 0.5rem 0.5rem;
+  border: 1px solid #ced4da;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  appearance: none;
+  border-radius: 3px;
+  padding-left: 7px !important;
+}
+.p-inputtext:enabled:hover {
+  border-color: #2196F3 !important;
+}
+.p-inputtext {
+  padding-left: 7px !important;
+  font-size: 13px !important;
+}
+.customer-badge {
+  border-radius: 2px;
+  padding: .25em .5em;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .3px;
+
+  &.status-active {
+    background-color: #C8E6C9;
+    color: #256029;
+  }
+
+  &.status-blocked {
+    background-color: #FFCDD2;
+    color: #C63737;
+  }
+
+  &.status-negotiation {
+    background-color: #FEEDAF;
+    color: #8A5340;
+  }
+
+  &.status-new {
+    background-color: #B3E5FC;
+    color: #23547B;
+  }
+
+  &.status-renewal {
+    background-color: #ECCFFF;
+    color: #694382;
+  }
+
+  &.status-progress {
+    background-color: #FFD8B2;
+    color: #805B36;
+  }
+}

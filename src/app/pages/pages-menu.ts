@@ -69,15 +69,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Saisie tresorerie',
     icon: 'keypad-outline',
-    link: '/pages/ui-features',
     children: [
       {
         title: 'Règlements Clients',
-        link: '/pages/ui-features/grid',
+        link: '/pages/saisie-tresorerie/reglement-client',
       },
       {
         title: 'Paiements Fournisseurs',
-        link: '/pages/ui-features/icons',
+        link: '/pages/saisie-tresorerie/paiement-fournisseur',
       },
       {
         title: 'Encaissements',

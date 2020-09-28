@@ -12,6 +12,10 @@ import {UtilsServiceService} from '../../utils-service.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SaisirSocieteComponent } from './saisir-societe/saisir-societe.component';
 import {ModalModule} from 'ngx-bootstrap/modal';
+import localeFr from '@angular/common/locales/fr';
+import localeFrExtra from '@angular/common/locales/extra/fr';
+import {DatePipe, registerLocaleData} from '@angular/common';
+registerLocaleData(localeFr, 'fr', localeFrExtra);
 import {
   NbActionsModule,
   NbButtonModule,
