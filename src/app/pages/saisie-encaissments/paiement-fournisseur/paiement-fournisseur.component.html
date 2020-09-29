@@ -27,16 +27,16 @@
                 <th pSortableColumn="invoiceNumber" style="text-align: center; font-size: 13px;width: 10%">Numéro</th>
                 <th pSortableColumn="provider.providerLabel" style="text-align: center; font-size: 13px;width: 11%">Fournisseur</th>
                 <th pSortableColumn="invoiceDate" style="text-align: center; font-size: 13px;width: 15%">Date facture
-                    <p-sortIcon field="invoiceDate"></p-sortIcon>
+
                 </th>
                 <th pSortableColumn="invoiceDeadlineDate" style="text-align: center;font-size: 13px;width: 17%">Date d'échéance
-                    <p-sortIcon field="invoiceDeadlineDate"></p-sortIcon>
+
                 </th>
                 <th pSortableColumn="invoiceTotalAmount" style="text-align: center; font-size: 13px;width: 13%">Montant total
-                    <p-sortIcon field="invoiceTotalAmount"></p-sortIcon>
+
                 </th>
                 <th pSortableColumn="invoicePayment" style="text-align: center; font-size: 13px;width: 13%">Montant payé
-                    <p-sortIcon field="invoicePayment"></p-sortIcon>
+
                 </th>
                 <th pSortableColumn="invoiceStatus" style="text-align: center; font-size: 13px;width: 11%">Statut</th>
                 <th style="width: 10%;font-size: 13px">Actions</th>
@@ -76,7 +76,8 @@
 
                 <td style="text-align: center;">
                     <div style="display: flex;">
-                        <button pButton placement="top" ngbTooltip="Ajouter un réglement" pRipple icon="pi pi-plus" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;"></button>
+                        <button pButton placement="top" ngbTooltip="Ajouter un réglement" pRipple icon="pi pi-plus" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;"
+                        (click)="addPaymentRule(invoice)"></button>
                     </div>
 
                 </td>
@@ -84,22 +85,22 @@
         </ng-template>
         <ng-template pTemplate="rowexpansion" let-invoice>
             <tr>
-                <td colspan="7">
+                <td colspan="10">
                     <div class="p-p-3">
                         <p-table [value]="invoice.invoicePaymentRules" dataKey="id">
                             <ng-template pTemplate="header">
-                                <tr>
-                                    <th>Compte</th>
-                                    <th>Montant</th>
-                                    <th>Mode de paiement</th>
-                                    <th>Détails</th>
-                                    <th>Date d'échénace</th>
-                                    <th>Statut</th>
-                                    <th style="width: 4rem"></th>
+                                <tr style="text-align: center">
+                                    <th style="width: 10%; font-size: 13px;text-align: center">Compte</th>
+                                    <th style="width: 10%;font-size: 13px;text-align: center">Montant</th>
+                                    <th style="width: 10%;font-size: 13px;text-align: center">Mode de paiement</th>
+                                    <th style="width: 30%;font-size: 13px;text-align: center">Détails</th>
+                                    <th style="width: 20%;font-size: 13px;text-align: center">Date d'échénace</th>
+                                    <th style="width: 10%;font-size: 13px;text-align: center">Statut</th>
+                                    <th style="width: 10%;font-size: 13px;text-align: center">Valider</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-paymentRule>
-                                <tr>
+                                <tr style="font-size: 13px; text-align: center">
                                     <td>{{paymentRule.paymentRuleAccount}}</td>
                                     <td>{{paymentRule.paymentRuleAmount}}</td>
                                     <td>{{paymentRule.paymentRulePaymentMethod}}</td>
@@ -112,8 +113,8 @@
                                     </td>
                                     <td>{{paymentRule.paymentRuleDeadlineDate}}</td>
                                     <td>
-                                        <span *ngIf="isValidated" class="customer-badge status-active">Rapproché</span>
-                                        <span *ngIf="!isValidated" class="customer-badge status-progress">Non rapproché</span>
+                                        <span *ngIf="paymentRule.isValidated" class="customer-badge status-active">Rapproché</span>
+                                        <span *ngIf="!paymentRule.isValidated" class="customer-badge status-progress">Non rapproché</span>
                                     </td>
                                     <td style="text-align: center;">
                                         <div style="display: flex;">
@@ -123,8 +124,8 @@
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="emptymessage">
-                                <tr>
-                                    <td colspan="6">There are no order for this product yet.</td>
+                                <tr style="font-size: 13px">
+                                    <td colspan="6">Aucun réglement trouvé pour cette facture.</td>
                                 </tr>
                             </ng-template>
                         </p-table>
@@ -139,3 +140,11 @@
         </ng-template>
     </p-table>
 </div>
+<p-dialog header="Header" [(visible)]="displayPaymentRuleModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+          [draggable]="false" [resizable]="false">
+
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-times" (click)="displayPaymentRuleModal=false" label="Annuler" class="p-button-text"></p-button>
+    <p-button icon="pi pi-check" (click)="savePaymentRule()" label="Ajouter"></p-button>
+  </ng-template>
+</p-dialog>

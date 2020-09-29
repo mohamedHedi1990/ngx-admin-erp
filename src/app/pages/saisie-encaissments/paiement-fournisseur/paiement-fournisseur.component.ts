@@ -9,24 +9,33 @@ import {ConfirmationService} from 'primeng/api';
   styleUrls: ['./paiement-fournisseur.component.scss'],
 })
 export class PaiementFournisseurComponent implements OnInit {
-
+  displayPaymentRuleModal = false;
   invoices = [];
   selectedInvoices = [];
+  paymentRule = null;
   loading = false;
+  invoice = null;
   constructor(private UtilsService: UtilsServiceService,
               public dialogService: DialogService, private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
     this.getAllInvoices();
   }
-  savePaymentRule(invoice) {
+  initInvoiceId() {
+    this.invoice = null;
+  }
+  addPaymentRule(data) {
+    this.invoice = data;
+    this.displayPaymentRuleModal = true;
+  }
+  savePaymentRule() {
 
     const context = this;
-    this.UtilsService.post(UtilsServiceService.API_PROVIDER_INVOICE, invoice).subscribe( response => {
+    this.UtilsService.post(UtilsServiceService.API_PROVIDER_INVOICE + '/' + this.invoice.invoiceId, this.paymentRule).subscribe( response => {
 
       this.UtilsService.showToast('success',
       'Réglement ajoutée avec succés',
-      `Un réglement a été ajoutée avec succés à la facture ${invoice.invoiceNumber}`);
+      `Un réglement a été ajoutée avec succés à la facture ${this.invoice.invoiceNumber}`);
         context.getAllInvoices();
       },
       error => {this.UtilsService.showToast('danger',
