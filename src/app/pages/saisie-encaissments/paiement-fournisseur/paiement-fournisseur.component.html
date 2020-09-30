@@ -11,8 +11,8 @@
                 </span>
                 </div>
 
-                <div style="width:19%; margin-left: 25%">
-                    <button pButton pRipple label="Payer" class="p-button-success p-mr-2"></button>
+                <div style="margin-left: 31%">
+                    <button [disabled]="selectedInvoices.length === 0"pButton pRipple label="Payer" class="p-button-success p-mr-2"></button>
                 </div>
 
             </div>
@@ -77,7 +77,7 @@
                 <td style="text-align: center;">
                     <div style="display: flex;">
                         <button pButton placement="top" ngbTooltip="Ajouter un réglement" pRipple icon="pi pi-plus" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;"
-                        (click)="addPaymentRule(invoice)"></button>
+                        (click)="addPaymentRule(invoice)" [disabled]="invoice.invoiceStatus === 'CLOSED'"></button>
                     </div>
 
                 </td>
