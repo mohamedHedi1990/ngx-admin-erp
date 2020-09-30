@@ -32,9 +32,10 @@ import {DialogModule} from 'primeng/dialog';
 import {DialogService, DynamicDialogModule} from 'primeng/dynamicdialog';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
+import { NouveauReglementComponent } from './nouveau-reglement/nouveau-reglement.component';
 
 @NgModule({
-  declarations: [PaiementFournisseurComponent],
+  declarations: [PaiementFournisseurComponent, NouveauReglementComponent],
   imports: [
     CommonModule,
     SaisieEncaissmentsRoutingModule,
