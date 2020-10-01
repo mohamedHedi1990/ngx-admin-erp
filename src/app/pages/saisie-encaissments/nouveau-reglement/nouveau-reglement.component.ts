@@ -8,14 +8,12 @@ import {UtilsServiceService} from '../../../utils-service.service';
 export class NouveauReglementComponent implements OnInit {
 
   @Input() reglement = {
-    paymentRuleAccountBank: null,
-    paymentRuleAmount: '',
+    paymentRuleAccount: null,
+    paymentRuleAmount: null,
     paymentRulePaymentMethod: null,
-    paymentRuleNumber: '',
-    PaymentRulesDetails: '',
+    paymentRuleNumber: null,
+    PaymentRulesDetails: null,
     paymentRuleDeadlineDate: null,
-    accounts:[],
-
   };
   @Output() addNewReglementEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();
@@ -23,7 +21,21 @@ export class NouveauReglementComponent implements OnInit {
   constructor(private UtilsService: UtilsServiceService) { }
 
   ngOnInit(): void {
+    this.getAllAccounts();
   }
 
+  getAllAccounts() {
+
+    const context = this;
+    this.UtilsService.get(UtilsServiceService.API_ACCOUNT).subscribe( response => {
+        context.accounts = response;
+      },
+      error => {
+        this.UtilsService.showToast('danger',
+          'Erreur interne',
+          `Un erreur interne a été produit lors du chargement des comptes`);
+      });
+
+  }
 
 }

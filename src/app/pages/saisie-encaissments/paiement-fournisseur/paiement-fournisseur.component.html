@@ -1,6 +1,6 @@
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
 <div class="card">
-    <p-table #dt [value]="invoices" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true" [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading" [paginator]="true" currentPageReportTemplate="" [filterDelay]="0"
+    <p-table #dt [value]="invoices" dataKey="invoiceId" styleClass="p-datatable-customers" [rowHover]="true" [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading" [paginator]="true" currentPageReportTemplate="" [filterDelay]="0"
         [globalFilterFields]="['invoiceNumber','invoiceTotalAmount','invoiceDate','invoiceDeadlineDate','invoiceNet','provider.providerLabel','provider.providerUniqueIdentifier', 'createdAt', 'updatedAt']" [(selection)]="selectedInvoices">
         <ng-template pTemplate="caption">
             <div style="display: flex; width: 100%">
@@ -42,7 +42,7 @@
                 <th style="width: 10%;font-size: 13px">Actions</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-invoice>
+        <ng-template pTemplate="body" let-invoice let-expanded="expanded">
             <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
                 <td>
                     <button type="button" pButton pRipple [pRowToggler]="invoice" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
@@ -93,15 +93,15 @@
                                     <th style="width: 10%; font-size: 13px;text-align: center">Compte</th>
                                     <th style="width: 10%;font-size: 13px;text-align: center">Montant</th>
                                     <th style="width: 10%;font-size: 13px;text-align: center">Mode de paiement</th>
-                                    <th style="width: 30%;font-size: 13px;text-align: center">Détails</th>
+                                    <th style="width: 15%;font-size: 13px;text-align: center">Détails</th>
                                     <th style="width: 20%;font-size: 13px;text-align: center">Date d'échénace</th>
-                                    <th style="width: 10%;font-size: 13px;text-align: center">Statut</th>
-                                    <th style="width: 10%;font-size: 13px;text-align: center">Valider</th>
+                                    <th style="width: 13%;font-size: 13px;text-align: center">Statut</th>
+                                    <th style="width: 20%;font-size: 13px;text-align: center">Actions</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-paymentRule>
                                 <tr style="font-size: 13px; text-align: center">
-                                    <td>{{paymentRule.paymentRuleAccount}}</td>
+                                    <td>{{paymentRule.paymentRuleAccount.accountLabel}}</td>
                                     <td>{{paymentRule.paymentRuleAmount}}</td>
                                     <td>{{paymentRule.paymentRulePaymentMethod}}</td>
                                     <td>
@@ -117,8 +117,11 @@
                                         <span *ngIf="!paymentRule.isValidated" class="customer-badge status-progress">Non rapproché</span>
                                     </td>
                                     <td style="text-align: center;">
-                                        <div style="display: flex;">
-                                            <button pButton placement="top" ngbTooltip="Valider ce réglement" pRipple icon="pi pi-plus" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;"></button>
+                                        <div style="display: flex;text-align: center">
+                                          <button pButton placement="top" ngbTooltip="Valider ce réglement" pRipple icon="pi pi-check" class="p-button-rounded p-button-info p-mr-2" style="margin-right: 7px;"></button>
+                                          <button pButton placement="top" ngbTooltip="Metre en Effet" pRipple icon="pi pi-calendar-minus" class="p-button-rounded p-button-secondary p-mr-2" style="margin-right: 7px;"></button>
+                                          <button pButton placement="top" ngbTooltip="Modifier ce réglement" pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;"></button>
+                                          <button pButton placement="top" ngbTooltip="Supprimer ce réglement" pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-mr-2" style="margin-right: 7px;"></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -140,11 +143,17 @@
         </ng-template>
     </p-table>
 </div>
-<p-dialog header="Header" [(visible)]="displayPaymentRuleModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+<p-dialog header="Nouveau Reglement" [(visible)]="displayPaymentRuleModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
           [draggable]="false" [resizable]="false">
-
+  <br>
+  <ngx-nouveau-reglement [reglement]="paymentRule"></ngx-nouveau-reglement>
   <ng-template pTemplate="footer">
-    <p-button icon="pi pi-times" (click)="displayPaymentRuleModal=false" label="Annuler" class="p-button-text"></p-button>
-    <p-button icon="pi pi-check" (click)="savePaymentRule()" label="Ajouter"></p-button>
+    <div style="margin-top: 20px;">
+      <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
+              (click)="displayPaymentRuleModal=false"></button>
+      <button pButton pRipple label="Ajouter" icon="pi pi-check" class="p-button-success p-mr-2"
+              (click)="savePaymentRule()"></button>
+
+    </div>
   </ng-template>
 </p-dialog>
