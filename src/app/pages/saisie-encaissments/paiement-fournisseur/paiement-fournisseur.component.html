@@ -12,7 +12,8 @@
                 </div>
 
                 <div style="margin-left: 31%">
-                    <button [disabled]="selectedInvoices.length === 0"pButton pRipple label="Payer" class="p-button-success p-mr-2"></button>
+                    <button [disabled]="selectedInvoices.length === 0"pButton pRipple label="Payer" class="p-button-success p-mr-2"
+                    (click)="payInvoices()"></button>
                 </div>
 
             </div>

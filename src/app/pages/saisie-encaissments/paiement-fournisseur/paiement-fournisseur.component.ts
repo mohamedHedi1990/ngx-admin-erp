@@ -38,6 +38,29 @@ export class PaiementFournisseurComponent implements OnInit {
     this.invoice = data;
     this.displayPaymentRuleModal = true;
   }
+  payInvoices() {
+    const invoicePayment = {
+      selectedInvoices: this.selectedInvoices,
+      paymentRule: this.paymentRule,
+    };
+    this.UtilsService.post(UtilsServiceService.API_INVOICE + '/pay', invoicePayment).subscribe( response => {
+
+        this.UtilsService.showToast('success',
+          'Factures payées avec succés',
+          `Les factures selectionnées ont été payées et fermées avec succés`);
+        this.selectedInvoices = [];
+        this.initPaymentRule();
+        this.getAllInvoices();
+      },
+      error => {this.UtilsService.showToast('danger',
+        'Erreur interne',
+        `Un erreur interne a été produit lors de paiement de factures seletionnées`);
+        this.selectedInvoices = [];
+        this.initPaymentRule();
+    });
+
+  }
+
   savePaymentRule() {
 
     const context = this;
@@ -54,7 +77,8 @@ export class PaiementFournisseurComponent implements OnInit {
         'Erreur interne',
         `Un erreur interne a été produit lors de l'ajout du réglement`);
         this.displayPaymentRuleModal = false;
-        this.initPaymentRule();});
+        this.initPaymentRule();
+    });
 
   }
 
@@ -63,7 +87,6 @@ export class PaiementFournisseurComponent implements OnInit {
     const context = this;
     this.UtilsService.get(UtilsServiceService.API_PROVIDER_INVOICE).subscribe( response => {
         context.invoices = response;
-        console.log('invoices ', context.invoices);
       },
       error => {
         this.UtilsService.showToast('danger',
