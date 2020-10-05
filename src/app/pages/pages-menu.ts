@@ -79,6 +79,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/saisie-tresorerie/paiement-fournisseur',
       },
       {
+        title: 'Paiements client',
+        link: '/pages/saisie-tresorerie/paiement-client',
+      },
+      {
         title: 'Encaissements',
         link: '/pages/ui-features/typography',
       },
