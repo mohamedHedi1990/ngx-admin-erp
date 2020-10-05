@@ -18,9 +18,19 @@ export class NouveauReglementComponent implements OnInit {
   @Output() addNewReglementEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();
   accounts = [];
+  @Input() seletcedInvoices: any[] = null;
+  
+  isPaymentAmountDisabled = false;
+  
   constructor(private UtilsService: UtilsServiceService) { }
 
   ngOnInit(): void {
+	  if(this.seletcedInvoices != null) {
+		  this.seletcedInvoices.forEach(invoice => {
+			  this.reglement.paymentRuleAmount =  this.reglement.paymentRuleAmount + invoice.invoicePayment;
+		  }
+		  this.isPaymentAmountDisabled = true;
+	  }
     this.getAllAccounts();
   }
 

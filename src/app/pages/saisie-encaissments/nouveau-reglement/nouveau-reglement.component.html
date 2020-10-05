@@ -34,7 +34,7 @@
                  [ngClass]="{
         'is-invalid': reglement.paymentRuleAmount == null ,
         'is-valid':reglement.paymentRuleAmount != null
-      }">
+      }" [disabled]="isPaymentAmountDisabled">
         </div>
       </div>
       <div class="mb-12 col-md-12 col-12">
