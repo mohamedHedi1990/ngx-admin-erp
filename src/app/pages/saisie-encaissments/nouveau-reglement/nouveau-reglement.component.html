@@ -28,7 +28,7 @@
       <div class="mb-12 col-md-12 col-12">
         <label for="amount" class="p-float-label" style="font-size: 13px">Montant</label>
         <div class="p-inputgroup">
-          <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+          <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
           <input type="number" class="form-control p-field"  id="amount"
                  [(ngModel)]="reglement.paymentRuleAmount " style="font-size: 13px"
                  [ngClass]="{
@@ -79,7 +79,7 @@ reglement.paymentRulePaymentMethod === 'ESPECE'">
         <div class="mb-12 col-md-12 col-12">
           <label for="details" class="p-float-label" style="font-size: 13px" style="font-size: 13px">Details</label>
           <div class="p-inputgroup">
-            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <span class="p-inputgroup-addon"><i class="pi pi-align-justify"></i></span>
             <input type="text" class="form-control p-field"  id="details"
                    [(ngModel)]="reglement.PaymentRulesDetails" style="font-size: 13px">
           </div>
@@ -91,7 +91,7 @@ reglement.paymentRulePaymentMethod === 'ESPECE'">
   <div class="mb-12 col-md-12 col-12">
     <label for="fin" class="p-float-label" style="font-size: 13px">Date de écheance </label>
     <div class="p-inputgroup">
-      <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+      <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
       <input type="date" placeholder="Date" class="form-control p-field"  id="fin"
              [(ngModel)]="reglement.paymentRuleDeadlineDate" style="font-size: 13px">
     </div>
