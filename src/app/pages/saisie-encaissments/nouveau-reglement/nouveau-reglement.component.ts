@@ -25,7 +25,7 @@ export class NouveauReglementComponent implements OnInit {
   constructor(private UtilsService: UtilsServiceService) { }
 
   ngOnInit(): void {
-	  if(this.seletcedInvoices != null) {
+	  if(this.seletcedInvoices != null && this.seletcedInvoices.length !== 0) {
 		  this.seletcedInvoices.forEach(invoice => {
 			  this.reglement.paymentRuleAmount =  this.reglement.paymentRuleAmount + invoice.invoicePayment;
 		  }
