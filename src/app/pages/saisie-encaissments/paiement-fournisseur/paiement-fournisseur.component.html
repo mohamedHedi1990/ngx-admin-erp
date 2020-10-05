@@ -147,13 +147,15 @@
 <p-dialog header="Nouveau Reglement" [(visible)]="displayPaymentRuleModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
           [draggable]="false" [resizable]="false">
   <br>
-  <ngx-nouveau-reglement [reglement]="paymentRule"></ngx-nouveau-reglement>
+  <ngx-nouveau-reglement [reglement]="paymentRule" [seletcedInvoices]="selectedInvoices"></ngx-nouveau-reglement>
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
       <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
               (click)="displayPaymentRuleModal=false"></button>
-      <button pButton pRipple label="Ajouter" icon="pi pi-check" class="p-button-success p-mr-2"
+      <button *ngIf="selectedInvoices.length === 0" pButton pRipple label="Ajouter" icon="pi pi-check" class="p-button-success p-mr-2"
               (click)="savePaymentRule()"></button>
+			   <button *ngIf="selectedInvoices.length !== 0" pButton pRipple label="Payer" icon="pi pi-check" class="p-button-success p-mr-2"
+              (click)="payInvoices()"></button>
 
     </div>
   </ng-template>
