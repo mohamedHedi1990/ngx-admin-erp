@@ -11,6 +11,8 @@ import {DatePipe} from '@angular/common';
 })
 export class PaiementFournisseurComponent implements OnInit {
   displayPaymentRuleModal = false;
+  displayValidatePaymentRuleModal = false;
+  displayDeletePaymentRuleModal = false;
   invoices = [];
   selectedInvoices = [];
   paymentRule = {
@@ -93,6 +95,64 @@ export class PaiementFournisseurComponent implements OnInit {
           'Erreur interne',
           `Un erreur interne a été produit lors du chargement des factures`);
       });
+  }
+  ValidatePR(reglement) {
+	  
+	  this.paymentRule = reglement;
+	  this.displayValidatePaymentRuleModal = true;
+  }
+  ModifyPR(reglement) {
+	  
+	  this.paymentRule = reglement;
+	  this.displayPaymentRuleModal = true;
+  }
+  deletePR(reglement) {
+	  
+	  this.paymentRule = reglement;
+	  this.displayDeletePaymentRuleModal = true;
+  }
+  validatePaymentRule()  {
+	  const context = this;
+    this.UtilsService.post(UtilsServiceService.API_PAYMENT_RULE + '/' + this.paymentRule.paymentRuleId).subscribe( response => {
+
+      this.UtilsService.showToast('success',
+      'Réglement validé avec succés',
+      `Le réglement ${this.paymentRule.paymentRuleLabel} a été validé avec succés`);
+      this.displayValidatePaymentRuleModal = false;
+       context.getAllInvoices();
+	   this.initPaymentRule();
+      },
+      error => {this.UtilsService.showToast('danger',
+        'Erreur interne',
+        `Un erreur interne a été produit lors de la validation du réglement ${this.paymentRule.paymentRuleLabel}`);
+        this.displayValidatePaymentRuleModal = false;
+		this.initPaymentRule();
+    });
+
+	  
+  }
+  
+  deletePaymentRule() {
+	  
+	  const context = this;
+    this.UtilsService.post(UtilsServiceService.API_PAYMENT_RULE + '/' + this.paymentRule.paymentRuleId).subscribe( response => {
+
+      this.UtilsService.showToast('success',
+      'Réglement supprimé avec succés',
+      `Le réglement ${this.paymentRule.paymentRuleLabel} a été supprimé avec succés`);
+      this.displayDeletePaymentRuleModal = false;
+       context.getAllInvoices();
+	   this.initPaymentRule();
+      },
+      error => {this.UtilsService.showToast('danger',
+        'Erreur interne',
+        `Un erreur interne a été produit lors de la suppression du réglement ${this.paymentRule.paymentRuleLabel}`);
+        this.displayDeletePaymentRuleModal = false;
+		this.initPaymentRule();
+    });
+
+	  
+	  
   }
 
 initPaymentRule() {

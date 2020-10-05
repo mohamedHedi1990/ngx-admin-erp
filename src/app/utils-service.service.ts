@@ -21,6 +21,7 @@ export class UtilsServiceService {
   public static API_TYPE_ENCAISSEMENT = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/encaissement-type';
   public static API_TYPE_DECAISSEMENT = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/decaissement-type';
   public static API_DECAISSEMENT = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/decaissement';
+    public static API_PAYMENT_RULE = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/paymentRule';
 
 
 

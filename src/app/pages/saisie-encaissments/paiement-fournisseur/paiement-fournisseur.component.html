@@ -119,9 +119,11 @@
                                     </td>
                                     <td style="text-align: center;">
                                         <div style="display: flex;text-align: center">
-                                          <button pButton placement="top" ngbTooltip="Valider ce réglement" pRipple icon="pi pi-check" class="p-button-rounded p-button-info p-mr-2" style="margin-right: 7px;"></button>
+                                          <button pButton placement="top" ngbTooltip="Valider ce réglement" pRipple icon="pi pi-check" class="p-button-rounded p-button-info p-mr-2" style="margin-right: 7px;"
+										  (click)="ValidatePR(paymentRule)"></button>
                                           <button pButton placement="top" ngbTooltip="Metre en Effet" pRipple icon="pi pi-calendar-minus" class="p-button-rounded p-button-secondary p-mr-2" style="margin-right: 7px;"></button>
-                                          <button pButton placement="top" ngbTooltip="Modifier ce réglement" pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;"></button>
+                                          <button pButton placement="top" ngbTooltip="Modifier ce réglement" pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;"
+										  (click)="ModifyPR(paymentRule)"></button>
                                           <button pButton placement="top" ngbTooltip="Supprimer ce réglement" pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-mr-2" style="margin-right: 7px;"></button>
                                         </div>
                                     </td>
@@ -144,7 +146,7 @@
         </ng-template>
     </p-table>
 </div>
-<p-dialog header="Nouveau Reglement" [(visible)]="displayPaymentRuleModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+<p-dialog header="Nouveau réglement" [(visible)]="displayPaymentRuleModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
           [draggable]="false" [resizable]="false">
   <br>
   <ngx-nouveau-reglement [reglement]="paymentRule" [seletcedInvoices]="selectedInvoices"></ngx-nouveau-reglement>
@@ -156,6 +158,36 @@
               (click)="savePaymentRule()"></button>
 			   <button *ngIf="selectedInvoices.length !== 0" pButton pRipple label="Payer" icon="pi pi-check" class="p-button-success p-mr-2"
               (click)="payInvoices()"></button>
+
+    </div>
+  </ng-template>
+</p-dialog>
+<p-dialog header="Valider un réglement" [(visible)]="displayValidatePaymentRuleModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+          [draggable]="false" [resizable]="false">
+  <br>
+  Vous voulez valider le réglement {{paymentRule.paymentRuleLabel}} ?
+  <ng-template pTemplate="footer">
+    <div style="margin-top: 20px;">
+      <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
+              (click)="displayValidatePaymentRuleModal=false"></button>
+ 
+			   <button pButton pRipple label="Valider" icon="pi pi-check" class="p-button-success p-mr-2"
+              (click)="validatePaymentRule()"></button>
+
+    </div>
+  </ng-template>
+</p-dialog>
+<p-dialog header="Supprimer un réglement" [(visible)]="displayDeletePaymentRuleModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+          [draggable]="false" [resizable]="false">
+  <br>
+  Vous voulez supprimer le réglement {{paymentRule.paymentRuleLabel}} ?
+  <ng-template pTemplate="footer">
+    <div style="margin-top: 20px;">
+      <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
+              (click)="displayDeletePaymentRuleModal=false"></button>
+ 
+			   <button pButton pRipple label="Valider" icon="pi pi-check" class="p-button-success p-mr-2"
+              (click)="deletePaymentRule()"></button>
 
     </div>
   </ng-template>
