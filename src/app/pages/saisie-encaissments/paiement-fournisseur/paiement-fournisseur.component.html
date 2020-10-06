@@ -118,6 +118,7 @@
                                         <span *ngIf="!paymentRule.isValidated" class="customer-badge status-progress">Non rapproché</span>
                                     </td>
                                     <td style="text-align: center;">
+                                        <!-- 
                                         <div style="display: flex;text-align: center">
                                           <button pButton placement="top" ngbTooltip="Valider ce réglement" pRipple icon="pi pi-check" class="p-button-rounded p-button-info p-mr-2" style="margin-right: 7px;"
 										  (click)="ValidatePR(paymentRule)"></button>
@@ -126,6 +127,15 @@
 										  (click)="ModifyPR(paymentRule)"></button>
                                           <button pButton placement="top" ngbTooltip="Supprimer ce réglement" pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-mr-2" style="margin-right: 7px;"></button>
                                         </div>
+                                        -->
+                                        <div style="display: flex;text-align: center">
+                                            <i  placement="top" ngbTooltip="Valider ce réglement"  class="pi pi-check"  style="margin-right: 7px;"
+                                            (click)="ValidatePR(paymentRule)"></i>
+                                            <i  placement="top" ngbTooltip="Metre en Effet"  class="pi pi-calendar-minus" style="margin-right: 7px;"></i>
+                                            <i  placement="top" ngbTooltip="Modifier ce réglement"  class="pi pi-pencil" style="margin-right: 7px;"
+                                            (click)="ModifyPR(paymentRule)"></i>
+                                            <i  placement="top" ngbTooltip="Supprimer ce réglement"  class="pi pi-trash"  style="margin-right: 7px;"></i>
+                                          </div>
                                     </td>
                                 </tr>
                             </ng-template>

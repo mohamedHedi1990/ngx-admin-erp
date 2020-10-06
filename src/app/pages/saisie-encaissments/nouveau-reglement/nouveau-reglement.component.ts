@@ -8,6 +8,8 @@ import {UtilsServiceService} from '../../../utils-service.service';
 export class NouveauReglementComponent implements OnInit {
 
   @Input() reglement = {
+    paymentRuleId: null,
+    paymentRuleLabel: null,
     paymentRuleAccount: null,
     paymentRuleAmount: null,
     paymentRulePaymentMethod: null,
@@ -28,7 +30,7 @@ export class NouveauReglementComponent implements OnInit {
 	  if(this.seletcedInvoices != null && this.seletcedInvoices.length !== 0) {
 		  this.seletcedInvoices.forEach(invoice => {
 			  this.reglement.paymentRuleAmount =  this.reglement.paymentRuleAmount + invoice.invoicePayment;
-		  }
+		  });
 		  this.isPaymentAmountDisabled = true;
 	  }
     this.getAllAccounts();

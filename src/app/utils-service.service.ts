@@ -51,6 +51,11 @@ export class UtilsServiceService {
     return this.httpClient.post(url, object);
   }
 
+  public put(url: string, object: any): Observable<any> {
+
+    return this.httpClient.put(url, object);
+  }
+
   public get(url: string): Observable<any> {
 
     return this.httpClient.get(url);

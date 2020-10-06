@@ -16,6 +16,8 @@ export class PaiementFournisseurComponent implements OnInit {
   invoices = [];
   selectedInvoices = [];
   paymentRule = {
+    paymentRuleId: null,
+    paymentRuleLabel: null,
     paymentRuleAccount: null,
     paymentRuleAmount: null,
     paymentRulePaymentMethod: null,
@@ -113,7 +115,7 @@ export class PaiementFournisseurComponent implements OnInit {
   }
   validatePaymentRule()  {
 	  const context = this;
-    this.UtilsService.post(UtilsServiceService.API_PAYMENT_RULE + '/' + this.paymentRule.paymentRuleId).subscribe( response => {
+    this.UtilsService.put(UtilsServiceService.API_PAYMENT_RULE + '/' + this.paymentRule.paymentRuleId, null).subscribe( response => {
 
       this.UtilsService.showToast('success',
       'Réglement validé avec succés',
@@ -135,7 +137,7 @@ export class PaiementFournisseurComponent implements OnInit {
   deletePaymentRule() {
 	  
 	  const context = this;
-    this.UtilsService.post(UtilsServiceService.API_PAYMENT_RULE + '/' + this.paymentRule.paymentRuleId).subscribe( response => {
+    this.UtilsService.delete(UtilsServiceService.API_PAYMENT_RULE + '/' + this.paymentRule.paymentRuleId).subscribe( response => {
 
       this.UtilsService.showToast('success',
       'Réglement supprimé avec succés',
@@ -157,6 +159,8 @@ export class PaiementFournisseurComponent implements OnInit {
 
 initPaymentRule() {
   this.paymentRule = {
+    paymentRuleId: null,
+    paymentRuleLabel: null,
     paymentRuleAccount: null,
     paymentRuleAmount: null,
     paymentRulePaymentMethod: null,
