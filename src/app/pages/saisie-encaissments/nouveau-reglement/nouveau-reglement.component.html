@@ -26,6 +26,17 @@
 
       </div>
       <div class="mb-12 col-md-12 col-12">
+        <label for="amount" class="p-float-label" style="font-size: 13px">Label</label>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+          <input type="text" class="form-control p-field"  id="amount"
+                 [(ngModel)]="reglement.paymentRuleLabel " style="font-size: 13px"
+                 [ngClass]="{
+        'is-invalid': reglement.paymentRuleLabel == null ,
+        'is-valid':reglement.paymentRuleLabel != null
+      }">
+        </div>
+      <div class="mb-12 col-md-12 col-12">
         <label for="amount" class="p-float-label" style="font-size: 13px">Montant</label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
@@ -36,6 +47,8 @@
         'is-valid':reglement.paymentRuleAmount != null
       }" [disabled]="isPaymentAmountDisabled">
         </div>
+      </div>
+      
       </div>
       <div class="mb-12 col-md-12 col-12">
         <label for="paie" class="p-float-label" style="font-size: 13px">Mode de payment</label>
