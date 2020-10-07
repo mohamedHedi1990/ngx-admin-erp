@@ -66,7 +66,7 @@ export class ListeFacturesFournisseursComponent implements OnInit {
   delInvoice(invoice) {
     const context = this;
     const url = UtilsServiceService.API_INVOICE + '/' + invoice.invoiceId;
-    this.UtilsService.delete(`${UtilsServiceService.API_PROVIDER_INVOICE}/${invoice.invoiceId}`).subscribe( response => {
+    this.UtilsService.delete(`${UtilsServiceService.API_INVOICE}/${invoice.invoiceId}`).subscribe( response => {
         this.UtilsService.showToast('success',
           'Facture supprimée avec succés',
           `La facture fournisseur numéro  ${invoice.invoiceNumber} a été supprimée avec succcés`);
@@ -96,6 +96,7 @@ export class ListeFacturesFournisseursComponent implements OnInit {
   initInvoice() {
     this.invoice = {
       invoiceId: null,
+	  invoiceCurrency: 'TND',
       invoiceNumber: '',
       provider: null,
       invoiceDate: null,

@@ -11,6 +11,7 @@ export class AddNewFactureFournisseurComponent implements OnInit {
 
   @Input() invoice = {
     invoiceId: null,
+	invoiceCurrency: 'TND',
     invoiceNumber: '',
     provider: null,
     invoiceDate: null,
