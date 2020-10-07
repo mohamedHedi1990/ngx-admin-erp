@@ -32,13 +32,25 @@ export class AddNewFactureFournisseurComponent implements OnInit {
   ngOnInit(): void {
     this.rsAmount = 0;
     // this.invoice.invoiceDate = this.UtilsService.now('yyyy-MM-dd');
-     this.invoice.invoiceDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+	if(this.invoice.invoiceId == null) {
+		this.invoice.invoiceDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.invoice.invoiceDeadlineDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+		
+	} else {
+		
+		this.invoice.invoiceDate = this.datePipe.transform(this.invoice.invoiceDate, 'yyyy-MM-dd');
+    this.invoice.invoiceDeadlineDate = this.datePipe.transform( this.invoice.invoiceDeadlineDate, 'yyyy-MM-dd');
+	}
+     
     this.getAllProviders();
   }
 
   saveInvoice() {
-    this.addNewProviderInvoiceEvent.emit(this.invoice);
+	  const tempInvoice = this.invoice;
+	  tempInvoice.invoiceDate = this.datePipe.transform(this.invoice.invoiceDate, 'dd-MM-yyyy');
+		tempInvoice.invoiceDeadlineDate = this.datePipe.transform(this.invoice.invoiceDeadlineDate, 'dd-MM-yyyy');
+
+    this.addNewProviderInvoiceEvent.emit(tempInvoice);
   }
 
   cancel() {
