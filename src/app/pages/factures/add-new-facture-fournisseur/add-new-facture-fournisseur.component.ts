@@ -32,7 +32,7 @@ export class AddNewFactureFournisseurComponent implements OnInit {
   ngOnInit(): void {
     this.rsAmount = 0;
     // this.invoice.invoiceDate = this.UtilsService.now('yyyy-MM-dd');
-    this.invoice.invoiceDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+     this.invoice.invoiceDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.invoice.invoiceDeadlineDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.getAllProviders();
   }
@@ -70,6 +70,11 @@ export class AddNewFactureFournisseurComponent implements OnInit {
       this.rsAmount = this.invoice.invoiceRs;
     }
     this.invoice.invoiceTotalAmount = this.rsAmount + this.invoice.invoiceNet;
+  }
+  
+  change() {
+	  const startDate = this.datePipe.transform(this.invoice.invoiceDate, 'dd-MM-yyyy');
+	  console.log( startDate);
   }
 
 }

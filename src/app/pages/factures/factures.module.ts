@@ -31,8 +31,11 @@ import { ListeFacturesFournisseursComponent } from './liste-factures-fournisseur
 import { ListeFacturesClientsComponent } from './liste-factures-clients/liste-factures-clients.component';
 import { AddNewFactureClientComponent } from './add-new-facture-client/add-new-facture-client.component';
 import { AddNewFactureFournisseurComponent } from './add-new-facture-fournisseur/add-new-facture-fournisseur.component';
-
-
+import {DatePipe, registerLocaleData} from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import localeFrExtra from '@angular/common/locales/extra/fr';
+import {LOCALE_ID} from '@angular/core';
+registerLocaleData(localeFr, 'fr', localeFrExtra);
 
 @NgModule({
   declarations: [ListeFacturesFournisseursComponent, ListeFacturesClientsComponent, AddNewFactureClientComponent, AddNewFactureFournisseurComponent],
@@ -58,6 +61,6 @@ import { AddNewFactureFournisseurComponent } from './add-new-facture-fournisseur
     NbUserModule, FormsModule,
     ModalModule.forRoot(), Ng2SmartTableModule, PanelModule, DialogModule,
   ],
-  providers: [UtilsServiceService, ConfirmationService, DialogService],
+  providers: [UtilsServiceService, ConfirmationService, DialogService,  { provide: LOCALE_ID, useValue: "fr-FR" }],
 })
 export class FacturesModule { }
