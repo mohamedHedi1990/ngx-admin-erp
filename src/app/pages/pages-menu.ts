@@ -59,10 +59,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Factures clients',
         link: '/pages/factures/factures-clients',
+		icon: 'file-outline'
       },
       {
         title: 'Factures fournisseurs',
         link: '/pages/factures/factures-fournisseurs',
+		icon: 'file-outline'
       },
     ],
   },
