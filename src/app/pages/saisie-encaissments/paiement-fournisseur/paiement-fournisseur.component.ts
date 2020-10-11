@@ -47,7 +47,7 @@ export class PaiementFournisseurComponent implements OnInit {
       selectedInvoices: this.selectedInvoices,
       paymentRule: this.paymentRule,
     };
-    this.UtilsService.post(UtilsServiceService.API_INVOICE + '/pay', invoicePayment).subscribe( response => {
+    this.UtilsService.post(UtilsServiceService.API_PROVIDER_INVOICE + '/pay', invoicePayment).subscribe( response => {
 
         this.UtilsService.showToast('success',
           'Factures payées avec succés',
@@ -91,6 +91,7 @@ export class PaiementFournisseurComponent implements OnInit {
     const context = this;
     this.UtilsService.get(UtilsServiceService.API_PROVIDER_INVOICE).subscribe( response => {
         context.invoices = response;
+        console.log('invoices ', this.invoices);
       },
       error => {
         this.UtilsService.showToast('danger',
@@ -99,17 +100,17 @@ export class PaiementFournisseurComponent implements OnInit {
       });
   }
   ValidatePR(reglement) {
-	  
+
 	  this.paymentRule = reglement;
 	  this.displayValidatePaymentRuleModal = true;
   }
   ModifyPR(reglement) {
-	  
+
 	  this.paymentRule = reglement;
 	  this.displayPaymentRuleModal = true;
   }
   deletePR(reglement) {
-	  
+
 	  this.paymentRule = reglement;
 	  this.displayDeletePaymentRuleModal = true;
   }
@@ -131,11 +132,11 @@ export class PaiementFournisseurComponent implements OnInit {
 		this.initPaymentRule();
     });
 
-	  
+
   }
-  
+
   deletePaymentRule() {
-	  
+
 	  const context = this;
     this.UtilsService.delete(UtilsServiceService.API_PAYMENT_RULE + '/' + this.paymentRule.paymentRuleId).subscribe( response => {
 
@@ -153,8 +154,8 @@ export class PaiementFournisseurComponent implements OnInit {
 		this.initPaymentRule();
     });
 
-	  
-	  
+
+
   }
 
 initPaymentRule() {

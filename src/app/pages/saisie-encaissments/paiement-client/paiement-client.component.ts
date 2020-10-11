@@ -13,9 +13,13 @@ import {DatePipe} from '@angular/common';
 export class PaiementClientComponent implements OnInit {
 
   displayPaymentRuleModal = false;
+  displayValidatePaymentRuleModal = false;
+  displayDeletePaymentRuleModal = false;
   invoices = [];
   selectedInvoices = [];
   paymentRule = {
+    paymentRuleId: null,
+    paymentRuleLabel: null,
     paymentRuleAccount: null,
     paymentRuleAmount: null,
     paymentRulePaymentMethod: null,
@@ -99,6 +103,8 @@ export class PaiementClientComponent implements OnInit {
 
   initPaymentRule() {
     this.paymentRule = {
+      paymentRuleId: null,
+      paymentRuleLabel: null,
       paymentRuleAccount: null,
       paymentRuleAmount: null,
       paymentRulePaymentMethod: null,

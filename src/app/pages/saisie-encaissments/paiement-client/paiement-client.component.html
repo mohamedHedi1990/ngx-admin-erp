@@ -49,7 +49,7 @@
                     <button type="button" pButton pRipple [pRowToggler]="invoice" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                 </td>
                 <td>
-                    <p-tableCheckbox [value]="invoice"></p-tableCheckbox>
+                    <p-tableCheckbox [disabled]="invoice.invoiceStatus === 'CLOSED'" [value]="invoice"></p-tableCheckbox>
                 </td>
                 <td style="text-align: center;font-size: 13px;">
                     {{invoice.invoiceNumber}}
@@ -64,10 +64,10 @@
                     {{invoice.invoiceDeadlineDate}}
                 </td>
                 <td style="text-align: center;">
-                    {{invoice.invoiceTotalAmount}}
+                    {{invoice.invoiceTotalAmountS}}
                 </td>
                 <td style="text-align: center;">
-                    {{invoice.invoicePayment}}
+                    {{invoice.invoicePaymentS}}
                 </td>
                 <td style="text-align: center;">
                     <span *ngIf="invoice.invoiceStatus === 'CLOSED'" class="customer-badge status-active">Fermée</span>
@@ -123,7 +123,7 @@
                                         <span *ngIf="!paymentRule.isValidated" class="customer-badge status-progress">Non rapproché</span>
                                     </td>
                                     <td style="text-align: center;">
-                                        <!-- 
+                                        <!--
                                         <div style="display: flex;text-align: center">
                                           <button pButton placement="top" ngbTooltip="Valider ce réglement" pRipple icon="pi pi-check" class="p-button-rounded p-button-info p-mr-2" style="margin-right: 7px;"
 										  (click)="ValidatePR(paymentRule)"></button>
@@ -188,7 +188,7 @@
     <div style="margin-top: 20px;">
       <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
               (click)="displayValidatePaymentRuleModal=false"></button>
- 
+
 			   <button pButton pRipple label="Valider" icon="pi pi-check" class="p-button-success p-mr-2"
               (click)="validatePaymentRule()"></button>
 
@@ -203,7 +203,7 @@
     <div style="margin-top: 20px;">
       <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
               (click)="displayDeletePaymentRuleModal=false"></button>
- 
+
 			   <button pButton pRipple label="Valider" icon="pi pi-check" class="p-button-success p-mr-2"
               (click)="deletePaymentRule()"></button>
 

@@ -29,7 +29,7 @@
 		    <th pSortableColumn="invoiceTotalAmount" style="text-align: center; font-size: 13px;width: 14%">Montant total<p-sortIcon field="invoiceTotalAmount"></p-sortIcon></th>
 		    <th pSortableColumn="invoicePayment" style="text-align: center; font-size: 13px;width: 14%">Montant payé<p-sortIcon field="invoicePayment"></p-sortIcon></th>
         <th pSortableColumn="invoiceStatus"  style="text-align: center; font-size: 13px;width: 10%">Statut</th>
-        <th style="width: 9%;font-size: 13px">Actions</th>
+        <th style="width: 9%;font-size: 13px;text-align: center;">Actions</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-invoice>
@@ -60,10 +60,9 @@
 
         <td style="text-align: center;">
           <div >
-            <i   placement="top" ngbTooltip="Modifier"  class="pi pi-pencil"  style="margin-right: 7px; color: blue" (click)="editInvoice(invoice)"></i>
+            <i   *ngIf="invoice.invoiceStatus === 'OPENED'" placement="top" ngbTooltip="Modifier"  class="pi pi-pencil"  style="margin-right: 7px; color: blue" (click)="editInvoice(invoice)"></i>
             <i    placement="top" ngbTooltip="Supprimer"  class="pi pi-trash" (click)="deleteInvoice(invoice)" style="color:red"></i>
           </div>
-
         </td>
       </tr>
     </ng-template>

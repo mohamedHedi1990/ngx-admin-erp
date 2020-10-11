@@ -36,11 +36,13 @@
         'is-valid':reglement.paymentRuleLabel != null
       }">
         </div>
+
+      </div>
       <div class="mb-12 col-md-12 col-12">
-        <label for="amount" class="p-float-label" style="font-size: 13px">Montant</label>
+        <label for="amounth" class="p-float-label" style="font-size: 13px">Montant</label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
-          <input type="number" class="form-control p-field"  id="amount"
+          <input type="number" class="form-control p-field"  id="amounth"
                  [(ngModel)]="reglement.paymentRuleAmount " style="font-size: 13px"
                  [ngClass]="{
         'is-invalid': reglement.paymentRuleAmount == null ,
@@ -48,23 +50,25 @@
       }" [disabled]="isPaymentAmountDisabled">
         </div>
       </div>
-      
-      </div>
       <div class="mb-12 col-md-12 col-12">
         <label for="paie" class="p-float-label" style="font-size: 13px">Mode de payment</label>
-        <select class="form-control p-field" id="paie" name="side" [(ngModel)]="reglement.paymentRulePaymentMethod"  style="font-size: 13px;"
-                [ngClass]="{
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
+          <select class="form-control p-field" id="paie" name="side" [(ngModel)]="reglement.paymentRulePaymentMethod"  style="font-size: 13px;"
+                  [ngClass]="{
         'is-invalid': reglement.paymentRulePaymentMethod == null ,
         'is-valid':reglement.paymentRulePaymentMethod != null
       }">
-          <option [ngValue]="null">-- Mode de payment --</option>
-          <option [ngValue]="'CHEQUE'">CHEQUE</option>
-          <option [ngValue]="'EFFET'">EFFET</option>
-          <option [ngValue]="'VIREMENT'">VIREMENT</option>
-          <option [ngValue]="'ESPECE'">ESPECE</option>
-          <option [ngValue]="'TRAITE'">TRAITE</option>
+            <option [ngValue]="null">-- Mode de payment --</option>
+            <option [ngValue]="'CHEQUE'">CHEQUE</option>
+            <option [ngValue]="'EFFET'">EFFET</option>
+            <option [ngValue]="'VIREMENT'">VIREMENT</option>
+            <option [ngValue]="'ESPECE'">ESPECE</option>
+            <option [ngValue]="'TRAITE'">TRAITE</option>
 
-        </select>
+          </select>
+        </div>
+
       </div>
       <div class="p-grid p-fluid" *ngIf="reglement.paymentRulePaymentMethod === 'CHEQUE' ||
 reglement.paymentRulePaymentMethod === 'TRAITE'">

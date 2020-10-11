@@ -59,12 +59,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Factures clients',
         link: '/pages/factures/factures-clients',
-		icon: 'file-outline'
+		icon: 'file-outline',
       },
       {
         title: 'Factures fournisseurs',
         link: '/pages/factures/factures-fournisseurs',
-		icon: 'file-outline'
+		icon: 'file-outline',
       },
     ],
   },
@@ -75,22 +75,22 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Règlements Clients',
         link: '/pages/saisie-tresorerie/reglement-client',
+        icon: 'keypad-outline',
       },
       {
         title: 'Paiements Fournisseurs',
         link: '/pages/saisie-tresorerie/paiement-fournisseur',
-      },
-      {
-        title: 'Paiements client',
-        link: '/pages/saisie-tresorerie/paiement-client',
+        icon: 'keypad-outline',
       },
       {
         title: 'Encaissements',
         link: '/pages/ui-features/typography',
+        icon: 'keypad-outline',
       },
       {
         title: 'Décaissements',
         link: '/pages/ui-features/search-fields',
+        icon: 'keypad-outline',
       },
     ],
   },
