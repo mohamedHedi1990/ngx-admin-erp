@@ -54,6 +54,7 @@ export class PaiementFournisseurComponent implements OnInit {
           `Les factures selectionnées ont été payées et fermées avec succés`);
         this.selectedInvoices = [];
         this.initPaymentRule();
+        this.displayPaymentRuleModal = false;
         this.getAllInvoices();
       },
       error => {this.UtilsService.showToast('danger',
@@ -61,6 +62,7 @@ export class PaiementFournisseurComponent implements OnInit {
         `Un erreur interne a été produit lors de paiement de factures seletionnées`);
         this.selectedInvoices = [];
         this.initPaymentRule();
+        this.displayPaymentRuleModal = false;
     });
 
   }
