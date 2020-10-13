@@ -97,16 +97,16 @@ export class ListDecaissementsComponent implements OnInit {
   initDecaissement() {
     this.decaissement = {
       decaissementId: null,
-      decaissementType: null,
-      decaissementDeadlineDate: null,
-      decaissementPaymentType: null,
-      decaissementPaymentRuleNumber: null,
-      decaissementPaymentRuleDetails: 0,
-      decaissementAmount: 0,
-      decaissementLabel: null,
-      decaissementDetails: null,
-      decaissementInvoice: null,
-      decaissementBankAccount: null,
+    decaissementType: null,
+    decaissementDeadlineDate : null,
+    decaissementPaymentType: null,
+    decaissementPaymentRuleNumber: null,
+    decaissementPaymentRuleDetails: null,
+    decaissementAmount : null,
+    decaissementLabel: null,
+    decaissementDetails : null,
+    decaissementInvoice : null,
+    decaissementBankAccount : null,
 
     };
   }
