@@ -35,20 +35,20 @@ export class AddNewFactureFournisseurComponent implements OnInit {
 	if(this.invoice.invoiceId == null) {
 		this.invoice.invoiceDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.invoice.invoiceDeadlineDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-		
+
 	} else {
-		
+
 		this.invoice.invoiceDate = this.datePipe.transform(this.invoice.invoiceDate, 'yyyy-MM-dd');
     this.invoice.invoiceDeadlineDate = this.datePipe.transform( this.invoice.invoiceDeadlineDate, 'yyyy-MM-dd');
 	}
-     
+
     this.getAllProviders();
   }
 
   saveInvoice() {
 	  const tempInvoice = this.invoice;
-	  tempInvoice.invoiceDate = this.datePipe.transform(this.invoice.invoiceDate, 'dd-MM-yyyy');
-		tempInvoice.invoiceDeadlineDate = this.datePipe.transform(this.invoice.invoiceDeadlineDate, 'dd-MM-yyyy');
+	  tempInvoice.invoiceDate = this.datePipe.transform(this.invoice.invoiceDate, 'yyyy-MM-dd');
+		tempInvoice.invoiceDeadlineDate = this.datePipe.transform(this.invoice.invoiceDeadlineDate, 'yyyy-MM-dd');
 
     this.addNewProviderInvoiceEvent.emit(tempInvoice);
   }
@@ -83,9 +83,9 @@ export class AddNewFactureFournisseurComponent implements OnInit {
     }
     this.invoice.invoiceTotalAmount = this.rsAmount + this.invoice.invoiceNet;
   }
-  
+
   change() {
-	  const startDate = this.datePipe.transform(this.invoice.invoiceDate, 'dd-MM-yyyy');
+	  const startDate = this.datePipe.transform(this.invoice.invoiceDate, 'yyyy-MM-dd');
 	  console.log( startDate);
   }
 
