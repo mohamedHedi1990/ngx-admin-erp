@@ -35,9 +35,10 @@ import {ConfirmationService} from 'primeng/api';
 import { NouveauReglementComponent } from './nouveau-reglement/nouveau-reglement.component';
 import { ListDecaissementsComponent } from './list-decaissements/list-decaissements.component';
 import { PaiementClientComponent } from './paiement-client/paiement-client.component';
+import { NouveauDecaissementComponent } from './nouveau-decaissement/nouveau-decaissement.component';
 
 @NgModule({
-  declarations: [PaiementFournisseurComponent, NouveauReglementComponent, ListDecaissementsComponent, PaiementClientComponent],
+  declarations: [PaiementFournisseurComponent, NouveauReglementComponent, ListDecaissementsComponent, PaiementClientComponent, NouveauDecaissementComponent],
   imports: [
     CommonModule,
     SaisieEncaissmentsRoutingModule,

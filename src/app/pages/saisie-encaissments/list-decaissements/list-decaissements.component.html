@@ -22,11 +22,10 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 15px;">
-        <th pSortableColumn="invoiceNumber" style="text-align: center; font-size: 13px;width: 10%">Décaissement</th>
-        <th pSortableColumn="customer.customerLabel" style="text-align: center; font-size: 13px;width: 10%">Type</th>
+        <th pSortableColumn="invoiceNumber" style="text-align: center; font-size: 13px;width: 13%">Décaissement</th>
+        <th pSortableColumn="customer.customerLabel" style="text-align: center; font-size: 13px;width: 14%">Type</th>
         <th pSortableColumn="invoiceDate" style="text-align: center; font-size: 13px;width: 10%">Montant<p-sortIcon field="invoiceDate"></p-sortIcon></th>
-        <th pSortableColumn="invoicePayment" style="text-align: center; font-size: 13px;width: 10%">Type de réglement<p-sortIcon field="invoicePayment"></p-sortIcon></th>
-        <th pSortableColumn="invoiceDeadlineDate" style="text-align: center;font-size: 13px;width: 10%">Date d'échéance<p-sortIcon field="invoiceDeadlineDate"></p-sortIcon></th>
+        <th pSortableColumn="invoiceDeadlineDate" style="text-align: center;font-size: 13px;width: 12%">Date d'échéance<p-sortIcon field="invoiceDeadlineDate"></p-sortIcon></th>
         <th pSortableColumn="invoiceTotalAmount" style="text-align: center; font-size: 13px;width: 30%">Détails<p-sortIcon field="invoiceTotalAmount"></p-sortIcon></th>
         <th pSortableColumn="invoiceStatus"  style="text-align: center; font-size: 13px;width: 10%">Statut</th>
         <th style="width: 10%;font-size: 13px">Actions</th>
@@ -39,6 +38,7 @@
         </td>
         <td style="text-align: center;font-size: 13px;">
           {{decaissement.decaissementType}}
+          <span *ngIf="decaissement.decaissementType === 'PAIEMENT_FACTURE_FOURNISSEUR'"> Facture {{decaissement.decaissementInvoice}}</span>
         </td>
         <td style="text-align: center;font-size: 13px;">
           {{decaissement.decaissementAmount}}
@@ -60,8 +60,8 @@
 
         <td style="text-align: center;">
           <div style="display: flex;">
-            <button pButton   placement="top" ngbTooltip="Modifier" pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="editInvoice(invoice)"></button>
-            <button pButton   placement="top" ngbTooltip="Supprimer" pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteInvoice(invoice)"></button>
+            <i ngbTooltip="Modifier"  class="pi pi-pencil"  style="margin-right: 7px;" (click)="editDecaissement(decaissement)"></button>
+            <i placement="top" ngbTooltip="Supprimer"  class="pi pi-trash" (click)="deleteDecaissement(decaissement)"></button>
           </div>
 
         </td>
