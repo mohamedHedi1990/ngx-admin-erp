@@ -31,7 +31,7 @@ export class NouveauDecaissementComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllAccounts();
-    this.getAllInvoiceProviders();
+    // this.getAllInvoiceProviders();
     this.getAllProviders();
     this.getAllTypesDEcaissements();
   }
@@ -54,7 +54,7 @@ export class NouveauDecaissementComponent implements OnInit {
   getAllInvoiceProviders() {
 
     const context = this;
-    this.UtilsService.get(UtilsServiceService.API_PROVIDER_INVOICE).subscribe( response => {
+    this.UtilsService.get(`${UtilsServiceService.API_PROVIDER_INVOICE}/by-provider-id/${this.decaissement.decaissementProvider.providerId}`).subscribe( response => {
         context.invoices = response;
       },
       error => {

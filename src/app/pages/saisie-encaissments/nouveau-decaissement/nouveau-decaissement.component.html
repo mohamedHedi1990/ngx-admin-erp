@@ -87,7 +87,7 @@
             'is-invalid': decaissement.decaissementProvider == null
           }"
           style="font-size: 13px"
-        >
+        (change)="getAllInvoiceProviders()">
           <option [ngValue]="null">-- Fournisseur --</option>
           <option *ngFor="let p of providers" [ngValue]="i">
             {{ p.providerLabel }}
