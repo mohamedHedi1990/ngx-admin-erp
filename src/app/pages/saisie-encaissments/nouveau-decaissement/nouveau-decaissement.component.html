@@ -67,6 +67,35 @@
         </div>
       </div>
       <div
+      *ngIf="
+        decaissement.decaissementType != null &&
+        decaissement.decaissementType.decaissementType ===
+          'PAIEMENT_FACTURE_FOURNISSEUR'
+      "
+    >
+      <label for="type" class="p-float-label" style="font-size: 13px"
+        >Fournisseur</label
+      >
+      <div class="p-inputgroup p-fluid">
+        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+        <select
+          class="form-control p-field"
+          id="type"
+          name="side"
+          [(ngModel)]="decaissement.decaissementProvider"
+          [ngClass]="{
+            'is-invalid': decaissement.decaissementProvider == null
+          }"
+          style="font-size: 13px"
+        >
+          <option [ngValue]="null">-- Fournisseur --</option>
+          <option *ngFor="let p of providers" [ngValue]="i">
+            {{ p.providerLabel }}
+          </option>
+        </select>
+      </div>
+    </div>
+      <div
         *ngIf="
           decaissement.decaissementType != null &&
           decaissement.decaissementType.decaissementType ===

@@ -19,6 +19,7 @@ export class NouveauDecaissementComponent implements OnInit {
     decaissementDetails : null,
     decaissementInvoice : null,
     decaissementBankAccount : null,
+    decaissementProvider: null,
   };
   @Output() addNewDecaissementEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();
@@ -31,6 +32,7 @@ export class NouveauDecaissementComponent implements OnInit {
   ngOnInit(): void {
     this.getAllAccounts();
     this.getAllInvoiceProviders();
+    this.getAllProviders();
     this.getAllTypesDEcaissements();
   }
 
@@ -61,6 +63,18 @@ export class NouveauDecaissementComponent implements OnInit {
           `Un erreur interne a été produit lors du chargement des factures fournissuers`);
       });
 
+  }
+
+  getAllProviders() {
+    const context = this;
+    this.UtilsService.get(UtilsServiceService.API_PROVIDER).subscribe( response => {
+        context.invoices = response;
+      },
+      error => {
+        this.UtilsService.showToast('danger',
+          'Erreur interne',
+          `Un erreur interne a été produit lors du chargement des fournissuers`);
+      });
   }
 
   getAllTypesDEcaissements() {
