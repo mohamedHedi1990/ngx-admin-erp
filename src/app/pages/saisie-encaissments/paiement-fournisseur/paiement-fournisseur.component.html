@@ -52,7 +52,7 @@
                 <td>
                   <p-tableCheckbox [disabled]="invoice.invoiceStatus === 'CLOSED'" [value]="invoice"
                                    [ngClass]="{
-        'disabled': invoice.invoiceStatus === 'CLOSED' }"></p-tableCheckbox>
+        'disabledElement': invoice.invoiceStatus === 'CLOSED' }"></p-tableCheckbox>
                 </td>
                 <td style="text-align: center;font-size: 13px;">
                     {{invoice.invoiceNumber}}

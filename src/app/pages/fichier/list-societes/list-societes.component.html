@@ -14,7 +14,7 @@
         </div>
 
         <div style="width:19%; margin-left: 25%">
-          <button pButton pRipple label="Nouvelle societé" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="showSocieteWindow = true"></button>
+          <button *ngIf="societes.length === 0" pButton pRipple label="Ajouter votre societé" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="showSocieteWindow = true"></button>
         </div>
 
       </div>
@@ -50,8 +50,8 @@
 
         <td style="text-align: center;">
           <div style="display: flex;">
-             <button pButton   placement="top" ngbTooltip="Modifier" pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="editSociete(societe)"></button>
-            <button pButton   placement="top" ngbTooltip="Supprimer" pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteSociete(societe)"></button>
+             <i    placement="top" ngbTooltip="Modifier" class="pi pi-pencil"  style="margin-right: 7px;" (click)="editSociete(societe)"></button>
+            <i    placement="top" ngbTooltip="Supprimer"  class="pi pi-trash"  (click)="deleteSociete(societe)"></button>
           </div>
 
         </td>
