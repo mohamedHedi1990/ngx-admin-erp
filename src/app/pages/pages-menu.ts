@@ -89,7 +89,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'Décaissements',
-        link: '/pages/ui-features/search-fields',
+        link: '/pages/saisie-tresorerie/decaissements',
         icon: 'keypad-outline',
       },
     ],

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {PaiementFournisseurComponent} from './paiement-fournisseur/paiement-fournisseur.component';
 import {NouveauReglementComponent} from './nouveau-reglement/nouveau-reglement.component';
 import {PaiementClientComponent} from './paiement-client/paiement-client.component';
+import { ListDecaissementsComponent } from './list-decaissements/list-decaissements.component';
 
 const routes: Routes = [{
   path: '',
@@ -16,8 +17,12 @@ const routes: Routes = [{
       component: PaiementFournisseurComponent,
     },
     {
-      path: 'paiement-client',
+      path: 'reglement-client',
       component: PaiementClientComponent,
+    },
+    {
+      path: 'decaissements',
+      component: ListDecaissementsComponent,
     },
   ],
 

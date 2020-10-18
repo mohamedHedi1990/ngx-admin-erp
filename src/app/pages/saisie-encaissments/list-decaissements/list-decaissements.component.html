@@ -60,8 +60,8 @@
 
         <td style="text-align: center;">
           <div style="display: flex;">
-            <i ngbTooltip="Modifier"  class="pi pi-pencil"  style="margin-right: 7px;" (click)="editDecaissement(decaissement)"></button>
-            <i placement="top" ngbTooltip="Supprimer"  class="pi pi-trash" (click)="deleteDecaissement(decaissement)"></button>
+            <i ngbTooltip="Modifier"  class="pi pi-pencil"  style="margin-right: 7px;" (click)="editDecaissement(decaissement)"></i>
+            <i placement="top" ngbTooltip="Supprimer"  class="pi pi-trash" (click)="deleteDecaissement(decaissement)"></i>
           </div>
 
         </td>
@@ -74,7 +74,4 @@
     </ng-template>
   </p-table>
 </div>
-<!--
-<ngx-add-new-facture-client *ngIf="showCustomerInvoiceWindow" [invoice]="invoice" (addNewCustomerInvoiceEvent)="saveInvoice($event)"
-                            (cancelEvent)="hideInvoiceWindow(); initInvoice();"></ngx-add-new-facture-client>
--->
+<ngx-nouveau-decaissement *ngIf="showDecaissementWindow" [decaissement]="decaissement"></ngx-nouveau-decaissement>
