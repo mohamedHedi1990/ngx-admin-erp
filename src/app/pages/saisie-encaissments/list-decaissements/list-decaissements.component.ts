@@ -50,7 +50,56 @@ export class ListDecaissementsComponent implements OnInit {
   }
 
   getAllDecaissements() {
-    const context = this;
+    this.decaissments = [
+      {
+        decaissementId: 1,
+      decaissementType: {
+        decaissementTypeValue: 'PAIEMENT_FACTURE_FOURNISSEUR',
+        decaissementTypeLabel: 'Paiement facture fournisseur'
+      },
+      decaissementDeadlineDate : '18-10-2020',
+      decaissementPaymentType: 'CHEQUE',
+      decaissementPaymentRuleNumber: '000000123',
+      decaissementPaymentRuleDetails: null,
+      decaissementAmount : 1300,
+      decaissementAmountS : '1300.000',
+      decaissementCurrency : 'TND',
+      decaissementLabel: 'Decaissement de la facture fournissuer numéro REF123',
+      decaissementDetails : 'Décaissement fait par notre agence commercial pour régler cette facture avant la date de fin',
+      decaissementInvoice : {
+        invoiceId: 1,
+	invoiceCurrency: 'TND',
+    invoiceNumber: 'REF123',
+      },
+      decaissementBankAccount : {
+        accountId: null,
+        accountLabel : 'Compte courant BIAT',
+        accountBank: 'BIAT',
+        accountBankAdress : 'LAC 2',
+        accountAgency: 'BIAT LAC 2',
+        accountAgencyAdress: '',
+        accountChargeCustomerName: '',
+        accountChargeCustomerPhoneNumber: '',
+        accountChargeCustomerEmail: '',
+        accountNumber: 'M4123456789',
+        accountRIB: '',
+        accountCurrency: '',
+        accountContacts: [],
+      },
+      decaissementProvider:  {
+        providerId: 1,
+    providerLabel: 'BI SERVICES',
+    providerAddress: '',
+    providerUniqueIdentifier: 'BI S RF 12OPL - KL2',
+    providerManagerName: '',
+    providerTel: '',
+    providerEmail: '',
+    providerContacts: [],
+      },
+      isValidated: false,
+      }
+    ];
+    /*const context = this;
     this.UtilsService.get(UtilsServiceService.API_DECAISSEMENT).subscribe( response => {
         context.decaissments = response;
       },
@@ -58,7 +107,7 @@ export class ListDecaissementsComponent implements OnInit {
         this.UtilsService.showToast('danger',
           'Erreur interne',
           `Un erreur interne a été produit lors du chargement de la liste des décaissements`);
-      });
+      });*/
   }
 
   editDecaissement(decaissement) {

@@ -3,7 +3,7 @@
   <p-table #dt [value]="decaissments" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
            [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
            [paginator]="true" currentPageReportTemplate=""
-           [filterDelay]="0" [globalFilterFields]="['decaissementDeadlineDate','decaissementPaymentType','decaissementPaymentRuleNumber','decaissementType','decaissementAmount','decaissementLabel','decaissementInvoice.invoiceNumber', 'decaissementBankAccount.accountLabel','createdAt', 'updatedAt']">
+           [filterDelay]="0" [globalFilterFields]="['decaissementDeadlineDate','decaissementTypeLabel','decaissementAmount','decaissementLabel','decaissementInvoice.invoiceNumber', 'decaissementBankAccount.accountLabel','createdAt', 'updatedAt', 'decaissementStatus']">
     <ng-template pTemplate="caption" >
       <div style="display: flex; width: 100%">
         <div class="p-d-flex p-ai-center p-jc-between" style="width: 60%">
@@ -21,13 +21,14 @@
 
     </ng-template>
     <ng-template pTemplate="header">
-      <tr style="text-align: center; font-size: 15px;">
-        <th pSortableColumn="invoiceNumber" style="text-align: center; font-size: 13px;width: 13%">Décaissement</th>
-        <th pSortableColumn="customer.customerLabel" style="text-align: center; font-size: 13px;width: 14%">Type</th>
-        <th pSortableColumn="invoiceDate" style="text-align: center; font-size: 13px;width: 10%">Montant<p-sortIcon field="invoiceDate"></p-sortIcon></th>
-        <th pSortableColumn="invoiceDeadlineDate" style="text-align: center;font-size: 13px;width: 12%">Date d'échéance<p-sortIcon field="invoiceDeadlineDate"></p-sortIcon></th>
-        <th pSortableColumn="invoiceTotalAmount" style="text-align: center; font-size: 13px;width: 30%">Détails<p-sortIcon field="invoiceTotalAmount"></p-sortIcon></th>
-        <th pSortableColumn="invoiceStatus"  style="text-align: center; font-size: 13px;width: 10%">Statut</th>
+      <tr style="text-align: center; font-size: 13px;">
+        <th pSortableColumn="decaissementLabel" style="text-align: center; font-size: 13px;width: 12%">Décaissement</th>
+        <th pSortableColumn="decaissementTypeLabel" style="text-align: center; font-size: 13px;width: 10%">Type</th>
+        <th pSortableColumn="decaissementBankAccount.accountLabel" style="text-align: center; font-size: 13px;width: 12%">Banque</th>
+        <th pSortableColumn="decaissementAmount" style="text-align: center; font-size: 13px;width: 12%">Montant<p-sortIcon field="decaissementAmount"></p-sortIcon></th>
+        <th pSortableColumn="decaissementDeadlineDate" style="text-align: center;font-size: 13px;width: 12%">Date d'échéance<p-sortIcon field="decaissementDeadlineDate"></p-sortIcon></th>
+        <th style="text-align: center; font-size: 13px;width: 30%">Détails</th>
+        <th pSortableColumn="decaissementStatus"  style="text-align: center; font-size: 13px;width: 10%">Statut</th>
         <th style="width: 10%;font-size: 13px">Actions</th>
       </tr>
     </ng-template>
@@ -37,32 +38,48 @@
           {{decaissement.decaissementLabel}}
         </td>
         <td style="text-align: center;font-size: 13px;">
-          {{decaissement.decaissementType}}
-          <span *ngIf="decaissement.decaissementType === 'PAIEMENT_FACTURE_FOURNISSEUR'"> Facture {{decaissement.decaissementInvoice}}</span>
+          {{decaissement.decaissementType.decaissementTypeLabel}}
         </td>
         <td style="text-align: center;font-size: 13px;">
-          {{decaissement.decaissementAmount}}
+          {{decaissement.decaissementBankAccount.accountLabel}}
         </td>
         <td style="text-align: center;font-size: 13px;">
-          {{decaissement.decaissementPaymentType}}
+          {{decaissement.decaissementAmountS}} {{decaissement.decaissementCurrency}}
         </td>
-        <td style="text-align: center;">
+        <td style="text-align: center;font-size: 13px;">
           {{decaissement.decaissementDeadlineDate}}
         </td>
+        
         <td style="text-align: center;">
-          {{decaissement.decaissementDetails}}
+          <div>
+            <span>Paiement par <span class="customer-badge status-label">{{decaissement.decaissementPaymentType}} </span><span *ngIf="
+              decaissement.decaissementPaymentType === 'CHEQUE' ||
+              decaissement.decaissementPaymentType === 'TRAITE'
+            ">(No: {{decaissement.decaissementPaymentRuleNumber}})</span></span>
+          </div>
+          <div>
+            <span *ngIf="decaissement.decaissementType.decaissementTypeValue === 'PAIEMENT_FACTURE_FOURNISSEUR'"> Decaissmement pour la facture numéro <span class="customer-badge status-label">{{decaissement.decaissementInvoice.invoiceNumber}} </span>pour le fournisseur <span class="customer-badge status-label">{{decaissement.decaissementProvider.providerLabel}}</span></span>
+          </div>
+          <div>
+            <i>{{decaissement.decaissementDetails}}</i>
+          </div>
+          
         </td>
         <td style="text-align: center;">
           <span *ngIf="decaissement.isValidated" class="customer-badge status-active">Rapproché</span>
-          <span *ngIf="decaissement.isValidated" class="customer-badge status-progress">Non rapproché</span>
+          <span *ngIf="!decaissement.isValidated" class="customer-badge status-progress">Non rapproché</span>
         </td>
 
 
         <td style="text-align: center;">
-          <div style="display: flex;">
-            <i ngbTooltip="Modifier"  class="pi pi-pencil"  style="margin-right: 7px;" (click)="editDecaissement(decaissement)"></i>
-            <i placement="top" ngbTooltip="Supprimer"  class="pi pi-trash" (click)="deleteDecaissement(decaissement)"></i>
+          <div  *ngIf="!decaissement.isValidated" style="display: flex;">
+            <i ngbTooltip="Modifier"  class="pi pi-check"  style="margin-right: 7px; color: #6200ee" (click)="editDecaissement(decaissement)"></i>
+            <i ngbTooltip="Modifier"  class="pi pi-pencil"  style="margin-right: 7px;color: #6200ee" (click)="editDecaissement(decaissement)"></i>
+            <i placement="top" ngbTooltip="Supprimer"  class="pi pi-trash" (click)="deleteDecaissement(decaissement)" style="color: #6200ee"></i>
           </div>
+          <div *ngIf="decaissement.isValidated" style="text-align: center">
+            - -
+            </div>
 
         </td>
       </tr>
