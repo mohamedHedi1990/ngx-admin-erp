@@ -22,6 +22,7 @@ export class ListDecaissementsComponent implements OnInit {
     this.getAllDecaissements();
   }
   saveDecaissement(decaissement) {
+    console.log('--------------------------------------------------------------- ', decaissement);
 
     const context = this;
     this.UtilsService.post(UtilsServiceService.API_DECAISSEMENT, decaissement).subscribe( response => {
@@ -45,6 +46,7 @@ export class ListDecaissementsComponent implements OnInit {
   }
   hideDecaissementWindow() {
     this.showDecaissementWindow = false;
+    this.initDecaissement();
   }
 
   getAllDecaissements() {

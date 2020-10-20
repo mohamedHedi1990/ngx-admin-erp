@@ -138,17 +138,22 @@ export class NouveauDecaissementComponent implements OnInit {
   }
 
   getAllInvoiceProviders() {
+    this.invoices = [];
+    if (this.decaissement.decaissementProvider != null) {
+      const context = this;
+      this.UtilsService.get(`${UtilsServiceService.API_PROVIDER_INVOICE}/by-provider-id/${this.decaissement.decaissementProvider.providerId}`).subscribe( response => {
+          context.invoices = response;
+          console.log('invoices --------------------------------- ', context.invoices);
+        },
+        error => {
+          this.UtilsService.showToast('danger',
+            'Erreur interne',
+            `Un erreur interne a été produit lors du chargement des factures fournissuers`);
+        });
+  
+    }
 
-    const context = this;
-    this.UtilsService.get(`${UtilsServiceService.API_PROVIDER_INVOICE}/by-provider-id/${this.decaissement.decaissementProvider.providerId}`).subscribe( response => {
-        context.invoices = response;
-      },
-      error => {
-        this.UtilsService.showToast('danger',
-          'Erreur interne',
-          `Un erreur interne a été produit lors du chargement des factures fournissuers`);
-      });
-
+    
   }
 
   getAllProviders() {
@@ -168,6 +173,7 @@ export class NouveauDecaissementComponent implements OnInit {
     const context = this;
     this.UtilsService.get(UtilsServiceService.API_TYPE_DECAISSEMENT).subscribe( response => {
         context.decaissementTypes = response;
+        console.log('type decaiss--------------------------- ',  context.decaissementTypes);
       },
       error => {
         this.UtilsService.showToast('danger',
@@ -206,13 +212,16 @@ export class NouveauDecaissementComponent implements OnInit {
   }
 
   checkDecaissementValid(): boolean {
-    return this.decaissement.decaissementType == null || this.decaissement.decaissementDeadlineDate === '' &&
-      this.decaissement.decaissementPaymentType == null || this.decaissement.decaissementPaymentRuleNumber === ''
-      || this.decaissement.decaissementAmount === null
-      || this.decaissement.decaissementLabel === null
-      || this.decaissement.decaissementBankAccount === null
-      || (this.decaissement.decaissementInvoice === null && this.decaissement.decaissementType.decaissementType ===
-        'PAIEMENT_FACTURE_FOURNISSEUR');
+    return this.decaissement.decaissementType == null || this.decaissement.decaissementDeadlineDate === null || (this.decaissement.decaissementPaymentRuleNumber === null && 
+      (this.decaissement.decaissementPaymentType === 'CHEQUE' || this.decaissement.decaissementPaymentType === 'TRAITE'))
+      || this.decaissement.decaissementPaymentType == null
+      || this.decaissement.decaissementAmount == null
+      || this.decaissement.decaissementLabel == null
+      || this.decaissement.decaissementBankAccount == null
+      || (this.decaissement.decaissementInvoice == null && this.decaissement.decaissementType.decaissementType ===
+        'PAIEMENT_FACTURE_FOURNISSEUR')
+        || (this.decaissement.decaissementProvider == null && this.decaissement.decaissementType.decaissementType ===
+          'PAIEMENT_FACTURE_FOURNISSEUR');
   }
 
   initDecaissementType() {

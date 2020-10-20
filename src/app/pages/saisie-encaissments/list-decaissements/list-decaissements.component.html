@@ -74,4 +74,6 @@
     </ng-template>
   </p-table>
 </div>
-<ngx-nouveau-decaissement *ngIf="showDecaissementWindow" [decaissement]="decaissement"></ngx-nouveau-decaissement>
+<ngx-nouveau-decaissement *ngIf="showDecaissementWindow" [decaissement]="decaissement"
+(addNewDecaissementEvent)="saveDecaissement($event)"
+(cancelEvent)="hideDecaissementWindow()"></ngx-nouveau-decaissement>

@@ -1,5 +1,14 @@
-<div style="width: 90%; margin: auto">
-  <div class="p-grid p-fluid" style="display: flex">
+
+<h4 style="background: #E7E8E8; 
+padding: 20px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;margin-left: 10px">
+Ajouter un nouveau décaissement
+</h4>
+
+
+<div style="width: 90%; margin: auto;margin-top:5%; border-color:#E7E8E8 !important; border:solid">
+  <div class="p-grid p-fluid" style="display: flex; padding: 2%;">
     <div class="mb-12 col-md-6 col-12">
       <div>
         <label for="type" class="p-float-label" style="font-size: 13px"
@@ -46,7 +55,7 @@
             <div>
               <label for="type" class="p-float-label" style="font-size: 13px">Nature de décaissement<span style="color: red;">*</span></label>
             </div>
-            <div style="margin-left: 75%">
+            <div style="margin-left: 73%">
               <i
                 placement="top"
                 ngbTooltip="Ajouter un type de décaissement"
@@ -78,13 +87,13 @@
       <div
       *ngIf="
       decaissement.decaissementType != null &&
-      decaissement.decaissementType.decaissementType ===
+      decaissement.decaissementType.decaissementTypeValue ===
         'PAIEMENT_FACTURE_FOURNISSEUR'
     "
       >
         <div style="display: flex">
           <label for="type" class="p-float-label" style="font-size: 13px">Fournisseur<span style="color: red;">*</span></label>
-          <div style="margin-left: 86%">
+          <div style="margin-left: 84%">
             <i
               placement="top"
               ngbTooltip="Ajouter un fournisseur"
@@ -106,7 +115,7 @@
             (change)="getAllInvoiceProviders()"
           >
             <option [ngValue]="null">-- Fournisseur --</option>
-            <option *ngFor="let p of providers" [ngValue]="i">
+            <option *ngFor="let p of providers" [ngValue]="p">
               {{ p.providerLabel }}
             </option>
           </select>
@@ -116,13 +125,13 @@
       <div  
       *ngIf="
       decaissement.decaissementType != null &&
-      decaissement.decaissementType.decaissementType ===
+      decaissement.decaissementType.decaissementTypeValue ===
         'PAIEMENT_FACTURE_FOURNISSEUR'
     "
       >
         <div style="display: flex">
           <label for="type" class="p-float-label" style="font-size: 13px">Facture fournisseur<span style="color: red;">*</span></label>
-          <div style="margin-left: 79%">
+          <div style="margin-left: 77%">
             <i
               placement="top"
               ngbTooltip="Ajouter une facture"
@@ -228,8 +237,8 @@
           decaissement.decaissementPaymentType === 'TRAITE'
         "
       >
-        <div style="display: flex">
-          <div class="mb-12 col-md-12 col-12">
+        <div>
+          <div >
             <label for="nbre" class="p-float-label" style="font-size: 13px">Numéro<span style="color: red;">*</span></label>
             <div class="p-inputgroup">
               <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
@@ -265,21 +274,23 @@
 
   <br />
 
-  <div class="p-panel p-panel-header" style="margin-top: 20px">
+  <div class="p-panel p-panel-header" style="margin-top: 20px;margin-left:83%; padding: 2%;">
     <button
       [disabled]=""
       class="btn btn-secondary"
-      style="margin-left: 1%; font-size: 13px"
+      style="font-size: 13px"
       (click)="cancel()"
     >
       Annuler
     </button>
     <button
-      [disabled]="checkDecaissementValid()"
-      class="btn btn-success"
-      style="margin-left: 74%; font-size: 13px"
+   
+     
+      style="margin-left: 10px; font-size: 13px"
       (click)="saveDecaissement()"
-    >
+    [disabled]="checkDecaissementValid()"
+    [ngClass]= "{'disabled disabledPrimary': checkDecaissementValid(),
+  'primaryBtn': !checkDecaissementValid()}">
       Enregistrer
     </button>
   </div>
