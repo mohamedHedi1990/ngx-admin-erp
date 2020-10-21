@@ -1,13 +1,20 @@
 
-<h4 style="background: #E7E8E8; 
-padding: 20px 10px 10px 10px !important;
+<h4 *ngIf="decaissement.decaissementId == null" style="background: #E7E8E8; 
+padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
 Ajouter un nouveau décaissement
 </h4>
+<h4 *ngIf="decaissement.decaissementId != null" style="background: #E7E8E8; 
+padding: 10px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;margin-left: 10px">
+Modifier un décaissement
+<div><span class="customer-badge status-label">{{decaissement.decaissementLabel}}</span></div>
+</h4>
 
 
-<div style="width: 90%; margin: auto;margin-top:5%; border-color:#E7E8E8 !important; border:solid">
+<div style="width: 90%; margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
   <div class="p-grid p-fluid" style="display: flex; padding: 2%;">
     <div class="mb-12 col-md-6 col-12">
       <div>
@@ -23,8 +30,10 @@ Ajouter un nouveau décaissement
             [(ngModel)]="decaissement.decaissementBankAccount"
            
             style="font-size: 13px"
-          >
-            <option [ngValue]="null">-- Compte bancaire --</option>
+            [compareWith]="compareAccount" 
+            >
+            
+            <option *ngIf="decaissement.decaissementId == null" [ngValue]="null">-- Compte bancaire --</option>
             <option *ngFor="let a of accounts" [ngValue]="a">
               {{ a.accountLabel }}
             </option>
@@ -74,8 +83,9 @@ Ajouter un nouveau décaissement
               [(ngModel)]="decaissement.decaissementType"
              
               style="font-size: 13px"
+              [compareWith]="compareDeacissementType"
             >
-              <option [ngValue]="null">-- Nature de décaissement --</option>
+              <option *ngIf="decaissement.decaissementId == null" [ngValue]="null">-- Nature de décaissement --</option>
               <option *ngFor="let t of decaissementTypes" [ngValue]="t">
                 {{ t.decaissementTypeLabel }}
               </option>
@@ -93,7 +103,7 @@ Ajouter un nouveau décaissement
       >
         <div style="display: flex">
           <label for="type" class="p-float-label" style="font-size: 13px">Fournisseur<span style="color: red;">*</span></label>
-          <div style="margin-left: 84%">
+          <div style="margin-left: 85%">
             <i
               placement="top"
               ngbTooltip="Ajouter un fournisseur"
@@ -113,8 +123,9 @@ Ajouter un nouveau décaissement
             
             style="font-size: 13px"
             (change)="getAllInvoiceProviders()"
+            [compareWith]="compareProvider"
           >
-            <option [ngValue]="null">-- Fournisseur --</option>
+            <option *ngIf="decaissement.decaissementId == null" [ngValue]="null">-- Fournisseur --</option>
             <option *ngFor="let p of providers" [ngValue]="p">
               {{ p.providerLabel }}
             </option>
@@ -131,7 +142,7 @@ Ajouter un nouveau décaissement
       >
         <div style="display: flex">
           <label for="type" class="p-float-label" style="font-size: 13px">Facture fournisseur<span style="color: red;">*</span></label>
-          <div style="margin-left: 77%">
+          <div style="margin-left: 78%">
             <i
               placement="top"
               ngbTooltip="Ajouter une facture"
@@ -150,8 +161,9 @@ Ajouter un nouveau décaissement
             name="side"
             [(ngModel)]="decaissement.decaissementInvoice"
             style="font-size: 13px"
+            [compareWith]="compareInvoice"
           >
-            <option [ngValue]="null">-- Facture fournisseur --</option>
+            <option *ngIf="decaissement.decaissementId == null" [ngValue]="null">-- Facture fournisseur --</option>
             <option *ngFor="let i of invoices" [ngValue]="i">
               Facture {{ i.invoiceNumber }}
             </option>
@@ -255,7 +267,7 @@ Ajouter un nouveau décaissement
       </div>
       <div>
         <label for="fin" class="p-float-label" style="font-size: 13px"
-          >Date de écheance<span style="color: red;">*</span>
+          >Date d'écheance<span style="color: red;">*</span>
         </label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
@@ -274,25 +286,22 @@ Ajouter un nouveau décaissement
 
   <br />
 
-  <div class="p-panel p-panel-header" style="margin-top: 20px;margin-left:83%; padding: 2%;">
+  <div class="p-panel p-panel-header" style="margin-top: 20px;margin-left:80%; padding: 2%;">
+    <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="cancel()"></button>
+
+    <!-- 
     <button
-      [disabled]=""
-      class="btn btn-secondary"
-      style="font-size: 13px"
-      (click)="cancel()"
-    >
-      Annuler
-    </button>
-    <button
-   
-     
       style="margin-left: 10px; font-size: 13px"
       (click)="saveDecaissement()"
     [disabled]="checkDecaissementValid()"
     [ngClass]= "{'disabled disabledPrimary': checkDecaissementValid(),
-  'primaryBtn': !checkDecaissementValid()}">
-      Enregistrer
+  'primaryBtn': !checkDecaissementValid()}"
+ >Enregistrer
     </button>
+  -->
+  <button [disabled]="checkDecaissementValid()" [ngClass]= "{'disabled': checkDecaissementValid()}" pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn" (click)="saveDecaissement()" style="margin-left: 10px;"></button>
+
+    
   </div>
 </div>
 

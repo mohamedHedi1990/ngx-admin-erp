@@ -57,7 +57,7 @@ export class ListDecaissementsComponent implements OnInit {
         decaissementTypeValue: 'PAIEMENT_FACTURE_FOURNISSEUR',
         decaissementTypeLabel: 'Paiement facture fournisseur'
       },
-      decaissementDeadlineDate : '18-10-2020',
+      decaissementDeadlineDate : '2020-10-10',
       decaissementPaymentType: 'CHEQUE',
       decaissementPaymentRuleNumber: '000000123',
       decaissementPaymentRuleDetails: null,
@@ -72,8 +72,8 @@ export class ListDecaissementsComponent implements OnInit {
     invoiceNumber: 'REF123',
       },
       decaissementBankAccount : {
-        accountId: null,
-        accountLabel : 'Compte courant BIAT',
+        accountId: 1,
+        accountLabel : 'Compte courant BIATmmmm',
         accountBank: 'BIAT',
         accountBankAdress : 'LAC 2',
         accountAgency: 'BIAT LAC 2',

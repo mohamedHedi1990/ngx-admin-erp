@@ -61,12 +61,31 @@ export class NouveauDecaissementComponent implements OnInit {
   dispalyDecaissementTypeModal = false;
   dispalyProviderModal = false;
   dispalyInvoiceProviderModal = false;
+  compareAccount(a: any, b: any): boolean {
+    if (a==null || b== null) return true;
+    return a.accountId === b.accountId;
+ }
+ compareDeacissementType(a: any, b: any): boolean {
+  if (a==null || b== null)return true;
+  return a.decaissementTypeValue === b.decaissementTypeValue;
+}
+compareProvider(a: any, b: any): boolean {
+  if (a==null || b== null) return true;
+  return a.providerId === b.providerId;
+}
+compareInvoice(a: any, b: any): boolean {
+  if (a==null || b== null) return true;
+  return a.invoiceId === b.invoiceId;
+}
 
   constructor(private UtilsService: UtilsServiceService) { }
 
   ngOnInit(): void {
     this.getAllAccounts();
-    // this.getAllInvoiceProviders();
+    if (this.decaissement.decaissementProvider != null) {
+      this.getAllInvoiceProviders();
+    }
+   
     this.getAllProviders();
     this.getAllTypesDEcaissements();
   }
@@ -88,7 +107,38 @@ export class NouveauDecaissementComponent implements OnInit {
     });
   }
   getAllAccounts() {
-
+    this.accounts = [
+      {
+        accountId: 1,
+        accountLabel : 'Compte courant BIAT',
+        accountBank: 'BIAT',
+        accountBankAdress : 'LAC 2',
+        accountAgency: 'BIAT LAC 2',
+        accountAgencyAdress: '',
+        accountChargeCustomerName: '',
+        accountChargeCustomerPhoneNumber: '',
+        accountChargeCustomerEmail: '',
+        accountNumber: 'M4123456789',
+        accountRIB: '',
+        accountCurrency: '',
+        accountContacts: [],
+      },
+      {
+        accountId: 2,
+        accountLabel : 'Compte courant BIAT',
+        accountBank: 'BIAT',
+        accountBankAdress : 'LAC 2',
+        accountAgency: 'BIAT LAC 2',
+        accountAgencyAdress: '',
+        accountChargeCustomerName: '',
+        accountChargeCustomerPhoneNumber: '',
+        accountChargeCustomerEmail: '',
+        accountNumber: 'M4123456789',
+        accountRIB: '',
+        accountCurrency: '',
+      }
+    ];
+/*
     const context = this;
     this.UtilsService.get(UtilsServiceService.API_ACCOUNT).subscribe( response => {
         context.accounts = response;
@@ -98,6 +148,7 @@ export class NouveauDecaissementComponent implements OnInit {
           'Erreur interne',
           `Un erreur interne a été produit lors du chargement des comptes`);
       });
+      */
 
   }
 
@@ -138,6 +189,19 @@ export class NouveauDecaissementComponent implements OnInit {
   }
 
   getAllInvoiceProviders() {
+this.invoices = [
+  {
+    invoiceId: 1,
+invoiceCurrency: 'TND',
+invoiceNumber: 'REF123',
+  },
+  {
+    invoiceId: 2,
+invoiceCurrency: 'TND',
+invoiceNumber: 'REF12325565',
+  }
+];
+    /*
     this.invoices = [];
     if (this.decaissement.decaissementProvider != null) {
       const context = this;
@@ -151,13 +215,35 @@ export class NouveauDecaissementComponent implements OnInit {
             `Un erreur interne a été produit lors du chargement des factures fournissuers`);
         });
   
-    }
+    }*/
 
     
   }
 
   getAllProviders() {
-    const context = this;
+    this.providers = [
+      {
+        providerId: 1,
+    providerLabel: 'BI SERVICES',
+    providerAddress: '',
+    providerUniqueIdentifier: 'BI S RF 12OPL - KL2',
+    providerManagerName: '',
+    providerTel: '',
+    providerEmail: '',
+    providerContacts: [],
+      },
+      {
+        providerId: 2,
+    providerLabel: 'Bsdvffdgf',
+    providerAddress: '',
+    providerUniqueIdentifier: 'BI S RF 12OPL - KL2',
+    providerManagerName: '',
+    providerTel: '',
+    providerEmail: '',
+    providerContacts: [],
+      }
+    ];
+    /*const context = this;
     this.UtilsService.get(UtilsServiceService.API_PROVIDER).subscribe( response => {
         context.providers = response;
       },
@@ -165,11 +251,21 @@ export class NouveauDecaissementComponent implements OnInit {
         this.UtilsService.showToast('danger',
           'Erreur interne',
           `Un erreur interne a été produit lors du chargement des fournissuers`);
-      });
+      });*/
   }
 
   getAllTypesDEcaissements() {
-
+this.decaissementTypes = [
+  {
+    decaissementTypeValue: 'PAIEMENT_FACTURE_FOURNISSEUR',
+    decaissementTypeLabel: 'Paiement facture fournisseur'
+  },
+  {
+    decaissementTypeValue: 'CHEQUE_IMPAYE',
+    decaissementTypeLabel: 'Cheque impayé'
+  },
+];
+/*
     const context = this;
     this.UtilsService.get(UtilsServiceService.API_TYPE_DECAISSEMENT).subscribe( response => {
         context.decaissementTypes = response;
@@ -179,7 +275,7 @@ export class NouveauDecaissementComponent implements OnInit {
         this.UtilsService.showToast('danger',
           'Erreur interne',
           `Un erreur interne a été produit lors du chargement des types des décaissements`);
-      });
+      }); */
 
   }
 
