@@ -14,6 +14,8 @@ export class ListDecaissementsComponent implements OnInit {
   decaissments = [];
   loading = false;
   decaissement = null;
+  displayValidateDecaissement = false;
+  displayDeleteDecaissement = false;
   constructor(private UtilsService: UtilsServiceService,
               public dialogService: DialogService, private confirmationService: ConfirmationService) { }
 
@@ -115,35 +117,28 @@ export class ListDecaissementsComponent implements OnInit {
     this.showDecaissementWindow = true;
   }
 
-  delDecaissement(decaissement) {
+  delDecaissement() {
     const context = this;
-    const url = UtilsServiceService.API_DECAISSEMENT + '/' + decaissement.decaissementId;
+    const url = UtilsServiceService.API_DECAISSEMENT + '/' + this.decaissement.decaissementId;
     this.UtilsService.delete(url).subscribe( response => {
         this.UtilsService.showToast('success',
           'Décaissement supprimé avec succés',
-          `Le décaissement  ${decaissement.decaissementLabel} a été supprimé avec succcés`);
+          `Le décaissement  ${this.decaissement.decaissementLabel} a été supprimé avec succcés`);
+          this.displayDeleteDecaissement = false;
         context.getAllDecaissements();
+        this.initDecaissement();
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
-        `Un erreur interne a été produit lors de la suppression du décaissement  ${decaissement.decaissementLabel}`);
+        `Un erreur interne a été produit lors de la suppression du décaissement  ${this.decaissement.decaissementLabel}`);
       });
 
 
   }
 
   deleteDecaissement(decaissement) {
-    this.confirmationService.confirm({
-      message: `Voulez vous vraiment supprimer le décaissement  ${decaissement.decaissementLabel}?`,
-      acceptLabel: 'Supprimer',
-      rejectLabel: 'Annuler',
-      header: `Supprimer un décaissement `,
-      acceptButtonStyleClass: 'p-button-danger',
-      rejectButtonStyleClass: 'p-button-secondary',
-      accept: () => {
-        this.delDecaissement(decaissement);
-      },
-    });
+    this.displayDeleteDecaissement = true;
+    this.decaissement = decaissement;
   }
   initDecaissement() {
     this.decaissement = {
@@ -162,4 +157,29 @@ export class ListDecaissementsComponent implements OnInit {
     };
   }
 
+  showValidateDecaisementWindow(decaissement) {
+    this.displayValidateDecaissement = true;
+    this.decaissement = decaissement;
+  }
+
+  validateDecaissement()  {
+	  const context = this;
+    this.UtilsService.put(UtilsServiceService.API_DECAISSEMENT + '/' + this.decaissement.decaissementId, null).subscribe( response => {
+
+      this.UtilsService.showToast('success',
+      'Décaissement validé avec succés',
+      `Le décaissement ${this.decaissement.decaissementLabel} a été validé avec succés`);
+      this.displayValidateDecaissement = false;
+       context.getAllDecaissements();
+	   this.initDecaissement();
+      },
+      error => {this.UtilsService.showToast('danger',
+        'Erreur interne',
+        `Un erreur interne a été produit lors de la validation du décaissement ${this.decaissement.decaissementLabel}`);
+        this.displayValidateDecaissement = false;
+		this.initDecaissement();
+    });
+
+
+  }
 }
