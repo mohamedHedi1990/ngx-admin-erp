@@ -31,6 +31,7 @@ Modifier un décaissement
            
             style="font-size: 13px"
             [compareWith]="compareAccount" 
+            (change)="changeAccount()"
             >
             
             <option *ngIf="decaissement.decaissementId == null" [ngValue]="null">-- Compte bancaire --</option>
@@ -93,7 +94,25 @@ Modifier un décaissement
           </div>
         </div>
       </div>
- 
+
+      <div  *ngIf="decaissement.decaissementType != null && decaissement.decaissementType.decaissementTypeValue === 'CHEQUE_IMPAYE'">
+        <label for="amounth" class="p-float-label" style="font-size: 13px"
+        >Numéro de chèque impayé<span style="color: red;">*</span></label
+      >
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"
+          ><i class="pi pi-money-bill"></i
+        ></span>
+        <input
+          type="number"
+          class="form-control p-field"
+          id="amounth"
+          [(ngModel)]="decaissement.decaissementChequeImpaye"
+          style="font-size: 13px"
+         
+        />
+      </div>
+      </div>
       <div
       *ngIf="
       decaissement.decaissementType != null &&
@@ -199,22 +218,43 @@ Modifier un décaissement
       </div>
     </div>
     <div class="mb-12 col-md-6 col-12">
-      <div>
-        <label for="amounth" class="p-float-label" style="font-size: 13px"
-          >Montant<span style="color: red;">*</span></label
-        >
-        <div class="p-inputgroup">
-          <span class="p-inputgroup-addon"
-            ><i class="pi pi-money-bill"></i
-          ></span>
-          <input
-            type="number"
-            class="form-control p-field"
-            id="amounth"
-            [(ngModel)]="decaissement.decaissementAmount"
-            style="font-size: 13px"
-           
-          />
+      <div style="display:flex">
+        <div class="mb-12 col-md-8 col-12" style="padding-left: 0px !important">
+          <label for="amounth" class="p-float-label" style="font-size: 13px"
+            >Montant<span style="color: red;">*</span></label
+          >
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"
+              ><i class="pi pi-money-bill"></i
+            ></span>
+            <input
+              type="number"
+              class="form-control p-field"
+              id="amounth"
+              [(ngModel)]="decaissement.decaissementAmount"
+              style="font-size: 13px"
+             
+            />
+          </div>
+        </div>
+        <div class="mb-12 col-md-4 col-12">
+          <label for="amounth" class="p-float-label" style="font-size: 13px"
+            >Devise</label
+          >
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"
+              ><i class="pi pi-money-bill"></i
+            ></span>
+            <input
+              type="text"
+              class="form-control p-field"
+              id="amounth"
+              [(ngModel)]="decaissement.decaissementCurrency"
+              style="font-size: 13px"
+              disabled=true
+             
+            />
+          </div>
         </div>
       </div>
       <div>
@@ -333,11 +373,11 @@ Modifier un décaissement
   </div>
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
-      <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
-              (click)="dispalyDecaissementTypeModal=false"></button>
-			   <button pButton pRipple label="Ajouter" icon="pi pi-check" class="p-button-success p-mr-2"
-              (click)="saveDecaissementType()"
-              [disabled]="decaissementType.decaissementTypeLabel == null || decaissementType.decaissementTypeLabel === ''"></button>
+              <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="dispalyDecaissementTypeModal=false"></button>
+
+              <button [disabled]="decaissementType.decaissementTypeLabel == null || decaissementType.decaissementTypeLabel === ''"
+              [ngClass]= "{'disabled': decaissementType.decaissementTypeLabel == null || decaissementType.decaissementTypeLabel === ''}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn" 
+              (click)="saveDecaissementType()" style="margin-left: 10px;"></button>
 
     </div>
   </ng-template>
@@ -393,11 +433,11 @@ Modifier un décaissement
 </div>
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
-      <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
-              (click)="dispalyProviderModal=false"></button>
-			   <button pButton pRipple label="Ajouter" icon="pi pi-check" class="p-button-success p-mr-2"
-              (click)="saveProvider()"
-              [disabled]="provider.providerLabel == null || provider.providerLabel === '' || provider.providerUniqueIdentifier == null || providerUniqueIdentifier.providerLabel === ''"></button>
+      <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="dispalyProviderModal=false"></button>
+
+      <button [disabled]="provider.providerLabel == null || provider.providerLabel === '' || provider.providerUniqueIdentifier == null || providerUniqueIdentifier.providerLabel === ''" 
+      [ngClass]= "{'disabled': provider.providerLabel == null || provider.providerLabel === '' || provider.providerUniqueIdentifier == null || providerUniqueIdentifier.providerLabel === ''}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn" 
+      (click)="saveProvider()" style="margin-left: 10px;"></button>
 
     </div>
   </ng-template>
@@ -519,11 +559,14 @@ Modifier un décaissement
 
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
-      <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
-              (click)="dispalyInvoiceProviderModal=false"></button>
-			   <button pButton pRipple label="Ajouter" icon="pi pi-check" class="p-button-success p-mr-2"
-              (click)="saveDecaissementType()"
-              [disabled]="provider.providerLabel == null || provider.providerLabel === '' || provider.providerUniqueIdentifier == null || providerUniqueIdentifier.providerLabel === ''"></button>
+  
+
+
+              <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="dispalyInvoiceProviderModal=false"></button>
+
+      <button [disabled]="invoice.invoiceNumber == null || invoice.invoiceNumber === '' || invoice.provider == null" 
+      [ngClass]= "{'disabled': invoice.invoiceNumber == null || invoice.invoiceNumber === '' || invoice.provider == null}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn" 
+      (click)="saveInvoice()" style="margin-left: 10px;"></button>
 
     </div>
   </ng-template>

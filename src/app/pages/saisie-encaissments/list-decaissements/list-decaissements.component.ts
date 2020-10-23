@@ -25,7 +25,7 @@ export class ListDecaissementsComponent implements OnInit {
   }
   saveDecaissement(decaissement) {
     console.log('--------------------------------------------------------------- ', decaissement);
-
+/*
     const context = this;
     this.UtilsService.post(UtilsServiceService.API_DECAISSEMENT, decaissement).subscribe( response => {
         this.hideDecaissementWindow();
@@ -40,10 +40,18 @@ export class ListDecaissementsComponent implements OnInit {
         }
         context.getAllDecaissements();
         context.initDecaissement();
+         this.showDecaissementWindow = false;
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
-        `Un erreur interne a été produit lors de l'enregistrement du décaissement  ${decaissement.decaissementLabel}`); });
+        `Un erreur interne a été produit lors de l'enregistrement du décaissement  ${decaissement.decaissementLabel}`);
+        }); */
+
+        this.decaissments.push(decaissement);
+        this.initDecaissement();
+        this.showDecaissementWindow = false;
+       
+
 
   }
   hideDecaissementWindow() {
@@ -99,6 +107,8 @@ export class ListDecaissementsComponent implements OnInit {
     providerContacts: [],
       },
       isValidated: false,
+      decaissementChequeImpaye: null,
+      
       }
     ];
     /*const context = this;
@@ -153,6 +163,8 @@ export class ListDecaissementsComponent implements OnInit {
     decaissementDetails : null,
     decaissementInvoice : null,
     decaissementBankAccount : null,
+    decaissementChequeImpaye: null,
+    decaissementCurrency: 'TND',
 
     };
   }

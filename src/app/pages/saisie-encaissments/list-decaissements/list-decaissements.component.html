@@ -67,6 +67,13 @@ Liste des décaissements
             <span *ngIf="decaissement.decaissementType.decaissementTypeValue === 'PAIEMENT_FACTURE_FOURNISSEUR'"> Decaissmement pour la facture numéro <span class="customer-badge status-label">{{decaissement.decaissementInvoice.invoiceNumber}} </span>pour le fournisseur <span class="customer-badge status-label">{{decaissement.decaissementProvider.providerLabel}}</span></span>
           </div>
           <div>
+            <span *ngIf="decaissement.decaissementType.decaissementTypeValue === 'CHEQUE_IMPAYE'"> Decaissmement le chèque impayé numéro <span class="customer-badge status-label">{{decaissement.decaissementChequeImpaye}} </span></span>
+          </div>
+          <div>
+            <span *ngIf="decaissement.decaissementType.decaissementTypeValue !== 'CHEQUE_IMPAYE'
+            && decaissement.decaissementType.decaissementTypeValue !== 'PAIEMENT_FACTURE_FOURNISSEUR'">{{decaissement.decaissementLabel}}</span>
+          </div>
+          <div>
             <i>{{decaissement.decaissementDetails}}</i>
           </div>
           

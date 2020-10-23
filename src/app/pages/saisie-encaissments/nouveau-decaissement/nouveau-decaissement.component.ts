@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UtilsServiceService } from '../../../utils-service.service';
 
@@ -20,6 +21,8 @@ export class NouveauDecaissementComponent implements OnInit {
     decaissementInvoice : null,
     decaissementBankAccount : null,
     decaissementProvider: null,
+    decaissementChequeImpaye: null,
+    decaissementCurrency: 'TND',
   };
   @Output() addNewDecaissementEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();
@@ -49,8 +52,8 @@ export class NouveauDecaissementComponent implements OnInit {
 	invoiceCurrency: 'TND',
     invoiceNumber: '',
     provider: null,
-    invoiceDate: null,
-    invoiceDeadlineDate: null,
+    invoiceDate: this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
+    invoiceDeadlineDate: this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
     invoiceNet: 0,
     invoiceRs: 0,
     invoiceRsType: 'VALUE',
@@ -78,7 +81,8 @@ compareInvoice(a: any, b: any): boolean {
   return a.invoiceId === b.invoiceId;
 }
 
-  constructor(private UtilsService: UtilsServiceService) { }
+  constructor(private UtilsService: UtilsServiceService, private datePipe: DatePipe) {
+   }
 
   ngOnInit(): void {
     this.getAllAccounts();
@@ -120,7 +124,7 @@ compareInvoice(a: any, b: any): boolean {
         accountChargeCustomerEmail: '',
         accountNumber: 'M4123456789',
         accountRIB: '',
-        accountCurrency: '',
+        accountCurrency: 'TND',
         accountContacts: [],
       },
       {
@@ -135,7 +139,7 @@ compareInvoice(a: any, b: any): boolean {
         accountChargeCustomerEmail: '',
         accountNumber: 'M4123456789',
         accountRIB: '',
-        accountCurrency: '',
+        accountCurrency: 'TND',
       }
     ];
 /*
@@ -264,6 +268,18 @@ this.decaissementTypes = [
     decaissementTypeValue: 'CHEQUE_IMPAYE',
     decaissementTypeLabel: 'Cheque impayé'
   },
+  {
+    decaissementTypeValue: 'SALAIRE',
+    decaissementTypeLabel: 'Salaire'
+  },
+  {
+    decaissementTypeValue: 'INTERETS',
+    decaissementTypeLabel: 'Intérets'
+  },
+  {
+    decaissementTypeValue: 'COMISSION_BANCAIRE',
+    decaissementTypeLabel: 'Comission bancaire'
+  },
 ];
 /*
     const context = this;
@@ -277,6 +293,12 @@ this.decaissementTypes = [
           `Un erreur interne a été produit lors du chargement des types des décaissements`);
       }); */
 
+  }
+
+  changeAccount() {
+    if(this.decaissement.decaissementBankAccount != null) {
+      this.decaissement.decaissementCurrency = this.decaissement.decaissementBankAccount.accountCurrency;
+    }
   }
 
   saveDecaissement(){
