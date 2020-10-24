@@ -471,7 +471,7 @@ Modifier un décaissement
         </div>
       </div>
       <div style="display: flex;">
-        <div class="mb-1 col-md-8 col-12 p-field">
+        <div class="mb-1 col-md-6 col-12 p-field">
           <label for="invoiceNumber" class="p-float-label">Numéro<span style="color: red;">*</span></label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
@@ -479,7 +479,7 @@ Modifier un décaissement
                    [(ngModel)]="invoice.invoiceNumber"  style="font-size: 13px">
           </div>
         </div>
-    <div class="mb-1 col-md-4 col-12 p-field">
+    <div class="mb-1 col-md-6 col-12 p-field">
           <label for="invoiceNumber" class="p-float-label">Devise<span style="color: red;">*</span></label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-dollar"></i></span>
@@ -495,9 +495,9 @@ Modifier un décaissement
     </div>
   <br>
     <div class="p-grid p-fluid">
-      <div style="display: flex">
+      <div>
 
-        <div class="mb-1 col-md-6 col-12">
+        <div class="mb-1 col-md-12 col-12 p-field">
           <label for="manager" class="p-float-label">Date de facture<span style="color: red;">*</span> </label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
@@ -506,7 +506,7 @@ Modifier un décaissement
           </div>
         </div>
 
-        <div class="mb-12 col-md-6 col-12">
+        <div class="mb-1 col-md-12 col-12 p-field">
           <label for="fin" class="p-float-label">Date de écheance<span style="color: red;">*</span> </label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
@@ -518,10 +518,9 @@ Modifier un décaissement
       </div>
     </div>
   </div>
-<br>
   <div class="p-grid p-fluid">
-    <div style="display: flex">
-      <div class="mb-1 col-md-4 col-12">
+    <div >
+      <div class="mb-1 col-md-12 col-12">
         <label for="NET" class="p-float-label">NET<span style="color: red;">*</span></label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
@@ -530,7 +529,8 @@ Modifier un décaissement
                  (change)="updateTotalAmount()">
         </div>
       </div>
-      <div class="mb-12 col-md-4 col-12">
+	  <div style="display: flex">
+      <div class="mb-1 col-md-6 col-12">
         <label for="rs" class="p-float-label">RS<span style="color: red;">*</span></label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
@@ -539,7 +539,7 @@ Modifier un décaissement
         </div>
         <span *ngIf="invoice.invoiceRsType === 'POURCENTAGE'" style="font-size: 12px;"><i>Soit valeur de {{rsAmount}}</i></span>
       </div>
-      <div class="mb-12 col-md-4 col-12">
+      <div class="mb-1 col-md-6 col-12">
         <label for="rs" class="p-float-label">RS type<span style="color: red;">*</span></label>
         <select class="form-control p-field" id="type" name="side" [(ngModel)]="invoice.invoiceRsType"
                 (change)="updateTotalAmount()" style="font-size: 13px;">
@@ -548,7 +548,7 @@ Modifier un décaissement
 
         </select>
       </div>
-
+</div>
     </div>
     <div class="mb-12 col-md-12 col-12">
       <label for="amount" class="p-float-label">Montant total</label>
