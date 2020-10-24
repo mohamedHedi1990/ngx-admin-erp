@@ -61,11 +61,11 @@ Modifier un décaissement
     
       <div>
         <div>
-          <div style="display: flex">
-            <div>
+          <div >
+            <div style="display: inline-block">
               <label for="type" class="p-float-label" style="font-size: 13px">Nature de décaissement<span style="color: red;">*</span></label>
             </div>
-            <div style="margin-left: 73%">
+            <div style="float: right;">
               <i
                 placement="top"
                 ngbTooltip="Ajouter un type de décaissement"
@@ -121,9 +121,12 @@ Modifier un décaissement
         'PAIEMENT_FACTURE_FOURNISSEUR'
     "
       >
-        <div style="display: flex">
-          <label for="type" class="p-float-label" style="font-size: 13px">Fournisseur<span style="color: red;">*</span></label>
-          <div style="margin-left: 85%">
+        <div>
+          <div  style="display: inline-block">
+            <label for="type" class="p-float-label" style="font-size: 13px">Fournisseur<span style="color: red;">*</span></label>
+          </div>
+         
+          <div style="float:right">
             <i
               placement="top"
               ngbTooltip="Ajouter un fournisseur"
@@ -159,10 +162,12 @@ Modifier un décaissement
         'PAIEMENT_FACTURE_FOURNISSEUR'
     "
       >
-        <div style="display: flex">
-          <label for="type" class="p-float-label" style="font-size: 13px">Facture fournisseur<span style="color: red;">*</span></label>
-          <div style="margin-left: 78%">
-            <i
+        <div>
+          <div  style="display: inline-block">
+            <label for="type" class="p-float-label" style="font-size: 13px">Facture fournisseur<span style="color: red;">*</span></label>
+          </div>
+          <div style="float:right">
+            <i 
               placement="top"
               ngbTooltip="Ajouter une facture"
               pRipple
@@ -325,7 +330,7 @@ Modifier un décaissement
 
   <br />
 
-  <div class="p-panel p-panel-header" style="margin-top: 20px;margin-left:80%; padding: 2%;">
+  <div class="p-panel p-panel-header" style="margin-top: 20px;float: right; padding: 2%;">
     <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="cancel()"></button>
 
     <!-- 

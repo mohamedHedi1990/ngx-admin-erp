@@ -11,19 +11,21 @@ Liste des décaissements
            [paginator]="true" currentPageReportTemplate=""
            [filterDelay]="0" [globalFilterFields]="['decaissementDeadlineDate','decaissementTypeLabel','decaissementAmount','decaissementLabel','decaissementInvoice.invoiceNumber', 'decaissementBankAccount.accountLabel','createdAt', 'updatedAt', 'decaissementStatus']">
     <ng-template pTemplate="caption" >
-      <div style="display: flex; width: 100%">
-        <div class="p-d-flex p-ai-center p-jc-between" style="width: 60%">
-        <span class="p-input-icon-left" style="width: 100%">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher un décaissement.." />
-                </span>
-        </div>
-
-        <div style="width:19%; margin-left: 45%">
-          <button pButton pRipple label="Nouveau décaissement" icon="pi pi-plus" class="primaryBtn" (click)="showDecaissementWindow = true"></button>
-        </div>
-
+      <div >
+        <div class="p-d-flex p-ai-center p-jc-between" style=" width: 60%; display: inline-block;">
+          <span class="p-input-icon-left" style="width: 100%">
+                      <i class="pi pi-search"></i>
+                      <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher un décaissement.." />
+                  </span>
+          </div>
+  
+          <div style="float:right">
+            <button pButton pRipple label="Nouveau décaissement" icon="pi pi-plus" class="primaryBtn" (click)="showDecaissementWindow = true"></button>
+          </div>
       </div>
+        
+
+     
 
     </ng-template>
     <ng-template pTemplate="header">
@@ -32,8 +34,8 @@ Liste des décaissements
         <th pSortableColumn="decaissementTypeLabel" style="text-align: center; font-size: 13px;width: 10%">Type</th>
         <th pSortableColumn="decaissementBankAccount.accountLabel" style="text-align: center; font-size: 13px;width: 12%">Banque</th>
         <th pSortableColumn="decaissementAmount" style="text-align: center; font-size: 13px;width: 12%">Montant<p-sortIcon field="decaissementAmount"></p-sortIcon></th>
-        <th pSortableColumn="decaissementDeadlineDate" style="text-align: center;font-size: 13px;width: 12%">Date d'échéance<p-sortIcon field="decaissementDeadlineDate"></p-sortIcon></th>
-        <th style="text-align: center; font-size: 13px;width: 30%">Détails</th>
+        <th pSortableColumn="decaissementDeadlineDate" style="text-align: center;font-size: 13px;width: 17%">Date d'échéance<p-sortIcon field="decaissementDeadlineDate"></p-sortIcon></th>
+        <th style="text-align: center; font-size: 13px;width: 25%">Détails</th>
         <th pSortableColumn="decaissementStatus"  style="text-align: center; font-size: 13px;width: 10%">Statut</th>
         <th style="width: 10%;font-size: 13px;text-align: center;">Actions</th>
       </tr>
