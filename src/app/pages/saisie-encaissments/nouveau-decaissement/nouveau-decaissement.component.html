@@ -86,7 +86,8 @@ Modifier un décaissement
               style="font-size: 13px"
               [compareWith]="compareDeacissementType"
             >
-              <option *ngIf="decaissement.decaissementId == null" [ngValue]="null">-- Nature de décaissement --</option>
+            <!-- 
+              <option *ngIf="decaissement.decaissementId == null" [ngValue]="null">-- Nature de décaissement --</option>-->
               <option *ngFor="let t of decaissementTypes" [ngValue]="t">
                 {{ t.decaissementTypeLabel }}
               </option>
@@ -144,7 +145,6 @@ Modifier un décaissement
             (change)="getAllInvoiceProviders()"
             [compareWith]="compareProvider"
           >
-            <option *ngIf="decaissement.decaissementId == null" [ngValue]="null">-- Fournisseur --</option>
             <option *ngFor="let p of providers" [ngValue]="p">
               {{ p.providerLabel }}
             </option>
@@ -181,8 +181,8 @@ Modifier un décaissement
             [(ngModel)]="decaissement.decaissementInvoice"
             style="font-size: 13px"
             [compareWith]="compareInvoice"
+            (change)="updateAmount()"
           >
-            <option *ngIf="decaissement.decaissementId == null" [ngValue]="null">-- Facture fournisseur --</option>
             <option *ngFor="let i of invoices" [ngValue]="i">
               Facture {{ i.invoiceNumber }}
             </option>
@@ -273,7 +273,6 @@ Modifier un décaissement
             style="font-size: 13px"
            
           >
-            <option [ngValue]="null">-- Mode de payment --</option>
             <option [ngValue]="'CHEQUE'">CHEQUE</option>
             <option [ngValue]="'EFFET'">EFFET</option>
             <option [ngValue]="'VIREMENT'">VIREMENT</option>
@@ -295,7 +294,7 @@ Modifier un décaissement
             <div class="p-inputgroup">
               <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
               <input
-                type="number"
+                type="text"
                 class="form-control p-field"
                 id="nbre"
                 [(ngModel)]="decaissement.decaissementPaymentRuleNumber"
@@ -339,7 +338,7 @@ Modifier un décaissement
  >Enregistrer
     </button>
   -->
-  <button [disabled]="checkDecaissementValid()" [ngClass]= "{'disabled': checkDecaissementValid()}" pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn" (click)="saveDecaissement()" style="margin-left: 10px;"></button>
+  <button [disabled]="checkDecaissementValid()" [ngClass]= "{'disabled': checkDecaissementValid()}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn" (click)="saveDecaissement()" style="margin-left: 10px;"></button>
 
     
   </div>
@@ -383,7 +382,7 @@ Modifier un décaissement
   </ng-template>
 </p-dialog>
 
-
+<!-- ajouter un nouveau fournisseur -->
 <p-dialog header="Nouveau fournisseur" [(visible)]="dispalyProviderModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
           [draggable]="false" [resizable]="false">
   <br>
@@ -435,8 +434,8 @@ Modifier un décaissement
     <div style="margin-top: 20px;">
       <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="dispalyProviderModal=false"></button>
 
-      <button [disabled]="provider.providerLabel == null || provider.providerLabel === '' || provider.providerUniqueIdentifier == null || providerUniqueIdentifier.providerLabel === ''" 
-      [ngClass]= "{'disabled': provider.providerLabel == null || provider.providerLabel === '' || provider.providerUniqueIdentifier == null || providerUniqueIdentifier.providerLabel === ''}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn" 
+      <button [disabled]="provider.providerLabel == null || provider.providerLabel === '' || provider.providerUniqueIdentifier == null || provider.providerUniqueIdentifier === ''" 
+      [ngClass]= "{'disabled': provider.providerLabel == null || provider.providerLabel === '' || provider.providerUniqueIdentifier == null || provider.providerUniqueIdentifier === ''}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn" 
       (click)="saveProvider()" style="margin-left: 10px;"></button>
 
     </div>

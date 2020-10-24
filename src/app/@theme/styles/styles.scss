@@ -70,7 +70,7 @@ font-size: 13px !important;
 }
 
 .disabled {
-  cursor: not-allowed;
+  cursor: not-allowed !important;
 }
 .disabledPrimary {
   background-color: #6300ee34;
@@ -90,6 +90,10 @@ font-size: 13px !important;
 
 .p-dialog  {
   width: 35% !important;;
+}
+
+input {
+  font-size: 13px;
 }
 
 .primaryBtn {

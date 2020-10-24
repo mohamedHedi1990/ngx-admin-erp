@@ -24,8 +24,7 @@ export class ListDecaissementsComponent implements OnInit {
     this.getAllDecaissements();
   }
   saveDecaissement(decaissement) {
-    console.log('--------------------------------------------------------------- ', decaissement);
-/*
+
     const context = this;
     this.UtilsService.post(UtilsServiceService.API_DECAISSEMENT, decaissement).subscribe( response => {
         this.hideDecaissementWindow();
@@ -45,13 +44,7 @@ export class ListDecaissementsComponent implements OnInit {
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
         `Un erreur interne a été produit lors de l'enregistrement du décaissement  ${decaissement.decaissementLabel}`);
-        }); */
-
-        this.decaissments.push(decaissement);
-        this.initDecaissement();
-        this.showDecaissementWindow = false;
-       
-
+        }); 
 
   }
   hideDecaissementWindow() {
@@ -60,7 +53,7 @@ export class ListDecaissementsComponent implements OnInit {
   }
 
   getAllDecaissements() {
-    this.decaissments = [
+    /*this.decaissments = [
       {
         decaissementId: 1,
       decaissementType: {
@@ -110,8 +103,8 @@ export class ListDecaissementsComponent implements OnInit {
       decaissementChequeImpaye: null,
       
       }
-    ];
-    /*const context = this;
+    ];*/
+    const context = this;
     this.UtilsService.get(UtilsServiceService.API_DECAISSEMENT).subscribe( response => {
         context.decaissments = response;
       },
@@ -119,7 +112,7 @@ export class ListDecaissementsComponent implements OnInit {
         this.UtilsService.showToast('danger',
           'Erreur interne',
           `Un erreur interne a été produit lors du chargement de la liste des décaissements`);
-      });*/
+      });
   }
 
   editDecaissement(decaissement) {

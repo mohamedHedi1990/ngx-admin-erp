@@ -110,8 +110,16 @@ compareInvoice(a: any, b: any): boolean {
       contactEmail : '',
     });
   }
+  updateAmount() {
+    if( this.decaissement.decaissementType != null &&
+      this.decaissement.decaissementType.decaissementTypeValue ===
+        'PAIEMENT_FACTURE_FOURNISSEUR' && this.decaissement.decaissementInvoice != null) {
+          const restantAmount = this.decaissement.decaissementInvoice.invoiceTotalAmount - this.decaissement.decaissementInvoice.invoicePayment;
+          this.decaissement.decaissementAmount = restantAmount;
+        }
+  }
   getAllAccounts() {
-    this.accounts = [
+    /*this.accounts = [
       {
         accountId: 1,
         accountLabel : 'Compte courant BIAT',
@@ -141,8 +149,8 @@ compareInvoice(a: any, b: any): boolean {
         accountRIB: '',
         accountCurrency: 'TND',
       }
-    ];
-/*
+    ]; */
+
     const context = this;
     this.UtilsService.get(UtilsServiceService.API_ACCOUNT).subscribe( response => {
         context.accounts = response;
@@ -152,7 +160,7 @@ compareInvoice(a: any, b: any): boolean {
           'Erreur interne',
           `Un erreur interne a été produit lors du chargement des comptes`);
       });
-      */
+      
 
   }
 
@@ -161,6 +169,7 @@ compareInvoice(a: any, b: any): boolean {
       this.dispalyInvoiceProviderModal = false;
       this.getAllInvoiceProviders();
       this.decaissement.decaissementInvoice = response;
+      this.updateAmount();
       this.UtilsService.showToast('success',
       'Facture fournisseur ajoutée avec succés',
       `La facture fournisseur numéro ${response.invoiceNumber} a été ajoutée avec succés`);
@@ -193,7 +202,7 @@ compareInvoice(a: any, b: any): boolean {
   }
 
   getAllInvoiceProviders() {
-this.invoices = [
+/*this.invoices = [
   {
     invoiceId: 1,
 invoiceCurrency: 'TND',
@@ -204,8 +213,8 @@ invoiceNumber: 'REF123',
 invoiceCurrency: 'TND',
 invoiceNumber: 'REF12325565',
   }
-];
-    /*
+];*/
+    
     this.invoices = [];
     if (this.decaissement.decaissementProvider != null) {
       const context = this;
@@ -219,13 +228,13 @@ invoiceNumber: 'REF12325565',
             `Un erreur interne a été produit lors du chargement des factures fournissuers`);
         });
   
-    }*/
+    }
 
     
   }
 
   getAllProviders() {
-    this.providers = [
+    /*this.providers = [
       {
         providerId: 1,
     providerLabel: 'BI SERVICES',
@@ -246,8 +255,8 @@ invoiceNumber: 'REF12325565',
     providerEmail: '',
     providerContacts: [],
       }
-    ];
-    /*const context = this;
+    ];*/
+    const context = this;
     this.UtilsService.get(UtilsServiceService.API_PROVIDER).subscribe( response => {
         context.providers = response;
       },
@@ -255,11 +264,11 @@ invoiceNumber: 'REF12325565',
         this.UtilsService.showToast('danger',
           'Erreur interne',
           `Un erreur interne a été produit lors du chargement des fournissuers`);
-      });*/
+      });
   }
 
   getAllTypesDEcaissements() {
-this.decaissementTypes = [
+/*this.decaissementTypes = [
   {
     decaissementTypeValue: 'PAIEMENT_FACTURE_FOURNISSEUR',
     decaissementTypeLabel: 'Paiement facture fournisseur'
@@ -280,8 +289,8 @@ this.decaissementTypes = [
     decaissementTypeValue: 'COMISSION_BANCAIRE',
     decaissementTypeLabel: 'Comission bancaire'
   },
-];
-/*
+];*/
+
     const context = this;
     this.UtilsService.get(UtilsServiceService.API_TYPE_DECAISSEMENT).subscribe( response => {
         context.decaissementTypes = response;
@@ -291,7 +300,7 @@ this.decaissementTypes = [
         this.UtilsService.showToast('danger',
           'Erreur interne',
           `Un erreur interne a été produit lors du chargement des types des décaissements`);
-      }); */
+      }); 
 
   }
 
