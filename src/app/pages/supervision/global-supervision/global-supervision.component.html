@@ -1,0 +1,47 @@
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
+<h4 *ngIf="!showDecaissementWindow" style="background: #E7E8E8; 
+padding: 10px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;margin-left: 10px">
+Etat global de trésereorie
+</h4>
+<div class="card" style="margin-top:3%;">
+  <p-table #dt [value]="operations" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+           [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+           [paginator]="true" currentPageReportTemplate=""
+           [filterDelay]="0">
+    <ng-template pTemplate="header">
+      <tr style="text-align: center; font-size: 13px;">
+        <th style="text-align: center; font-size: 13px;width: 12%">Date</th>
+        <th style="text-align: center; font-size: 13px;width: 10%">Opération</th>
+        <th style="text-align: center; font-size: 13px;width: 12%">Détails</th>
+        <th style="text-align: center; font-size: 13px;width: 12%">Montant</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-operation>
+      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;"[ngClass]="{
+        'green-tr': operation.opperationType === 'ENCAISSEMENT',
+        'red-tr': operation.opperationType === 'DECAISSEMENT'
+      }">
+        <td  style="text-align: center;font-size: 13px;">
+          {{operation.operationDate}}
+        </td>
+        <td style="text-align: center;font-size: 13px;">
+          <div>{{operation.opperationLabel}}</div>
+          <div *ngIf="operation.opperationFacultatifLabel != null || operation.opperationFacultatifLabel !==''"> {{operation.opperationFacultatifLabel}}</div>
+        </td>
+        <td style="text-align: center;font-size: 13px;">
+          {{operation.opperationDetails}}
+        </td>
+        <td style="text-align: center;font-size: 13px;">
+          <span *ngIf="operation.opperationType === 'DECAISSEMENT'">-</span>{{operation.operationAmountS}} {{operation.opperationCurrency}}
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr style="font-size: 13px">
+        <td colspan="8" style="text-align: left !important;">Aucune opération trouvée pour cette pèriode!</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
