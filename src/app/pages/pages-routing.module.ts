@@ -27,6 +27,11 @@ const routes: Routes = [{
         .then(m => m.SaisieEncaissmentsModule),
     },
     {
+      path: 'suivi-tresorerie',
+      loadChildren: () => import('./supervision/supervision.module')
+        .then(m => m.SupervisionModule),
+    },
+    {
       path: 'iot-dashboard',
       component: DashboardComponent,
     },

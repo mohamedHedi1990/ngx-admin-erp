@@ -24,6 +24,7 @@ export class PaiementFournisseurComponent implements OnInit {
     paymentRuleNumber: null,
     PaymentRulesDetails: null,
     paymentRuleDeadlineDate: null,
+    paymentRuleOperationType: 'DECAISSEMENT',
   };
   loading = false;
   invoice = null;
@@ -136,7 +137,10 @@ export class PaiementFournisseurComponent implements OnInit {
 
 
   }
-
+delPaymentRule(pRule) {
+  this.paymentRule = pRule;
+  this.displayDeletePaymentRuleModal = true;
+}
   deletePaymentRule() {
 
 	  const context = this;
@@ -170,6 +174,7 @@ initPaymentRule() {
     paymentRuleNumber: null,
     PaymentRulesDetails: null,
     paymentRuleDeadlineDate: null,
+    paymentRuleOperationType: 'DECAISSEMENT',
   };
 }
 

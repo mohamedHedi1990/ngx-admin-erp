@@ -119,38 +119,6 @@ compareInvoice(a: any, b: any): boolean {
         }
   }
   getAllAccounts() {
-    /*this.accounts = [
-      {
-        accountId: 1,
-        accountLabel : 'Compte courant BIAT',
-        accountBank: 'BIAT',
-        accountBankAdress : 'LAC 2',
-        accountAgency: 'BIAT LAC 2',
-        accountAgencyAdress: '',
-        accountChargeCustomerName: '',
-        accountChargeCustomerPhoneNumber: '',
-        accountChargeCustomerEmail: '',
-        accountNumber: 'M4123456789',
-        accountRIB: '',
-        accountCurrency: 'TND',
-        accountContacts: [],
-      },
-      {
-        accountId: 2,
-        accountLabel : 'Compte courant BIAT',
-        accountBank: 'BIAT',
-        accountBankAdress : 'LAC 2',
-        accountAgency: 'BIAT LAC 2',
-        accountAgencyAdress: '',
-        accountChargeCustomerName: '',
-        accountChargeCustomerPhoneNumber: '',
-        accountChargeCustomerEmail: '',
-        accountNumber: 'M4123456789',
-        accountRIB: '',
-        accountCurrency: 'TND',
-      }
-    ]; */
-
     const context = this;
     this.UtilsService.get(UtilsServiceService.API_ACCOUNT).subscribe( response => {
         context.accounts = response;

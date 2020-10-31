@@ -130,7 +130,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'Etat global de trésereorie',
-        link: '/pages/extra-components/progress-bar',
+        link: '/pages/suivi-tresorerie/etat-global',
       },
       {
         title: 'Effets à l\'encaissements',
