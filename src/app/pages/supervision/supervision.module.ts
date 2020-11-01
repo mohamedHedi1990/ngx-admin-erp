@@ -14,7 +14,7 @@ import localeFrExtra from '@angular/common/locales/extra/fr';
 import {DatePipe, registerLocaleData} from '@angular/common';
 registerLocaleData(localeFr, 'fr', localeFrExtra);
 import { GlobalSupervisionComponent } from './global-supervision/global-supervision.component';
-
+import {StatusCardComponent} from './status-card/status-card.component';
 import {
   NbActionsModule,
   NbButtonModule,
@@ -35,7 +35,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 
 @NgModule({
-  declarations: [GlobalSupervisionComponent],
+  declarations: [GlobalSupervisionComponent, StatusCardComponent],
   imports: [
     CommonModule,
     SupervisionRoutingModule,

@@ -17,14 +17,15 @@ Etat global de trésereorie
           class="form-control p-field"
           id="type"
           name="side"
-          [(ngModel)]="supervision.accountId"
+          [(ngModel)]="supervision.account"
          
           style="font-size: 13px"
           (change)="supervisionFn()"
+          [compareWith]="compareAccount" 
           >
           
-          <option *ngIf="supervision.accountId == null" [ngValue]="null">-- Compte bancaire --</option>
-          <option *ngFor="let a of accounts" [ngValue]="a.accountId">
+          <option *ngIf="supervision.account == null" [ngValue]="null">-- Compte bancaire --</option>
+          <option *ngFor="let a of accounts" [ngValue]="a">
             {{ a.accountLabel }}
           </option>
         </select>
@@ -66,6 +67,13 @@ Etat global de trésereorie
           >
         
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xxxl-3 col-md-6" *ngFor="let statusCard of statusCards">
+      <ngx-status-card [title]="statusCard.title" [type]="statusCard.type" [value]="statusCard.value">
+        <i [ngClass]="statusCard.iconClass"></i>
+      </ngx-status-card>
     </div>
   </div>
   <p-table #dt [value]="operations" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"

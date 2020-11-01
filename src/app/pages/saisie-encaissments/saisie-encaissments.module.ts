@@ -36,9 +36,10 @@ import { NouveauReglementComponent } from './nouveau-reglement/nouveau-reglement
 import { ListDecaissementsComponent } from './list-decaissements/list-decaissements.component';
 import { PaiementClientComponent } from './paiement-client/paiement-client.component';
 import { NouveauDecaissementComponent } from './nouveau-decaissement/nouveau-decaissement.component';
+import { ListEncaissementsComponent } from './list-encaissements/list-encaissements.component';
 
 @NgModule({
-  declarations: [PaiementFournisseurComponent, NouveauReglementComponent, ListDecaissementsComponent, PaiementClientComponent, NouveauDecaissementComponent],
+  declarations: [PaiementFournisseurComponent, NouveauReglementComponent, ListDecaissementsComponent, PaiementClientComponent, NouveauDecaissementComponent, ListEncaissementsComponent],
   imports: [
     CommonModule,
     SaisieEncaissmentsRoutingModule,

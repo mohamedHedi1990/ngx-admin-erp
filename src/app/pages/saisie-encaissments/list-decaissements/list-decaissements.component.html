@@ -9,7 +9,7 @@ Liste des décaissements
   <p-table #dt [value]="decaissments" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
            [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
            [paginator]="true" currentPageReportTemplate=""
-           [filterDelay]="0" [globalFilterFields]="['decaissementDeadlineDate','decaissementTypeLabel','decaissementAmount','decaissementLabel','decaissementInvoice.invoiceNumber', 'decaissementBankAccount.accountLabel','createdAt', 'updatedAt', 'decaissementStatus']">
+           [filterDelay]="0" [globalFilterFields]="['decaissementDeadlineDate','decaissementType.decaissementTypeLabel','decaissementAmount','decaissementLabel','decaissementInvoice.invoiceNumber', 'decaissementBankAccount.accountLabel','createdAt', 'updatedAt']">
     <ng-template pTemplate="caption" >
       <div >
         <div class="p-d-flex p-ai-center p-jc-between" style=" width: 60%; display: inline-block;">

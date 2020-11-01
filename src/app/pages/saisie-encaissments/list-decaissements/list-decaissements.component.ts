@@ -53,57 +53,6 @@ export class ListDecaissementsComponent implements OnInit {
   }
 
   getAllDecaissements() {
-    /*this.decaissments = [
-      {
-        decaissementId: 1,
-      decaissementType: {
-        decaissementTypeValue: 'PAIEMENT_FACTURE_FOURNISSEUR',
-        decaissementTypeLabel: 'Paiement facture fournisseur'
-      },
-      decaissementDeadlineDate : '2020-10-10',
-      decaissementPaymentType: 'CHEQUE',
-      decaissementPaymentRuleNumber: '000000123',
-      decaissementPaymentRuleDetails: null,
-      decaissementAmount : 1300,
-      decaissementAmountS : '1300.000',
-      decaissementCurrency : 'TND',
-      decaissementLabel: 'Decaissement de la facture fournissuer numéro REF123',
-      decaissementDetails : 'Décaissement fait par notre agence commercial pour régler cette facture avant la date de fin',
-      decaissementInvoice : {
-        invoiceId: 1,
-	invoiceCurrency: 'TND',
-    invoiceNumber: 'REF123',
-      },
-      decaissementBankAccount : {
-        accountId: 1,
-        accountLabel : 'Compte courant BIATmmmm',
-        accountBank: 'BIAT',
-        accountBankAdress : 'LAC 2',
-        accountAgency: 'BIAT LAC 2',
-        accountAgencyAdress: '',
-        accountChargeCustomerName: '',
-        accountChargeCustomerPhoneNumber: '',
-        accountChargeCustomerEmail: '',
-        accountNumber: 'M4123456789',
-        accountRIB: '',
-        accountCurrency: '',
-        accountContacts: [],
-      },
-      decaissementProvider:  {
-        providerId: 1,
-    providerLabel: 'BI SERVICES',
-    providerAddress: '',
-    providerUniqueIdentifier: 'BI S RF 12OPL - KL2',
-    providerManagerName: '',
-    providerTel: '',
-    providerEmail: '',
-    providerContacts: [],
-      },
-      isValidated: false,
-      decaissementChequeImpaye: null,
-      
-      }
-    ];*/
     const context = this;
     this.UtilsService.get(UtilsServiceService.API_DECAISSEMENT).subscribe( response => {
         context.decaissments = response;
