@@ -88,7 +88,7 @@ Liste des encaissements
 
 
         <td style="text-align: center;">
-          <div  *ngIf="!decaissement.isValidated" style="text-align: center;">
+          <div  *ngIf="!encaissement.isValidated" style="text-align: center;">
             <i ngbTooltip="Valider"  class="pi pi-check"  style="margin-right: 7px; color: #6200ee" (click)="showValidateEncaissementWindow(encaissement)"></i>
             <i ngbTooltip="Modifier"  class="pi pi-pencil"  style="margin-right: 7px;color: #6200ee" (click)="editEncaissement(encaissement)"></i>
             <i placement="top" ngbTooltip="Supprimer"  class="pi pi-trash" (click)="deleteEncaissement(encaissement)" style="color: #6200ee"></i>

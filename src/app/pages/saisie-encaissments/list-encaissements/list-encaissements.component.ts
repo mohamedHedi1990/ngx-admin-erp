@@ -110,7 +110,7 @@ export class ListEncaissementsComponent implements OnInit {
 
   validateEncaissement()  {
 	  const context = this;
-    this.UtilsService.put(UtilsServiceService.API_DECAISSEMENT + '/' + this.encaissement.encaissementId, null).subscribe( response => {
+    this.UtilsService.put(UtilsServiceService.API_ENCAISSEMENT + '/' + this.encaissement.encaissementId, null).subscribe( response => {
 
       this.UtilsService.showToast('success',
       'Décaissement validé avec succés',

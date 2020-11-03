@@ -4,6 +4,7 @@ import {PaiementFournisseurComponent} from './paiement-fournisseur/paiement-four
 import {NouveauReglementComponent} from './nouveau-reglement/nouveau-reglement.component';
 import {PaiementClientComponent} from './paiement-client/paiement-client.component';
 import { ListDecaissementsComponent } from './list-decaissements/list-decaissements.component';
+import { ListEncaissementsComponent } from './list-encaissements/list-encaissements.component';
 
 const routes: Routes = [{
   path: '',
@@ -23,6 +24,10 @@ const routes: Routes = [{
     {
       path: 'decaissements',
       component: ListDecaissementsComponent,
+    },
+    {
+      path: 'encaissements',
+      component: ListEncaissementsComponent,
     },
   ],
 

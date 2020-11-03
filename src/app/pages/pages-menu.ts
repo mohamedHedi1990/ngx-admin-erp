@@ -84,7 +84,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'Encaissements',
-        link: '/pages/ui-features/typography',
+        link: '/pages/saisie-tresorerie/encaissements',
         icon: 'keypad-outline',
       },
       {
