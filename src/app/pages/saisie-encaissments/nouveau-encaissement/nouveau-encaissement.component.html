@@ -261,7 +261,8 @@ Modifier un encaissement
            
           >
             <option [ngValue]="'CHEQUE'">CHEQUE</option>
-            <option [ngValue]="'EFFET'">EFFET</option>
+            <option [ngValue]="'EFFET_ENCAISSEMENT'">EFFET ENCAISSEMENT</option>
+            <option [ngValue]="'EFFET_ESCOMPTE'">EFFET ESCOMPTE</option>
             <option [ngValue]="'VIREMENT'">VIREMENT</option>
             <option [ngValue]="'ESPECE'">ESPECE</option>
             <option [ngValue]="'TRAITE'">TRAITE</option>
@@ -359,7 +360,7 @@ Modifier un encaissement
   </div>
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
-              <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="dispalyencaissementTypeModal=false"></button>
+              <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="dispalyEncaissementTypeModal=false"></button>
 
               <button [disabled]="encaissementType.encaissementTypeLabel == null || encaissementType.encaissementTypeLabel === ''"
               [ngClass]= "{'disabled': encaissementType.encaissementTypeLabel == null || encaissementType.encaissementTypeLabel === ''}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn" 
@@ -419,7 +420,7 @@ Modifier un encaissement
 </div>
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
-      <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="dispalycustomerModal=false"></button>
+      <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="dispalyCustomerModal=false"></button>
 
       <button [disabled]="customer.customerLabel == null || customer.customerLabel === '' || customer.customerUniqueIdentifier == null || customer.customerUniqueIdentifier === ''" 
       [ngClass]= "{'disabled': customer.customerLabel == null || customer.customerLabel === '' || customer.customerUniqueIdentifier == null || customer.customerUniqueIdentifier === ''}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn" 
@@ -548,7 +549,7 @@ Modifier un encaissement
   
 
 
-              <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="dispalyInvoicecustomerModal=false"></button>
+              <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="dispalyInvoiceCustomerModal=false"></button>
 
       <button [disabled]="invoice.invoiceNumber == null || invoice.invoiceNumber === '' || invoice.customer == null" 
       [ngClass]= "{'disabled': invoice.invoiceNumber == null || invoice.invoiceNumber === '' || invoice.customer == null}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn" 

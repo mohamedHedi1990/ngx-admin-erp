@@ -16,8 +16,7 @@
                     id="type" name="side" [(ngModel)]="reglement.paymentRuleAccount" [ngClass]="{
         'is-invalid': reglement.paymentRuleAccount == null ,
         'is-valid':reglement.paymentRuleAccount != null
-      }" style="font-size: 13px">
-              <option [ngValue]="null">-- Compte bancaire --</option>
+      }" style="font-size: 13px" [compareWith]="compareAccount">
               <option *ngFor="let a of accounts;" [ngValue]="a">{{a.accountLabel}}</option>
             </select>
           </div>
@@ -61,7 +60,8 @@
       }">
             <option [ngValue]="null">-- Mode de payment --</option>
             <option [ngValue]="'CHEQUE'">CHEQUE</option>
-            <option [ngValue]="'EFFET'">EFFET</option>
+            <option [ngValue]="'EFFET_ENCAISSEMENT'">EFFET ENCAISSEMENT</option>
+            <option [ngValue]="'EFFET_ESCOMPTE'">EFFET ESCOMPTE</option>
             <option [ngValue]="'VIREMENT'">VIREMENT</option>
             <option [ngValue]="'ESPECE'">ESPECE</option>
             <option [ngValue]="'TRAITE'">TRAITE</option>
@@ -91,7 +91,9 @@ reglement.paymentRulePaymentMethod === 'TRAITE'">
     </div>
     <div class="p-grid p-fluid" *ngIf="reglement.paymentRulePaymentMethod === 'EFFET' ||
 reglement.paymentRulePaymentMethod === 'VIREMENT' ||
-reglement.paymentRulePaymentMethod === 'ESPECE'">
+reglement.paymentRulePaymentMethod === 'ESPECE' ||
+reglement.paymentRulePaymentMethod === 'EFFET_ENCAISSEMENT' ||
+reglement.paymentRulePaymentMethod === 'EFFET_ESCOMPTE'">
       <div style="display: flex">
         <div class="mb-12 col-md-12 col-12">
           <label for="details" class="p-float-label" style="font-size: 13px" style="font-size: 13px">Details</label>

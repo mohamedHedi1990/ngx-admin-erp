@@ -23,6 +23,7 @@ export class AddNewCompteComponent implements OnInit {
     accountRIB: '',
     accountCurrency: '',
     accountContacts: [],
+    accountInitialAmount: null,
   };
   @Output() addNewAccountEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();

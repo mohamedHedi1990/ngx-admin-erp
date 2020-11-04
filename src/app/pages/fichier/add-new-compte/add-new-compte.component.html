@@ -101,7 +101,7 @@
     <p-panel header="Informations sur le compte bancaire" [toggleable]="true">
       <div class="p-grid p-fluid">
         <div style="display: flex">
-          <div class="mb-1 col-md-6 col-12">
+          <div class="mb-1 col-md-4 col-12">
             <label for="accountLabel" class="p-float-label">Label Compte</label>
             <div class="p-inputgroup">
               <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
@@ -112,7 +112,7 @@
       }">
             </div>
           </div>
-          <div class="mb-1 col-md-6 col-12 p-field">
+          <div class="mb-1 col-md-4 col-12 p-field">
             <label for="accountBank" class="p-float-label">Numero Compte:</label>
 
             <div class="p-inputgroup">
@@ -125,12 +125,7 @@
             </div>
           </div>
 
-
-
-        </div></div>
-      <div class="p-grid p-fluid">
-        <div style="display: flex">
-          <div class="mb-1 col-md-6 col-12">
+          <div class="mb-1 col-md-4 col-12">
             <label for="accountRIB" class="p-float-label">Numero RIB:</label>
             <div class="p-inputgroup">
               <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
@@ -138,6 +133,21 @@
                      [(ngModel)]="account.accountRIB " [ngClass]="{
         'is-invalid': account.accountRIB  == null || account.accountRIB  == '' ,
         'is-valid': account.accountRIB != null && account.accountRIB  !== ''
+      }">
+            </div>
+          </div>
+
+        </div></div>
+      <div class="p-grid p-fluid">
+        <div style="display: flex">
+          <div class="mb-1 col-md-6 col-12">
+            <label for="accountAmount" class="p-float-label">Solde initial:</label>
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+              <input type="number" class="form-control p-field"  id="accountAmount"
+                     [(ngModel)]="account.accountInitialAmount" [ngClass]="{
+        'is-invalid': account.accountInitialAmount  == null || account.accountInitialAmount  == '' ,
+        'is-valid': account.accountInitialAmount != null && account.accountInitialAmount  !== ''
       }">
             </div>
           </div>
@@ -174,9 +184,13 @@
       <ngx-new-contact [contact]="contact"></ngx-new-contact>
     </div>
   </p-panel>
-  <div class="p-panel p-panel-header" style="margin-top: 20px;">
-    <button [disabled]="" class="btn btn-secondary" style="margin-left: 1%;" (click)="cancel()">Annuler</button>
-    <button   class="btn btn-success" style="margin-left: 74%;" (click)="saveAccount()" [disabled]="checkAccountValid()">Enregistrer</button>
+  <div class="p-panel p-panel-header" style="margin-top: 20px;float: right; padding: 2%;">
+
+    <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="cancel()"></button>
+
+      <button [disabled]="checkAccountValid()" 
+      [ngClass]= "{'disabled': checkAccountValid()}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn" 
+      (click)="saveAccount()" style="margin-left: 10px;"></button>
   </div>
 
 

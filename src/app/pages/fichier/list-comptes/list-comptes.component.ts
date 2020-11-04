@@ -133,6 +133,7 @@ export class ListComptesComponent implements OnInit {
         accountRIB: '',
         accountCurrency: '',
         accountContacts: [],
+        accountInitialAmount: null,
     };
   }
 

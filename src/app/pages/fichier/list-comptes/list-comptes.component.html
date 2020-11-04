@@ -5,28 +5,31 @@
            [paginator]="true" currentPageReportTemplate=""
            [filterDelay]="0" [globalFilterFields]="['accountLabel','accountBankAdress','accountBank','accountAgency','accountAgencyAdress','accountChargeCustomerName','accountChargeCustomerPhoneNumber','accountNumber','accountRIB','accountCurrency','accountContacts','createdAt','updatedAt']">
     <ng-template pTemplate="caption" >
-      <div style="display: flex; width: 100%">
-        <div class="p-d-flex p-ai-center p-jc-between" style="width: 60%">
-        <span class="p-input-icon-left" style="width: 100%">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher un compte.." />
-                </span>
-        </div>
-
-        <div style="width:25%; margin-left: 36%">
-          <button pButton pRipple label="Nouveau Compte" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="showAccountWindow = true"></button>
-        </div>
-
+      <div >
+        <div class="p-d-flex p-ai-center p-jc-between" style=" width: 60%; display: inline-block;">
+          <span class="p-input-icon-left" style="width: 100%">
+                      <i class="pi pi-search"></i>
+                      <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher un compte.." />
+                  </span>
+          </div>
+  
+          <div style="float:right">
+            <button pButton pRipple label="Nouveau Compte" icon="pi pi-plus" class="primaryBtn" (click)="showAccountWindow = true"></button>
+          </div>
       </div>
+        
+
+     
 
     </ng-template>
     <ng-template pTemplate="header">
-      <tr style="text-align: center; font-size: 15px;">
-        <th pSortableColumn="accountLabel" style="text-align: center; font-size: 13px; width: 20%">Compte Bancaire</th>
-        <th pSortableColumn="accountNumber" style="text-align: center; font-size: 13px;width: 20%">Num compte</th>
-        <th pSortableColumn="accountBank" style=" text-align: center;font-size: 13px;width: 10%">Banque</th>
-        <th pSortableColumn="accountAgency" style="text-align: center; font-size: 13px;width: 20%">Agence</th>
-        <th pSortableColumn="accountCurrency" style="text-align: center;font-size: 13px;width: 10%">Devise</th>
+      <tr style="text-align: center; font-size: 13px;">
+        <th  style="text-align: center; font-size: 13px; width: 20%">Compte Bancaire</th>
+        <th  style="text-align: center; font-size: 13px;width: 20%">Num compte</th>
+        <th style=" text-align: center;font-size: 13px;width: 10%">Banque</th>
+        <th  style="text-align: center; font-size: 13px;width: 20%">Agence</th>
+        <th style="text-align: center;font-size: 13px;width: 10%">Solde</th>
+        <th  style="text-align: center;font-size: 13px;width: 10%">Devise</th>
 
         <!--
 		<th pSortableColumn="accountChargeCustomerPhoneNumber" style="text-align: center; font-size: 15px;">Télephone</th>
@@ -37,7 +40,7 @@
           <th pSortableColumn="createdAt">Date de création</th>
           <th pSortableColumn="updatedAt">Date de modfication</th>
           -->
-        <th style="width: 20%;font-size: 13px">Actions</th>      </tr>
+        <th style="text-align: center;width: 10%">Actions</th>      </tr>
       <!--
       <tr>
         <th>
@@ -74,6 +77,9 @@
           {{account.accountAgency}}
         </td>
         <td style="text-align: center;">
+          {{account.accountInitialAmountS}}
+        </td>
+        <td style="text-align: center;">
           {{account.accountCurrency}}
         </td>
 
@@ -96,10 +102,10 @@
                 </td>
         -->
         <td style="text-align: center;">
-          <div style="display: flex;">
-            <i    placement="top" ngbTooltip="Contacter"  class="pi pi-users"  style="margin-right: 7px;" (click)="showContacts(account)"></i>
-            <i    placement="top" ngbTooltip="Modifier"  class="pi pi-pencil"  style="margin-right: 7px;" (click)="editAccount(account)"></i>
-            <i    placement="top" ngbTooltip="Supprimer"  class="pi pi-trash"  (click)="deleteAccount(account)"></i>
+          <div>
+            <i    placement="top" ngbTooltip="Contacter"  class="pi pi-users"  style="margin-right: 7px;color: #6200ee" (click)="showContacts(account)"></i>
+            <i    placement="top" ngbTooltip="Modifier"  class="pi pi-pencil"  style="margin-right: 7px;color: #6200ee" (click)="editAccount(account)"></i>
+            <i    placement="top" ngbTooltip="Supprimer"  class="pi pi-trash"  style="color: #6200ee" (click)="deleteAccount(account)"></i>
           </div>
 
         </td>

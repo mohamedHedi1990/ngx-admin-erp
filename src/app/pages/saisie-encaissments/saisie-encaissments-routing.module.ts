@@ -11,7 +11,7 @@ const routes: Routes = [{
   children: [
     {
       path: 'reglement-client',
-      component: NouveauReglementComponent,
+      component: PaiementClientComponent,
     },
     {
       path: 'paiement-fournisseur',

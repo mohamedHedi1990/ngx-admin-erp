@@ -2,23 +2,25 @@
 <div class="card">
     <p-table #dt [value]="invoices" dataKey="invoiceId" styleClass="p-datatable-customers" [rowHover]="true" [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading" [paginator]="true" currentPageReportTemplate="" [filterDelay]="0"
         [globalFilterFields]="['invoiceNumber','invoiceTotalAmount','invoiceDate','invoiceDeadlineDate','invoiceNet','customer.customerLabel','customer.customerUniqueIdentifier', 'createdAt', 'updatedAt']" [(selection)]="selectedInvoices">
-        <ng-template pTemplate="caption">
-            <div style="display: flex; width: 100%">
-                <div class="p-d-flex p-ai-center p-jc-between" style="width: 60%">
-                    <span class="p-input-icon-left" style="width: 100%">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher une facture fournisseur.." />
-                </span>
+        <ng-template pTemplate="caption" >
+            <div >
+              <div class="p-d-flex p-ai-center p-jc-between" style=" width: 60%; display: inline-block;">
+                <span class="p-input-icon-left" style="width: 100%">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher une facture client.." />
+                        </span>
                 </div>
-
-                <div style="margin-left: 31%">
-                    <button [disabled]="selectedInvoices.length === 0"pButton pRipple label="Payer" class="p-button-success p-mr-2"
-                    (click)="displayPaymentRuleModal=true"></button>
+        
+                <div style="float:right">
+                  <button pButton pRipple label="Payer" icon="pi pi-plus" class="primaryBtn" (click)="displayPaymentRuleModal = true"
+                  [disabled]="selectedInvoices.length===0" [ngClass]= "{'disabled': selectedInvoices.length===0}"></button>
                 </div>
-
             </div>
-
-        </ng-template>
+              
+      
+           
+      
+          </ng-template>
         <ng-template pTemplate="header">
             <tr style="text-align: center; font-size: 15px;">
                 <th style="width: 3rem"></th>
@@ -58,7 +60,7 @@
                     {{invoice.invoiceNumber}}
                 </td>
                 <td style="text-align: center;font-size: 13px;">
-                    {{invoice.provider.providerLabel}}
+                    {{invoice.customer.customerLabel}}
                 </td>
                 <td style="text-align: center;font-size: 13px;">
                     {{invoice.invoiceDate}}
@@ -80,7 +82,7 @@
 
                 <td style="text-align: center;">
                     <div *ngIf="invoice.invoiceStatus === 'OPENED'">
-                        <i  placement="top" ngbTooltip="Ajouter un réglement"  class="pi pi-plus" style="margin-right: 7px; color:green"
+                        <i  placement="top" ngbTooltip="Ajouter un réglement"  class="pi pi-plus" style="margin-right: 7px; color: #6200ee"
                         (click)="addPaymentRule(invoice)"></i>
                     </div>
 					<div *ngIf="invoice.invoiceStatus === 'CLOSED'" style="text-align: center">
@@ -120,7 +122,9 @@
                                         <span *ngIf="paymentRule.paymentRulePaymentMethod === 'TRAITE'"> Traite numéro {{paymentRule.paymentRuleNumber}}</span>
                                         <span *ngIf="paymentRule.paymentRulePaymentMethod === 'VIREMENT'"> Virement{{paymentRule.paymentRulesDetails}}</span>
                                         <span *ngIf="paymentRule.paymentRulePaymentMethod === 'ESPECE'"> Espèce{{paymentRule.paymentRulesDetails}}</span>
-                                        <span *ngIf="paymentRule.paymentRulePaymentMethod === 'EFFET'"> Effet{{paymentRule.paymentRulesDetails}} </span>
+                                        <span *ngIf="paymentRule.paymentRulePaymentMethod === 'EFFET_ENCAISSEMENT'"> Effet d'encaissement {{paymentRule.paymentRulesDetails}} </span>
+                                        <span *ngIf="paymentRule.paymentRulePaymentMethod === 'EFFET_ESCOMPTE'"> Effet d'escompte {{paymentRule.paymentRulesDetails}} </span>
+
                                     </td>
                                     <td>{{paymentRule.paymentRuleDeadlineDate}}</td>
                                     <td>
@@ -139,11 +143,12 @@
                                         </div>
                                         -->
                                         <div *ngIf="!paymentRule.isValidated" style="text-align: center">
-                                            <i  placement="top" ngbTooltip="Valider ce réglement"  class="pi pi-check"  style="margin-right: 7px; color:green"
+                                            <i  placement="top" ngbTooltip="Valider ce réglement"  class="pi pi-check"  style="margin-right: 7px; color: #6200ee"
                                             (click)="ValidatePR(paymentRule)"></i>
-                                            <i  placement="top" ngbTooltip="Modifier ce réglement"  class="pi pi-pencil" style="margin-right: 7px; color: blue"
+                                            <i  placement="top" ngbTooltip="Modifier ce réglement"  class="pi pi-pencil" style="margin-right: 7px; color: #6200ee"
                                             (click)="ModifyPR(paymentRule)"></i>
-                                            <i  placement="top" ngbTooltip="Supprimer ce réglement"  class="pi pi-trash"  style="margin-right: 7px; color:red"></i>
+                                            <i  placement="top" ngbTooltip="Supprimer ce réglement"  class="pi pi-trash"  style="margin-right: 7px; color: #6200ee"
+                                            (click)="delPaymentRule(paymentRule)"></i>
                                           </div>
 										  <div *ngIf="paymentRule.isValidated" style="text-align: center">
 											- -

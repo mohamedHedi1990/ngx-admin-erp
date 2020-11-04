@@ -50,4 +50,21 @@ export class NouveauReglementComponent implements OnInit {
 
   }
 
+  compareAccount(a: any, b: any): boolean {
+    if (a==null || b== null) return true;
+    return a.accountId === b.accountId;
+ }
+ compareDeacissementType(a: any, b: any): boolean {
+  if (a==null || b== null)return true;
+  return a.encaissementTypeValue === b.encaissementTypeValue;
+}
+compareCustomer(a: any, b: any): boolean {
+  if (a==null || b== null) return true;
+  return a.customerId === b.customerId;
+}
+compareInvoice(a: any, b: any): boolean {
+  if (a==null || b== null) return true;
+  return a.invoiceId === b.invoiceId;
+}
+
 }
