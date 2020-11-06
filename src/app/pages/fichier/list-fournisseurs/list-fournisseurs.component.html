@@ -5,26 +5,28 @@
            [paginator]="true" currentPageReportTemplate=""
            [filterDelay]="0" [globalFilterFields]="['providerLabel','providerUniqueIdentifier','providerAddress','providerTel','providerEmail','providerManagerName','createdAt', 'updatedAt']">
     <ng-template pTemplate="caption" >
-      <div style="display: flex; width: 100%">
-        <div class="p-d-flex p-ai-center p-jc-between" style="width: 60%">
-        <span class="p-input-icon-left" style="width: 100%">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher un fournisseur.." />
-                </span>
-        </div>
-
-        <div style="width:23%; margin-left: 25%">
-          <button pButton pRipple label="Nouveau fournisseur" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="showProviderWindow=true"></button>
-        </div>
-
+      <div >
+        <div class="p-d-flex p-ai-center p-jc-between" style=" width: 60%; display: inline-block;">
+          <span class="p-input-icon-left" style="width: 100%">
+                      <i class="pi pi-search"></i>
+                      <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher un fournisseur.." />
+                  </span>
+          </div>
+  
+          <div style="float:right">
+            <button pButton pRipple label="Nouveau fournisseur" icon="pi pi-plus" class="primaryBtn" (click)="showProviderWindow = true"></button>
+          </div>
       </div>
+        
+
+     
 
     </ng-template>
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 13px;">
-        <th pSortableColumn="providerLabel" style="text-align: center; font-size: 13px;width: 20%">Dénomination<p-sortIcon field="providerLabel"></p-sortIcon></th>
-        <th pSortableColumn="providerUniqueIdentifier" style="text-align: center; font-size: 13px; width: 20%">Identifiant<p-sortIcon field="providerUniqueIdentifier"></p-sortIcon></th>
-        <th pSortableColumn="providerAddress" style="text-align: center;font-size: 13px; width: 25%">Adresse<p-sortIcon field="providerAddress"></p-sortIcon></th>
+        <th  style="text-align: center; font-size: 13px;width: 20%">Dénomination</th>
+        <th  style="text-align: center; font-size: 13px; width: 20%">Identifiant</th>
+        <th  style="text-align: center;font-size: 13px; width: 30%">Adresse</th>
         <!--
 		<th pSortableColumn="customerTel" style="text-align: center; font-size: 15px;">Télephone</th>
 		<th pSortableColumn="customerEmail" style="text-align: center; font-size: 15px;">Email</th>
@@ -35,7 +37,7 @@
           <th pSortableColumn="createdAt">Date de création</th>
           <th pSortableColumn="updatedAt">Date de modfication</th>
           -->
-        <th style="width: 15%;font-size: 13px">Actions</th>      </tr>
+        <th style="width: 10%;font-size: 13px; text-align: center;">Actions</th>      </tr>
       <!--
       <tr>
         <th>
@@ -81,10 +83,10 @@
         </td>
 
         <td style="text-align: center;">
-          <div style="display: flex;">
-            <i    placement="top" ngbTooltip="Contacter"  class="pi pi-users" style="margin-right: 7px;" (click)="showContacts(provider)"></i>
-            <i    placement="top" ngbTooltip="Modifier"  class="pi pi-pencil"  style="margin-right: 7px;" (click)="editProvider(provider)"></i>
-            <i    placement="top" ngbTooltip="Supprimer"  class="pi pi-trash"  (click)="deleteProvider(provider)"></i>
+          <div style="text-align: center;">
+            <i    placement="top" ngbTooltip="Contacter"  class="pi pi-users" style="margin-right: 7px;color: #6200ee" (click)="showContacts(provider)"></i>
+            <i    placement="top" ngbTooltip="Modifier"  class="pi pi-pencil"  style="margin-right: 7px;color: #6200ee" (click)="editProvider(provider)"></i>
+            <i    placement="top" ngbTooltip="Supprimer"  class="pi pi-trash"  style="color: #6200ee" (click)="deleteProvider(provider)"></i>
           </div>
 
         </td>

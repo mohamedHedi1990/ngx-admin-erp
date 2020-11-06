@@ -131,7 +131,7 @@ export class ListComptesComponent implements OnInit {
         accountChargeCustomerPhoneNumber: '',
         accountNumber: '',
         accountRIB: '',
-        accountCurrency: '',
+        accountCurrency: 'TND',
         accountContacts: [],
         accountInitialAmount: null,
     };

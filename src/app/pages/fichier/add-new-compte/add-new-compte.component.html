@@ -156,11 +156,10 @@
 
             <div class="p-inputgroup">
               <span class="p-inputgroup-addon"><i class="pi pi-dollar"></i></span>
-              <input type="text" class="form-control p-field" id="accountCurrency"
-                     [(ngModel)]="account.accountCurrency" [ngClass]="{
-        'is-invalid': account.accountCurrency == null || account.accountCurrency == '' ,
-        'is-valid': account.accountCurrency != null && account.accountCurrency !== ''
-      }">
+              <select class="form-control p-field" name="currency" [(ngModel)]="account.accountCurrency" id="cb">
+                      <option [ngValue]="'TND'">TND</option>
+                      <option [ngValue]="'EUR'">EUR</option>
+                    </select>
             </div>
           </div>
 
@@ -173,16 +172,16 @@
     </p-panel>
   <br>
   <p-panel header="Configuration des contacts" [toggleable]="true" collapsed="true">
-    <div style="width: 21%;
-    margin-left: 79%;">
+    <div>
       <button pButton pRipple label="Nouveau contact" icon="pi pi-user-plus" class="p-mr-2"
               (click)="addNewContact()" style="background: #dee2e6;
     color: black;
     border: #dee2e6;"></button>
     </div>
-    <div *ngFor="let contact of account.accountContacts" style="padding-bottom: 50px;">
-      <ngx-new-contact [contact]="contact"></ngx-new-contact>
-    </div>
+   <div *ngFor="let contact of account.accountContacts" style="padding-bottom: 50px;">
+    <ngx-new-contact [contact]="contact"></ngx-new-contact>
+  </div>
+    
   </p-panel>
   <div class="p-panel p-panel-header" style="margin-top: 20px;float: right; padding: 2%;">
 
