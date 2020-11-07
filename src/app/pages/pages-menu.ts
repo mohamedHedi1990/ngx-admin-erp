@@ -100,8 +100,21 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Rapprochement bancaire',
-        link: '/pages/modal-overlays/dialog',
+        link: '/pages/suivi-tresorerie/rapprochement-bancaire',
       },
+      {
+        title: 'Tréserorie previsionnel non engagé',
+        link: '/pages/suivi-tresorerie/etat-non-engage',
+      },
+      {
+        title: 'Tréserorie previsionnel engagé',
+        link: '/pages/suivi-tresorerie/etat-engage',
+      },
+      {
+        title: 'Etat global de trésereorie',
+        link: '/pages/suivi-tresorerie/etat-global',
+      },
+      /*
       {
         title: 'Escompte d\'effets',
         link: '/pages/modal-overlays/window',
@@ -109,10 +122,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Simulation tréserorie',
         link: '/pages/modal-overlays/popover',
-      },
+      },*/
     ],
   },
-  {
+  /*{
     title: 'Edition',
     icon: 'message-circle-outline',
     children: [
@@ -155,5 +168,5 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/maps/leaflet',
       },
     ],
-  },
+  },*/
 ];

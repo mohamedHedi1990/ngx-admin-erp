@@ -1,4 +1,10 @@
-<h5>Nouvelle tarification bancaire</h5>
+<h4 style="background: #E7E8E8; 
+padding: 10px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;margin-left: 10px">
+<span *ngIf="tarif.tarifId == null">Ajouter une tarif bancaire</span>
+<span *ngIf="tarif.tarifId != null">Modifier la tarif bancaire{{tarif.tarifLabel}}</span>
+</h4>
 <div style="width: 90%;margin: auto;">
   <div class="p-grid p-fluid">
     <div style="display: flex">

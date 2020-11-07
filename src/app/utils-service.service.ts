@@ -26,6 +26,7 @@ export class UtilsServiceService {
   public static API_PAYMENT_RULE = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/paymentRule';
   public static API_SUIVIE_TRESERORIE = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/supervision';
   public static API_GLOBAL_SUPERVISION = UtilsServiceService.API_SUIVIE_TRESERORIE + '/' + 'global';
+  public static API_RAAPROCHEMENT_BANCAIRE= UtilsServiceService.API_SUIVIE_TRESERORIE + '/' + 'rapprochement-bancaire';
 
 
 

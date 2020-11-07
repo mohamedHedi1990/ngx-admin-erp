@@ -1,6 +1,17 @@
-<h5 *ngIf="invoice.invoiceId == null">Nouvelle facture client</h5>
-<h5 *ngIf="invoice.invoiceId != null">Modifier la facture client {{invoice.invoiceNumber}}</h5>
 
+<h4 *ngIf="invoice.invoiceId == null" style="background: #E7E8E8; 
+padding: 10px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;margin-left: 10px">
+Ajouter une nouvelle facture client
+</h4>
+<h4 *ngIf="invoice.invoiceId != null" style="background: #E7E8E8; 
+padding: 10px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;margin-left: 10px">
+Modifier une nouvelle facture client
+<div><span class="customer-badge status-label">{{invoice.invoiceNumber}}</span></div>
+</h4>
 <div style="width: 90%;
     margin: auto;">
   <p-panel  [toggleable]="false">
@@ -101,9 +112,13 @@
   </p-panel>
   <br>
 
-  <div class="p-panel p-panel-header" style="margin-top: 20px;">
-    <button [disabled]="" class="btn btn-secondary" style="margin-left: 1%;" (click)="cancel()">Annuler</button>
-    <button  [disabled]="checkInvoiceValid()" class="btn btn-success" style="margin-left: 74%;" (click)="saveInvoice()">Enregistrer</button>
+  <div class="p-panel p-panel-header" style="margin-top: 20px;float: right; padding: 2%;">
+
+    <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="cancel()"></button>
+
+      <button [disabled]="checkInvoiceValid()"
+      [ngClass]= "{'disabled':  checkInvoiceValid()}" pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn" 
+      (click)="saveInvoice()" style="margin-left: 10px;"></button>
   </div>
 
 

@@ -1,16 +1,15 @@
 
-<h4 *ngIf="decaissement.decaissementId == null" style="background: #E7E8E8; 
+<h4 style="background: #E7E8E8; 
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
-Ajouter un nouveau décaissement
-</h4>
-<h4 *ngIf="decaissement.decaissementId != null" style="background: #E7E8E8; 
-padding: 10px 10px 10px 10px !important;
-    font-size: 20px !important;
-    color: #222b45;margin-left: 10px">
-Modifier un décaissement
-<div><span class="customer-badge status-label">{{decaissement.decaissementLabel}}</span></div>
+<span *ngIf="decaissement.decaissementId == null">Ajouter un nouveau décaissement</span>
+<span *ngIf="decaissement.decaissementId != null">Modifier un décaissement 
+  <div>
+    <span class="customer-badge status-label">{{decaissement.decaissementLabel}}</span>
+  </div>
+  
+</span>
 </h4>
 
 

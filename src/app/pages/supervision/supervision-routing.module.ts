@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { EtatGlobalTreserorieComponent } from './etat-global-treserorie/etat-global-treserorie.component';
+import { EtatNonEngageComponent } from './etat-non-engage/etat-non-engage.component';
 import { GlobalSupervisionComponent } from './global-supervision/global-supervision.component';
+import { RapprochementBancaireComponent } from './rapprochement-bancaire/rapprochement-bancaire.component';
 
 const routes: Routes = [{
   path: '',
@@ -8,8 +11,20 @@ const routes: Routes = [{
   children: [
     {
       path: 'etat-global',
+      component: EtatGlobalTreserorieComponent,
+    },
+    {
+      path: 'etat-engage',
       component: GlobalSupervisionComponent,
     },
+    {
+      path: 'etat-non-engage',
+      component: EtatNonEngageComponent,
+    },
+    {
+      path: 'rapprochement-bancaire',
+      component: RapprochementBancaireComponent
+    }
   ],
 
 }];

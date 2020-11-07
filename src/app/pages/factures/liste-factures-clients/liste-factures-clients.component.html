@@ -4,32 +4,35 @@
            [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
            [paginator]="true" currentPageReportTemplate=""
            [filterDelay]="0" [globalFilterFields]="['invoiceNumber','invoiceTotalAmount','invoiceDate','invoiceDeadlineDate','invoiceNet','customer.customerLabel','customer.customerUniqueIdentifier', 'createdAt', 'updatedAt']">
+
     <ng-template pTemplate="caption" >
-      <div style="display: flex; width: 100%">
-        <div class="p-d-flex p-ai-center p-jc-between" style="width: 60%">
-        <span class="p-input-icon-left" style="width: 100%">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher une facture client.." />
-                </span>
-        </div>
-
-        <div style="width:19%; margin-left: 25%">
-          <button pButton pRipple label="Nouvelle facture" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="showCustomerInvoiceWindow = true"></button>
-        </div>
-
+      <div >
+        <div class="p-d-flex p-ai-center p-jc-between" style=" width: 60%; display: inline-block;">
+          <span class="p-input-icon-left" style="width: 100%">
+                      <i class="pi pi-search"></i>
+                      <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher une facture client.." />
+                  </span>
+          </div>
+  
+          <div style="float:right">
+            <button pButton pRipple label="Nouvelle facture" icon="pi pi-plus" class="primaryBtn" (click)="showCustomerInvoiceWindow = true"></button>
+          </div>
       </div>
+        
+
+     
 
     </ng-template>
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 15px;">
-        <th pSortableColumn="invoiceNumber" style="text-align: center; font-size: 13px;width: 10%">Numéro</th>
-        <th pSortableColumn="customer.customerLabel" style="text-align: center; font-size: 13px;width: 10%">Client</th>
-        <th pSortableColumn="invoiceDate" style="text-align: center; font-size: 13px;width: 15%">Date facture<p-sortIcon field="invoiceDate"></p-sortIcon></th>
-        <th pSortableColumn="invoiceDeadlineDate" style="text-align: center;font-size: 13px;width: 17%">Date d'échéance<p-sortIcon field="invoiceDeadlineDate"></p-sortIcon></th>
-        <th pSortableColumn="invoiceTotalAmount" style="text-align: center; font-size: 13px;width: 14%">Montant total<p-sortIcon field="invoiceTotalAmount"></p-sortIcon></th>
-        <th pSortableColumn="invoicePayment" style="text-align: center; font-size: 13px;width: 14%">Montant payé<p-sortIcon field="invoicePayment"></p-sortIcon></th>
-        <th pSortableColumn="invoiceStatus"  style="text-align: center; font-size: 13px;width: 10%">Statut</th>
-        <th style="width: 10%;font-size: 13px">Actions</th>
+        <th style="text-align: center; font-size: 13px;width: 10%">Numéro</th>
+        <th style="text-align: center; font-size: 13px;width: 10%">Client</th>
+        <th style="text-align: center; font-size: 13px;width: 15%">Date facture</th>
+        <th  style="text-align: center;font-size: 13px;width: 17%">Date d'échéance</th>
+        <th style="text-align: center; font-size: 13px;width: 14%">Montant total</th>
+        <th  style="text-align: center; font-size: 13px;width: 14%">Montant payé</th>
+        <th  style="text-align: center; font-size: 13px;width: 10%">Statut</th>
+        <th style="width: 10%;font-size: 13px; text-align: center;">Actions</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-invoice>
@@ -47,10 +50,10 @@
           {{invoice.invoiceDeadlineDate}}
         </td>
         <td style="text-align: center;">
-          {{invoice.invoiceTotalAmount}}
+          {{invoice.invoiceTotalAmountS}} {{invoice.invoiceCurrency}}
         </td>
         <td style="text-align: center;">
-          {{invoice.invoicePayment}}
+          {{invoice.invoicePaymentS}} {{invoice.invoiceCurrency}}
         </td>
         <td style="text-align: center;">
           <span *ngIf="invoice.invoiceStatus === 'CLOSED'" class="customer-badge status-active">Fermé</span>
@@ -59,17 +62,16 @@
 
 
         <td style="text-align: center;">
-          <div style="display: flex;">
-            <button pButton   placement="top" ngbTooltip="Modifier" pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="editInvoice(invoice)"></button>
-            <button pButton   placement="top" ngbTooltip="Supprimer" pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteInvoice(invoice)"></button>
+          <div>
+            <i   *ngIf="invoice.invoiceStatus === 'OPENED'" placement="top" ngbTooltip="Modifier"  class="pi pi-pencil"  style="margin-right: 7px; color: #6200ee" (click)="editInvoice(invoice)"></i>
+            <i    placement="top" ngbTooltip="Supprimer"  class="pi pi-trash" (click)="deleteInvoice(invoice)" style="color: #6200ee"></i>
           </div>
-
         </td>
       </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr style="font-size: 13px">
-        <td colspan="8">Aucune facture client trouvée!</td>
+        <td colspan="8" style="text-align: left !important;">Aucune facture client trouvée!</td>
       </tr>
     </ng-template>
   </p-table>

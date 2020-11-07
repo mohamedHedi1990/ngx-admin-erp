@@ -33,9 +33,12 @@ import {DialogModule} from 'primeng/dialog';
 import {DialogService, DynamicDialogModule} from 'primeng/dynamicdialog';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
+import { EtatGlobalTreserorieComponent } from './etat-global-treserorie/etat-global-treserorie.component';
+import { EtatNonEngageComponent } from './etat-non-engage/etat-non-engage.component';
+import { RapprochementBancaireComponent } from './rapprochement-bancaire/rapprochement-bancaire.component';
 
 @NgModule({
-  declarations: [GlobalSupervisionComponent, StatusCardComponent],
+  declarations: [GlobalSupervisionComponent, StatusCardComponent, EtatGlobalTreserorieComponent, EtatNonEngageComponent, RapprochementBancaireComponent],
   imports: [
     CommonModule,
     SupervisionRoutingModule,

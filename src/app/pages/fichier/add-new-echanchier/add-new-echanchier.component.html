@@ -1,4 +1,10 @@
-<h5>Nouveau échancier</h5>
+<h4 style="background: #E7E8E8; 
+padding: 10px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;margin-left: 10px">
+<span *ngIf="timeLine.timeLineId == null">Ajouter un échénacier</span>
+<span *ngIf="timeLine.timeLineId != null">Modifier l'échénacier {{timeLine.timeLineLabel}}</span>
+</h4>
 <div style="width: 90%;
     margin: auto;">
   <p-panel header="Configuration génerale" [toggleable]="false">
