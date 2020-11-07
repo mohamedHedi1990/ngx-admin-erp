@@ -18,7 +18,7 @@
         <select class="form-control p-field" id="op" name="side" [(ngModel)]="comission.comissionOperation" [ngClass]="{
         'is-invalid': comission.comissionOperation == null ,
         'is-valid':comission.comissionOperation != null
-      }">
+      }" style="font-size: 13px;">
           <option [ngValue]="null">-- Opération --</option>
           <option [ngValue]="'REMISE_CHHEQUE'">Remise des chèques</option>
           <option [ngValue]="'REMISE_EFFETS_ENCAISSEMENT'">Remise effets à l'encaissement</option>
@@ -49,7 +49,7 @@
         <select class="form-control p-field" id="type" name="side" [(ngModel)]="comission.commissionType" [ngClass]="{
         'is-invalid': comission.commissionType == null ,
         'is-valid':comission.commissionType != null
-      }">
+      }" style="font-size: 13px;">
           <option [ngValue]="null">-- Type --</option>
           <option [ngValue]="'NUMBER'">Numéro </option>
           <option [ngValue]="'RATE'">Pourcentage</option>

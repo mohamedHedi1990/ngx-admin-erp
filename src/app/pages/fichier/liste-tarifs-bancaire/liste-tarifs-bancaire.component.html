@@ -5,35 +5,26 @@
            [paginator]="true" currentPageReportTemplate=""
            [filterDelay]="0"
            [globalFilterFields]="['providerLabel','providerUniqueIdentifier','providerAddress','providerTel','providerEmail','providerManagerName','createdAt', 'updatedAt']">
-    <ng-template pTemplate="caption">
-      <div style="display: flex; width: 100%">
-        <div class="p-d-flex p-ai-center p-jc-between" style="width: 60%">
-          <!--
-        <span class="p-input-icon-left" style="width: 100%">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"
-                           (input)="dt.filterGlobal($event.target.value, 'contains')"
-                           placeholder="Chercher une configuration de tarifs bancaires.."/>
-                </span>
-                -->
+    <ng-template pTemplate="caption" >
+      
+      <div class="p-d-flex p-ai-center p-jc-between" style="  width: 100%; display: inline-block;">
+        <div style="float:right">
+          <button pButton pRipple label="Nouvelle tarification bancaire" icon="pi pi-plus" class="primaryBtn" (click)="showTarifBancaireWindow = true"></button>
         </div>
+    </div>
+      
 
-        <div style="width:36%; margin-left: 25%">
-          <button pButton pRipple label="Nouvelle tarification bancaire" icon="pi pi-plus"
-                  class="p-button-success p-mr-2" (click)="showTarifBancaireWindow=true"></button>
-        </div>
+   
 
-      </div>
-
-    </ng-template>
+  </ng-template>
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 15px;">
         <th style="width: 3rem"></th>
-        <th pSortableColumn="tarifLabel" style="text-align: center; font-size: 13px; width: 30%">Tarif bancaire
+        <th  style="text-align: center; font-size: 13px; width: 30%">Tarif bancaire
         </th>
-        <th pSortableColumn="tarifAccount.accountLabel" style="text-align: center; font-size: 13px;width: 30%">Compte bancaire
+        <th style="text-align: center; font-size: 13px;width: 30%">Compte bancaire
         </th>
-        <th pSortableColumn="tarifAccount.accountNumber" style="text-align: center; font-size: 13px;width: 35%">Numéro de compte bancaire
+        <th style="text-align: center; font-size: 13px;width: 30%">Numéro de compte bancaire
         </th>
         <!--
         <th pSortableColumn="check_remittance_commission" style=" text-align: center;font-size: 15px;">Commision de
@@ -55,7 +46,7 @@
           <p-sortIcon field="providerAddress"></p-sortIcon>
         </th>
 !-->
-        <th style="width: 15%"></th>
+        <th style="width: 10%; text-align: center;font-size: 13px">Actions</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-tarif let-expanded="expanded">
@@ -93,13 +84,13 @@
         </td>
 -->
         <td style="text-align: center;">
-          <div style="display: flex;">
-            <button pButton placement="top" ngbTooltip="Modifier" pRipple icon="pi pi-pencil"
-                    class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="editTarif(tarif)"></button>
-            <button pButton placement="top" ngbTooltip="Supprimer" pRipple icon="pi pi-trash"
-                    class="p-button-rounded p-button-danger" (click)="deleteTarif(tarif)"></button>
+          <div>
+            <!--
+            <button pButton   placement="top" ngbTooltip="Contacter" pRipple icon="pi pi-users" class="p-button-rounded p-button-info p-mr-2" style="margin-right: 7px;" (click)="showContacts(client)"></button>
+            -->
+            <i    placement="top" ngbTooltip="Modifier"  class="pi pi-pencil" style="margin-right: 7px;color: #6200ee" (click)="editTarif(tarif)"></i>
+            <i    placement="top" ngbTooltip="Supprimer"  class="pi pi-trash" style="color: #6200ee" (click)="deleteTarif(tarif)"></i>
           </div>
-
         </td>
       </tr>
     </ng-template>
@@ -110,10 +101,10 @@
             <p-table #dt [value]="tarif.comissions" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true">
               <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 13px;">
-        <th pSortableColumn="providerLabel" style="text-align: center; font-size: 13px;width: 30%">Label</th>
-        <th pSortableColumn="providerUniqueIdentifier" style="text-align: center; font-size: 13px; width: 30%">Opération</th>
-        <th pSortableColumn="providerAddress" style="text-align: center;font-size: 13px; width: 20%">Valeur</th>
-      <th pSortableColumn="providerAddress" style="text-align: center;font-size: 13px; width: 20%">Type</th>
+        <th  style="text-align: center; font-size: 13px;width: 30%">Label</th>
+        <th  style="text-align: center; font-size: 13px; width: 30%">Opération</th>
+        <th style="text-align: center;font-size: 13px; width: 20%">Valeur</th>
+      <th style="text-align: center;font-size: 13px; width: 20%">Type</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-comission>
@@ -147,7 +138,7 @@
     </ng-template>
 <ng-template pTemplate="emptymessage">
   <tr>
-    <td colspan="8" style="font-size: 13px;">Aucune tarification bancaire trouvée!</td>
+    <td colspan="8" style="font-size: 13px;text-align: left !important;">Aucune tarification bancaire trouvée!</td>
   </tr>
 </ng-template>
 </p-table>
