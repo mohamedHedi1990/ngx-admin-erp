@@ -121,11 +121,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/extra-components/calendar',
       },
       {
-        title: 'Etat de tréserorie previsionnel non engagé',
+        title: 'Tréserorie previsionnel non engagé',
         link: '/pages/extra-components/progress-bar',
       },
       {
-        title: 'Etat de tréserorie previsionnel engagé',
+        title: 'Tréserorie previsionnel engagé',
         link: '/pages/extra-components/progress-bar',
       },
       {

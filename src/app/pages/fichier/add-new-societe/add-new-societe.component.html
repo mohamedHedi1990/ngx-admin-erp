@@ -79,9 +79,13 @@
     </div>
   <br>
 
-  <div class="p-panel p-panel-header" style="margin-top: 20px;">
-    <button [disabled]="" class="btn btn-secondary" style="margin-left: 1%;" (click)="cancel()">Annuler</button>
-    <button  [disabled]="checkCompanyValid()" class="btn btn-success" style="margin-left: 74%;" (click)="saveSociete()">Enregistrer</button>
+  <div class="p-panel p-panel-header" style="margin-top: 20px;float: right; padding: 2%;">
+
+    <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="cancel()"></button>
+
+      <button [disabled]="checkCompanyValid()"
+      [ngClass]= "{'disabled':  checkCompanyValid()}" pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn" 
+      (click)="saveSociete()" style="margin-left: 10px;"></button>
   </div>
 
 

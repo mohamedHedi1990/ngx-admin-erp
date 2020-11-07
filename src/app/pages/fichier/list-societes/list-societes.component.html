@@ -3,33 +3,29 @@
   <p-table #dt [value]="societes" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
            [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
            [paginator]="true" currentPageReportTemplate=""
-           [filterDelay]="0" [globalFilterFields]="['campanyName','campanyAddress','campanyUniqueIdentifier','campanyPhoneNumber','companyIllustration','campanyEmail','companyPictureUrl','createdAt','updatedAt']">
+           [filterDelay]="0">
     <ng-template pTemplate="caption" >
-      <div style="display: flex; width: 100%">
-        <div class="p-d-flex p-ai-center p-jc-between" style="width: 60%">
-        <span class="p-input-icon-left" style="width: 100%">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher une societé.." />
-                </span>
-        </div>
-
-        <div style="width:19%; margin-left: 25%">
-          <button *ngIf="societes.length === 0" pButton pRipple label="Ajouter votre societé" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="showSocieteWindow = true"></button>
-        </div>
-
+      
+        <div class="p-d-flex p-ai-center p-jc-between" style="  width: 100%; display: inline-block;">
+          <div style="float:right" *ngIf="societes.length === 0">
+            <button pButton pRipple label="Ajouter votre societé" icon="pi pi-plus" class="primaryBtn" (click)="showSocieteWindow = true"></button>
+          </div>
       </div>
+        
+
+     
 
     </ng-template>
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 15px;">
-        <th pSortableColumn="campanyName" style="text-align: center; font-size: 13px;width: 20%">Dénomination<p-sortIcon field="campanyName"></p-sortIcon></th>
-        <th pSortableColumn="campanyUniqueIdentifier" style="text-align: center; font-size: 13px;width: 20%">Identifiant<p-sortIcon field="campanyUniqueIdentifier"></p-sortIcon></th>
-        <th pSortableColumn="campanyAddress" style="text-align: center;font-size: 13px;width: 25%">Adresse<p-sortIcon field="customerAddress"></p-sortIcon></th>
+        <th pSortableColumn="campanyName" style="text-align: center; font-size: 13px;width: 20%">Dénomination</th>
+        <th pSortableColumn="campanyUniqueIdentifier" style="text-align: center; font-size: 13px;width: 20%">Identifiant</th>
+        <th pSortableColumn="campanyAddress" style="text-align: center;font-size: 13px;width: 30%">Adresse</th>
 
 
         <th pSortableColumn="companyManagerName"  style="text-align: center; font-size: 13px;width: 20%">Nom du responsable</th>
 
-        <th style="width: 15%;font-size: 13px">Actions</th>      </tr>
+        <th style="width: 10%;font-size: 13px; text-align: center;">Actions</th>      </tr>
     </ng-template>
     <ng-template pTemplate="body" let-societe>
       <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
@@ -49,9 +45,9 @@
         </td>
 
         <td style="text-align: center;">
-          <div style="display: flex;">
-             <i    placement="top" ngbTooltip="Modifier" class="pi pi-pencil"  style="margin-right: 7px;" (click)="editSociete(societe)"></i>
-            <i    placement="top" ngbTooltip="Supprimer"  class="pi pi-trash"  (click)="deleteSociete(societe)"></i>
+          <div>
+             <i    placement="top" ngbTooltip="Modifier" class="pi pi-pencil"  style="margin-right: 7px;color: #6200ee" (click)="editSociete(societe)"></i>
+            <i    placement="top" ngbTooltip="Supprimer"  class="pi pi-trash"  style="color: #6200ee" (click)="deleteSociete(societe)"></i>
           </div>
 
         </td>
@@ -59,7 +55,7 @@
     </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr style="font-size: 13px">
-        <td colspan="8">Aucune societé trouvée!</td>
+        <td colspan="8" style="text-align: left !important;">Aucune societé trouvée!</td>
       </tr>
     </ng-template>
   </p-table>

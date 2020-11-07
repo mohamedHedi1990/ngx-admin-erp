@@ -75,8 +75,7 @@
   </p-panel>
   <br>
   <p-panel header="Configuration des contacts" [toggleable]="true" collapsed="true">
-    <div style="width: 20%;
-    margin-left: 80%;">
+    <div>
       <button pButton pRipple label="Nouveau contact" icon="pi pi-user-plus" class="p-mr-2"
       (click)="addNewContact()" style="background: #dee2e6;
     color: black;
@@ -86,10 +85,13 @@
       <ngx-new-contact [contact]="contact"></ngx-new-contact>
     </div>
   </p-panel>
-  <div class="p-panel p-panel-header" style="margin-top: 20px;">
-    <button [disabled]="" class="btn btn-secondary" style="margin-left: 1%;" (click)="cancel()">Annuler</button>
-    <button  [disabled]="checkClientValid()" class="btn btn-success" style="margin-left: 74%;" (click)="saveClient()">Enregistrer</button>
-  </div>
+  <div class="p-panel p-panel-header" style="margin-top: 20px;float: right; padding: 2%;">
 
+    <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="cancel()"></button>
+
+      <button [disabled]="checkClientValid()"
+      [ngClass]= "{'disabled':  checkClientValid()}" pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn" 
+      (click)="saveClient()" style="margin-left: 10px;"></button>
+  </div>
 
 </div>
