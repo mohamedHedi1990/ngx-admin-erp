@@ -5,7 +5,7 @@ padding: 10px 10px 10px 10px !important;
     color: #222b45;margin-left: 10px">
 Liste des fournisseurs
 </h4>
-<div class="card" *ngIf="!showProviderWindow" style="width: 90%; margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
+<div class="card" *ngIf="!showProviderWindow" style=" margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
   <p-table #dt [value]="providers" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
            [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
            [paginator]="true" currentPageReportTemplate=""

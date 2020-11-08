@@ -5,7 +5,7 @@ padding: 10px 10px 10px 10px !important;
     color: #222b45;margin-left: 10px">
 Liste des échénaciers
 </h4>
-<div *ngIf="!showEchancierWindow" class="card" style="width: 90%; margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
+<div *ngIf="!showEchancierWindow" class="card" style=" margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
   <p-table #dt [value]="echanciers" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
            [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
            [paginator]="true" currentPageReportTemplate=""
