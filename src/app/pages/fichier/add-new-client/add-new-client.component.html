@@ -1,12 +1,17 @@
-<h4 style="background: #E7E8E8; 
+<h4 *ngIf="client.customerId  == null" style="background: #E7E8E8; 
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
-<span *ngIf="client.customerId == null">Ajouter un client</span>
-<span *ngIf="client.customerId != null">Modifier le client {{customer.customerLabel}}</span>
+Ajouter un nouveau client
 </h4>
-<div style="width: 90%;
-    margin: auto;">
+<h4 *ngIf="client.customerId != null" style="background: #E7E8E8; 
+padding: 10px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;margin-left: 10px">
+Modifier un client
+<div><span class="customer-badge status-label">{{client.customerLabel}}</span></div>
+</h4>
+<div style="width: 90%; margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
   <p-panel header="Configuration génerale" [toggleable]="false">
       <div class="p-grid p-fluid">
         <div style="display: flex">

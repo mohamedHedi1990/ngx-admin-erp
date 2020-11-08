@@ -1,12 +1,17 @@
-<h4 style="background: #E7E8E8; 
+<h4 *ngIf="societe.campanyId == null" style="background: #E7E8E8; 
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
-<span *ngIf="societe.campanyId == null">Ajouter votre société</span>
-<span *ngIf="societe.campanyId != null">Modifier votre société</span>
+Ajouter votre société
 </h4>
-<div style="width: 90%;
-    margin: auto;">
+<h4 *ngIf="societe.campanyId != null" style="background: #E7E8E8; 
+padding: 10px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;margin-left: 10px">
+Modifier votre société
+<div><span class="customer-badge status-label">{{societe.campanyName}}</span></div>
+</h4>
+<div style="width: 90%; margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
     <div class="p-grid p-fluid">
       <div style="display: flex">
         <div class="mb-1 col-md-6 col-12 p-field">

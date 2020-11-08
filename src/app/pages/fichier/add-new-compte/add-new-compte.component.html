@@ -1,12 +1,17 @@
-<h4 style="background: #E7E8E8; 
+<h4 *ngIf="account.accountId  == null" style="background: #E7E8E8; 
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
-<span *ngIf="account.accountId == null">Ajouter un compte</span>
-<span *ngIf="account.accountId != null">Modifier le compte {{account.accountLabel}}</span>
+Ajouter un nouveau compte bancaire
 </h4>
-<div style="width: 90%;
-    margin: auto;">
+<h4 *ngIf="account.accountId != null" style="background: #E7E8E8; 
+padding: 10px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;margin-left: 10px">
+Modifier un compte bancaire
+<div><span class="customer-badge status-label">{{account.accountLabel}}</span></div>
+</h4>
+<div style="width: 90%; margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
     <p-panel header="Informations sur la banque" [toggleable]="true">
     <div class="p-grid p-fluid">
       <div style="display: flex">

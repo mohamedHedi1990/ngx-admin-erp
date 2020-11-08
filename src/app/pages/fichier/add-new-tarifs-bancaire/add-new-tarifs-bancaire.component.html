@@ -1,18 +1,24 @@
-<h4 style="background: #E7E8E8; 
+<h4 *ngIf="tarif.tarifId  == null" style="background: #E7E8E8; 
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
-<span *ngIf="tarif.tarifId == null">Ajouter une tarif bancaire</span>
-<span *ngIf="tarif.tarifId != null">Modifier la tarif bancaire{{tarif.tarifLabel}}</span>
+Ajouter un nouveau tarif bancaire
 </h4>
-<div style="width: 90%;margin: auto;">
+<h4 *ngIf="tarif.tarifId != null" style="background: #E7E8E8; 
+padding: 10px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;margin-left: 10px">
+Modifier un tarif bancaire
+<div><span class="customer-badge status-label">{{tarif.tarifLabel}}</span></div>
+</h4>
+<div style="width: 90%; margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
   <div class="p-grid p-fluid">
     <div style="display: flex">
       <div class="mb-1 col-md-6 col-12 p-field">
-        <label for="providerLabel" class="p-float-label">Label</label>
+        <label for="tarifLabel" class="p-float-label">Label</label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-          <input type="text" class="form-control p-field" id="providerLabel"
+          <input type="text" class="form-control p-field" id="tarifLabel"
                  [(ngModel)]="tarif.tarifLabel" [ngClass]="{
         'is-invalid': tarif.tarifLabel == null || tarif.tarifLabel== '' ,
         'is-valid': tarif.tarifLabel != null && tarif.tarifLabel != ''
@@ -35,7 +41,7 @@ padding: 10px 10px 10px 10px !important;
     </div>
     <div style="display: flex" *ngIf="tarif.tarifAccount != null">
       <div class="mb-1 col-md-6 col-12 p-field">
-        <label for="providerLabel" class="p-float-label">Numéro compte bancaire</label>
+        <label for="tarifLabel" class="p-float-label">Numéro compte bancaire</label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
           <input type="text" class="form-control p-field" id="numCompte"
@@ -43,7 +49,7 @@ padding: 10px 10px 10px 10px !important;
         </div>
       </div>
       <div class="mb-1 col-md-6 col-12 p-field">
-        <label for="providerLabel" class="p-float-label">Devise</label>
+        <label for="tarifLabel" class="p-float-label">Devise</label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-dollar"></i></span>
           <input type="text" class="form-control p-field" id="devise"
@@ -66,7 +72,7 @@ padding: 10px 10px 10px 10px !important;
     <!--
     <div style="display: flex">
       <div class="mb-1 col-md-6 col-12 p-field">
-        <label for="providerLabel" class="p-float-label">Commision de remise des chèques</label>
+        <label for="tarifLabel" class="p-float-label">Commision de remise des chèques</label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
           <input type="number" class="form-control p-field" id="chequeRemittance"
@@ -77,7 +83,7 @@ padding: 10px 10px 10px 10px !important;
         </div>
       </div>
       <div class="mb-1 col-md-6 col-12 p-field">
-        <label for="providerLabel" class="p-float-label">Commission de remise remise effets à l'encaissement</label>
+        <label for="tarifLabel" class="p-float-label">Commission de remise remise effets à l'encaissement</label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
           <input type="number" class="form-control p-field" id="billsComission"
@@ -92,7 +98,7 @@ padding: 10px 10px 10px 10px !important;
 
     <div style="display: flex">
       <div class="mb-1 col-md-6 col-12 p-field">
-        <label for="providerLabel" class="p-float-label">Commission de remise remise effets à l'escompte</label>
+        <label for="tarifLabel" class="p-float-label">Commission de remise remise effets à l'escompte</label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
           <input type="number" class="form-control p-field" id="discount"
@@ -103,7 +109,7 @@ padding: 10px 10px 10px 10px !important;
         </div>
       </div>
       <div class="mb-1 col-md-6 col-12 p-field">
-        <label for="providerLabel" class="p-float-label">Commission de virement</label>
+        <label for="tarifLabel" class="p-float-label">Commission de virement</label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
           <input type="number" class="form-control p-field" id="transfer"
@@ -118,7 +124,7 @@ padding: 10px 10px 10px 10px !important;
 
     <div style="display: flex">
       <div class="mb-1 col-md-12 col-12 p-field" >
-        <label for="providerLabel" class="p-float-label">Taux interet (en %)</label>
+        <label for="tarifLabel" class="p-float-label">Taux interet (en %)</label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
           <input type="number" class="form-control p-field" id="interest"
