@@ -2,10 +2,10 @@
   <p-table #dt [value]="contacts" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true">
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 13px;">
-        <th pSortableColumn="contactName" style="text-align: center; font-size: 13px;width: 30%">Nom complet<p-sortIcon field="contactName"></p-sortIcon></th>
-        <th pSortableColumn="contactPost" style="text-align: center; font-size: 13px;width: 20%">Poste<p-sortIcon field="contactPost"></p-sortIcon></th>
-        <th pSortableColumn="contactTel" style="text-align: center;font-size: 13px;width: 25%">Télephone<p-sortIcon field="contactTel"></p-sortIcon></th>
-        <th pSortableColumn="contactEmail" style="text-align: center;font-size: 13px;width: 25%">Email<p-sortIcon field="contactEmail"></p-sortIcon></th>
+        <th  style="text-align: center; font-size: 13px;width: 30%">Nom complet</th>
+        <th  style="text-align: center; font-size: 13px;width: 20%">Poste</th>
+        <th  style="text-align: center;font-size: 13px;width: 25%">Télephone</th>
+        <th  style="text-align: center;font-size: 13px;width: 25%">Email</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-contact>

@@ -14,6 +14,24 @@ Modifier un compte bancaire
 <div style="width: 90%; margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
     <p-panel header="Informations sur la banque" [toggleable]="true">
     <div class="p-grid p-fluid">
+      <div *ngIf="account.accountId != null" style="display: flex">
+        <div class="mb-1 col-md-6 col-12 p-field">
+          <label for="creationDate" class="p-float-label">Date de création</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field" id="creationDate"
+                   [(ngModel)]="account.createdAt" disabled="true">
+          </div>
+        </div>
+        <div class="mb-1 col-md-6 col-12">
+          <label for="modificationDate" class="p-float-label">Date de dernière modification</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field"  id="modificationDate"
+                   [(ngModel)]="account.updatedAt " disabled="true">
+          </div>
+        </div>
+      </div>
       <div style="display: flex">
         <div class="mb-1 col-md-6 col-12 p-field">
           <label for="accountBank" class="p-float-label">Banque:</label>
@@ -199,7 +217,7 @@ Modifier un compte bancaire
     <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="cancel()"></button>
 
       <button [disabled]="checkAccountValid()" 
-      [ngClass]= "{'disabled': checkAccountValid()}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn" 
+      [ngClass]= "{'disabled': checkAccountValid()}" pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn" 
       (click)="saveAccount()" style="margin-left: 10px;"></button>
   </div>
 

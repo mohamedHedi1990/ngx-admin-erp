@@ -14,6 +14,24 @@ Modifier un client
 <div style="width: 90%; margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
   <p-panel header="Configuration génerale" [toggleable]="false">
       <div class="p-grid p-fluid">
+        <div *ngIf="client.customerId != null" style="display: flex">
+          <div class="mb-1 col-md-6 col-12 p-field">
+            <label for="creationDate" class="p-float-label">Date de création</label>
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+              <input type="text" class="form-control p-field" id="creationDate"
+                     [(ngModel)]="client.createdAt" disabled="true">
+            </div>
+          </div>
+          <div class="mb-1 col-md-6 col-12">
+            <label for="modificationDate" class="p-float-label">Date de dernière modification</label>
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+              <input type="text" class="form-control p-field"  id="modificationDate"
+                     [(ngModel)]="client.updatedAt " disabled="true">
+            </div>
+          </div>
+        </div>
         <div style="display: flex">
           <div class="mb-1 col-md-6 col-12 p-field">
             <label for="clientLabel" class="p-float-label">Dénomination client</label>

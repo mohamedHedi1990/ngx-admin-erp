@@ -87,10 +87,24 @@ statusCards = [
             encaissement = encaissement + element.operationAmount;
           }
         });
+
+        context.statusCards[0].value = ''+ this.accountInitialAmount;
         context.statusCards[1].value = ''+encaissement;
         context.statusCards[2].value = ''+decaissement;
         const finalAmount = this.accountInitialAmount + encaissement - decaissement;
         context.statusCards[3].value = '' + finalAmount;
+
+
+        this.UtilsService.get(UtilsServiceService.API_HISTORIC_SOLD+ '/' + this.supervision.account.accountId + '/' + this.supervision.startDate
+       ).subscribe( response => {
+            
+          },
+          error => {
+            this.UtilsService.showToast('danger',
+              'Erreur interne',
+              `Un erreur interne a été produit lors du chargement du montant initial au début de cette période`);
+          });
+
       },
       error => {
         this.UtilsService.showToast('danger',

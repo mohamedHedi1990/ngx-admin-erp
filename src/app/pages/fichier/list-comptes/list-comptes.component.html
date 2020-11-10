@@ -127,7 +127,7 @@ Liste des comptes bancaires
 <ngx-add-new-compte *ngIf="showAccountWindow" [account]="account" (addNewAccountEvent)="saveNewAccount($event)"
 (cancelEvent)="hideAccountWindow(); initAccount();"></ngx-add-new-compte>
 
-<p-dialog [(visible)]="showContactList" [style]="{width: '650px'}" [header]="contactModalheader"  styleClass="p-fluid">
+<p-dialog id="listContactModal" [(visible)]="showContactList" [header]="contactModalheader"  styleClass="p-fluid">
   <ng-template pTemplate="content">
     <ngx-list-contacts [contacts]="account.accountContacts"></ngx-list-contacts>
   </ng-template>

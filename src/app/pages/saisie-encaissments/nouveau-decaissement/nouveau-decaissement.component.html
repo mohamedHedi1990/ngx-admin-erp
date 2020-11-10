@@ -14,319 +14,342 @@ padding: 10px 10px 10px 10px !important;
 
 
 <div style="width: 90%; margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
-  <div class="p-grid p-fluid" style="display: flex; padding: 2%;">
-    <div class="mb-12 col-md-6 col-12">
-      <div>
-        <label for="type" class="p-float-label" style="font-size: 13px"
-          >Compte bancaire<span style="color: red;">*</span></label
-        >
-        <div class="p-inputgroup p-fluid">
-          <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-          <select
-            class="form-control p-field"
-            id="type"
-            name="side"
-            [(ngModel)]="decaissement.decaissementBankAccount"
-           
-            style="font-size: 13px"
-            [compareWith]="compareAccount" 
-            (change)="changeAccount()"
-            >
-            
-            <option *ngIf="decaissement.decaissementId == null" [ngValue]="null">-- Compte bancaire --</option>
-            <option *ngFor="let a of accounts" [ngValue]="a">
-              {{ a.accountLabel }}
-            </option>
-          </select>
-        </div>
-      </div>
-     
-      <div>
-        <label for="amount" class="p-float-label" style="font-size: 13px"
-          >Libéllé<span style="color: red;">*</span></label
-        >
+  <div style="margin:3%">
+    <div *ngIf="decaissement.decaissementId  != null" style="display: flex">
+      <div class="mb-1 col-md-6 col-12 p-field">
+        <label for="creationDate" class="p-float-label">Date de création</label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-          <input
-            type="text"
-            class="form-control p-field"
-            id="amount"
-            [(ngModel)]="decaissement.decaissementLabel"
-            style="font-size: 13px"
-           
-          />
+          <input type="text" class="form-control p-field" id="creationDate"
+                 [(ngModel)]="decaissement.createdAt" disabled="true">
         </div>
       </div>
-    
-      <div>
+      <div class="mb-1 col-md-6 col-12">
+        <label for="modificationDate" class="p-float-label">Date de dernière modification</label>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+          <input type="text" class="form-control p-field"  id="modificationDate"
+                 [(ngModel)]="decaissement.updatedAt " disabled="true">
+        </div>
+      </div>
+    </div>
+    <div class="p-grid p-fluid" style="display: flex">
+      
+      
+      <div class="mb-12 col-md-6 col-12">
         <div>
-          <div >
-            <div style="display: inline-block">
-              <label for="type" class="p-float-label" style="font-size: 13px">Nature de décaissement<span style="color: red;">*</span></label>
-            </div>
-            <div style="float: right;">
-              <i
-                placement="top"
-                ngbTooltip="Ajouter un type de décaissement"
-                pRipple
-                class="pi pi-plus"
-              (click)="dispalyDecaissementTypeModal = true"></i>
-            </div>
-          </div>
-
+          <label for="type" class="p-float-label" style="font-size: 13px"
+            >Compte bancaire<span style="color: red;">*</span></label
+          >
           <div class="p-inputgroup p-fluid">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
             <select
               class="form-control p-field"
               id="type"
               name="side"
-              [(ngModel)]="decaissement.decaissementType"
+              [(ngModel)]="decaissement.decaissementBankAccount"
              
               style="font-size: 13px"
-              [compareWith]="compareDeacissementType"
-            >
-            <!-- 
-              <option *ngIf="decaissement.decaissementId == null" [ngValue]="null">-- Nature de décaissement --</option>-->
-              <option *ngFor="let t of decaissementTypes" [ngValue]="t">
-                {{ t.decaissementTypeLabel }}
+              [compareWith]="compareAccount" 
+              (change)="changeAccount()"
+              >
+              
+              <option *ngIf="decaissement.decaissementId == null" [ngValue]="null">-- Compte bancaire --</option>
+              <option *ngFor="let a of accounts" [ngValue]="a">
+                {{ a.accountLabel }}
               </option>
             </select>
           </div>
         </div>
-      </div>
-
-      <div  *ngIf="decaissement.decaissementType != null && decaissement.decaissementType.decaissementTypeValue === 'CHEQUE_IMPAYE'">
-        <label for="amounth" class="p-float-label" style="font-size: 13px"
-        >Numéro de chèque impayé<span style="color: red;">*</span></label
-      >
-      <div class="p-inputgroup">
-        <span class="p-inputgroup-addon"
-          ><i class="pi pi-money-bill"></i
-        ></span>
-        <input
-          type="number"
-          class="form-control p-field"
-          id="amounth"
-          [(ngModel)]="decaissement.decaissementChequeImpaye"
-          style="font-size: 13px"
-         
-        />
-      </div>
-      </div>
-      <div
-      *ngIf="
-      decaissement.decaissementType != null &&
-      decaissement.decaissementType.decaissementTypeValue ===
-        'PAIEMENT_FACTURE_FOURNISSEUR'
-    "
-      >
+       
         <div>
-          <div  style="display: inline-block">
-            <label for="type" class="p-float-label" style="font-size: 13px">Fournisseur<span style="color: red;">*</span></label>
-          </div>
-         
-          <div style="float:right">
-            <i
-              placement="top"
-              ngbTooltip="Ajouter un fournisseur"
-              pRipple
-              class="pi pi-plus"
-            (click)="dispalyProviderModal = true"></i>
-          </div>
-        </div>
-
-        <div class="p-inputgroup p-fluid">
-          <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-          <select
-            class="form-control p-field"
-            id="type"
-            name="side"
-            [(ngModel)]="decaissement.decaissementProvider"
-            
-            style="font-size: 13px"
-            (change)="getAllInvoiceProviders()"
-            [compareWith]="compareProvider"
-          >
-            <option *ngFor="let p of providers" [ngValue]="p">
-              {{ p.providerLabel }}
-            </option>
-          </select>
-        </div>
-      </div>
- 
-      <div  
-      *ngIf="
-      decaissement.decaissementType != null &&
-      decaissement.decaissementType.decaissementTypeValue ===
-        'PAIEMENT_FACTURE_FOURNISSEUR'
-    "
-      >
-        <div>
-          <div  style="display: inline-block">
-            <label for="type" class="p-float-label" style="font-size: 13px">Facture fournisseur<span style="color: red;">*</span></label>
-          </div>
-          <div style="float:right">
-            <i 
-              placement="top"
-              ngbTooltip="Ajouter une facture"
-              pRipple
-              class="pi pi-plus"
-              (click)="dispalyInvoiceProviderModal = true"
-            ></i>
-          </div>
-        </div>
-
-        <div class="p-inputgroup p-fluid">
-          <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-          <select
-            class="form-control p-field"
-            id="type"
-            name="side"
-            [(ngModel)]="decaissement.decaissementInvoice"
-            style="font-size: 13px"
-            [compareWith]="compareInvoice"
-            (change)="updateAmount()"
-          >
-            <option *ngFor="let i of invoices" [ngValue]="i">
-              Facture {{ i.invoiceNumber }}
-            </option>
-          </select>
-        </div>
-      </div>
- 
-      <div>
-        <div>
-          <div>
-            <label
-              for="details"
-              class="p-float-label"
-              style="font-size: 13px"
-              style="font-size: 13px"
-              >Plus d'informations sur ce décaissement</label
-            >
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon"
-                ><i class="pi pi-align-justify"></i
-              ></span>
-              <textarea
-                type="text"
-                class="form-control p-field"
-                id="details"
-                [(ngModel)]="decaissement.decaissementDetails"
-                style="font-size: 13px"
-                rows="3"
-              ></textarea>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="mb-12 col-md-6 col-12">
-      <div style="display:flex">
-        <div class="mb-12 col-md-8 col-12" style="padding-left: 0px !important">
-          <label for="amounth" class="p-float-label" style="font-size: 13px"
-            >Montant<span style="color: red;">*</span></label
+          <label for="amount" class="p-float-label" style="font-size: 13px"
+            >Libéllé<span style="color: red;">*</span></label
           >
           <div class="p-inputgroup">
-            <span class="p-inputgroup-addon"
-              ><i class="pi pi-money-bill"></i
-            ></span>
-            <input
-              type="number"
-              class="form-control p-field"
-              id="amounth"
-              [(ngModel)]="decaissement.decaissementAmount"
-              style="font-size: 13px"
-             
-            />
-          </div>
-        </div>
-        <div class="mb-12 col-md-4 col-12">
-          <label for="amounth" class="p-float-label" style="font-size: 13px"
-            >Devise</label
-          >
-          <div class="p-inputgroup">
-            <span class="p-inputgroup-addon"
-              ><i class="pi pi-money-bill"></i
-            ></span>
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
             <input
               type="text"
               class="form-control p-field"
-              id="amounth"
-              [(ngModel)]="decaissement.decaissementCurrency"
+              id="amount"
+              [(ngModel)]="decaissement.decaissementLabel"
               style="font-size: 13px"
-              disabled=true
              
             />
           </div>
         </div>
-      </div>
-      <div>
-        <label for="paie" class="p-float-label" style="font-size: 13px"
-          >Mode de payment<span style="color: red;">*</span></label
+      
+        <div>
+          <div>
+            <div >
+              <div style="display: inline-block">
+                <label for="type" class="p-float-label" style="font-size: 13px">Nature de décaissement<span style="color: red;">*</span></label>
+              </div>
+              <div style="float: right;">
+                <i
+                  placement="top"
+                  ngbTooltip="Ajouter un type de décaissement"
+                  pRipple
+                  class="pi pi-plus"
+                (click)="dispalyDecaissementTypeModal = true"></i>
+              </div>
+            </div>
+  
+            <div class="p-inputgroup p-fluid">
+              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+              <select
+                class="form-control p-field"
+                id="type"
+                name="side"
+                [(ngModel)]="decaissement.decaissementType"
+               
+                style="font-size: 13px"
+                [compareWith]="compareDeacissementType"
+              >
+              <!-- 
+                <option *ngIf="decaissement.decaissementId == null" [ngValue]="null">-- Nature de décaissement --</option>-->
+                <option *ngFor="let t of decaissementTypes" [ngValue]="t">
+                  {{ t.decaissementTypeLabel }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+  
+        <div  *ngIf="decaissement.decaissementType != null && decaissement.decaissementType.decaissementTypeValue === 'CHEQUE_IMPAYE'">
+          <label for="amounth" class="p-float-label" style="font-size: 13px"
+          >Numéro de chèque impayé<span style="color: red;">*</span></label
         >
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"
             ><i class="pi pi-money-bill"></i
           ></span>
-          <select
+          <input
+            type="number"
             class="form-control p-field"
-            id="paie"
-            name="side"
-            [(ngModel)]="decaissement.decaissementPaymentType"
+            id="amounth"
+            [(ngModel)]="decaissement.decaissementChequeImpaye"
             style="font-size: 13px"
            
-          >
-            <option [ngValue]="'CHEQUE'">CHEQUE</option>
-            <option [ngValue]="'EFFET_ENCAISSEMENT'">EFFET ENCAISSEMENT</option>
-            <option [ngValue]="'EFFET_ESCOMPTE'">EFFET ESCOMPTE</option>
-            <option [ngValue]="'VIREMENT'">VIREMENT</option>
-            <option [ngValue]="'ESPECE'">ESPECE</option>
-            <option [ngValue]="'TRAITE'">TRAITE</option>
-          </select>
+          />
         </div>
-      </div>
-      <div
-        class="p-grid p-fluid"
+        </div>
+        <div
         *ngIf="
-          decaissement.decaissementPaymentType === 'CHEQUE' ||
-          decaissement.decaissementPaymentType === 'TRAITE'
-        "
-      >
+        decaissement.decaissementType != null &&
+        decaissement.decaissementType.decaissementTypeValue ===
+          'PAIEMENT_FACTURE_FOURNISSEUR'
+      "
+        >
+          <div>
+            <div  style="display: inline-block">
+              <label for="type" class="p-float-label" style="font-size: 13px">Fournisseur<span style="color: red;">*</span></label>
+            </div>
+           
+            <div style="float:right">
+              <i
+                placement="top"
+                ngbTooltip="Ajouter un fournisseur"
+                pRipple
+                class="pi pi-plus"
+              (click)="dispalyProviderModal = true"></i>
+            </div>
+          </div>
+  
+          <div class="p-inputgroup p-fluid">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <select
+              class="form-control p-field"
+              id="type"
+              name="side"
+              [(ngModel)]="decaissement.decaissementProvider"
+              
+              style="font-size: 13px"
+              (change)="getAllInvoiceProviders()"
+              [compareWith]="compareProvider"
+            >
+              <option *ngFor="let p of providers" [ngValue]="p">
+                {{ p.providerLabel }}
+              </option>
+            </select>
+          </div>
+        </div>
+   
+        <div  
+        *ngIf="
+        decaissement.decaissementType != null &&
+        decaissement.decaissementType.decaissementTypeValue ===
+          'PAIEMENT_FACTURE_FOURNISSEUR'
+      "
+        >
+          <div>
+            <div  style="display: inline-block">
+              <label for="type" class="p-float-label" style="font-size: 13px">Facture fournisseur<span style="color: red;">*</span></label>
+            </div>
+            <div style="float:right">
+              <i 
+                placement="top"
+                ngbTooltip="Ajouter une facture"
+                pRipple
+                class="pi pi-plus"
+                (click)="dispalyInvoiceProviderModal = true"
+              ></i>
+            </div>
+          </div>
+  
+          <div class="p-inputgroup p-fluid">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <select
+              class="form-control p-field"
+              id="type"
+              name="side"
+              [(ngModel)]="decaissement.decaissementInvoice"
+              style="font-size: 13px"
+              [compareWith]="compareInvoice"
+              (change)="updateAmount()"
+            >
+              <option *ngFor="let i of invoices" [ngValue]="i">
+                Facture {{ i.invoiceNumber }}
+              </option>
+            </select>
+          </div>
+        </div>
+   
         <div>
-          <div >
-            <label for="nbre" class="p-float-label" style="font-size: 13px">Numéro<span style="color: red;">*</span></label>
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-              <input
-                type="text"
-                class="form-control p-field"
-                id="nbre"
-                [(ngModel)]="decaissement.decaissementPaymentRuleNumber"
+          <div>
+            <div>
+              <label
+                for="details"
+                class="p-float-label"
                 style="font-size: 13px"
-              />
+                style="font-size: 13px"
+                >Plus d'informations sur ce décaissement</label
+              >
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"
+                  ><i class="pi pi-align-justify"></i
+                ></span>
+                <textarea
+                  type="text"
+                  class="form-control p-field"
+                  id="details"
+                  [(ngModel)]="decaissement.decaissementDetails"
+                  style="font-size: 13px"
+                  rows="3"
+                ></textarea>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div>
-        <label for="fin" class="p-float-label" style="font-size: 13px"
-          >Date d'écheance<span style="color: red;">*</span>
-        </label>
-        <div class="p-inputgroup">
-          <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
-          <input
-            type="date"
-            placeholder="Date"
-            class="form-control p-field"
-            id="fin"
-            [(ngModel)]="decaissement.decaissementDeadlineDate"
-            style="font-size: 13px"
-          />
+      <div class="mb-12 col-md-6 col-12">
+        <div style="display:flex">
+          <div class="mb-12 col-md-8 col-12" style="padding-left: 0px !important">
+            <label for="amounth" class="p-float-label" style="font-size: 13px"
+              >Montant<span style="color: red;">*</span></label
+            >
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"
+                ><i class="pi pi-money-bill"></i
+              ></span>
+              <input
+                type="number"
+                class="form-control p-field"
+                id="amounth"
+                [(ngModel)]="decaissement.decaissementAmount"
+                style="font-size: 13px"
+               
+              />
+            </div>
+          </div>
+          <div class="mb-12 col-md-4 col-12">
+            <label for="amounth" class="p-float-label" style="font-size: 13px"
+              >Devise</label
+            >
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"
+                ><i class="pi pi-money-bill"></i
+              ></span>
+              <input
+                type="text"
+                class="form-control p-field"
+                id="amounth"
+                [(ngModel)]="decaissement.decaissementCurrency"
+                style="font-size: 13px"
+                disabled=true
+               
+              />
+            </div>
+          </div>
+        </div>
+        <div>
+          <label for="paie" class="p-float-label" style="font-size: 13px"
+            >Mode de payment<span style="color: red;">*</span></label
+          >
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"
+              ><i class="pi pi-money-bill"></i
+            ></span>
+            <select
+              class="form-control p-field"
+              id="paie"
+              name="side"
+              [(ngModel)]="decaissement.decaissementPaymentType"
+              style="font-size: 13px"
+             
+            >
+              <option [ngValue]="'CHEQUE'">CHEQUE</option>
+              <option [ngValue]="'EFFET_ENCAISSEMENT'">EFFET ENCAISSEMENT</option>
+              <option [ngValue]="'EFFET_ESCOMPTE'">EFFET ESCOMPTE</option>
+              <option [ngValue]="'VIREMENT'">VIREMENT</option>
+              <option [ngValue]="'ESPECE'">ESPECE</option>
+              <option [ngValue]="'TRAITE'">TRAITE</option>
+            </select>
+          </div>
+        </div>
+        <div
+          class="p-grid p-fluid"
+          *ngIf="
+            decaissement.decaissementPaymentType === 'CHEQUE' ||
+            decaissement.decaissementPaymentType === 'TRAITE'
+          "
+        >
+          <div>
+            <div >
+              <label for="nbre" class="p-float-label" style="font-size: 13px">Numéro<span style="color: red;">*</span></label>
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                <input
+                  type="text"
+                  class="form-control p-field"
+                  id="nbre"
+                  [(ngModel)]="decaissement.decaissementPaymentRuleNumber"
+                  style="font-size: 13px"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <label for="fin" class="p-float-label" style="font-size: 13px"
+            >Date d'écheance<span style="color: red;">*</span>
+          </label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+            <input
+              type="date"
+              placeholder="Date"
+              class="form-control p-field"
+              id="fin"
+              [(ngModel)]="decaissement.decaissementDeadlineDate"
+              style="font-size: 13px"
+            />
+          </div>
         </div>
       </div>
     </div>
   </div>
+  
 
   <br />
 

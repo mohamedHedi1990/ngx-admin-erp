@@ -13,6 +13,24 @@ Modifier un échénacier
 </h4>
 <div style="width: 90%; margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
   <p-panel header="Configuration génerale" [toggleable]="false">
+    <div *ngIf="timeLine.timeLineId != null" style="display: flex">
+      <div class="mb-1 col-md-6 col-12 p-field">
+        <label for="creationDate" class="p-float-label">Date de création</label>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+          <input type="text" class="form-control p-field" id="creationDate"
+                 [(ngModel)]="timeLine.createdAt" disabled="true">
+        </div>
+      </div>
+      <div class="mb-1 col-md-6 col-12">
+        <label for="modificationDate" class="p-float-label">Date de dernière modification</label>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+          <input type="text" class="form-control p-field"  id="modificationDate"
+                 [(ngModel)]="timeLine.updatedAt " disabled="true">
+        </div>
+      </div>
+    </div>
     <div class="p-grid p-fluid">
       <div style="display: flex">
         <div class="mb-1 col-md-6 col-12 p-field">
@@ -242,7 +260,7 @@ Modifier un échénacier
                 <!--
                 <button pButton   placement="top" ngbTooltip="Modifier" pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="1"></button>
                 -->
-                <button pButton   placement="top" ngbTooltip="Supprimer" pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="1"></button>
+                <i  placement="top" ngbTooltip="Supprimer"  class="pi pi-trash"  style="color: #6200ee" (click)="1"></i>
               </div>
 
             </td>

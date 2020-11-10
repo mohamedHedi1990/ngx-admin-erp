@@ -131,12 +131,13 @@ export class ListFournisseursComponent implements OnInit {
   }
 
   showContacts(provider) {
-    this.contactModalheader = this.contactModalheader + provider.providerLabel;
+    // this.contactModalheader = this.contactModalheader + provider.providerLabel;
+    const contactModalheader = 'Liste des contacts';
     const ref = this.dialogService.open(ListContactsComponent, {
       data: {
         contacts: provider.providerContacts,
       },
-      header: this.contactModalheader,
+      header: contactModalheader,
       width: '70%',
     });
   }

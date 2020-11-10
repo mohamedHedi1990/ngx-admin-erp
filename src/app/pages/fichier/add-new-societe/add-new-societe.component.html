@@ -12,7 +12,25 @@ Modifier votre société
 <div><span class="customer-badge status-label">{{societe.campanyName}}</span></div>
 </h4>
 <div style="width: 90%; margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
-    <div class="p-grid p-fluid">
+    <div class="p-grid p-fluid" style="margin: 3%">
+      <div *ngIf="societe.campanyId != null" style="display: flex">
+        <div class="mb-1 col-md-6 col-12 p-field">
+          <label for="creationDate" class="p-float-label">Date de création</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field" id="creationDate"
+                   [(ngModel)]="societe.createdAt" disabled="true">
+          </div>
+        </div>
+        <div class="mb-1 col-md-6 col-12">
+          <label for="modificationDate" class="p-float-label">Date de dernière modification</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field"  id="modificationDate"
+                   [(ngModel)]="societe.updatedAt " disabled="true">
+          </div>
+        </div>
+      </div>
       <div style="display: flex">
         <div class="mb-1 col-md-6 col-12 p-field">
           <label for="societeLabel" class="p-float-label">Dénomination Societe</label>

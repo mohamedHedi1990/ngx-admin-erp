@@ -16,6 +16,24 @@ Modifier une nouvelle facture fournisseur
    margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
   <p-panel  [toggleable]="false">
     <div class="p-grid p-fluid">
+      <div *ngIf="invoice.invoiceId  != null" style="display: flex">
+        <div class="mb-1 col-md-6 col-12 p-field">
+          <label for="creationDate" class="p-float-label">Date de création</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field" id="creationDate"
+                   [(ngModel)]="invoice.createdAt" disabled="true">
+          </div>
+        </div>
+        <div class="mb-1 col-md-6 col-12">
+          <label for="modificationDate" class="p-float-label">Date de dernière modification</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field"  id="modificationDate"
+                   [(ngModel)]="invoice.updatedAt " disabled="true">
+          </div>
+        </div>
+      </div>
       <div style="display: flex">
         <div class="mb-1 col-md-6 col-12">
           <label for="type" class="p-float-label">Fournisseur</label>

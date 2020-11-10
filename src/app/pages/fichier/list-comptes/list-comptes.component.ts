@@ -138,7 +138,7 @@ export class ListComptesComponent implements OnInit {
   }
 
   showContacts(account) {
-    this.contactModalheader = this.contactModalheader + account.accountLabel;
+    // this.contactModalheader = this.contactModalheader + account.accountLabel;
     const ref = this.dialogService.open(ListContactsComponent, {
       data: {
         contacts: account.accountContacts,

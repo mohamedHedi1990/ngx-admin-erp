@@ -102,18 +102,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Rapprochement bancaire',
         link: '/pages/suivi-tresorerie/rapprochement-bancaire',
       },
+      /*
       {
         title: 'Tréserorie previsionnel non engagé',
         link: '/pages/suivi-tresorerie/etat-non-engage',
-      },
+      },*/
       {
         title: 'Tréserorie previsionnel engagé',
         link: '/pages/suivi-tresorerie/etat-engage',
       },
+      /*
       {
         title: 'Etat global de trésereorie',
         link: '/pages/suivi-tresorerie/etat-global',
-      },
+      },*/
       /*
       {
         title: 'Escompte d\'effets',

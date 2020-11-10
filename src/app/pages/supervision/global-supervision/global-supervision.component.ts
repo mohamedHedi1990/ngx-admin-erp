@@ -52,6 +52,7 @@ statusCards = [
   supervisionFn() {
     this.accountInitialAmount = this.supervision.account.accountInitialAmount;
     if(this.supervision.account != null) {
+      this.statusCards[0].value = '' +  this.accountInitialAmount;
       this.getOperationsBetweenTwoDates();
     }
   }
@@ -61,6 +62,7 @@ statusCards = [
         context.accounts = response;
         if(response.length !== 0) {
           this.supervision.account = response[0];
+          this.statusCards[0].value = '' +  this.supervision.account.accountInitialAmount;
           this.getOperationsBetweenTwoDates();
         }
       },

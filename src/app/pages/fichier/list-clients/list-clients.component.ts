@@ -184,7 +184,8 @@ export class ListClientsComponent implements OnInit {
   }
 
   showContacts(client) {
-    const contactModalheader = 'Liste des contacts pour le client ' + client.customerLabel;
+    // const contactModalheader = 'Liste des contacts pour le client ' + client.customerLabel;
+    const contactModalheader = 'Liste des contacts';
     const ref = this.dialogService.open(ListContactsComponent, {
       data: {
         contacts: client.customerContacts,
