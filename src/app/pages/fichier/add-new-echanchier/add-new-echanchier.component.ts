@@ -24,9 +24,13 @@ export class AddNewEchanchierComponent implements OnInit {
 line = {
   lineDate: new Date(Date.now()),
   initialAmount: 0,
+  initialAmountS: '0',
   interests: 0,
+  interestsS: '0',
   tva: 0,
+  tvaS: '0',
   total: 0,
+  totalS: '0',
 };
   settings = {
     add: {
@@ -102,13 +106,17 @@ line = {
    this.line = {
      lineDate: new Date(Date.now()),
      initialAmount: 0,
-     interests: 0,
-     tva: 0,
-     total: 0,
+  initialAmountS: '0',
+  interests: 0,
+  interestsS: '0',
+  tva: 0,
+  tvaS: '0',
+  total: 0,
+  totalS: '0',
    };
    this.line.lineDate = new Date();
  }
- addLine() {
+ addLine() { 
     this.timeLine.timeLineTable.push(this.line);
     this.initiateLine();
  }
@@ -127,6 +135,8 @@ line = {
 updateTotalAmount(line?) {
     if (line == null) line = this.line;
     line.total = line.initialAmount + line.interests + line.tva;
+    line.total = line.total.toFixed(3);
+    line.totalS = this.UtilsService.convertAmountToString('' +line.total);
 }
 
 checkTimeLineValid(): boolean {
@@ -135,4 +145,28 @@ checkTimeLineValid(): boolean {
   && this.timeLine.timeLineCreditNumber === '' || this.timeLine.timeLineLabel == null || this.timeLine.timeLineLabel === '' ||
       this.timeLine.timeLineYearNumber == null;
 }
+
+onChangeInitialAmount(line?) {
+  if (line == null) line = this.line;
+  line.initialAmountS = this.UtilsService.convertAmountToString('' +line.initialAmount);
+}
+onChangeInterests(line?) {
+  if (line == null) line = this.line;
+  line.interestsS = this.UtilsService.convertAmountToString('' + line.interests);
+}
+onChangeTva(line?) {
+  if (line == null) line = this.line;
+  line.tvaS = this.UtilsService.convertAmountToString('' + line.tva);
+}
+
+deleteLine(line) {
+  for(let i=0; i<this.timeLine.timeLineTable.length ; i++) {
+    const element = this.timeLine.timeLineTable[i];
+    if(element.timeLineEntryId != null && element.timeLineEntryId === line.timeLineEntryId) {
+     this.timeLine.timeLineTable.splice(i, 1);
+      break;
+    }
+  }
+}
+
 }

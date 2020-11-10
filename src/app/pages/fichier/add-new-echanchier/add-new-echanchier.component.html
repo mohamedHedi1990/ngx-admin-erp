@@ -170,19 +170,19 @@ Modifier un échénacier
                       </th>
                       <th  style="font-size: 13px;">
                         <input style="font-size: 13px;" pInputText type="number" placeholder="Echéance principale"
-                               class="form-control p-field" [(ngModel)]="line.initialAmount" (input)="updateTotalAmount()">
+                               class="form-control p-field" [(ngModel)]="line.initialAmount" (input)="updateTotalAmount(); onChangeInitialAmount();">
                       </th>
                       <th  style="font-size: 13px;">
                         <input style="font-size: 13px;" pInputText type="number" placeholder="Intérets"
-                               class="form-control p-field" [(ngModel)]="line.interests" (change)="updateTotalAmount()">
+                               class="form-control p-field" [(ngModel)]="line.interests" (change)="updateTotalAmount(); onChangeInterests();">
                       </th>
                       <th  style="font-size: 13px;">
                         <input style="font-size: 13px;" pInputText type="number" placeholder="TVA"
-                               class="form-control p-field" [(ngModel)]="line.tva" (change)="updateTotalAmount()">
+                               class="form-control p-field" [(ngModel)]="line.tva" (change)="updateTotalAmount();onChangeTva();">
                       </th>
                       <th  style="font-size: 13px;">
                         <input style="font-size: 13px;" pInputText type="number" placeholder="Toatal anuiité"
-                               class="form-control p-field" [(ngModel)]="line.total" disabled="true">
+                               class="form-control p-field" [(ngModel)]="line.totalS" disabled="true">
                       </th>
                       <th>
                         <button pButton   placement="top" ngbTooltip="Ajouter" pRipple icon="pi pi-plus" class="p-button-rounded p-mr-2"  style="margin-right: 7px;
@@ -209,10 +209,10 @@ Modifier un échénacier
               <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input style="font-size: 13px;" pInputText type="number"
-                         class="form-control p-field" [(ngModel)]="line.initialAmount" (change)="updateTotalAmount(line)">
+                         class="form-control p-field" [(ngModel)]="line.initialAmount" (change)="updateTotalAmount(line);onChangeInitialAmount(line);">
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{line.initialAmount}}
+                  {{line.initialAmountS}}
                 </ng-template>
               </p-cellEditor>
             </td>
@@ -221,10 +221,10 @@ Modifier un échénacier
               <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input style="font-size: 13px;" pInputText type="number"
-                         class="form-control p-field" [(ngModel)]="line.interests" (change)="updateTotalAmount(line)">
+                         class="form-control p-field" [(ngModel)]="line.interests" (change)="updateTotalAmount(line);onChangeInterests(line);">
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{line.interests}}
+                  {{line.interestsS}}
                 </ng-template>
               </p-cellEditor>
             </td>
@@ -233,10 +233,10 @@ Modifier un échénacier
               <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input style="font-size: 13px;" pInputText type="number"
-                         class="form-control p-field" [(ngModel)]="line.tva" (change)="updateTotalAmount(line)">
+                         class="form-control p-field" [(ngModel)]="line.tva" (change)="updateTotalAmount(line);onChangeTva(line);">
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{line.tva}}
+                  {{line.tvaS}}
                 </ng-template>
               </p-cellEditor>
             </td>
@@ -249,7 +249,7 @@ Modifier un échénacier
                          class="form-control p-field" [(ngModel)]="line.total"disabled="true">
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{line.total}}
+                  {{line.totalS}}
                 </ng-template>
               </p-cellEditor>
             </td>
@@ -260,7 +260,7 @@ Modifier un échénacier
                 <!--
                 <button pButton   placement="top" ngbTooltip="Modifier" pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="1"></button>
                 -->
-                <i  placement="top" ngbTooltip="Supprimer"  class="pi pi-trash"  style="color: #6200ee" (click)="1"></i>
+                <i  placement="top" ngbTooltip="Supprimer"  class="pi pi-trash"  style="color: #6200ee" (click)="deleteLine(line)"></i>
               </div>
 
             </td>

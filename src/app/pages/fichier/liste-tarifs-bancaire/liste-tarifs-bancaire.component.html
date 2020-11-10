@@ -122,10 +122,11 @@ Liste des  tarifs bancaires
           {{comission.comissionOperation}}
         </td>
         <td  style="text-align: center;">
-          {{comission.comissionValue}}
+          {{comission.comissionValueS}}
         </td>
         <td  style="text-align: center;">
-          {{comission.commissionType}}
+          <span *ngIf="comission.commissionType === 'NUMBER'">Valeur</span>
+          <span *ngIf="comission.commissionType === 'RATE'">Pourcentage</span>
         </td>
       </tr>
     </ng-template>
