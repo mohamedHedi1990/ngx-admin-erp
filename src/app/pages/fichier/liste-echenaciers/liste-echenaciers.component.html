@@ -80,3 +80,18 @@ Liste des échénaciers
 (addNewEchenacierEvent)="saveNewEchancier($event)" (cancelEvent)="hideEchenacierWindow();initTimeLine();"></ngx-add-new-echanchier>
 
 
+<p-dialog header="Supprimer un échéancier" [(visible)]="displayDeleteTimeLine" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+          [draggable]="false" [resizable]="false">
+  <br>
+  Voulez-vous supprimer l'échénacier <span  class="customer-badge status-negotiation">{{timeLine.timeLineLabel}}</span> ?
+  <ng-template pTemplate="footer">
+    <div style="margin-top: 20px;">
+      <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
+              (click)="displayDeleteTimeLine=false"></button>
+
+			   <button pButton pRipple label="Supprimer" icon="pi pi-check" class="p-button-danger p-mr-2"
+              (click)="delTimeLine()"></button>
+
+    </div>
+  </ng-template>
+</p-dialog>

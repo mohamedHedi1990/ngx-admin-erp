@@ -22,6 +22,7 @@ export class ListeEchenaciersComponent implements OnInit {
     timeLineInterestRate: 0,
     timeLineTable: [],
   };
+  displayDeleteTimeLine = false;
   constructor(private UtilsService: UtilsServiceService,
               private confirmationService: ConfirmationService) { }
 
@@ -89,33 +90,27 @@ export class ListeEchenaciersComponent implements OnInit {
 
   }
   deleteTimeLine(timeLine) {
-    this.confirmationService.confirm({
-      message: `Voulez vous vraiment supprimer l'échéancier ${timeLine.timeLineLabel}?`,
-      acceptLabel: 'Supprimer',
-      rejectLabel: 'Annuler',
-      header: `Supprimer un échéancier`,
-      acceptButtonStyleClass: 'p-button-danger',
-      rejectButtonStyleClass: 'p-button-secondary',
-      accept: () => {
-        this.delTimeLine(timeLine);
-      },
-    });
+   this.timeLine = timeLine;
+   this.displayDeleteTimeLine = true;
 
   }
 
-  delTimeLine(timeLine) {
+  delTimeLine() {
     const context = this;
-    this.UtilsService.delete(`${UtilsServiceService.API_TIME_LINE}/${timeLine.timeLineId}`).subscribe( response => {
+    this.UtilsService.delete(`${UtilsServiceService.API_TIME_LINE}/${this.timeLine.timeLineId}`).subscribe( response => {
         context.echanciers = response;
         this.UtilsService.showToast('success',
           'Echéancier supprimé avec succés',
-          `L'échéancier  ${timeLine.timeLineLabel} a été supprimé avec succcés`);
+          `L'échéancier  ${this.timeLine.timeLineLabel} a été supprimé avec succcés`);
+          this.getAllTimeLines();
         this.initTimeLine();
+        this.displayDeleteTimeLine = false;
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
-        `Un erreur interne a été produit lors de la suppression de l'échéancier ${timeLine.timeLineLabel}`);
-        this.initTimeLine(); });
+        `Un erreur interne a été produit lors de la suppression de l'échéancier ${this.timeLine.timeLineLabel}`);
+        this.initTimeLine(); 
+        this.displayDeleteTimeLine = false;});
 
 
 

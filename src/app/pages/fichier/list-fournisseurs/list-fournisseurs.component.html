@@ -113,3 +113,19 @@ Liste des fournisseurs
     <ngx-list-contacts [contacts]="provider.customerContacts"></ngx-list-contacts>
   </ng-template>
 </p-dialog>
+
+<p-dialog header="Supprimer un compte bancaire" [(visible)]="displayDeleteProvider" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+          [draggable]="false" [resizable]="false">
+  <br>
+  Voulez-vous supprimer le fournisseur <span  class="customer-badge status-negotiation">{{provider.providerLabel}}</span> ?
+  <ng-template pTemplate="footer">
+    <div style="margin-top: 20px;">
+      <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
+              (click)="displayDeleteProvider=false"></button>
+
+			   <button pButton pRipple label="Supprimer" icon="pi pi-check" class="p-button-danger p-mr-2"
+              (click)="delProvider()"></button>
+
+    </div>
+  </ng-template>
+</p-dialog>

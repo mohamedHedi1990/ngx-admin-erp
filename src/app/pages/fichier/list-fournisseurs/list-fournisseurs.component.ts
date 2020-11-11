@@ -17,6 +17,7 @@ export class ListFournisseursComponent implements OnInit {
   provider = null;
   showProviderList = false;
   contactModalheader = 'List des contacts pour le fournisseur ';
+  displayDeleteProvider = false;
   constructor(private service: SmartTableData, private UtilsService: UtilsServiceService,
               public dialogService: DialogService, private confirmationService: ConfirmationService) {
   }
@@ -79,34 +80,26 @@ export class ListFournisseursComponent implements OnInit {
 
 
   deleteProvider(provider) {
-    this.confirmationService.confirm({
-      message: `Voulez vous vraiment supprimer le fournisseur ${provider.providerLabel}?`,
-      acceptLabel: 'Supprimer',
-      rejectLabel: 'Annuler',
-      header: `Supprimer un fournisseur`,
-      acceptButtonStyleClass: 'p-button-danger',
-      rejectButtonStyleClass: 'p-button-secondary',
-      accept: () => {
-        this.delProvider(provider);
-      },
-    });
+    this.provider = provider;
+    this.displayDeleteProvider = true;
 
   }
-  delProvider(provider) {
+  delProvider() {
     const context = this;
-    this.UtilsService.delete(`${UtilsServiceService.API_PROVIDER}/${provider.providerId}`).subscribe( response => {
+    this.UtilsService.delete(`${UtilsServiceService.API_PROVIDER}/${this.provider.providerId}`).subscribe( response => {
         context.providers = response;
         this.UtilsService.showToast('success',
           'Fournisseur supprimé avec succés',
-          `Le fournisseur  ${provider.providerLabel} a été supprimé avec succcés`);
+          `Le fournisseur  ${this.provider.providerLabel} a été supprimé avec succcés`);
         this.initProvider();
         this.getAllProviders();
+        this.displayDeleteProvider = false;
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
-        `Un erreur interne a été produit lors de la suppression du fournisseur ${provider.providerLabel}`);
+        `Un erreur interne a été produit lors de la suppression du fournisseur ${this.provider.providerLabel}`);
         this.initProvider();
-    this.getAllProviders();
+    this.displayDeleteProvider = false;
     });
 
 

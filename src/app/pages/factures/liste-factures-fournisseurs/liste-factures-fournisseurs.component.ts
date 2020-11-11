@@ -13,6 +13,7 @@ export class ListeFacturesFournisseursComponent implements OnInit {
   invoices = [];
   loading = false;
   invoice = null;
+  displayDeleteProviderInvoice = false;
   constructor(private UtilsService: UtilsServiceService,
               public dialogService: DialogService, private confirmationService: ConfirmationService) { }
 
@@ -63,35 +64,29 @@ export class ListeFacturesFournisseursComponent implements OnInit {
     this.showProviderInvoiceWindow = true;
   }
 
-  delInvoice(invoice) {
+  delInvoice() {
     const context = this;
-    const url = UtilsServiceService.API_INVOICE + '/' + invoice.invoiceId;
-    this.UtilsService.delete(`${UtilsServiceService.API_INVOICE}/${invoice.invoiceId}`).subscribe( response => {
+    const url = UtilsServiceService.API_INVOICE + '/' + this.invoice.invoiceId;
+    this.UtilsService.delete(url).subscribe( response => {
         this.UtilsService.showToast('success',
           'Facture supprimée avec succés',
-          `La facture fournisseur numéro  ${invoice.invoiceNumber} a été supprimée avec succcés`);
+          `La facture fournisseur numéro  ${this.invoice.invoiceNumber} a été supprimée avec succcés`);
         context.getAllInvoices();
+        this.displayDeleteProviderInvoice = false;
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
-        `Un erreur interne a été produit lors de la suppression de facture fournisseur numéro  ${invoice.invoiceNumber}`);
+        `Un erreur interne a été produit lors de la suppression de facture fournisseur numéro  ${this.invoice.invoiceNumber}`);
+        this.displayDeleteProviderInvoice = false;
       });
 
 
   }
 
   deleteInvoice(invoice) {
-    this.confirmationService.confirm({
-      message: `Voulez vous vraiment supprimer la facture fournisseur numéro  ${invoice.invoiceNumber}?`,
-      acceptLabel: 'Supprimer',
-      rejectLabel: 'Annuler',
-      header: `Supprimer une facture`,
-      acceptButtonStyleClass: 'p-button-danger',
-      rejectButtonStyleClass: 'p-button-secondary',
-      accept: () => {
-        this.delInvoice(invoice);
-      },
-    });
+   this.invoice = invoice;
+   this.displayDeleteProviderInvoice = true;
+  
   }
   initInvoice() {
     this.invoice = {

@@ -18,6 +18,7 @@ export class ListClientsComponent implements OnInit {
   showClientWindow = false;
   client = null;
   showContactList = false;
+  displayDeleteClient = false;
 
   /*
   settings = {
@@ -133,36 +134,30 @@ export class ListClientsComponent implements OnInit {
     this.showClientWindow = true;
   }
 
-  delClient(client) {
+  delClient() {
     const context = this;
-    const url = UtilsServiceService.API_CLIENT + '/' + client.customerId;
-    this.UtilsService.delete(`${UtilsServiceService.API_CLIENT}/${client.customerId}`).subscribe( response => {
+    const url = UtilsServiceService.API_CLIENT + '/' + this.client.customerId;
+    this.UtilsService.delete(`${UtilsServiceService.API_CLIENT}/${this.client.customerId}`).subscribe( response => {
         context.clients = response;
         this.UtilsService.showToast('success',
           'Client supprimé avec succés',
-          `Le client  ${client.customerLabel} a été supprimé avec succcés`);
+          `Le client  ${this.client.customerLabel} a été supprimé avec succcés`);
         context.getAllClients();
+        context.initClient();
+        context.displayDeleteClient = false;
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
         `Un erreur interne a été produit lors de la suppression du client ${this.client.customerLabel}`);
+        context.displayDeleteClient = false;
       });
 
 
   }
 
   deleteClient(client) {
-    this.confirmationService.confirm({
-      message: `Voulez vous vraiment supprimer le client ${client.customerLabel}?`,
-      acceptLabel: 'Supprimer',
-      rejectLabel: 'Annuler',
-      header: `Supprimer un client`,
-      acceptButtonStyleClass: 'p-button-danger',
-      rejectButtonStyleClass: 'p-button-secondary',
-      accept: () => {
-        this.delClient(client);
-      },
-    });
+   this.client = client;
+   this.displayDeleteClient = true;
 
   }
 

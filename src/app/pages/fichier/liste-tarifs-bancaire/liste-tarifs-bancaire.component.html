@@ -154,3 +154,18 @@ Liste des  tarifs bancaires
 <ngx-add-new-tarifs-bancaire *ngIf="showTarifBancaireWindow" [tarif]="tarif" (cancelEvent)="hideTarifBancaireWindow(); initTarifBancaire()"
 (addNewTarifEvent)="saveNewTarif($event)"></ngx-add-new-tarifs-bancaire>
 
+<p-dialog header="Supprimer un client" [(visible)]="displayDeleteTarif" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+          [draggable]="false" [resizable]="false">
+  <br>
+  Voulez-vous supprimer le tarif bancaire <span  class="customer-badge status-negotiation">{{tarif.tarifLabel}}</span> ?
+  <ng-template pTemplate="footer">
+    <div style="margin-top: 20px;">
+      <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
+              (click)="displayDeleteTarif=false"></button>
+
+			   <button pButton pRipple label="Supprimer" icon="pi pi-check" class="p-button-danger p-mr-2"
+              (click)="delTarif()"></button>
+
+    </div>
+  </ng-template>
+</p-dialog>

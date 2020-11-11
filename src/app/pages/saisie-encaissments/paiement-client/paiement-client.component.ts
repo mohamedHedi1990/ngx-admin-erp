@@ -113,7 +113,7 @@ export class PaiementClientComponent implements OnInit {
 	  this.paymentRule = reglement;
 	  this.displayPaymentRuleModal = true;
   }
-  deletePR(reglement) {
+  delPaymentRule(reglement) {
 
 	  this.paymentRule = reglement;
 	  this.displayDeletePaymentRuleModal = true;

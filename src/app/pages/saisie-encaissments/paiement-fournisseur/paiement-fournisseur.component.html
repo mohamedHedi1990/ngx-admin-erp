@@ -196,7 +196,7 @@ Paiements fournissuers
 <p-dialog header="Valider un réglement" [(visible)]="displayValidatePaymentRuleModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
           [draggable]="false" [resizable]="false">
   <br>
-  Voulez-vous valider le réglement {{paymentRule.paymentRuleLabel}} ?
+  Voulez-vous valider le réglement <span  class="customer-badge status-negotiation">{{paymentRule.paymentRuleLabel}}</span> ?
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
       <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
@@ -211,7 +211,7 @@ Paiements fournissuers
 <p-dialog header="Supprimer un réglement" [(visible)]="displayDeletePaymentRuleModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
           [draggable]="false" [resizable]="false">
   <br>
-  Voulez-vous supprimer le réglement {{paymentRule.paymentRuleLabel}} ?
+  Voulez-vous supprimer le réglement <span  class="customer-badge status-negotiation">{{paymentRule.paymentRuleLabel}}</span> ?
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
       <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"

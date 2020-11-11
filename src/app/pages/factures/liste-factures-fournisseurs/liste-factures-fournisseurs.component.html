@@ -88,3 +88,19 @@ Liste des factures fournisseurs
                     -->
 <ngx-add-new-facture-fournisseur *ngIf="showProviderInvoiceWindow" [invoice]="invoice" (addNewProviderInvoiceEvent)="saveInvoice($event)"
                             (cancelEvent)="hideInvoiceWindow(); initInvoice();"></ngx-add-new-facture-fournisseur>
+
+                            <p-dialog header="Supprimer une facture client" [(visible)]="displayDeleteProviderInvoice" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+          [draggable]="false" [resizable]="false">
+  <br>
+  Voulez-vous supprimer la facture fournisseur <span  class="customer-badge status-negotiation">{{invoice.invoiceNumber}}</span> ?
+  <ng-template pTemplate="footer">
+    <div style="margin-top: 20px;">
+      <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
+              (click)="displayDeleteProviderInvoice=false"></button>
+
+			   <button pButton pRipple label="Supprimer" icon="pi pi-check" class="p-button-danger p-mr-2"
+              (click)="delInvoice()"></button>
+
+    </div>
+  </ng-template>
+</p-dialog>

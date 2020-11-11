@@ -19,6 +19,7 @@ export class ListComptesComponent implements OnInit {
   account = null;
   showContactList = false;
   contactModalheader = 'List des contacts ';
+  displayDeleteAccount = false;
 
   ngOnInit(): void {
     this.initAccount();
@@ -82,34 +83,27 @@ export class ListComptesComponent implements OnInit {
     this.showAccountWindow = true;
   }
   deleteAccount(account) {
-    this.confirmationService.confirm({
-      message: `Voulez vous vraiment supprimer le compte bancaire ${account.accountLabel}?`,
-      acceptLabel: 'Supprimer',
-      rejectLabel: 'Annuler',
-      header: `Supprimer un compte bancaire`,
-      acceptButtonStyleClass: 'p-button-danger',
-      rejectButtonStyleClass: 'p-button-secondary',
-      accept: () => {
-        this.delAccount(account);
-      },
-    });
+    this.account = account;
+    this.displayDeleteAccount = true;
 
   }
-  delAccount(account) {
+  delAccount() {
     const context = this;
-    this.UtilsService.delete(`${UtilsServiceService.API_ACCOUNT}/${account.accountId}`).subscribe( response => {
+    this.UtilsService.delete(`${UtilsServiceService.API_ACCOUNT}/${this.account.accountId}`).subscribe( response => {
         context.accounts = response;
         this.UtilsService.showToast('success',
           'Compte supprimé avec succés',
-          `Le compte  ${account.accountLabel} a été supprimé avec succcés`);
+          `Le compte  ${this.account.accountLabel} a été supprimé avec succcés`);
         this.initAccount();
         this.getAllAccounts();
+        this.displayDeleteAccount = false;
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
-        `Un erreur interne a été produit lors de la suppression du compte ${account.accountLabel}. \n Verifiez s'il existe d'autres données reliées à ce compte bancaire avant de le supprimer!`);
+        `Un erreur interne a été produit lors de la suppression du compte ${this.account.accountLabel}. \n Verifiez s'il existe d'autres données reliées à ce compte bancaire avant de le supprimer!`);
         this.initAccount();
-    this.getAllAccounts(); });
+    this.getAllAccounts();
+    this.displayDeleteAccount = false; });
 
 
 

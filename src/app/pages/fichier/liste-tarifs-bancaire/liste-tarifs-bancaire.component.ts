@@ -13,6 +13,7 @@ export class ListeTarifsBancaireComponent implements OnInit {
   loading = false;
   tarif = {tarifId: null, tarifLabel: '', tarifAccount: null, comissions: []};
   showTarifBancaireWindow = false;
+  displayDeleteTarif = false;
   constructor(private UtilsService: UtilsServiceService,
               private confirmationService: ConfirmationService) { }
 
@@ -70,33 +71,26 @@ export class ListeTarifsBancaireComponent implements OnInit {
 
   }
   deleteTarif(tarif) {
-    this.confirmationService.confirm({
-      message: `Voulez vous vraiment supprimer la tarification bancaire ${tarif.tarifLabel}?`,
-      acceptLabel: 'Supprimer',
-      rejectLabel: 'Annuler',
-      header: `Supprimer une tarification bancaire`,
-      acceptButtonStyleClass: 'p-button-danger',
-      rejectButtonStyleClass: 'p-button-secondary',
-      accept: () => {
-        this.delTarif(tarif);
-      },
-    });
+    this.tarif = tarif;
+    this.displayDeleteTarif = true;
 
   }
-  delTarif(tarif) {
+  delTarif() {
     const context = this;
-    this.UtilsService.delete(`${UtilsServiceService.API_TARIF}/${tarif.tarifId}`).subscribe( response => {
+    this.UtilsService.delete(`${UtilsServiceService.API_TARIF}/${this.tarif.tarifId}`).subscribe( response => {
         context.tarifs = response;
         this.UtilsService.showToast('success',
           'Tarification bancaire supprimée avec succés',
-          `La tarification bancaire  ${tarif.tarifLabel} a été supprimée avec succcés`);
+          `La tarification bancaire  ${this.tarif.tarifLabel} a été supprimée avec succcés`);
         this.initTarifBancaire();
         this.getAllTarifs();
+        this.displayDeleteTarif = false;
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
-        `Un erreur interne a été produit lors de la suppression de la tarification bancaire ${tarif.tarifLabel}`);
+        `Un erreur interne a été produit lors de la suppression de la tarification bancaire ${this.tarif.tarifLabel}`);
         this.initTarifBancaire();
+        this.displayDeleteTarif = false;
         this.getAllTarifs();
     });
 

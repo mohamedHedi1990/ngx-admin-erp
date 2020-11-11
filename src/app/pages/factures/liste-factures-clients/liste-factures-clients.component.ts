@@ -13,6 +13,7 @@ export class ListeFacturesClientsComponent implements OnInit {
   invoices = [];
   loading = false;
   invoice = null;
+  displayDeleteCustomerInvoice = false;
   constructor(private UtilsService: UtilsServiceService,
               public dialogService: DialogService, private confirmationService: ConfirmationService) { }
 
@@ -63,35 +64,28 @@ export class ListeFacturesClientsComponent implements OnInit {
     this.showCustomerInvoiceWindow = true;
   }
 
-  delInvoice(invoice) {
+  delInvoice() {
     const context = this;
-    const url = UtilsServiceService.API_INVOICE + '/' + invoice.invoiceId;
-    this.UtilsService.delete(`${UtilsServiceService.API_CUSTOMER_INVOICE}/${invoice.invoiceId}`).subscribe( response => {
+    const url = UtilsServiceService.API_INVOICE + '/' + this.invoice.invoiceId;
+    this.UtilsService.delete(url).subscribe( response => {
         this.UtilsService.showToast('success',
           'Facture supprimée avec succés',
-          `La facture client numéro  ${invoice.invoiceNumber} a été supprimée avec succcés`);
+          `La facture client numéro  ${this.invoice.invoiceNumber} a été supprimée avec succcés`);
         context.getAllInvoices();
+        this.displayDeleteCustomerInvoice = false;
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
-        `Un erreur interne a été produit lors de la suppression de facture client numéro  ${invoice.invoiceNumber}`);
+        `Un erreur interne a été produit lors de la suppression de facture client numéro  ${this.invoice.invoiceNumber}`);
+        this.displayDeleteCustomerInvoice = false;
       });
 
 
   }
 
   deleteInvoice(invoice) {
-    this.confirmationService.confirm({
-      message: `Voulez vous vraiment supprimer la facture client numéro  ${invoice.invoiceNumber}?`,
-      acceptLabel: 'Supprimer',
-      rejectLabel: 'Annuler',
-      header: `Supprimer une facture`,
-      acceptButtonStyleClass: 'p-button-danger',
-      rejectButtonStyleClass: 'p-button-secondary',
-      accept: () => {
-        this.delInvoice(invoice);
-      },
-    });
+   this.invoice = invoice;
+   this.displayDeleteCustomerInvoice = true;
   }
   initInvoice() {
     this.invoice = {
