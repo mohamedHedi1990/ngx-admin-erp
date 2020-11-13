@@ -80,7 +80,7 @@ statusCards = [
         context.operations = response;
         let decaissement = 0;
         let encaissement = 0;
-        response.array.forEach(element => {
+        context.operations.forEach(element => {
           if(element.opperationType === 'DECAISSEMENT') {
             decaissement = decaissement + element.operationAmount;
           } else {
@@ -88,16 +88,16 @@ statusCards = [
           }
         });
 
-        context.statusCards[0].value = ''+ this.accountInitialAmount;
-        context.statusCards[1].value = ''+encaissement;
-        context.statusCards[2].value = ''+decaissement;
-        const finalAmount = this.accountInitialAmount + encaissement - decaissement;
-        context.statusCards[3].value = '' + finalAmount;
+        
 
 
         this.UtilsService.get(UtilsServiceService.API_HISTORIC_SOLD+ '/' + this.supervision.account.accountId + '/' + this.supervision.startDate
        ).subscribe( response => {
-            
+        context.statusCards[0].value = this.UtilsService.convertAmountToString(''+ response.solde);
+        context.statusCards[1].value = this.UtilsService.convertAmountToString(''+encaissement);
+        context.statusCards[2].value = this.UtilsService.convertAmountToString(''+decaissement);
+        const finalAmount = response.solde + encaissement - decaissement;
+        context.statusCards[3].value = this.UtilsService.convertAmountToString('' + finalAmount);
           },
           error => {
             this.UtilsService.showToast('danger',

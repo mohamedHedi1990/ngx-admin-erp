@@ -53,6 +53,7 @@ statusCards = [
     this.accountInitialAmount = this.supervision.account.accountInitialAmount;
     if(this.supervision.account != null) {
       this.statusCards[0].value = '' +  this.accountInitialAmount;
+      this.statusCards[0].value = this.UtilsService.convertAmountToString('' +  this.accountInitialAmount);
       this.getOperationsBetweenTwoDates();
     }
   }
@@ -63,6 +64,7 @@ statusCards = [
         if(response.length !== 0) {
           this.supervision.account = response[0];
           this.statusCards[0].value = '' +  this.supervision.account.accountInitialAmount;
+          this.statusCards[0].value = this.UtilsService.convertAmountToString(this.statusCards[0].value );
           this.getOperationsBetweenTwoDates();
         }
       },
@@ -81,17 +83,17 @@ statusCards = [
         context.operations = response;
         let decaissement = 0;
         let encaissement = 0;
-        response.array.forEach(element => {
+        context.operations.forEach(element => {
           if(element.opperationType === 'DECAISSEMENT') {
             decaissement = decaissement + element.operationAmount;
           } else {
             encaissement = encaissement + element.operationAmount;
           }
         });
-        context.statusCards[1].value = ''+encaissement;
-        context.statusCards[2].value = ''+decaissement;
+        context.statusCards[1].value = this.UtilsService.convertAmountToString(''+encaissement);
+        context.statusCards[2].value = this.UtilsService.convertAmountToString(''+decaissement);
         const finalAmount = this.accountInitialAmount + encaissement - decaissement;
-        context.statusCards[3].value = '' + finalAmount;
+        context.statusCards[3].value = this.UtilsService.convertAmountToString('' + finalAmount);
       },
       error => {
         this.UtilsService.showToast('danger',

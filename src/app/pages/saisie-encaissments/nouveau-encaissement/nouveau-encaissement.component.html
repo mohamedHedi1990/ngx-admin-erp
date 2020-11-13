@@ -392,7 +392,7 @@ Modifier un encaissement
 </p-dialog>
 
 <!-- ajouter un nouveau client -->
-<p-dialog header="Nouveau fournisseur" [(visible)]="dispalyCustomerModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+<p-dialog header="Nouveau client" [(visible)]="dispalyCustomerModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
           [draggable]="false" [resizable]="false">
   <br>
   <div style="width: 90%;
@@ -452,7 +452,7 @@ Modifier un encaissement
 </p-dialog>
 
 <!--Ajouter une facture fournisseur-->
-<p-dialog header="Nouvelle facture pour le fournisseur {{customer.customerLabel}}" [(visible)]="dispalyInvoiceCustomerModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+<p-dialog header="Nouvelle facture pour le client {{customer.customerLabel}}" [(visible)]="dispalyInvoiceCustomerModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
           [draggable]="false" [resizable]="false">
   <br>
  
@@ -462,13 +462,13 @@ Modifier un encaissement
   <div class="p-grid p-fluid">
     <div>
       <div class="mb-1 col-md-12 col-12">
-        <label for="type" class="p-float-label">Fournisseur<span style="color: red;">*</span></label>
+        <label for="type" class="p-float-label">Client<span style="color: red;">*</span></label>
         <div class="p-inputgroup p-fluid">
           <span class="p-inputgroup-addon"><i class="pi pi-shopping-cart"></i></span>
           <input *ngIf="invoice.invoiceId!= null" type="text" placeholder="Date" class="form-control p-field"  id="manager"
                  [(ngModel)]="invoice.customer.customerLabel " style="font-size: 13px" disabled="true">
           <select *ngIf="invoice.invoiceId == null" class="form-control p-field" id="type" name="side" [(ngModel)]="invoice.customer"  style="font-size: 13px">
-            <option [ngValue]="null">-- Fournisseur --</option>
+            <option [ngValue]="null">-- Client --</option>
             <option *ngFor="let c of customers;" [ngValue]="c">{{c.customerLabel}}</option>
 
           </select>
