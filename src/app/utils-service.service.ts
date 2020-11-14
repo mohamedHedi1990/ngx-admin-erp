@@ -8,7 +8,7 @@ import {DatePipe} from '@angular/common';
 })
 export class UtilsServiceService {
   //public static REMOTE_ADDRESS = 'http://41.231.122.94:8090/';
-  public static REMOTE_ADDRESS = 'http://localhost:8090/';
+  public static REMOTE_ADDRESS = 'https://erp-forecast-bi-services.herokuapp.com';
   public static API_USER = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/user';
   public static API_COMPANY = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/company';
   public static API_PROVIDER = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/provider';
