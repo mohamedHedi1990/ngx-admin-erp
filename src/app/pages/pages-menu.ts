@@ -101,6 +101,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Rapprochement bancaire',
         link: '/pages/suivi-tresorerie/rapprochement-bancaire',
+        icon: 'browser-outline',
       },
       /*
       {
@@ -110,6 +111,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Tréserorie previsionnel engagé',
         link: '/pages/suivi-tresorerie/etat-engage',
+        icon: 'browser-outline',
       },
       /*
       {
