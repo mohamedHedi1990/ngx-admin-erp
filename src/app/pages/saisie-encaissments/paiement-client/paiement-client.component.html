@@ -186,7 +186,7 @@ Réglement clients
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
       <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
-              (click)="displayPaymentRuleModal=false"></button>
+              (click)="displayPaymentRuleModal=false; initPaymentRule()"></button>
       <button *ngIf="selectedInvoices.length === 0" pButton pRipple label="Ajouter" icon="pi pi-check" class="p-button-success p-mr-2"
               (click)="savePaymentRule()"></button>
 			   <button *ngIf="selectedInvoices.length !== 0" pButton pRipple label="Payer" icon="pi pi-check" class="p-button-success p-mr-2"

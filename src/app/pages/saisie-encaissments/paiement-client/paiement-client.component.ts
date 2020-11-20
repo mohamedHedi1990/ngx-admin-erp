@@ -161,6 +161,13 @@ export class PaiementClientComponent implements OnInit {
 
 
   }
+  
+  showPaymentInvoices() {
+	  this.selectedInvoices.forEach(element => {
+		  this.paymentRule.paymentRuleAmount = this.paymentRule.paymentRuleAmount + element.invoiceTotalAmount;
+	  });
+	  this.displayPaymentRuleModal = true;
+  }
 
 initPaymentRule() {
   this.paymentRule = {
