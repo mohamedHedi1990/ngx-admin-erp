@@ -7,16 +7,34 @@ import {UtilsServiceService} from '../../../utils-service.service';
   styleUrls: ['./add-new-tarifs-bancaire.component.scss'],
 })
 export class AddNewTarifsBancaireComponent implements OnInit {
-@Input() tarif = {tarifId: null, tarifLabel: '', tarifAccount: null, comissions: []};
   @Output() addNewTarifEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();
+  @Input() account = {
+    accountId: null,
+    accountLabel : '',
+    accountBank: '',
+    accountBankAdress : '',
+    accountAgency: '',
+    accountAgencyAdress: '',
+    accountChargeCustomerName: '',
+    accountChargeCustomerPhoneNumber: '',
+    accountChargeCustomerEmail: '',
+    accountNumber: '',
+    accountRIB: '',
+    accountCurrency: '',
+    accountContacts: [],
+    accountInitialAmount: null,
+    accountComissions: [],
+    createdAt: null,
+    updatedAt: null,
+  };
   constructor(private UtilsService: UtilsServiceService) { }
-  accounts = [];
+  accounts: any[] = [];
   ngOnInit(): void {
     this.getAllAccounts();
   }
   saveTarif() {
-    this.addNewTarifEvent.emit(this.tarif);
+    this.addNewTarifEvent.emit(this.account);
   }
   getAllAccounts() {
 
@@ -29,7 +47,6 @@ export class AddNewTarifsBancaireComponent implements OnInit {
           'Erreur interne',
           `Un erreur interne a été produit lors du chargement des comptes`);
       });
-
   }
   cancel() {
     this.cancelEvent.emit();
@@ -40,14 +57,21 @@ export class AddNewTarifsBancaireComponent implements OnInit {
     this.tarif.tarifAccount.accountNumber = this.tarif.tarifAccount.accountNumber;
   }*/
   addNewComission() {
-    this.tarif.comissions.push({
+    this.account.accountComissions.push({
       comissionLabel : '',
       comissionOperation: null,
       comissionValue: 0,
       commissionType: null,
     });
   }
-  checkTarifValid(): boolean {
-    return this.tarif.tarifAccount == null || this.tarif.tarifLabel == null || this.tarif.tarifLabel === '';
-  }
+
+  disabelAddComissionButton(): boolean {
+    for (const comission of this.account.accountComissions) {
+      if (comission.comissionLabel == null || comission.comissionOperation == null || comission.comissionValue == null || comission.commissionType == null ||
+        comission.comissionLabel === '' || comission.comissionOperation === '' || comission.comissionValue === '' || comission.commissionType === '') {
+        return true;
+      }
+    }
+    return false;
+      }
 }

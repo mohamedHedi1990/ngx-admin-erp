@@ -1,163 +1,64 @@
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
-<h4 *ngIf="!showTarifBancaireWindow" style="background: #E7E8E8; 
+<h4 *ngIf="!showTarifBancaireWindow" style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
 Liste des  tarifs bancaires
 </h4>
 <div class="card" *ngIf="!showTarifBancaireWindow" style=" margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
-  <p-table #dt [value]="tarifs" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
-           [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
-           [paginator]="true" currentPageReportTemplate=""
-           [filterDelay]="0"
-           [globalFilterFields]="['providerLabel','providerUniqueIdentifier','providerAddress','providerTel','providerEmail','providerManagerName','createdAt', 'updatedAt']">
-    <ng-template pTemplate="caption" >
-      
-      <div class="p-d-flex p-ai-center p-jc-between" style="  width: 100%; display: inline-block;">
-        <div style="float:right">
-          <button pButton pRipple label="Nouvelle tarification bancaire" icon="pi pi-plus" class="primaryBtn" (click)="showTarifBancaireWindow = true"></button>
-        </div>
-    </div>
-      
+  <div *ngFor="let account of accounts">
+      <div>Compte bancaire <span class="customer-badge status-label">{{account.accountLabel}} {{account.accountNumber}}</span></div>
+      <p-table #dt [value]="account.accountComissions" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true">
+        <ng-template pTemplate="header">
+          <tr style="text-align: center; font-size: 13px;">
+            <th  style="text-align: center; font-size: 13px;width: 30%">Libellé</th>
+            <th  style="text-align: center; font-size: 13px; width: 30%">Opération</th>
+            <th style="text-align: center;font-size: 13px; width: 10%">Valeur</th>
+            <th style="text-align: center;font-size: 13px; width: 20%">Type</th>
+            <th style="text-align: center;width: 10%">Supprimer</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-comission>
+          <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
+            <td  style="text-align: center;">
+              {{comission.comissionLabel}}
+            </td>
+            <td  style="text-align: center;">
+              {{comission.comissionOperation}}
+            </td>
+            <td  style="text-align: center;">
+              {{comission.comissionValueS}}
+            </td>
+            <td  style="text-align: center;">
+              <span *ngIf="comission.commissionType === 'NUMBER'">Valeur</span>
+              <span *ngIf="comission.commissionType === 'RATE'">Pourcentage</span>
+            </td>
+            <td style="text-align: center;">
+              <div style="text-align: center;">
+                <i    placement="top" ngbTooltip="Supprimer"  class="pi pi-trash"  style="color: #6200ee" (click)="deleteComission(comission)"></i>
+              </div>
 
-   
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr style="font-size: 13px">
+            <td colspan="8" style="text-align: left !important;">Aucune commission trouvée pour ce compte bancaire!</td>
+          </tr>
+        </ng-template>
+      </p-table>
 
-  </ng-template>
-    <ng-template pTemplate="header">
-      <tr style="text-align: center; font-size: 15px;">
-        <th style="width: 3rem"></th>
-        <th  style="text-align: center; font-size: 13px; width: 30%">Tarif bancaire
-        </th>
-        <th style="text-align: center; font-size: 13px;width: 30%">Compte bancaire
-        </th>
-        <th style="text-align: center; font-size: 13px;width: 30%">Numéro de compte bancaire
-        </th>
-        <!--
-        <th pSortableColumn="check_remittance_commission" style=" text-align: center;font-size: 15px;">Commision de
-          remise des chèques
-          <p-sortIcon field="providerAddress"></p-sortIcon>
-        </th>
-        <th pSortableColumn="remittance_of_bills_for_collection_commission"
-            style=" text-align: center;font-size: 15px;">Commission de remise remise effets à l'encaissement
-          <p-sortIcon field="providerAddress"></p-sortIcon>
-        </th>
-        <th pSortableColumn="discount_commission" style=" text-align: center;font-size: 15px;">Commission de remise
-          remise effets à l'escompte
-          <p-sortIcon field="providerAddress"></p-sortIcon>
-        </th>
-        <th pSortableColumn="transfer_commission" style="text-align: center;font-size: 15px;">Virement
-          <p-sortIcon field="providerAddress"></p-sortIcon>
-        </th>
-        <th pSortableColumn="interest_rate" style=" text-align: center;font-size: 15px;">Taux d\'intérêt
-          <p-sortIcon field="providerAddress"></p-sortIcon>
-        </th>
-!-->
-        <th style="width: 10%; text-align: center;font-size: 13px">Actions</th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-tarif let-expanded="expanded">
-      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
-        <td>
-          <button type="button" pButton pRipple [pRowToggler]="tarif"
-                  class="p-button-text p-button-rounded p-button-plain"
-                  [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
-        </td>
-        <td style="text-align: center;font-size: 13px;">
-          {{tarif.tarifLabel}}
-        </td>
-        <td style="text-align: center;font-size: 13px;  ">
-          {{tarif.tarifAccount.accountLabel}}
-        </td>
-        <td style="text-align: center;font-size: 13px;">
-          {{tarif.tarifAccount.accountNumber}}
-        </td>
-        <!--
-        <td style="text-align: center;">
-          {{tarif.check_remittance_commission}}
-        </td>
+  </div>
 
-        <td style="text-align: center;">
-          {{tarif.remittance_of_bills_for_collection_commission}}
-        </td>
-        <td style="text-align: center;">
-          {{tarif.discount_commission}}
-        </td>
-        <td style="text-align: center;">
-          {{tarif.transfer_commission}}
-        </td>
-        <td style="text-align: center;">
-          {{tarif.interest_rate}}
-        </td>
--->
-        <td style="text-align: center;">
-          <div>
-            <!--
-            <button pButton   placement="top" ngbTooltip="Contacter" pRipple icon="pi pi-users" class="p-button-rounded p-button-info p-mr-2" style="margin-right: 7px;" (click)="showContacts(client)"></button>
-            -->
-            <i    placement="top" ngbTooltip="Modifier"  class="pi pi-pencil" style="margin-right: 7px;color: #6200ee" (click)="editTarif(tarif)"></i>
-            <i    placement="top" ngbTooltip="Supprimer"  class="pi pi-trash" style="color: #6200ee" (click)="deleteTarif(tarif)"></i>
-          </div>
-        </td>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="rowexpansion" let-tarif>
-      <tr>
-        <td colspan="4">
-          <div class="p-p-3">
-            <p-table #dt [value]="tarif.comissions" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true">
-              <ng-template pTemplate="header">
-      <tr style="text-align: center; font-size: 13px;">
-        <th  style="text-align: center; font-size: 13px;width: 30%">Label</th>
-        <th  style="text-align: center; font-size: 13px; width: 30%">Opération</th>
-        <th style="text-align: center;font-size: 13px; width: 20%">Valeur</th>
-      <th style="text-align: center;font-size: 13px; width: 20%">Type</th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-comission>
-      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
-        <td  style="text-align: center;">
-          {{comission.comissionLabel}}
-        </td>
-        <td  style="text-align: center;">
-          {{comission.comissionOperation}}
-        </td>
-        <td  style="text-align: center;">
-          {{comission.comissionValueS}}
-        </td>
-        <td  style="text-align: center;">
-          <span *ngIf="comission.commissionType === 'NUMBER'">Valeur</span>
-          <span *ngIf="comission.commissionType === 'RATE'">Pourcentage</span>
-        </td>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="emptymessage">
-      <tr style="font-size: 13px">
-        <td colspan="8" style="text-align: left !important;">Aucune commission trouvée!</td>
-      </tr>
-    </ng-template>
-  </p-table>
-
-
-
-          </div>
-        </td>
-      </tr>
-    </ng-template>
-<ng-template pTemplate="emptymessage">
-  <tr>
-    <td colspan="8" style="font-size: 13px;text-align: left !important;">Aucune tarification bancaire trouvée!</td>
-  </tr>
-</ng-template>
-</p-table>
 </div>
 
-<ngx-add-new-tarifs-bancaire *ngIf="showTarifBancaireWindow" [tarif]="tarif" (cancelEvent)="hideTarifBancaireWindow(); initTarifBancaire()"
-(addNewTarifEvent)="saveNewTarif($event)"></ngx-add-new-tarifs-bancaire>
+<ngx-add-new-tarifs-bancaire *ngIf="showTarifBancaireWindow" [account]="account" (cancelEvent)="hideTarifBancaireWindow(); initTarifBancaire()"
+(addNewTarifEvent)="saveNewComissions($event)"></ngx-add-new-tarifs-bancaire>
 
-<p-dialog header="Supprimer un client" [(visible)]="displayDeleteTarif" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+<p-dialog header="Supprimer une comission" [(visible)]="displayDeleteTarif" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
           [draggable]="false" [resizable]="false">
   <br>
-  Voulez-vous supprimer le tarif bancaire <span  class="customer-badge status-negotiation">{{tarif.tarifLabel}}</span> ?
+  Voulez-vous supprimer la comission bancaire <span  class="customer-badge status-negotiation">{{comission.comissionLabel}}</span> ?
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
       <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"

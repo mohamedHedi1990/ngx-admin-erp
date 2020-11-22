@@ -7,13 +7,14 @@ import {DatePipe} from '@angular/common';
   providedIn: 'root',
 })
 export class UtilsServiceService {
-  //public static REMOTE_ADDRESS = 'http://212.129.62.79:8090/';
+  // public static REMOTE_ADDRESS = 'http://212.129.62.79:8090/';
   public static REMOTE_ADDRESS = 'http://localhost:8090/';
-  //public static REMOTE_ADDRESS = 'https://erp-forecast-bi-services.herokuapp.com';
+  // public static REMOTE_ADDRESS = 'https://erp-forecast-bi-services.herokuapp.com';
   public static API_USER = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/user';
   public static API_COMPANY = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/company';
   public static API_PROVIDER = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/provider';
   public static API_ACCOUNT = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/account';
+  public static API_COMISSION = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/comission';
   public static API_CLIENT = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/customer';
   public static API_TARIF = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/tarif';
   public static API_TIME_LINE = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/timeLine';
@@ -84,22 +85,22 @@ export class UtilsServiceService {
   }
 
   convertAmountToString(initialAmount: string) : string {
-let amount = '';
-if(initialAmount.includes('.')) {
-  const array: any[] = initialAmount.split('.');
-  if(array[1].length ===1) {
-    array[1] = "." + array[1] + "00";
-    return array[0] + array[1];
-  } else if(array[1].length === 2) {
-    array[1] = "." + array[1] + "0";
-    return array[0] + array[1];
-  }
-  return array[0] + '.' + array[1];
-} else {
-  amount = initialAmount + '.000';
-  return amount;
-}
-    
+    let amount = '';
+    if(initialAmount.includes('.')) {
+      const array: any[] = initialAmount.split('.');
+      if(array[1].length ===1) {
+        array[1] = "." + array[1] + "00";
+        return array[0] + array[1];
+      } else if(array[1].length === 2) {
+        array[1] = "." + array[1] + "0";
+        return array[0] + array[1];
+      }
+      return array[0] + '.' + array[1];
+    } else {
+      amount = initialAmount + '.000';
+      return amount;
+    }
+
   }
 
 }

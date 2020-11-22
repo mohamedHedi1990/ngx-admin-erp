@@ -1,10 +1,10 @@
-<h4 *ngIf="timeLine.timeLineId  == null" style="background: #E7E8E8; 
+<h4 *ngIf="timeLine.timeLineId  == null" style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
 Ajouter un nouveau échénacier
 </h4>
-<h4 *ngIf="timeLine.timeLineId != null" style="background: #E7E8E8; 
+<h4 *ngIf="timeLine.timeLineId != null" style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
@@ -34,7 +34,7 @@ Modifier un échénacier
     <div class="p-grid p-fluid">
       <div style="display: flex">
         <div class="mb-1 col-md-6 col-12 p-field">
-          <label for="label" class="p-float-label">Label</label>
+          <label for="label" class="p-float-label">Libellé</label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
             <input type="text" class="form-control p-field" id="label"
@@ -282,7 +282,7 @@ Modifier un échénacier
     <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="cancel()"></button>
 
       <button [disabled]="checkTimeLineValid()"
-      [ngClass]= "{'disabled':  checkTimeLineValid()}" pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn" 
+      [ngClass]= "{'disabled':  checkTimeLineValid()}" pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn"
       (click)="saveEcenachier()" style="margin-left: 10px;"></button>
   </div>
 

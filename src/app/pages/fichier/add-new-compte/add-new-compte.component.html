@@ -1,10 +1,10 @@
-<h4 *ngIf="account.accountId  == null" style="background: #E7E8E8; 
+<h4 *ngIf="account.accountId  == null" style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
 Ajouter un nouveau compte bancaire
 </h4>
-<h4 *ngIf="account.accountId != null" style="background: #E7E8E8; 
+<h4 *ngIf="account.accountId != null" style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
@@ -131,7 +131,7 @@ Modifier un compte bancaire
       <div class="p-grid p-fluid">
         <div style="display: flex">
           <div class="mb-1 col-md-4 col-12">
-            <label for="accountLabel" class="p-float-label">Label Compte</label>
+            <label for="accountLabel" class="p-float-label">Libellé Compte</label>
             <div class="p-inputgroup">
               <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
               <input type="text" class="form-control p-field"  id="accountLabel"
@@ -210,14 +210,14 @@ Modifier un compte bancaire
    <div *ngFor="let contact of account.accountContacts" style="padding-bottom: 50px;">
     <ngx-new-contact [contact]="contact"></ngx-new-contact>
   </div>
-    
+
   </p-panel>
   <div class="p-panel p-panel-header" style="margin-top: 20px;float: right; padding: 2%;">
 
     <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="cancel()"></button>
 
-      <button [disabled]="checkAccountValid()" 
-      [ngClass]= "{'disabled': checkAccountValid()}" pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn" 
+      <button [disabled]="checkAccountValid()"
+      [ngClass]= "{'disabled': checkAccountValid()}" pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn"
       (click)="saveAccount()" style="margin-left: 10px;"></button>
   </div>
 

@@ -1,25 +1,20 @@
-<h4 *ngIf="tarif.tarifId  == null" style="background: #E7E8E8; 
+<h4 style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
-Ajouter un nouveau tarif bancaire
-</h4>
-<h4 *ngIf="tarif.tarifId != null" style="background: #E7E8E8; 
-padding: 10px 10px 10px 10px !important;
-    font-size: 20px !important;
-    color: #222b45;margin-left: 10px">
-Modifier un tarif bancaire
-<div><span class="customer-badge status-label">{{tarif.tarifLabel}}</span></div>
+Ajouter / Modifier des comissions bancaires
+  <div>Compte bancaire <span class="customer-badge status-label">{{account.accountLabel}} {{account.accountNumber}}</span></div>
+
 </h4>
 <div style="width: 90%; margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
   <div class="p-grid p-fluid" style="margin:3%">
-    <div *ngIf="tarif.tarifId  != null" style="display: flex">
+    <div style="display: flex">
       <div class="mb-1 col-md-6 col-12 p-field">
         <label for="creationDate" class="p-float-label">Date de création</label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
           <input type="text" class="form-control p-field" id="creationDate"
-                 [(ngModel)]="tarif.createdAt" disabled="true">
+                 [(ngModel)]="account.createdAt" disabled="true">
         </div>
       </div>
       <div class="mb-1 col-md-6 col-12">
@@ -27,51 +22,35 @@ Modifier un tarif bancaire
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
           <input type="text" class="form-control p-field"  id="modificationDate"
-                 [(ngModel)]="tarif.updatedAt " disabled="true">
+                 [(ngModel)]="account.updatedAt " disabled="true">
+        </div>
+      </div>
+    </div>
+    <div style="display: flex">
+      <div class="mb-1 col-md-12 col-12">
+        <label class="p-float-label">Compte bancaire</label>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+          <input type="text" class="form-control p-field" id="side"
+                 [(ngModel)]="account.accountLabel" disabled="true">
         </div>
       </div>
     </div>
     <div style="display: flex">
       <div class="mb-1 col-md-6 col-12 p-field">
-        <label for="tarifLabel" class="p-float-label">Label</label>
-        <div class="p-inputgroup">
-          <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-          <input type="text" class="form-control p-field" id="tarifLabel"
-                 [(ngModel)]="tarif.tarifLabel" [ngClass]="{
-        'is-invalid': tarif.tarifLabel == null || tarif.tarifLabel== '' ,
-        'is-valid': tarif.tarifLabel != null && tarif.tarifLabel != ''
-      }">
-        </div>
-      </div>
-      <div class="mb-1 col-md-6 col-12">
-        <label class="p-float-label">Compte bancaire</label>
-        <div class="p-inputgroup">
-          <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-          <select class="form-control p-field" name="side" [(ngModel)]="tarif.tarifAccount" [ngClass]="{
-        'is-invalid': tarif.tarifAccount== null ,
-        'is-valid':tarif.tarifAccount != null
-      }" >
-            <option [ngValue]="null">-- Compte bancaire --</option>
-            <option *ngFor="let a of accounts;" [ngValue]="a">{{a.accountLabel}}</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <div style="display: flex" *ngIf="tarif.tarifAccount != null">
-      <div class="mb-1 col-md-6 col-12 p-field">
-        <label for="tarifLabel" class="p-float-label">Numéro compte bancaire</label>
+        <label for="numCompte" class="p-float-label">Numéro compte bancaire</label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
           <input type="text" class="form-control p-field" id="numCompte"
-                 [(ngModel)]="tarif.tarifAccount.accountNumber" disabled="true">
+                 [(ngModel)]="account.accountNumber" disabled="true">
         </div>
       </div>
       <div class="mb-1 col-md-6 col-12 p-field">
-        <label for="tarifLabel" class="p-float-label">Devise</label>
+        <label for="devise" class="p-float-label">Devise</label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-dollar"></i></span>
           <input type="text" class="form-control p-field" id="devise"
-                 [(ngModel)]="tarif.tarifAccount.accountCurrency" disabled="true">
+                 [(ngModel)]="account.accountCurrency" disabled="true">
         </div>
       </div>
     </div>
@@ -81,9 +60,11 @@ Modifier un tarif bancaire
         <button pButton pRipple label="Ajouter une comission" icon="pi pi-money-bill" class="p-mr-2"
                 (click)="addNewComission()" style="background: #dee2e6;
     color: black;
-    border: #dee2e6;"></button>
+    border: #dee2e6;"
+                [disabled]="disabelAddComissionButton()"
+                [ngClass]= "{'disabled': disabelAddComissionButton()}"></button>
       </div>
-      <div *ngFor="let commission of tarif.comissions" style="padding-bottom: 50px;">
+      <div *ngFor="let commission of account.accountComissions" style="padding-bottom: 50px;">
         <ngx-nouvelle-comission [comission]="commission"></ngx-nouvelle-comission>
       </div>
     </p-panel>
@@ -161,8 +142,8 @@ Modifier un tarif bancaire
 
     <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="cancel()"></button>
 
-      <button [disabled]="checkTarifValid()"
-      [ngClass]= "{'disabled': checkTarifValid()}" pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn" 
+      <button [disabled]="disabelAddComissionButton()"
+      [ngClass]= "{'disabled': disabelAddComissionButton()}" pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn"
       (click)="saveTarif()" style="margin-left: 10px;"></button>
   </div>
 

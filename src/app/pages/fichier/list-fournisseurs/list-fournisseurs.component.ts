@@ -134,5 +134,4 @@ export class ListFournisseursComponent implements OnInit {
       width: '70%',
     });
   }
-
 }
