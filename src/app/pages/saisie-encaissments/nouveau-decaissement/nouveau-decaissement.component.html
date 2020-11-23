@@ -1,14 +1,14 @@
 
-<h4 style="background: #E7E8E8; 
+<h4 style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
 <span *ngIf="decaissement.decaissementId == null">Ajouter un nouveau décaissement</span>
-<span *ngIf="decaissement.decaissementId != null">Modifier un décaissement 
+<span *ngIf="decaissement.decaissementId != null">Modifier un décaissement
   <div>
     <span class="customer-badge status-label">{{decaissement.decaissementLabel}}</span>
   </div>
-  
+
 </span>
 </h4>
 
@@ -34,8 +34,8 @@ padding: 10px 10px 10px 10px !important;
       </div>
     </div>
     <div class="p-grid p-fluid" style="display: flex">
-      
-      
+
+
       <div class="mb-12 col-md-6 col-12">
         <div>
           <label for="type" class="p-float-label" style="font-size: 13px"
@@ -48,12 +48,12 @@ padding: 10px 10px 10px 10px !important;
               id="type"
               name="side"
               [(ngModel)]="decaissement.decaissementBankAccount"
-             
+
               style="font-size: 13px"
-              [compareWith]="compareAccount" 
+              [compareWith]="compareAccount"
               (change)="changeAccount()"
               >
-              
+
               <option *ngIf="decaissement.decaissementId == null" [ngValue]="null">-- Compte bancaire --</option>
               <option *ngFor="let a of accounts" [ngValue]="a">
                 {{ a.accountLabel }}
@@ -61,7 +61,7 @@ padding: 10px 10px 10px 10px !important;
             </select>
           </div>
         </div>
-       
+
         <div>
           <label for="amount" class="p-float-label" style="font-size: 13px"
             >Libéllé<span style="color: red;">*</span></label
@@ -74,11 +74,11 @@ padding: 10px 10px 10px 10px !important;
               id="amount"
               [(ngModel)]="decaissement.decaissementLabel"
               style="font-size: 13px"
-             
+
             />
           </div>
         </div>
-      
+
         <div>
           <div>
             <div >
@@ -94,7 +94,7 @@ padding: 10px 10px 10px 10px !important;
                 (click)="dispalyDecaissementTypeModal = true"></i>
               </div>
             </div>
-  
+
             <div class="p-inputgroup p-fluid">
               <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
               <select
@@ -102,11 +102,11 @@ padding: 10px 10px 10px 10px !important;
                 id="type"
                 name="side"
                 [(ngModel)]="decaissement.decaissementType"
-               
+
                 style="font-size: 13px"
                 [compareWith]="compareDeacissementType"
               >
-              <!-- 
+              <!--
                 <option *ngIf="decaissement.decaissementId == null" [ngValue]="null">-- Nature de décaissement --</option>-->
                 <option *ngFor="let t of decaissementTypes" [ngValue]="t">
                   {{ t.decaissementTypeLabel }}
@@ -115,7 +115,7 @@ padding: 10px 10px 10px 10px !important;
             </div>
           </div>
         </div>
-  
+
         <div  *ngIf="decaissement.decaissementType != null && decaissement.decaissementType.decaissementTypeValue === 'CHEQUE_IMPAYE'">
           <label for="amounth" class="p-float-label" style="font-size: 13px"
           >Numéro de chèque impayé<span style="color: red;">*</span></label
@@ -130,7 +130,7 @@ padding: 10px 10px 10px 10px !important;
             id="amounth"
             [(ngModel)]="decaissement.decaissementChequeImpaye"
             style="font-size: 13px"
-           
+
           />
         </div>
         </div>
@@ -145,7 +145,7 @@ padding: 10px 10px 10px 10px !important;
             <div  style="display: inline-block">
               <label for="type" class="p-float-label" style="font-size: 13px">Fournisseur<span style="color: red;">*</span></label>
             </div>
-           
+
             <div style="float:right">
               <i
                 placement="top"
@@ -155,7 +155,7 @@ padding: 10px 10px 10px 10px !important;
               (click)="dispalyProviderModal = true"></i>
             </div>
           </div>
-  
+
           <div class="p-inputgroup p-fluid">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
             <select
@@ -163,7 +163,7 @@ padding: 10px 10px 10px 10px !important;
               id="type"
               name="side"
               [(ngModel)]="decaissement.decaissementProvider"
-              
+
               style="font-size: 13px"
               (change)="getAllInvoiceProviders()"
               [compareWith]="compareProvider"
@@ -174,8 +174,8 @@ padding: 10px 10px 10px 10px !important;
             </select>
           </div>
         </div>
-   
-        <div  
+
+        <div
         *ngIf="
         decaissement.decaissementType != null &&
         decaissement.decaissementType.decaissementTypeValue ===
@@ -187,7 +187,7 @@ padding: 10px 10px 10px 10px !important;
               <label for="type" class="p-float-label" style="font-size: 13px">Facture fournisseur<span style="color: red;">*</span></label>
             </div>
             <div style="float:right">
-              <i 
+              <i
                 placement="top"
                 ngbTooltip="Ajouter une facture"
                 pRipple
@@ -196,7 +196,7 @@ padding: 10px 10px 10px 10px !important;
               ></i>
             </div>
           </div>
-  
+
           <div class="p-inputgroup p-fluid">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
             <select
@@ -214,7 +214,7 @@ padding: 10px 10px 10px 10px !important;
             </select>
           </div>
         </div>
-   
+
         <div>
           <div>
             <div>
@@ -258,7 +258,7 @@ padding: 10px 10px 10px 10px !important;
                 id="amounth"
                 [(ngModel)]="decaissement.decaissementAmount"
                 style="font-size: 13px"
-               
+
               />
             </div>
           </div>
@@ -277,7 +277,7 @@ padding: 10px 10px 10px 10px !important;
                 [(ngModel)]="decaissement.decaissementCurrency"
                 style="font-size: 13px"
                 disabled=true
-               
+
               />
             </div>
           </div>
@@ -296,11 +296,9 @@ padding: 10px 10px 10px 10px !important;
               name="side"
               [(ngModel)]="decaissement.decaissementPaymentType"
               style="font-size: 13px"
-             
+
             >
               <option [ngValue]="'CHEQUE'">CHEQUE</option>
-              <option [ngValue]="'EFFET_ENCAISSEMENT'">EFFET ENCAISSEMENT</option>
-              <option [ngValue]="'EFFET_ESCOMPTE'">EFFET ESCOMPTE</option>
               <option [ngValue]="'VIREMENT'">VIREMENT</option>
               <option [ngValue]="'ESPECE'">ESPECE</option>
               <option [ngValue]="'TRAITE'">TRAITE</option>
@@ -349,14 +347,14 @@ padding: 10px 10px 10px 10px !important;
       </div>
     </div>
   </div>
-  
+
 
   <br />
 
   <div class="p-panel p-panel-header" style="margin-top: 20px;float: right; padding: 2%;">
     <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="cancel()"></button>
 
-    <!-- 
+    <!--
     <button
       style="margin-left: 10px; font-size: 13px"
       (click)="saveDecaissement()"
@@ -368,7 +366,7 @@ padding: 10px 10px 10px 10px !important;
   -->
   <button [disabled]="checkDecaissementValid()" [ngClass]= "{'disabled': checkDecaissementValid()}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn" (click)="saveDecaissement()" style="margin-left: 10px;"></button>
 
-    
+
   </div>
 </div>
 
@@ -395,7 +393,7 @@ padding: 10px 10px 10px 10px !important;
           </div>
         </div>
       </div>
-     
+
     </div>
   </div>
   <ng-template pTemplate="footer">
@@ -403,7 +401,7 @@ padding: 10px 10px 10px 10px !important;
               <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="dispalyDecaissementTypeModal=false"></button>
 
               <button [disabled]="decaissementType.decaissementTypeLabel == null || decaissementType.decaissementTypeLabel === ''"
-              [ngClass]= "{'disabled': decaissementType.decaissementTypeLabel == null || decaissementType.decaissementTypeLabel === ''}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn" 
+              [ngClass]= "{'disabled': decaissementType.decaissementTypeLabel == null || decaissementType.decaissementTypeLabel === ''}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn"
               (click)="saveDecaissementType()" style="margin-left: 10px;"></button>
 
     </div>
@@ -435,7 +433,7 @@ padding: 10px 10px 10px 10px !important;
             </div>
           </div>
         </div>
-      
+
         <div class="p-col-12 mb-1 col-md-12 p-field">
           <label for="manager" class="p-float-label">Responsable </label>
           <div class="p-inputgroup">
@@ -456,14 +454,14 @@ padding: 10px 10px 10px 10px !important;
         </div>
       </div>
   <br>
-  
+
 </div>
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
       <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="dispalyProviderModal=false"></button>
 
-      <button [disabled]="provider.providerLabel == null || provider.providerLabel === '' || provider.providerUniqueIdentifier == null || provider.providerUniqueIdentifier === ''" 
-      [ngClass]= "{'disabled': provider.providerLabel == null || provider.providerLabel === '' || provider.providerUniqueIdentifier == null || provider.providerUniqueIdentifier === ''}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn" 
+      <button [disabled]="provider.providerLabel == null || provider.providerLabel === '' || provider.providerUniqueIdentifier == null || provider.providerUniqueIdentifier === ''"
+      [ngClass]= "{'disabled': provider.providerLabel == null || provider.providerLabel === '' || provider.providerUniqueIdentifier == null || provider.providerUniqueIdentifier === ''}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn"
       (click)="saveProvider()" style="margin-left: 10px;"></button>
 
     </div>
@@ -474,7 +472,7 @@ padding: 10px 10px 10px 10px !important;
 <p-dialog header="Nouvelle facture pour le fournisseur {{provider.providerLabel}}" [(visible)]="dispalyInvoiceProviderModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
           [draggable]="false" [resizable]="false">
   <br>
- 
+
   <div style="width: 90%;
   margin: auto;">
 
@@ -509,12 +507,12 @@ padding: 10px 10px 10px 10px !important;
             <select class="form-control p-field" id="type" name="side" [(ngModel)]="invoice.invoiceCurrency" style="font-size: 13px">
               <option value="TND">TND</option>
                <option value="TND">EUR</option>
-  
+
             </select>
           </div>
         </div>
       </div>
-  
+
     </div>
   <br>
     <div class="p-grid p-fluid">
@@ -586,13 +584,13 @@ padding: 10px 10px 10px 10px !important;
 
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
-  
+
 
 
               <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="dispalyInvoiceProviderModal=false"></button>
 
-      <button [disabled]="invoice.invoiceNumber == null || invoice.invoiceNumber === '' || invoice.provider == null" 
-      [ngClass]= "{'disabled': invoice.invoiceNumber == null || invoice.invoiceNumber === '' || invoice.provider == null}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn" 
+      <button [disabled]="invoice.invoiceNumber == null || invoice.invoiceNumber === '' || invoice.provider == null"
+      [ngClass]= "{'disabled': invoice.invoiceNumber == null || invoice.invoiceNumber === '' || invoice.provider == null}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn"
       (click)="saveInvoice()" style="margin-left: 10px;"></button>
 
     </div>

@@ -1,11 +1,11 @@
 
-<h4 *ngIf="encaissement.encaissementId == null" style="background: #E7E8E8; 
+<h4 *ngIf="encaissement.encaissementId == null" style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
 Ajouter un nouveau encaissement
 </h4>
-<h4 *ngIf="encaissement.encaissementId != null" style="background: #E7E8E8; 
+<h4 *ngIf="encaissement.encaissementId != null" style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
@@ -47,12 +47,12 @@ Modifier un encaissement
               id="type"
               name="side"
               [(ngModel)]="encaissement.encaissementBankAccount"
-             
+
               style="font-size: 13px"
-              [compareWith]="compareAccount" 
+              [compareWith]="compareAccount"
               (change)="changeAccount()"
               >
-              
+
               <option *ngIf="encaissement.encaissementId == null" [ngValue]="null">-- Compte bancaire --</option>
               <option *ngFor="let a of accounts" [ngValue]="a">
                 {{ a.accountLabel }}
@@ -60,7 +60,7 @@ Modifier un encaissement
             </select>
           </div>
         </div>
-       
+
         <div>
           <label for="amount" class="p-float-label" style="font-size: 13px"
             >Libéllé<span style="color: red;">*</span></label
@@ -73,11 +73,11 @@ Modifier un encaissement
               id="amount"
               [(ngModel)]="encaissement.encaissementLabel"
               style="font-size: 13px"
-             
+
             />
           </div>
         </div>
-      
+
         <div>
           <div>
             <div >
@@ -93,7 +93,7 @@ Modifier un encaissement
                 (click)="dispalyEncaissementTypeModal = true"></i>
               </div>
             </div>
-  
+
             <div class="p-inputgroup p-fluid">
               <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
               <select
@@ -101,11 +101,11 @@ Modifier un encaissement
                 id="type"
                 name="side"
                 [(ngModel)]="encaissement.encaissementType"
-               
+
                 style="font-size: 13px"
                 [compareWith]="compareDeacissementType"
               >
-              <!-- 
+              <!--
                 <option *ngIf="encaissement.encaissementId == null" [ngValue]="null">-- Nature de décaissement --</option>-->
                 <option *ngFor="let t of encaissementTypes" [ngValue]="t">
                   {{ t.encaissementTypeLabel }}
@@ -114,7 +114,7 @@ Modifier un encaissement
             </div>
           </div>
         </div>
-  
+
         <div
         *ngIf="
         encaissement.encaissementType != null &&
@@ -126,7 +126,7 @@ Modifier un encaissement
             <div  style="display: inline-block">
               <label for="type" class="p-float-label" style="font-size: 13px">Client<span style="color: red;">*</span></label>
             </div>
-           
+
             <div style="float:right">
               <i
                 placement="top"
@@ -136,7 +136,7 @@ Modifier un encaissement
               (click)="dispalyCustomerModal = true"></i>
             </div>
           </div>
-  
+
           <div class="p-inputgroup p-fluid">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
             <select
@@ -144,7 +144,7 @@ Modifier un encaissement
               id="type"
               name="side"
               [(ngModel)]="encaissement.encaissementCustomer"
-              
+
               style="font-size: 13px"
               (change)="getAllInvoiceCustomers()"
               [compareWith]="compareCustomer"
@@ -155,8 +155,8 @@ Modifier un encaissement
             </select>
           </div>
         </div>
-   
-        <div  
+
+        <div
         *ngIf="
         encaissement.encaissementType != null &&
         encaissement.encaissementType.encaissementTypeValue ===
@@ -168,7 +168,7 @@ Modifier un encaissement
               <label for="type" class="p-float-label" style="font-size: 13px">Facture client<span style="color: red;">*</span></label>
             </div>
             <div style="float:right">
-              <i 
+              <i
                 placement="top"
                 ngbTooltip="Ajouter une facture"
                 pRipple
@@ -177,7 +177,7 @@ Modifier un encaissement
               ></i>
             </div>
           </div>
-  
+
           <div class="p-inputgroup p-fluid">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
             <select
@@ -195,7 +195,7 @@ Modifier un encaissement
             </select>
           </div>
         </div>
-   
+
         <div>
           <div>
             <div>
@@ -239,7 +239,7 @@ Modifier un encaissement
                 id="amounth"
                 [(ngModel)]="encaissement.encaissementAmount"
                 style="font-size: 13px"
-               
+
               />
             </div>
           </div>
@@ -258,7 +258,7 @@ Modifier un encaissement
                 [(ngModel)]="encaissement.encaissementCurrency"
                 style="font-size: 13px"
                 disabled=true
-               
+
               />
             </div>
           </div>
@@ -277,11 +277,9 @@ Modifier un encaissement
               name="side"
               [(ngModel)]="encaissement.encaissementPaymentType"
               style="font-size: 13px"
-             
+
             >
               <option [ngValue]="'CHEQUE'">CHEQUE</option>
-              <option [ngValue]="'EFFET_ENCAISSEMENT'">EFFET ENCAISSEMENT</option>
-              <option [ngValue]="'EFFET_ESCOMPTE'">EFFET ESCOMPTE</option>
               <option [ngValue]="'VIREMENT'">VIREMENT</option>
               <option [ngValue]="'ESPECE'">ESPECE</option>
               <option [ngValue]="'TRAITE'">TRAITE</option>
@@ -330,14 +328,14 @@ Modifier un encaissement
       </div>
     </div>
   </div>
- 
+
 
   <br />
 
   <div class="p-panel p-panel-header" style="margin-top: 20px;float: right; padding: 2%;">
     <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="cancel()"></button>
 
-    <!-- 
+    <!--
     <button
       style="margin-left: 10px; font-size: 13px"
       (click)="saveencaissement()"
@@ -349,7 +347,7 @@ Modifier un encaissement
   -->
   <button [disabled]="checkEncaissementValid()" [ngClass]= "{'disabled': checkEncaissementValid()}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn" (click)="saveEncaissement()" style="margin-left: 10px;"></button>
 
-    
+
   </div>
 </div>
 
@@ -376,7 +374,7 @@ Modifier un encaissement
           </div>
         </div>
       </div>
-     
+
     </div>
   </div>
   <ng-template pTemplate="footer">
@@ -384,7 +382,7 @@ Modifier un encaissement
               <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="dispalyEncaissementTypeModal=false"></button>
 
               <button [disabled]="encaissementType.encaissementTypeLabel == null || encaissementType.encaissementTypeLabel === ''"
-              [ngClass]= "{'disabled': encaissementType.encaissementTypeLabel == null || encaissementType.encaissementTypeLabel === ''}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn" 
+              [ngClass]= "{'disabled': encaissementType.encaissementTypeLabel == null || encaissementType.encaissementTypeLabel === ''}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn"
               (click)="saveEncaissementType()" style="margin-left: 10px;"></button>
 
     </div>
@@ -416,7 +414,7 @@ Modifier un encaissement
             </div>
           </div>
         </div>
-      
+
         <div class="p-col-12 mb-1 col-md-12 p-field">
           <label for="manager" class="p-float-label">Responsable </label>
           <div class="p-inputgroup">
@@ -437,14 +435,14 @@ Modifier un encaissement
         </div>
       </div>
   <br>
-  
+
 </div>
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
       <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="dispalyCustomerModal=false"></button>
 
-      <button [disabled]="customer.customerLabel == null || customer.customerLabel === '' || customer.customerUniqueIdentifier == null || customer.customerUniqueIdentifier === ''" 
-      [ngClass]= "{'disabled': customer.customerLabel == null || customer.customerLabel === '' || customer.customerUniqueIdentifier == null || customer.customerUniqueIdentifier === ''}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn" 
+      <button [disabled]="customer.customerLabel == null || customer.customerLabel === '' || customer.customerUniqueIdentifier == null || customer.customerUniqueIdentifier === ''"
+      [ngClass]= "{'disabled': customer.customerLabel == null || customer.customerLabel === '' || customer.customerUniqueIdentifier == null || customer.customerUniqueIdentifier === ''}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn"
       (click)="saveCustomer()" style="margin-left: 10px;"></button>
 
     </div>
@@ -455,7 +453,7 @@ Modifier un encaissement
 <p-dialog header="Nouvelle facture pour le client {{customer.customerLabel}}" [(visible)]="dispalyInvoiceCustomerModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
           [draggable]="false" [resizable]="false">
   <br>
- 
+
   <div style="width: 90%;
   margin: auto;">
 
@@ -490,12 +488,12 @@ Modifier un encaissement
             <select class="form-control p-field" id="type" name="side" [(ngModel)]="invoice.invoiceCurrency" style="font-size: 13px">
               <option value="TND">TND</option>
                <option value="TND">EUR</option>
-  
+
             </select>
           </div>
         </div>
       </div>
-  
+
     </div>
   <br>
     <div class="p-grid p-fluid">
@@ -567,13 +565,13 @@ Modifier un encaissement
 
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
-  
+
 
 
               <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="dispalyInvoiceCustomerModal=false"></button>
 
-      <button [disabled]="invoice.invoiceNumber == null || invoice.invoiceNumber === '' || invoice.customer == null" 
-      [ngClass]= "{'disabled': invoice.invoiceNumber == null || invoice.invoiceNumber === '' || invoice.customer == null}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn" 
+      <button [disabled]="invoice.invoiceNumber == null || invoice.invoiceNumber === '' || invoice.customer == null"
+      [ngClass]= "{'disabled': invoice.invoiceNumber == null || invoice.invoiceNumber === '' || invoice.customer == null}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn"
       (click)="saveInvoice()" style="margin-left: 10px;"></button>
 
     </div>

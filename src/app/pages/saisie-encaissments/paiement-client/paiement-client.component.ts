@@ -22,7 +22,7 @@ export class PaiementClientComponent implements OnInit {
     paymentRuleLabel: null,
     paymentRuleAccount: null,
     paymentRuleAmount: null,
-    paymentRulePaymentMethod: null,
+    paymentRulePaymentMethod: 'CHEQUE',
     paymentRuleNumber: null,
     PaymentRulesDetails: null,
     paymentRuleDeadlineDate: null,
@@ -161,7 +161,7 @@ export class PaiementClientComponent implements OnInit {
 
 
   }
-  
+
   showPaymentInvoices() {
 	  this.selectedInvoices.forEach(element => {
 		  this.paymentRule.paymentRuleAmount = this.paymentRule.paymentRuleAmount + element.invoiceTotalAmount;
@@ -175,7 +175,7 @@ initPaymentRule() {
     paymentRuleLabel: null,
     paymentRuleAccount: null,
     paymentRuleAmount: null,
-    paymentRulePaymentMethod: null,
+    paymentRulePaymentMethod: 'CHEQUE',
     paymentRuleNumber: null,
     PaymentRulesDetails: null,
     paymentRuleDeadlineDate: null,

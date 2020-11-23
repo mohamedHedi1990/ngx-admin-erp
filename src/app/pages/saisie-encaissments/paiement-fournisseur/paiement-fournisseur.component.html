@@ -180,7 +180,8 @@ Paiements fournissuers
 <p-dialog header="Nouveau réglement" [(visible)]="displayPaymentRuleModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
           [draggable]="false" [resizable]="false">
   <br>
-  <ngx-nouveau-reglement [reglement]="paymentRule" [seletcedInvoices]="selectedInvoices"></ngx-nouveau-reglement>
+  <ngx-nouveau-reglement [reglement]="paymentRule" [seletcedInvoices]="selectedInvoices"
+                         [invoice]="invoice"></ngx-nouveau-reglement>
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
       <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"

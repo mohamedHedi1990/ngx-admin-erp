@@ -14,9 +14,7 @@
                    -->
             <select  class="form-control p-field"
                     id="type" name="side" [(ngModel)]="reglement.paymentRuleAccount" [ngClass]="{
-        'is-invalid': reglement.paymentRuleAccount == null ,
-        'is-valid':reglement.paymentRuleAccount != null
-      }" style="font-size: 13px" [compareWith]="compareAccount">
+        'is-invalid': reglement.paymentRuleAccount == null}" style="font-size: 13px" [compareWith]="compareAccount">
               <option *ngFor="let a of accounts;" [ngValue]="a">{{a.accountLabel}}</option>
             </select>
           </div>
@@ -30,10 +28,7 @@
           <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
           <input type="text" class="form-control p-field"  id="amount"
                  [(ngModel)]="reglement.paymentRuleLabel " style="font-size: 13px"
-                 [ngClass]="{
-        'is-invalid': reglement.paymentRuleLabel == null ,
-        'is-valid':reglement.paymentRuleLabel != null
-      }">
+                 (change)="checkLabel()">
         </div>
 
       </div>
@@ -41,27 +36,20 @@
         <label for="amounth" class="p-float-label" style="font-size: 13px">Montant</label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
-          <input type="number" class="form-control p-field"  id="amounth"
+          <input *ngIf="seletcedInvoices == null || seletcedInvoices.length === 0" type="number" class="form-control p-field"  id="amounth"
                  [(ngModel)]="reglement.paymentRuleAmount " style="font-size: 13px"
-                 [ngClass]="{
-        'is-invalid': reglement.paymentRuleAmount == null ,
-        'is-valid':reglement.paymentRuleAmount != null
-      }" [disabled]="isPaymentAmountDisabled">
+                  min="0" (change)="checkAmount()">
+          <input *ngIf="seletcedInvoices != null && seletcedInvoices.length !== 0" type="number" class="form-control p-field"  id="amounths"
+                 [(ngModel)]="reglement.paymentRuleAmountS " style="font-size: 13px" disabled="true">
         </div>
       </div>
       <div class="mb-12 col-md-12 col-12">
         <label for="paie" class="p-float-label" style="font-size: 13px">Mode de payment</label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
-          <select class="form-control p-field" id="paie" name="side" [(ngModel)]="reglement.paymentRulePaymentMethod"  style="font-size: 13px;"
-                  [ngClass]="{
-        'is-invalid': reglement.paymentRulePaymentMethod == null ,
-        'is-valid':reglement.paymentRulePaymentMethod != null
-      }">
-            <option [ngValue]="null">-- Mode de payment --</option>
+          <select class="form-control p-field" id="paie" name="side" [(ngModel)]="reglement.paymentRulePaymentMethod"  style="font-size: 13px;">
+            <!-- <option [ngValue]="null">-- Mode de payment --</option> -->
             <option [ngValue]="'CHEQUE'">CHEQUE</option>
-            <option [ngValue]="'EFFET_ENCAISSEMENT'">EFFET ENCAISSEMENT</option>
-            <option [ngValue]="'EFFET_ESCOMPTE'">EFFET ESCOMPTE</option>
             <option [ngValue]="'VIREMENT'">VIREMENT</option>
             <option [ngValue]="'ESPECE'">ESPECE</option>
             <option [ngValue]="'TRAITE'">TRAITE</option>

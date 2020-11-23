@@ -5,13 +5,17 @@ padding: 10px 10px 10px 10px !important;
     color: #222b45;margin-left: 10px">
 Liste des  tarifs bancaires
 </h4>
-<div class="card" *ngIf="!showTarifBancaireWindow" style=" margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
+<div class="card" *ngIf="!showTarifBancaireWindow && accounts.length !== 0" style=" margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
   <div *ngFor="let account of accounts">
-      <div>Compte bancaire <span class="customer-badge status-label">{{account.accountLabel}} {{account.accountNumber}}</span></div>
-      <p-table #dt [value]="account.accountComissions" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true">
+      <div style="margin: 5px">
+        <span class="customer-badge status-label">{{account.accountLabel}} {{account.accountNumber}}</span>
+        <i    placement="top" ngbTooltip="Ajouter / Modifier une comission"  class="pi pi-pencil"  style="margin-left: 7px;color: #6200ee" (click)="editAccount(account)"></i>
+      </div>
+
+      <p-table *ngIf="account.accountComissions != null" #dt [value]="account.accountComissions" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true">
         <ng-template pTemplate="header">
           <tr style="text-align: center; font-size: 13px;">
-            <th  style="text-align: center; font-size: 13px;width: 30%">Libellé</th>
+            <th  style="text-align: center; font-size: 13px;width: 30%">Libellé comission</th>
             <th  style="text-align: center; font-size: 13px; width: 30%">Opération</th>
             <th style="text-align: center;font-size: 13px; width: 10%">Valeur</th>
             <th style="text-align: center;font-size: 13px; width: 20%">Type</th>
@@ -24,7 +28,12 @@ Liste des  tarifs bancaires
               {{comission.comissionLabel}}
             </td>
             <td  style="text-align: center;">
-              {{comission.comissionOperation}}
+              <span *ngIf="comission.comissionOperation === 'REMISE_CHHEQUE'">REMISE CHHEQUE</span>
+              <span *ngIf="comission.comissionOperation === 'REMISE_EFFET_ENCAISSEMENT'">REMISE EFFET ENCAISSEMENT</span>
+              <span *ngIf="comission.comissionOperation === 'REMISE_EFFET_ESCOMPTE'">REMISE EFFET ESCOMPTE</span>
+              <span *ngIf="comission.comissionOperation === 'INTERET'">INTERET</span>
+              <span *ngIf="comission.comissionOperation === 'TRAITE'">TRAITE</span>
+              <span *ngIf="comission.comissionOperation === 'VIREMENT'">VIREMENT</span>
             </td>
             <td  style="text-align: center;">
               {{comission.comissionValueS}}
@@ -50,9 +59,14 @@ Liste des  tarifs bancaires
 
   </div>
 
-</div>
 
-<ngx-add-new-tarifs-bancaire *ngIf="showTarifBancaireWindow" [account]="account" (cancelEvent)="hideTarifBancaireWindow(); initTarifBancaire()"
+</div>
+<div  *ngIf="!showTarifBancaireWindow && accounts.length === 0">
+    <span style="font-size: 13px;text-align: left !important;">
+      Aucun compte bancaire trouvé!
+    </span>
+</div>
+<ngx-add-new-tarifs-bancaire *ngIf="showTarifBancaireWindow" [account]="account" (cancelEvent)="hideTarifBancaireWindow();"
 (addNewTarifEvent)="saveNewComissions($event)"></ngx-add-new-tarifs-bancaire>
 
 <p-dialog header="Supprimer une comission" [(visible)]="displayDeleteTarif" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
@@ -65,7 +79,7 @@ Liste des  tarifs bancaires
               (click)="displayDeleteTarif=false"></button>
 
 			   <button pButton pRipple label="Supprimer" icon="pi pi-check" class="p-button-danger p-mr-2"
-              (click)="delTarif()"></button>
+              (click)="delComission()"></button>
 
     </div>
   </ng-template>

@@ -1,11 +1,11 @@
 
-<h4 *ngIf="invoice.invoiceId == null" style="background: #E7E8E8; 
+<h4 *ngIf="invoice.invoiceId == null" style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
 Ajouter une nouvelle facture client
 </h4>
-<h4 *ngIf="invoice.invoiceId != null" style="background: #E7E8E8; 
+<h4 *ngIf="invoice.invoiceId != null" style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
@@ -90,7 +90,7 @@ Modifier une nouvelle facture client
     <div class="p-grid p-fluid">
       <div style="display: flex">
     <div class="mb-1 col-md-4 col-12">
-      <label for="NET" class="p-float-label">NET</label>
+      <label for="NET" class="p-float-label">Montant TTC</label>
       <div class="p-inputgroup">
         <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
         <input type="number" class="form-control p-field"  id="net"
@@ -119,7 +119,7 @@ Modifier une nouvelle facture client
 
    </div>
       <div class="mb-12 col-md-12 col-12">
-        <label for="amount" class="p-float-label">Montant total</label>
+        <label for="amount" class="p-float-label">Montant NET à payer</label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
           <input type="number" class="form-control p-field"  id="amount"
@@ -135,7 +135,7 @@ Modifier une nouvelle facture client
     <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="cancel()"></button>
 
       <button [disabled]="checkInvoiceValid()"
-      [ngClass]= "{'disabled':  checkInvoiceValid()}" pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn" 
+      [ngClass]= "{'disabled':  checkInvoiceValid()}" pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn"
       (click)="saveInvoice()" style="margin-left: 10px;"></button>
   </div>
 

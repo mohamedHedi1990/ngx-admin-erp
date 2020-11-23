@@ -20,7 +20,7 @@ export class PaiementFournisseurComponent implements OnInit {
     paymentRuleLabel: null,
     paymentRuleAccount: null,
     paymentRuleAmount: null,
-    paymentRulePaymentMethod: null,
+    paymentRulePaymentMethod: 'CHEQUE',
     paymentRuleNumber: null,
     PaymentRulesDetails: null,
     paymentRuleDeadlineDate: null,
@@ -64,7 +64,7 @@ export class PaiementFournisseurComponent implements OnInit {
         this.selectedInvoices = [];
         this.initPaymentRule();
         this.displayPaymentRuleModal = false;
-    });
+      });
 
   }
 
@@ -73,11 +73,11 @@ export class PaiementFournisseurComponent implements OnInit {
     const context = this;
     this.UtilsService.post(UtilsServiceService.API_INVOICE + '/' + this.invoice.invoiceId, this.paymentRule).subscribe( response => {
 
-      this.UtilsService.showToast('success',
-      'Réglement ajoutée avec succés',
-      `Un réglement a été ajoutée avec succés à la facture ${this.invoice.invoiceNumber}`);
-      this.displayPaymentRuleModal = false;
-      this.initPaymentRule();
+        this.UtilsService.showToast('success',
+          'Réglement ajoutée avec succés',
+          `Un réglement a été ajoutée avec succés à la facture ${this.invoice.invoiceNumber}`);
+        this.displayPaymentRuleModal = false;
+        this.initPaymentRule();
         context.getAllInvoices();
       },
       error => {this.UtilsService.showToast('danger',
@@ -85,7 +85,7 @@ export class PaiementFournisseurComponent implements OnInit {
         `Un erreur interne a été produit lors de l'ajout du réglement`);
         this.displayPaymentRuleModal = false;
         this.initPaymentRule();
-    });
+      });
 
   }
 
@@ -104,78 +104,78 @@ export class PaiementFournisseurComponent implements OnInit {
   }
   ValidatePR(reglement) {
 
-	  this.paymentRule = reglement;
-	  this.displayValidatePaymentRuleModal = true;
+    this.paymentRule = reglement;
+    this.displayValidatePaymentRuleModal = true;
   }
   ModifyPR(reglement) {
 
-	  this.paymentRule = reglement;
-	  this.displayPaymentRuleModal = true;
+    this.paymentRule = reglement;
+    this.displayPaymentRuleModal = true;
   }
   deletePR(reglement) {
 
-	  this.paymentRule = reglement;
-	  this.displayDeletePaymentRuleModal = true;
+    this.paymentRule = reglement;
+    this.displayDeletePaymentRuleModal = true;
   }
   validatePaymentRule()  {
-	  const context = this;
+    const context = this;
     this.UtilsService.put(UtilsServiceService.API_PAYMENT_RULE + '/' + this.paymentRule.paymentRuleId, null).subscribe( response => {
 
-      this.UtilsService.showToast('success',
-      'Réglement validé avec succés',
-      `Le réglement ${this.paymentRule.paymentRuleLabel} a été validé avec succés`);
-      this.displayValidatePaymentRuleModal = false;
-       context.getAllInvoices();
-	   this.initPaymentRule();
+        this.UtilsService.showToast('success',
+          'Réglement validé avec succés',
+          `Le réglement ${this.paymentRule.paymentRuleLabel} a été validé avec succés`);
+        this.displayValidatePaymentRuleModal = false;
+        context.getAllInvoices();
+        this.initPaymentRule();
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
         `Un erreur interne a été produit lors de la validation du réglement ${this.paymentRule.paymentRuleLabel}`);
         this.displayValidatePaymentRuleModal = false;
-		this.initPaymentRule();
-    });
+        this.initPaymentRule();
+      });
 
 
   }
-delPaymentRule(pRule) {
-  this.paymentRule = pRule;
-  this.displayDeletePaymentRuleModal = true;
-}
+  delPaymentRule(pRule) {
+    this.paymentRule = pRule;
+    this.displayDeletePaymentRuleModal = true;
+  }
   deletePaymentRule() {
 
-	  const context = this;
+    const context = this;
     this.UtilsService.delete(UtilsServiceService.API_PAYMENT_RULE + '/' + this.paymentRule.paymentRuleId).subscribe( response => {
 
-      this.UtilsService.showToast('success',
-      'Réglement supprimé avec succés',
-      `Le réglement ${this.paymentRule.paymentRuleLabel} a été supprimé avec succés`);
-      this.displayDeletePaymentRuleModal = false;
-       context.getAllInvoices();
-	   this.initPaymentRule();
+        this.UtilsService.showToast('success',
+          'Réglement supprimé avec succés',
+          `Le réglement ${this.paymentRule.paymentRuleLabel} a été supprimé avec succés`);
+        this.displayDeletePaymentRuleModal = false;
+        context.getAllInvoices();
+        this.initPaymentRule();
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
         `Un erreur interne a été produit lors de la suppression du réglement ${this.paymentRule.paymentRuleLabel}`);
         this.displayDeletePaymentRuleModal = false;
-		this.initPaymentRule();
-    });
+        this.initPaymentRule();
+      });
 
 
 
   }
 
-initPaymentRule() {
-  this.paymentRule = {
-    paymentRuleId: null,
-    paymentRuleLabel: null,
-    paymentRuleAccount: null,
-    paymentRuleAmount: null,
-    paymentRulePaymentMethod: null,
-    paymentRuleNumber: null,
-    PaymentRulesDetails: null,
-    paymentRuleDeadlineDate: null,
-    paymentRuleOperationType: 'DECAISSEMENT',
-  };
-}
+  initPaymentRule() {
+    this.paymentRule = {
+      paymentRuleId: null,
+      paymentRuleLabel: null,
+      paymentRuleAccount: null,
+      paymentRuleAmount: null,
+      paymentRulePaymentMethod: 'CHEQUE',
+      paymentRuleNumber: null,
+      PaymentRulesDetails: null,
+      paymentRuleDeadlineDate: null,
+      paymentRuleOperationType: 'DECAISSEMENT',
+    };
+  }
 
 }

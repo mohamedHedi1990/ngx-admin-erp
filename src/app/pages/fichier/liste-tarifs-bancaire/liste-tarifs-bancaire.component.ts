@@ -19,6 +19,7 @@ export class ListeTarifsBancaireComponent implements OnInit {
               private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
+    this.initComissionBancaire();
     this.getAllAccounts();
   }
   getAllAccounts() {
@@ -41,9 +42,14 @@ export class ListeTarifsBancaireComponent implements OnInit {
     this.account = null;
   }
   initComissionBancaire() {
-    this.comission = null;
+    this.comission = {
+      comissionLabel : '',
+      comissionOperation: null,
+      comissionValue: 0,
+      commissionType: null,
+    };
   }
-  editTarif(account) {
+  editAccount(account) {
     this.account = account;
     this.showTarifBancaireWindow = true;
   }
