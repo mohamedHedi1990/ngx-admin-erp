@@ -1,5 +1,5 @@
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
-<h4 style="background: #E7E8E8; 
+<h4 style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
@@ -18,12 +18,12 @@ Etat prévisionnel de trésereorie engagé
           id="type"
           name="side"
           [(ngModel)]="supervision.account"
-         
+
           style="font-size: 13px"
           (change)="supervisionFn()"
-          [compareWith]="compareAccount" 
+          [compareWith]="compareAccount"
           >
-          
+
           <option *ngIf="supervision.account == null" [ngValue]="null">-- Compte bancaire --</option>
           <option *ngFor="let a of accounts" [ngValue]="a">
             {{ a.accountLabel }}
@@ -46,7 +46,7 @@ Etat prévisionnel de trésereorie engagé
           style="font-size: 13px"
           disabled="true"
           >
-        
+
       </div>
     </div>
     <div class="mb-12 col-md-3 col-12">
@@ -65,7 +65,7 @@ Etat prévisionnel de trésereorie engagé
           (change)="supervisionFn()"
           [min]="supervision.startDate"
           >
-        
+
       </div>
     </div>
   </div>
@@ -84,15 +84,22 @@ Etat prévisionnel de trésereorie engagé
       <tr style="text-align: center; font-size: 13px;">
         <th style="text-align: center; font-size: 13px;width: 15%">Date d'échéance</th>
         <th style="text-align: center; font-size: 13px;width: 20%">Opération</th>
+        <!--
         <th style="text-align: center; font-size: 13px;width: 50%">Détails</th>
+        -->
         <th style="text-align: center; font-size: 13px;width: 15%">Montant</th>
+        <th style="text-align: center; font-size: 13px;width: 15%">Solde progressive</th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-operation>
-      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;"[ngClass]="{
+    <!--
+    [ngClass]="{
         'green-tr': operation.opperationType === 'ENCAISSEMENT',
         'red-tr': operation.opperationType === 'DECAISSEMENT'
-      }">
+      }"
+
+    -->
+    <ng-template pTemplate="body" let-operation>
+      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
         <td  style="text-align: center;font-size: 13px;">
           {{operation.operationDate}}
         </td>
@@ -100,13 +107,26 @@ Etat prévisionnel de trésereorie engagé
           <div>{{operation.opperationLabel}}</div>
           <div *ngIf="operation.opperationFacultatifLabel != null || operation.opperationFacultatifLabel !==''"><i> {{operation.opperationFacultatifLabel}}</i></div>
         </td>
+        <!--
         <td style="text-align: center;font-size: 13px;">
-          <div>{{operation.opperationDetails[0]}} 
+          <div>{{operation.opperationDetails[0]}}
             <span *ngIf="operation.opperationDetails[1] != null && operation.opperationDetails[1] !== ''"> (No: {{operation.opperationDetails[1]}} )</span></div>
           <div><i>{{operation.opperationDetails[2]}}</i></div>
         </td>
+        -->
         <td style="text-align: center;font-size: 13px;">
-          <span *ngIf="operation.opperationType === 'DECAISSEMENT'">-</span>{{operation.operationAmountS}} {{operation.opperationCurrency}}
+          <span class="customer-badge"  [ngClass]="{
+        'status-blocked': operation.opperationType === 'DECAISSEMENT',
+         'status-active': operation.opperationType === 'ENCAISSEMENT'}">
+                      <span *ngIf="operation.opperationType === 'DECAISSEMENT'">-</span>{{operation.operationAmountS}} {{operation.opperationCurrency}}
+          </span>
+        </td>
+        <td style="text-align: center;font-size: 13px;">
+           <span class="customer-badge"  [ngClass]="{
+        'status-blocked': operation.progressiveAmount < 0,
+         'status-active': operation.progressiveAmount >= 0">
+                       <span *ngIf="operation.progressiveAmount < 0">-</span>{{operation.progressiveAmountS}} {{operation.opperationCurrency}}
+           </span>
         </td>
       </tr>
     </ng-template>
