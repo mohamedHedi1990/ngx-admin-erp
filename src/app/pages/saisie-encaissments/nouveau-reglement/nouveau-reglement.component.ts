@@ -20,6 +20,8 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
   @Input() invoice = {
 
     invoiceNumber: '',
+    invoiceTotalAmount: 0,
+    invoicePayment : 0,
 
   }
   @Output() addNewReglementEvent = new EventEmitter();
@@ -35,8 +37,16 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
     if (this.seletcedInvoices != null && this.seletcedInvoices.length !== 0) {
       let label = 'Reg Fact N° ';
       this.seletcedInvoices.forEach(invoice => {
-        this.reglement.paymentRuleAmount =  this.reglement.paymentRuleAmount + (invoice.invoiceTotalAmount - invoice.invoicePayment);
-        label = label + invoice.invoiceNumber + ',';
+        if(invoice.invoiceStatus !== 'CLOSED') {
+          this.reglement.paymentRuleAmount =  this.reglement.paymentRuleAmount + (invoice.invoiceTotalAmount - invoice.invoicePayment);
+          if(label === 'Reg Fact N° ') {
+            label = label + invoice.invoiceNumber;
+          } else {
+            label = label + ' , ' + invoice.invoiceNumber;
+          }
+
+        }
+
       });
       this.reglement.paymentRuleAmountS = this.UtilsService.convertAmountToString('' + this.reglement.paymentRuleAmount);
       this.isPaymentAmountDisabled = true;
@@ -52,8 +62,16 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
     if (this.seletcedInvoices != null && this.seletcedInvoices.length !== 0) {
       let label = 'Reg Fact N° ';
       this.seletcedInvoices.forEach(invoice => {
-        this.reglement.paymentRuleAmount =  this.reglement.paymentRuleAmount + (invoice.invoiceTotalAmount - invoice.invoicePayment);
-      label = label + invoice.invoiceNumber + ',';
+        if(invoice.invoiceStatus !== 'CLOSED') {
+          this.reglement.paymentRuleAmount =  this.reglement.paymentRuleAmount + (invoice.invoiceTotalAmount - invoice.invoicePayment);
+          if(label === 'Reg Fact N° ') {
+            label = label + invoice.invoiceNumber;
+          } else {
+            label = label + ' , ' + invoice.invoiceNumber;
+          }
+
+        }
+
       });
       this.reglement.paymentRuleAmountS = this.UtilsService.convertAmountToString('' + this.reglement.paymentRuleAmount);
       this.isPaymentAmountDisabled = true;
@@ -98,6 +116,10 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
   checkAmount() {
     if (this.reglement.paymentRuleAmount == null || this.reglement.paymentRuleAmount === '' || this.reglement.paymentRuleAmount < 0) {
       this.reglement.paymentRuleAmount = 0;
+    } else if (this.invoice != null) {
+      if (this.reglement.paymentRuleAmount > (this.invoice.invoiceTotalAmount - this.invoice.invoicePayment)) {
+        this.reglement.paymentRuleAmount = this.invoice.invoiceTotalAmount - this.invoice.invoicePayment;
+      }
     }
   }
 
@@ -106,7 +128,14 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
       if (this.seletcedInvoices != null && this.seletcedInvoices.length !== 0) {
         let label = 'Reg Fact N° ';
         this.seletcedInvoices.forEach(invoice => {
-          label = label + invoice.invoiceNumber + ',';
+          if (invoice.invoiceStatus !== 'CLOSED') {
+            if(label === 'Reg Fact N° ') {
+              label = label + invoice.invoiceNumber;
+            } else {
+              label = label + ' , ' + invoice.invoiceNumber;
+            }
+          }
+
         });
         this.reglement.paymentRuleLabel = label;
       } else {

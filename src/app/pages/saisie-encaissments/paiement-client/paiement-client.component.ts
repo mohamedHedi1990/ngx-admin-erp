@@ -25,7 +25,7 @@ export class PaiementClientComponent implements OnInit {
     paymentRulePaymentMethod: 'CHEQUE',
     paymentRuleNumber: null,
     PaymentRulesDetails: null,
-    paymentRuleDeadlineDate: null,
+    paymentRuleDeadlineDate: this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
   };
   loading = false;
   invoice = null;
@@ -69,7 +69,7 @@ export class PaiementClientComponent implements OnInit {
 
   }
 
-  savePaymentRule() {
+  savePaymentRule(validateAndAdd: boolean) {
 
     const context = this;
     this.UtilsService.post(UtilsServiceService.API_INVOICE + '/' + this.invoice.invoiceId, this.paymentRule).subscribe( response => {
@@ -77,8 +77,15 @@ export class PaiementClientComponent implements OnInit {
       this.UtilsService.showToast('success',
       'Réglement ajoutée avec succés',
       `Un réglement a été ajoutée avec succés à la facture ${this.invoice.invoiceNumber}`);
-      this.displayPaymentRuleModal = false;
-      this.initPaymentRule();
+      if (!validateAndAdd) {
+        this.displayPaymentRuleModal = false;
+        this.initPaymentRule();
+        this.invoice = null;
+      } else {
+        this.paymentRule.paymentRuleNumber = null;
+        this.paymentRule.paymentRuleAmount = 0;
+      }
+
         context.getAllInvoices();
       },
       error => {this.UtilsService.showToast('danger',
@@ -90,6 +97,9 @@ export class PaiementClientComponent implements OnInit {
 
   }
 
+  resetSelectedInvoices() {
+    this.selectedInvoices = [];
+  }
 
   getAllInvoices() {
     const context = this;
@@ -178,7 +188,7 @@ initPaymentRule() {
     paymentRulePaymentMethod: 'CHEQUE',
     paymentRuleNumber: null,
     PaymentRulesDetails: null,
-    paymentRuleDeadlineDate: null,
+    paymentRuleDeadlineDate: this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
   };
 }
 

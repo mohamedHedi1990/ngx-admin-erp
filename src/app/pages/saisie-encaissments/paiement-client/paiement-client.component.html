@@ -18,7 +18,7 @@ Réglement clients
                 </div>
 
                 <div style="float:right">
-                  <button pButton pRipple label="
+                  <button pButton pRipple label="Régler
 " icon="pi pi-plus" class="primaryBtn" (click)="displayPaymentRuleModal = true"
                   [disabled]="selectedInvoices.length===0" [ngClass]= "{'disabled': selectedInvoices.length===0}"></button>
                 </div>
@@ -90,7 +90,7 @@ Réglement clients
                 <td style="text-align: center;">
                     <div *ngIf="invoice.invoiceStatus === 'OPENED'">
                         <i  placement="top" ngbTooltip="Ajouter un réglement"  class="pi pi-plus" style="margin-right: 7px; color: #6200ee"
-                        (click)="addPaymentRule(invoice)"></i>
+                        (click)="resetSelectedInvoices(); addPaymentRule(invoice)"></i>
                     </div>
 					<div *ngIf="invoice.invoiceStatus === 'CLOSED'" style="text-align: center">
                         - -
@@ -189,8 +189,10 @@ Réglement clients
     <div style="margin-top: 20px;">
       <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
               (click)="displayPaymentRuleModal=false; initPaymentRule()"></button>
+      <button *ngIf="selectedInvoices.length === 0" pButton pRipple label="Valider et ajouter" icon="pi pi-check" class="p-button-success p-mr-2"
+              (click)="savePaymentRule(true)"></button>
       <button *ngIf="selectedInvoices.length === 0" pButton pRipple label="Ajouter" icon="pi pi-check" class="p-button-success p-mr-2"
-              (click)="savePaymentRule()"></button>
+              (click)="savePaymentRule(false)"></button>
 			   <button *ngIf="selectedInvoices.length !== 0" pButton pRipple label="Payer" icon="pi pi-check" class="p-button-success p-mr-2"
               (click)="payInvoices()"></button>
 
