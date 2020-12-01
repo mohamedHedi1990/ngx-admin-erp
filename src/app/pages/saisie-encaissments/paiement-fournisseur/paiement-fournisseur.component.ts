@@ -68,7 +68,7 @@ export class PaiementFournisseurComponent implements OnInit {
 
   }
 
-  savePaymentRule() {
+  savePaymentRule(validateAndAdd) {
 
     const context = this;
     this.UtilsService.post(UtilsServiceService.API_INVOICE + '/' + this.invoice.invoiceId, this.paymentRule).subscribe( response => {
@@ -76,8 +76,16 @@ export class PaiementFournisseurComponent implements OnInit {
         this.UtilsService.showToast('success',
           'Réglement ajoutée avec succés',
           `Un réglement a été ajoutée avec succés à la facture ${this.invoice.invoiceNumber}`);
+        if (!validateAndAdd) {
         this.displayPaymentRuleModal = false;
         this.initPaymentRule();
+        this.invoice = null;
+      } else {
+        this.paymentRule.paymentRuleNumber = null;
+        this.paymentRule.paymentRuleAmount = 0;
+        this.displayPaymentRuleModal = true;
+      }
+
         context.getAllInvoices();
       },
       error => {this.UtilsService.showToast('danger',
