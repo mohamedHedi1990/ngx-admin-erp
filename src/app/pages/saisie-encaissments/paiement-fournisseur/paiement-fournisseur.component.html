@@ -186,8 +186,10 @@ Paiements fournissuers
     <div style="margin-top: 20px;">
       <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
               (click)="displayPaymentRuleModal=false"></button>
+      <button *ngIf="selectedInvoices.length === 0" pButton pRipple label="Valider et ajouter" icon="pi pi-check" class="p-button-success p-mr-2"
+              (click)="savePaymentRule(true)"></button>
       <button *ngIf="selectedInvoices.length === 0" pButton pRipple label="Ajouter" icon="pi pi-check" class="p-button-success p-mr-2"
-              (click)="savePaymentRule()"></button>
+              (click)="savePaymentRule(false)"></button>
 			   <button *ngIf="selectedInvoices.length !== 0" pButton pRipple label="Payer" icon="pi pi-check" class="p-button-success p-mr-2"
               (click)="payInvoices()"></button>
 
