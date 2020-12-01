@@ -84,6 +84,7 @@ export class PaiementClientComponent implements OnInit {
       } else {
         this.paymentRule.paymentRuleNumber = null;
         this.paymentRule.paymentRuleAmount = 0;
+        this.displayPaymentRuleModal = true;
       }
 
         context.getAllInvoices();
