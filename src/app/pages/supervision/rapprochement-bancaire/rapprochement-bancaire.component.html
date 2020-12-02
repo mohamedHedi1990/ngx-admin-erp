@@ -1,5 +1,5 @@
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
-<h4 style="background: #E7E8E8; 
+<h4 style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
@@ -18,12 +18,12 @@ Rapprochement bancaire
           id="type"
           name="side"
           [(ngModel)]="supervision.account"
-         
+
           style="font-size: 13px"
           (change)="supervisionFn()"
-          [compareWith]="compareAccount" 
+          [compareWith]="compareAccount"
           >
-          
+
           <option *ngIf="supervision.account == null" [ngValue]="null">-- Compte bancaire --</option>
           <option *ngFor="let a of accounts" [ngValue]="a">
             {{ a.accountLabel }}
@@ -43,11 +43,11 @@ Rapprochement bancaire
           class="form-control p-field"
           id="fin"
           [(ngModel)]="supervision.startDate"
-          [max]="supervision.startDate"
+          [max]="supervision.endDate"
           style="font-size: 13px"
-         
+          (change)="supervisionFn()"
           >
-        
+
       </div>
     </div>
     <div class="mb-12 col-md-3 col-12">
@@ -63,11 +63,11 @@ Rapprochement bancaire
           id="fin"
           [(ngModel)]="supervision.endDate"
           style="font-size: 13px"
-          (change)="supervisionFn()"
-         
+
+
           disabled="true"
           >
-        
+
       </div>
     </div>
   </div>
@@ -84,31 +84,62 @@ Rapprochement bancaire
            [filterDelay]="0">
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 13px;">
-        <th style="text-align: center; font-size: 13px;width: 15%">Date d'échéance</th>
-        <th style="text-align: center; font-size: 13px;width: 20%">Opération</th>
-        <th style="text-align: center; font-size: 13px;width: 50%">Détails</th>
+        <th style="text-align: center; font-size: 13px;width: 20%">Date opération</th>
+        <th style="text-align: center; font-size: 13px;width: 25%">Libellé</th>
         <th style="text-align: center; font-size: 13px;width: 15%">Montant</th>
+        <th style="text-align: center; font-size: 13px;width: 20%">Solde progressive</th>
+        <th style="text-align: center; font-size: 13px;width: 15%">Statut</th>
+        <th style="text-align: center; font-size: 13px;width: 15%">Rapprocher</th>
+
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-operation>
-      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;"[ngClass]="{
-        'green-tr': operation.opperationType === 'ENCAISSEMENT',
-        'red-tr': operation.opperationType === 'DECAISSEMENT'
-      }">
+      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
         <td  style="text-align: center;font-size: 13px;">
           {{operation.operationDate}}
         </td>
         <td style="text-align: center;font-size: 13px;">
           <div>{{operation.opperationLabel}}</div>
-          <div *ngIf="operation.opperationFacultatifLabel != null || operation.opperationFacultatifLabel !==''"><i> {{operation.opperationFacultatifLabel}}</i></div>
+          <!--<div *ngIf="operation.opperationFacultatifLabel != null || operation.opperationFacultatifLabel !==''"><i> {{operation.opperationFacultatifLabel}}</i></div> -->
         </td>
+        <!--
         <td style="text-align: center;font-size: 13px;">
-          <div>{{operation.opperationDetails[0]}} 
+          <div>{{operation.opperationDetails[0]}}
             <span *ngIf="operation.opperationDetails[1] != null && operation.opperationDetails[1] !== ''"> (No: {{operation.opperationDetails[1]}} )</span></div>
           <div><i>{{operation.opperationDetails[2]}}</i></div>
         </td>
+        -->
+        <td pEditableColumn style="text-align: center;font-size: 13px;">
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input style="font-size: 13px;" pInputText type="number"
+                     class="form-control p-field" [(ngModel)]="operation.operationAmount" (change)="changeOperationAmount(operation)" [disabled]="operation.isValidated">
+            </ng-template>
+            <ng-template pTemplate="output">
+              <span class="customer-badge"  [ngClass]="{
+                'status-blocked': operation.opperationType === 'DECAISSEMENT',
+                 'status-active': operation.opperationType === 'ENCAISSEMENT'}">
+                              <span *ngIf="operation.opperationType === 'DECAISSEMENT'">-</span>{{operation.operationAmountS}} {{operation.opperationCurrency}}
+                  </span>
+            </ng-template>
+          </p-cellEditor>
+        </td>
+
         <td style="text-align: center;font-size: 13px;">
-          <span *ngIf="operation.opperationType === 'DECAISSEMENT'">-</span>{{operation.operationAmountS}} {{operation.opperationCurrency}}
+           <span class="customer-badge"  [ngClass]="{
+        'status-blocked': operation.progressiveAmount < 0,
+         'status-active': operation.progressiveAmount >= 0}">
+                       {{operation.progressiveAmountS}} {{operation.opperationCurrency}}
+           </span>
+        </td>
+        <td style="text-align: center;">
+          <span *ngIf="operation.isValidated" class="customer-badge status-active">Rapproché</span>
+          <span *ngIf="!operation.isValidated" class="customer-badge status-progress">Non rapproché</span>
+        </td>
+        <td>
+          <i  *ngIf="!operation.isValidated" placement="top" ngbTooltip="Valider ce réglement"  class="pi pi-check"  style="margin-right: 7px; color: #6200ee"
+              (click)="rapprocherOperation(operation)"></i>
+          <span  *ngIf="operation.isValidated"> - -</span>
         </td>
       </tr>
     </ng-template>
@@ -119,3 +150,4 @@ Rapprochement bancaire
     </ng-template>
   </p-table>
 </div>
+<p-progressSpinner *ngIf="loading" [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"></p-progressSpinner>

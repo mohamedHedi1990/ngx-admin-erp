@@ -26,6 +26,7 @@ export class PaiementClientComponent implements OnInit {
     paymentRuleNumber: null,
     PaymentRulesDetails: null,
     paymentRuleDeadlineDate: this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
+    paymentRuleOperationType: 'ENCAISSEMENT',
   };
   loading = false;
   invoice = null;
@@ -151,6 +152,10 @@ export class PaiementClientComponent implements OnInit {
 
   }
 
+  rapprocherOperation() {
+
+  }
+
   deletePaymentRule() {
 
 	  const context = this;
@@ -191,6 +196,7 @@ initPaymentRule() {
     paymentRuleNumber: null,
     PaymentRulesDetails: null,
     paymentRuleDeadlineDate: this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
+    paymentRuleOperationType: 'ENCAISSEMENT',
   };
 }
 

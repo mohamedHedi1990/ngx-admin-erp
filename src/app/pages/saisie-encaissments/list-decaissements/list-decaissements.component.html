@@ -1,5 +1,5 @@
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
-<h4 *ngIf="!showDecaissementWindow" style="background: #E7E8E8; 
+<h4 *ngIf="!showDecaissementWindow" style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
@@ -18,14 +18,14 @@ Liste des décaissements
                       <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher un décaissement.." />
                   </span>
           </div>
-  
+
           <div style="float:right">
             <button pButton pRipple label="Nouveau décaissement" icon="pi pi-plus" class="primaryBtn" (click)="showDecaissementWindow = true"></button>
           </div>
       </div>
-        
 
-     
+
+
 
     </ng-template>
     <ng-template pTemplate="header">
@@ -57,7 +57,7 @@ Liste des décaissements
         <td style="text-align: center;font-size: 13px;">
           {{decaissement.decaissementDeadlineDate}}
         </td>
-        
+
         <td style="text-align: center;">
           <div>
             <span>Paiement par <span class="customer-badge status-label">{{decaissement.decaissementPaymentType}} </span><span *ngIf="
@@ -78,7 +78,7 @@ Liste des décaissements
           <div>
             <i>{{decaissement.decaissementDetails}}</i>
           </div>
-          
+
         </td>
         <td style="text-align: center;">
           <span *ngIf="decaissement.isValidated" class="customer-badge status-active">Rapproché</span>
@@ -88,23 +88,25 @@ Liste des décaissements
 
         <td style="text-align: center;">
           <div  *ngIf="!decaissement.isValidated" style="text-align: center;">
-            <i ngbTooltip="Valider"  class="pi pi-check"  style="margin-right: 7px; color: #6200ee" (click)="showValidateDecaisementWindow(decaissement)"></i>
-            <i ngbTooltip="Modifier"  class="pi pi-pencil"  style="margin-right: 7px;color: #6200ee" (click)="editDecaissement(decaissement)"></i>
-            <i placement="top" ngbTooltip="Supprimer"  class="pi pi-trash" (click)="deleteDecaissement(decaissement)" style="color: #6200ee"></i>
-          </div>
-          <div *ngIf="decaissement.isValidated" style="text-align: center">
-            - -
-            </div>
+            <!--
+           <i ngbTooltip="Valider"  class="pi pi-check"  style="margin-right: 7px; color: #6200ee" (click)="showValidateDecaisementWindow(decaissement)"></i>
+           -->
+           <i ngbTooltip="Modifier"  class="pi pi-pencil"  style="margin-right: 7px;color: #6200ee" (click)="editDecaissement(decaissement)"></i>
+           <i placement="top" ngbTooltip="Supprimer"  class="pi pi-trash" (click)="deleteDecaissement(decaissement)" style="color: #6200ee"></i>
+         </div>
+         <div *ngIf="decaissement.isValidated" style="text-align: center">
+           - -
+           </div>
 
-        </td>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="emptymessage">
-      <tr style="font-size: 13px">
-        <td colspan="8" style="text-align: left !important;">Aucun décaissement trouvé!</td>
-      </tr>
-    </ng-template>
-  </p-table>
+       </td>
+     </tr>
+   </ng-template>
+   <ng-template pTemplate="emptymessage">
+     <tr style="font-size: 13px">
+       <td colspan="8" style="text-align: left !important;">Aucun décaissement trouvé!</td>
+     </tr>
+   </ng-template>
+ </p-table>
 </div>
 <ngx-nouveau-decaissement *ngIf="showDecaissementWindow" [decaissement]="decaissement"
 (addNewDecaissementEvent)="saveDecaissement($event)"
@@ -112,32 +114,32 @@ Liste des décaissements
 
 
 <p-dialog header="Valider un décaissement" [(visible)]="displayValidateDecaissement" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
-          [draggable]="false" [resizable]="false">
-  <br>
-  Voulez-vous valider le décaissement <span  class="customer-badge status-negotiation">{{decaissement.decaissementLabel}}</span> ?
-  <ng-template pTemplate="footer">
-    <div style="margin-top: 20px;">
-      <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
-              (click)="displayValidateDecaissement=false"></button>
+         [draggable]="false" [resizable]="false">
+ <br>
+ Voulez-vous valider le décaissement <span  class="customer-badge status-negotiation">{{decaissement.decaissementLabel}}</span> ?
+ <ng-template pTemplate="footer">
+   <div style="margin-top: 20px;">
+     <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
+             (click)="displayValidateDecaissement=false"></button>
 
-			   <button pButton pRipple label="Valider" icon="pi pi-check" class="p-button-success p-mr-2"
-              (click)="validateDecaissement()"></button>
+        <button pButton pRipple label="Valider" icon="pi pi-check" class="p-button-success p-mr-2"
+             (click)="validateDecaissement()"></button>
 
-    </div>
-  </ng-template>
+   </div>
+ </ng-template>
 </p-dialog>
 <p-dialog header="Supprimer un décaissement" [(visible)]="displayDeleteDecaissement" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
-          [draggable]="false" [resizable]="false">
-  <br>
-  Voulez-vous supprimer le décaissement <span  class="customer-badge status-negotiation">{{decaissement.decaissementLabel}}</span> ?
-  <ng-template pTemplate="footer">
-    <div style="margin-top: 20px;">
-      <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
-              (click)="displayDeleteDecaissement=false"></button>
+         [draggable]="false" [resizable]="false">
+ <br>
+ Voulez-vous supprimer le décaissement <span  class="customer-badge status-negotiation">{{decaissement.decaissementLabel}}</span> ?
+ <ng-template pTemplate="footer">
+   <div style="margin-top: 20px;">
+     <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
+             (click)="displayDeleteDecaissement=false"></button>
 
-			   <button pButton pRipple label="Supprimer" icon="pi pi-check" class="p-button-danger p-mr-2"
-              (click)="delDecaissement()"></button>
+        <button pButton pRipple label="Supprimer" icon="pi pi-check" class="p-button-danger p-mr-2"
+             (click)="delDecaissement()"></button>
 
-    </div>
-  </ng-template>
+   </div>
+ </ng-template>
 </p-dialog>

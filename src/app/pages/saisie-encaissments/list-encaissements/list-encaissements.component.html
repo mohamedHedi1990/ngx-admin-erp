@@ -1,5 +1,5 @@
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
-<h4 *ngIf="!showEncaissementWindow" style="background: #E7E8E8; 
+<h4 *ngIf="!showEncaissementWindow" style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
@@ -18,14 +18,14 @@ Liste des encaissements
                       <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher un encaissement.." />
                   </span>
           </div>
-  
+
           <div style="float:right">
             <button pButton pRipple label="Nouveau encaissement" icon="pi pi-plus" class="primaryBtn" (click)="showEncaissementWindow = true"></button>
           </div>
       </div>
-        
 
-     
+
+
 
     </ng-template>
     <ng-template pTemplate="header">
@@ -57,7 +57,7 @@ Liste des encaissements
         <td style="text-align: center;font-size: 13px;">
           {{encaissement.encaissementDeadlineDate}}
         </td>
-        
+
         <td style="text-align: center;">
           <div>
             <span>Paiement par <span class="customer-badge status-label">{{encaissement.encaissementPaymentType}} </span><span *ngIf="
@@ -68,7 +68,7 @@ Liste des encaissements
           <div>
             <span *ngIf="encaissement.encaissementType.encaissementTypeValue === 'REGLEMENT_FACTURE_CLIENT'"> Encaissement pour la facture numéro <span class="customer-badge status-label">{{encaissement.encaissementInvoice.invoiceNumber}} </span>pour le client <span class="customer-badge status-label">{{encaissement.encaissementCustomer.customerLabel}}</span></span>
           </div>
-          <!-- 
+          <!--
           <div>
             <span *ngIf="encaissement.encaissementType.encaissementTypeValue === 'CHEQUE_IMPAYE'"> Decaissmement le chèque impayé numéro <span class="customer-badge status-label">{{decaissement.decaissementChequeImpaye}} </span></span>
           </div>
@@ -79,7 +79,7 @@ Liste des encaissements
           <div>
             <i>{{encaissement.encaissementDetails}}</i>
           </div>
-          
+
         </td>
         <td style="text-align: center;">
           <span *ngIf="encaissement.isValidated" class="customer-badge status-active">Rapproché</span>
@@ -89,7 +89,9 @@ Liste des encaissements
 
         <td style="text-align: center;">
           <div  *ngIf="!encaissement.isValidated" style="text-align: center;">
+            <!--
             <i ngbTooltip="Valider"  class="pi pi-check"  style="margin-right: 7px; color: #6200ee" (click)="showValidateEncaissementWindow(encaissement)"></i>
+            -->
             <i ngbTooltip="Modifier"  class="pi pi-pencil"  style="margin-right: 7px;color: #6200ee" (click)="editEncaissement(encaissement)"></i>
             <i placement="top" ngbTooltip="Supprimer"  class="pi pi-trash" (click)="deleteEncaissement(encaissement)" style="color: #6200ee"></i>
           </div>

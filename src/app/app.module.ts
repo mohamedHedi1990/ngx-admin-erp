@@ -12,6 +12,7 @@ import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {
   NbChatModule,
   NbDatepickerModule,
@@ -31,6 +32,7 @@ import {FormsModule} from '@angular/forms';
         HttpClientModule,
         AppRoutingModule,
         NgbModule,
+        ProgressSpinnerModule,
         NbSidebarModule.forRoot(),
         NbMenuModule.forRoot(),
         NbDatepickerModule.forRoot(),

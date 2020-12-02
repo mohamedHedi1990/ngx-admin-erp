@@ -95,7 +95,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
-    title: 'Suivi tresorerie',
+    title: 'Rapprochement',
     icon: 'browser-outline',
     children: [
       {
@@ -108,11 +108,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Tréserorie previsionnel non engagé',
         link: '/pages/suivi-tresorerie/etat-non-engage',
       },*/
-      {
+      /*{
         title: 'Tréserorie previsionnel engagé',
         link: '/pages/suivi-tresorerie/etat-engage',
         icon: 'browser-outline',
-      },
+      },*/
       /*
       {
         title: 'Etat global de trésereorie',

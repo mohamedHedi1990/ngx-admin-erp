@@ -21,11 +21,11 @@ supervision= {
 accountInitialAmount = 0;
 statusCards = [
   {
-      title: 'Montant initial',
+      title: 'Solde début période',
       iconClass: 'nb-square-outline',
       type: 'primary',
       value: '0' ,
-    
+
   },
   {
     title: 'Total des encaissements',
@@ -40,7 +40,7 @@ statusCards = [
     value: '0',
   },
   {
-    title: 'Montant final',
+    title: 'Solde fin période',
     iconClass: 'nb-checkmark',
     type: 'success',
     value: '0'
@@ -58,6 +58,7 @@ statusCards = [
   }
   getAllAccounts() {
     const context = this;
+    this.loading = true;
     this.UtilsService.get(UtilsServiceService.API_ACCOUNT).subscribe( response => {
         context.accounts = response;
         if(response.length !== 0) {
@@ -66,15 +67,17 @@ statusCards = [
         }
       },
       error => {
+        this.loading = false;
         this.UtilsService.showToast('danger',
           'Erreur interne',
           `Un erreur interne a été produit lors du chargement des comptes`);
       });
-      
+
 
   }
   getOperationsBetweenTwoDates() {
     const context = this;
+    this.loading = true;
     this.UtilsService.get(UtilsServiceService.API_RAAPROCHEMENT_BANCAIRE + '/' + this.supervision.account.accountId + '/' + this.supervision.startDate
     + '/' + this.supervision.endDate).subscribe( response => {
         context.operations = response;
@@ -88,7 +91,7 @@ statusCards = [
           }
         });
 
-        
+
 
 
         this.UtilsService.get(UtilsServiceService.API_HISTORIC_SOLD+ '/' + this.supervision.account.accountId + '/' + this.supervision.startDate
@@ -98,8 +101,10 @@ statusCards = [
         context.statusCards[2].value = this.UtilsService.convertAmountToString(''+decaissement);
         const finalAmount = response.solde + encaissement - decaissement;
         context.statusCards[3].value = this.UtilsService.convertAmountToString('' + finalAmount);
+        this.loading = false;
           },
           error => {
+            this.loading = false;
             this.UtilsService.showToast('danger',
               'Erreur interne',
               `Un erreur interne a été produit lors du chargement du montant initial au début de cette période`);
@@ -107,6 +112,7 @@ statusCards = [
 
       },
       error => {
+      this.loading = false;
         this.UtilsService.showToast('danger',
           'Erreur interne',
           `Un erreur interne a été produit lors du chargement des opérations`);
@@ -117,5 +123,35 @@ statusCards = [
     return a.accountId === b.accountId;
  }
 
+ changeOperationAmount(operation) {
+  const context = this;
+  this.loading = true;
+    this.UtilsService.put(UtilsServiceService.API_RAAPROCHEMENT_BANCAIRE , operation).subscribe( response => {
+        this.getOperationsBetweenTwoDates();
+
+      },
+      error => {
+        this.loading = false;
+        this.UtilsService.showToast('danger',
+          'Erreur interne',
+          `Un erreur interne a été produit lors de la modification du montant de l'opération`);
+      });
+ }
+
+ rapprocherOperation(operation) {
+   const context = this;
+   this.UtilsService.put(UtilsServiceService.API_RAAPROCHEMENT_BANCAIRE + '/validate/' + operation.operationRealType + '/' + operation.operationRealId, null).subscribe( response => {
+
+       this.UtilsService.showToast('success',
+         'Opération validée avec succés',
+         `L'opération ${operation.operationLabel} a été validée avec succés`);
+       this.getOperationsBetweenTwoDates();
+     },
+     error => {this.UtilsService.showToast('danger',
+       'Erreur interne',
+       `Un erreur interne a été produit lors de la validation de l'opértion ${operation.operationLabel}`);
+     });
+
+ }
 
 }

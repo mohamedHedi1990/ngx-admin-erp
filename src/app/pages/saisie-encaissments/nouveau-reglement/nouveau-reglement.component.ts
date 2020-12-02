@@ -52,7 +52,10 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
       this.isPaymentAmountDisabled = true;
       this.reglement.paymentRuleLabel = label;
     } else {
-      this.reglement.paymentRuleLabel = 'Reg Fact N° ' + this.invoice.invoiceNumber;
+      if (this.invoice != null) {
+        this.reglement.paymentRuleLabel = 'Reg Fact N° ' + this.invoice.invoiceNumber;
+      }
+
     }
     this.getAllAccounts();
   }
@@ -77,7 +80,10 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
       this.isPaymentAmountDisabled = true;
       this.reglement.paymentRuleLabel = label;
     } else {
-      this.reglement.paymentRuleLabel = 'Reg Fact N° ' + this.invoice.invoiceNumber;
+      if(this.invoice != null) {
+        this.reglement.paymentRuleLabel = 'Reg Fact N° ' + this.invoice.invoiceNumber;
+      }
+
     }
   }
   getAllAccounts() {
