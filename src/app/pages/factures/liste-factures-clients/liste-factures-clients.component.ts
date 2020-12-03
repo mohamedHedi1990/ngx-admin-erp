@@ -98,6 +98,8 @@ export class ListeFacturesClientsComponent implements OnInit {
         invoiceRs: 0,
         invoiceRsType: 'VALUE',
         invoiceTotalAmount: 0,
+      invoiceDeadlineInNumberOfDays: 0,
+      invoiceCurrency: 'TND',
 
       };
   }

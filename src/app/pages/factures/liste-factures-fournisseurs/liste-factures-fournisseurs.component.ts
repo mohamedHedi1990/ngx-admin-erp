@@ -86,7 +86,7 @@ export class ListeFacturesFournisseursComponent implements OnInit {
   deleteInvoice(invoice) {
    this.invoice = invoice;
    this.displayDeleteProviderInvoice = true;
-  
+
   }
   initInvoice() {
     this.invoice = {
@@ -100,6 +100,8 @@ export class ListeFacturesFournisseursComponent implements OnInit {
       invoiceRs: 0,
       invoiceRsType: 'VALUE',
       invoiceTotalAmount: 0,
+      invoiceDeadlineInNumberOfDays: 0,
+
     };
   }
   }

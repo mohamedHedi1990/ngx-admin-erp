@@ -3,18 +3,18 @@
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
-Ajouter une nouvelle facture client
+  Ajouter une nouvelle facture client
 </h4>
 <h4 *ngIf="invoice.invoiceId != null" style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
-Modifier une nouvelle facture client
-<div><span class="customer-badge status-label">{{invoice.invoiceNumber}}</span></div>
+  Modifier une nouvelle facture client
+  <div><span class="customer-badge status-label">{{invoice.invoiceNumber}}</span></div>
 </h4>
 <div style="width: 90%;
     margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
-  <p-panel  [toggleable]="false">
+  <p-panel [toggleable]="false">
     <div class="p-grid p-fluid">
       <div *ngIf="invoice.invoiceId  != null" style="display: flex">
         <div class="mb-1 col-md-6 col-12 p-field">
@@ -29,7 +29,7 @@ Modifier une nouvelle facture client
           <label for="modificationDate" class="p-float-label">Date de dernière modification</label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-            <input type="text" class="form-control p-field"  id="modificationDate"
+            <input type="text" class="form-control p-field" id="modificationDate"
                    [(ngModel)]="invoice.updatedAt " disabled="true">
           </div>
         </div>
@@ -46,13 +46,15 @@ Modifier une nouvelle facture client
       }" style="font-size: 13px">
           </div>
         </div>
-        <div class="mb-1 col-md-6 col-12">
+        <div class="mb-1 col-md-4 col-12">
           <label for="type" class="p-float-label">Client</label>
           <div class="p-inputgroup p-fluid">
-            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-            <input *ngIf="invoice.invoiceId!= null" type="text" placeholder="Date" class="form-control p-field"  id="manager"
+            <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+            <input *ngIf="invoice.invoiceId!= null" type="text" placeholder="Date" class="form-control p-field"
+                   id="manager"
                    [(ngModel)]="invoice.customer.customerLabel " style="font-size: 13px" disabled="true">
-            <select *ngIf="invoice.invoiceId == null" class="form-control p-field" id="type" name="side" [(ngModel)]="invoice.customer" [ngClass]="{
+            <select *ngIf="invoice.invoiceId == null" class="form-control p-field" id="type" name="side"
+                    [(ngModel)]="invoice.customer" [ngClass]="{
         'is-invalid': invoice.customer == null ,
         'is-valid':invoice.customer != null
       }" style="font-size: 13px">
@@ -62,38 +64,62 @@ Modifier une nouvelle facture client
             </select>
           </div>
         </div>
-      </div>
-      <div class="p-grid p-fluid">
-        <div style="display: flex">
+        <div class="mb-1 col-md-2 col-12 p-field">
+          <label for="invoiceNumber" class="p-float-label">Devise</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-dollar"></i></span>
+            <select class="form-control p-field" id="devise" name="side" [(ngModel)]="invoice.invoiceCurrency"
+                    style="font-size: 13px">
+              <option value="TND">TND</option>
+              <option value="TND">EUR</option>
 
-      <div class="mb-1 col-md-6 col-12">
-        <label for="manager" class="p-float-label">Date </label>
-        <div class="p-inputgroup">
-          <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-          <input type="date" placeholder="Date" class="form-control p-field"  id="manager"
-                 [(ngModel)]="invoice.invoiceDate " style="font-size: 13px">
-        </div>
-      </div>
-
-      <div class="mb-12 col-md-6 col-12">
-        <label for="fin" class="p-float-label">Date de écheance </label>
-        <div class="p-inputgroup">
-          <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-          <input type="date" placeholder="Date" class="form-control p-field"  id="fin"
-                 [(ngModel)]="invoice.invoiceDeadlineDate " style="font-size: 13px">
+            </select>
+          </div>
         </div>
       </div>
-
-        </div>
-        </div>
     </div>
     <div class="p-grid p-fluid">
       <div style="display: flex">
+
+        <div class="mb-1 col-md-4 col-12">
+          <label for="manager" class="p-float-label">Date </label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+            <input type="date" placeholder="Date" class="form-control p-field" id="manager"
+                   [(ngModel)]="invoice.invoiceDate " style="font-size: 13px">
+          </div>
+        </div>
+
+        <div class="mb-12 col-md-4 col-12">
+          <label for="fin" class="p-float-label">Nombre des jours avant la date d'échéance </label>
+          <div class="p-inputgroup">
+            <input type="number" class="form-control p-field" id="daysNumber" length="3" min="0"
+                   [(ngModel)]="invoice.invoiceDeadlineInNumberOfDays " style="font-size: 13px"
+                   (change)="changeNumberOfDeadlineDaysNumber()">
+          </div>
+        </div>
+
+        <div class="mb-12 col-md-4 col-12">
+          <label for="fin" class="p-float-label">Date d'écheance </label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+            <input type="date" placeholder="Date" class="form-control p-field" id="fin"
+                   [(ngModel)]="invoice.invoiceDeadlineDate " style="font-size: 13px"
+                   (change)="changeDeadLineDate()">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+<div class="p-grid p-fluid">
+  <div style="display: flex">
     <div class="mb-1 col-md-4 col-12">
       <label for="NET" class="p-float-label">Montant TTC</label>
       <div class="p-inputgroup">
-        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-        <input type="number" class="form-control p-field"  id="net"
+        <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
+        <input type="number" class="form-control p-field" id="net"
                [(ngModel)]="invoice.invoiceNet " style="font-size: 13px" (change)="updateTotalAmount()"
                (change)="updateTotalAmount()">
       </div>
@@ -102,32 +128,32 @@ Modifier une nouvelle facture client
       <label for="rs" class="p-float-label">RS</label>
       <div class="p-inputgroup">
         <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-        <input type="number" class="form-control p-field"  id="rs"
+        <input type="number" class="form-control p-field" id="rs"
                [(ngModel)]="invoice.invoiceRs " style="font-size: 13px" (change)="updateTotalAmount()">
       </div>
       <span *ngIf="invoice.invoiceRsType === 'POURCENTAGE'" style="font-size: 12px;"><i>Soit valeur de {{rsAmount}}</i></span>
     </div>
-        <div class="mb-12 col-md-4 col-12">
-          <label for="rs" class="p-float-label">RS type</label>
-          <select class="form-control p-field" id="type" name="side" [(ngModel)]="invoice.invoiceRsType"
-                  (change)="updateTotalAmount()" style="font-size: 13px;">
-            <option [ngValue]="'VALUE'">Valeur</option>
-            <option [ngValue]="'POURCENTAGE'">Pourcentage</option>
+    <div class="mb-12 col-md-4 col-12">
+      <label for="rs" class="p-float-label">RS type</label>
+      <select class="form-control p-field" id="type" name="side" [(ngModel)]="invoice.invoiceRsType"
+              (change)="updateTotalAmount()" style="font-size: 13px;">
+        <option [ngValue]="'VALUE'">Valeur</option>
+        <option [ngValue]="'POURCENTAGE'">Pourcentage</option>
 
-          </select>
-        </div>
-
-   </div>
-      <div class="mb-12 col-md-12 col-12">
-        <label for="amount" class="p-float-label">Montant NET à payer</label>
-        <div class="p-inputgroup">
-          <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-          <input type="number" class="form-control p-field"  id="amount"
-                 [(ngModel)]="invoice.invoiceTotalAmount " disabled="true" style="font-size: 13px">
-        </div>
-      </div>
+      </select>
     </div>
-  </p-panel>
+
+  </div>
+  <div class="mb-12 col-md-12 col-12">
+    <label for="amount" class="p-float-label">Montant NET à payer</label>
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
+      <input type="number" class="form-control p-field" id="amount"
+             [(ngModel)]="invoice.invoiceTotalAmount " disabled="true" style="font-size: 13px">
+    </div>
+  </div>
+</div>
+</p-panel>
   <br>
 
   <div class="p-panel p-panel-header" style="margin-top: 20px;float: right; padding: 2%;">

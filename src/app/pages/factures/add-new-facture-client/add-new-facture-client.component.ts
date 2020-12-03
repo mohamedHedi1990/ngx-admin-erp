@@ -17,6 +17,8 @@ export class AddNewFactureClientComponent implements OnInit {
     invoiceRs: 0,
     invoiceRsType: 'VALUE',
     invoiceTotalAmount: 0,
+    invoiceDeadlineInNumberOfDays: 0,
+    invoiceCurrency: 'TND',
 
   };
   rsAmount = null;
@@ -66,5 +68,19 @@ export class AddNewFactureClientComponent implements OnInit {
       this.rsAmount = this.invoice.invoiceRs;
     }
     this.invoice.invoiceTotalAmount = this.rsAmount + this.invoice.invoiceNet;
+  }
+
+  changeNumberOfDeadlineDaysNumber() {
+    const invoiceDate = new Date(this.invoice.invoiceDate);
+    let limitDate: Date;
+    limitDate = new Date(this.invoice.invoiceDate);
+    limitDate.setDate(invoiceDate.getDate() + this.invoice.invoiceDeadlineInNumberOfDays);
+    this.invoice.invoiceDeadlineDate = this.datePipe.transform(limitDate, 'yyyy-MM-dd');
+  }
+
+  changeDeadLineDate() {
+    const limitDate = new Date(this.invoice.invoiceDeadlineDate);
+    const invoiceDate = new Date(this.invoice.invoiceDate);
+   this.invoice.invoiceDeadlineInNumberOfDays = limitDate.getDate() - invoiceDate.getDate();
   }
 }

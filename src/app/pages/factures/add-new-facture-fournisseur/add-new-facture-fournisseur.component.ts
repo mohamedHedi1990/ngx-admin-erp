@@ -20,6 +20,7 @@ export class AddNewFactureFournisseurComponent implements OnInit {
     invoiceRs: 0,
     invoiceRsType: 'VALUE',
     invoiceTotalAmount: 0,
+    invoiceDeadlineInNumberOfDays: 0,
 
   };
   rsAmount = null;
@@ -87,6 +88,20 @@ export class AddNewFactureFournisseurComponent implements OnInit {
   change() {
 	  const startDate = this.datePipe.transform(this.invoice.invoiceDate, 'yyyy-MM-dd');
 	  console.log( startDate);
+  }
+
+  changeNumberOfDeadlineDaysNumber() {
+    const invoiceDate = new Date(this.invoice.invoiceDate);
+    let limitDate: Date;
+    limitDate = new Date(this.invoice.invoiceDate);
+    limitDate.setDate(invoiceDate.getDate() + this.invoice.invoiceDeadlineInNumberOfDays);
+    this.invoice.invoiceDeadlineDate = this.datePipe.transform(limitDate, 'yyyy-MM-dd');
+  }
+
+  changeDeadLineDate() {
+    const limitDate = new Date(this.invoice.invoiceDeadlineDate);
+    const invoiceDate = new Date(this.invoice.invoiceDate);
+    this.invoice.invoiceDeadlineInNumberOfDays = limitDate.getDate() - invoiceDate.getDate();
   }
 
 }

@@ -78,7 +78,7 @@ Modifier une nouvelle facture fournisseur
       <div class="p-grid p-fluid">
         <div style="display: flex">
 
-          <div class="mb-1 col-md-6 col-12">
+          <div class="mb-1 col-md-4 col-12">
             <label for="manager" class="p-float-label">Date de facture </label>
             <div class="p-inputgroup">
               <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
@@ -86,12 +86,21 @@ Modifier une nouvelle facture fournisseur
                      [(ngModel)]="invoice.invoiceDate " style="font-size: 13px" (change)="change()">
             </div>
           </div>
-
-          <div class="mb-12 col-md-6 col-12">
-            <label for="fin" class="p-float-label">Date de écheance </label>
+          <div class="mb-12 col-md-4 col-12">
+            <label for="fin" class="p-float-label">Nombre des jours avant la date d'échéance </label>
+            <div class="p-inputgroup">
+              <!--
+              <span class="p-inputgroup-addon"><i class="pi pi-spinner"></i></span> -->
+              <input type="number"  class="form-control p-field"  id="daysNumber" length="3" min="0"
+                     [(ngModel)]="invoice.invoiceDeadlineInNumberOfDays " style="font-size: 13px"
+                     (change)="changeNumberOfDeadlineDaysNumber()">
+            </div>
+          </div>
+          <div class="mb-12 col-md-4 col-12">
+            <label for="fin" class="p-float-label">Date d'écheance </label>
             <div class="p-inputgroup">
               <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
-              <input type="date" placeholder="Date" class="form-control p-field"  id="fin"
+              <input type="date" class="form-control p-field"  id="fin"
                      [(ngModel)]="invoice.invoiceDeadlineDate " style="font-size: 13px">
             </div>
           </div>
