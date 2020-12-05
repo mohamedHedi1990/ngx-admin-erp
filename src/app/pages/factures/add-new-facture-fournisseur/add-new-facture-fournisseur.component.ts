@@ -18,7 +18,7 @@ export class AddNewFactureFournisseurComponent implements OnInit {
     invoiceDeadlineDate: null,
     invoiceNet: 0,
     invoiceRs: 0,
-    invoiceRsType: 'VALUE',
+    invoiceRsType: 'POURCENTAGE',
     invoiceTotalAmount: 0,
     invoiceDeadlineInNumberOfDays: 0,
 
@@ -27,11 +27,15 @@ export class AddNewFactureFournisseurComponent implements OnInit {
   @Output() addNewProviderInvoiceEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();
   providers = [];
+  maxDateInvoiceDate;
+  minDateDeadlineDate;
   constructor(private UtilsService: UtilsServiceService,
               private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.rsAmount = 0;
+    this.invoice.invoiceRsType='POURCENTAGE'
+
     // this.invoice.invoiceDate = this.UtilsService.now('yyyy-MM-dd');
 	if(this.invoice.invoiceId == null) {
 		this.invoice.invoiceDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
@@ -42,16 +46,15 @@ export class AddNewFactureFournisseurComponent implements OnInit {
 		this.invoice.invoiceDate = this.datePipe.transform(this.invoice.invoiceDate, 'yyyy-MM-dd');
     this.invoice.invoiceDeadlineDate = this.datePipe.transform( this.invoice.invoiceDeadlineDate, 'yyyy-MM-dd');
 	}
-
+    this.maxDateInvoiceDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    this.minDateDeadlineDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    console.log(this.datePipe.transform(new Date(), 'dd-MM-yyyy'));
     this.getAllProviders();
   }
 
   saveInvoice() {
-	  const tempInvoice = this.invoice;
-	  tempInvoice.invoiceDate = this.datePipe.transform(this.invoice.invoiceDate, 'yyyy-MM-dd');
-		tempInvoice.invoiceDeadlineDate = this.datePipe.transform(this.invoice.invoiceDeadlineDate, 'yyyy-MM-dd');
-
-    this.addNewProviderInvoiceEvent.emit(tempInvoice);
+	  
+    this.addNewProviderInvoiceEvent.emit(this.invoice);
   }
 
   cancel() {
@@ -82,14 +85,27 @@ export class AddNewFactureFournisseurComponent implements OnInit {
     } else {
       this.rsAmount = this.invoice.invoiceRs;
     }
-    this.invoice.invoiceTotalAmount = this.rsAmount + this.invoice.invoiceNet;
+    this.rsAmount=Math.round(this.rsAmount * 1000) / 1000
+    this.invoice.invoiceTotalAmount =this.invoice.invoiceNet- this.rsAmount ;
+    this.invoice.invoiceTotalAmount=Math.round(this.invoice.invoiceTotalAmount * 1000) / 1000
   }
+  changeInvoiceDate()
+  {
+    this.minDateDeadlineDate = this.invoice.invoiceDate;
+    if (this.invoice.invoiceDate > this.invoice.invoiceDeadlineDate)
+    {
+      this.invoice.invoiceDeadlineDate = this.invoice.invoiceDate;
+    
+    }  
+    const invoiceDate = new Date(this.invoice.invoiceDate);
+    let limitDate: Date;
+    limitDate = new Date(this.invoice.invoiceDeadlineDate);
+    const time=(limitDate.valueOf()-invoiceDate.valueOf())/86400000 ;
+    this.invoice.invoiceDeadlineInNumberOfDays = time;
 
-  change() {
-	  const startDate = this.datePipe.transform(this.invoice.invoiceDate, 'yyyy-MM-dd');
-	  console.log( startDate);
+
+
   }
-
   changeNumberOfDeadlineDaysNumber() {
     const invoiceDate = new Date(this.invoice.invoiceDate);
     let limitDate: Date;
@@ -101,7 +117,8 @@ export class AddNewFactureFournisseurComponent implements OnInit {
   changeDeadLineDate() {
     const limitDate = new Date(this.invoice.invoiceDeadlineDate);
     const invoiceDate = new Date(this.invoice.invoiceDate);
-    this.invoice.invoiceDeadlineInNumberOfDays = limitDate.getDate() - invoiceDate.getDate();
+    const time=(limitDate.valueOf()-invoiceDate.valueOf())/86400000 ;
+    this.invoice.invoiceDeadlineInNumberOfDays = time;
   }
 
 }

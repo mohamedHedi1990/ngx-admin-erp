@@ -50,10 +50,10 @@ Liste des factures clients
           {{invoice.customer.customerLabel}}
         </td>
         <td style="text-align: center;font-size: 13px;">
-          {{invoice.invoiceDate}}
+          {{invoice.invoiceDate | date: 'dd-MM-yyyy'}}
         </td>
         <td style="text-align: center;font-size: 13px;">
-          {{invoice.invoiceDeadlineDate}}
+          {{invoice.invoiceDeadlineDate  | date: 'dd-MM-yyyy'}}
         </td>
         <td style="text-align: center;">
           {{invoice.invoiceTotalAmountS}} {{invoice.invoiceCurrency}}
