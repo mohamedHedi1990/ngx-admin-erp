@@ -19,7 +19,7 @@ Réglement clients
 
                 <div style="float:right">
                   <button pButton pRipple label="Régler
-" icon="pi pi-plus" class="primaryBtn" (click)="displayPaymentRuleModal = true"
+" icon="pi pi-plus" class="primaryBtn" (click)="displayPaymentRuleModal = true && titleHeader= 'Régler des factures'"
                   [disabled]="selectedInvoices.length===0" [ngClass]= "{'disabled': selectedInvoices.length===0}"></button>
                 </div>
             </div>
@@ -70,10 +70,10 @@ Réglement clients
                     {{invoice.customer.customerLabel}}
                 </td>
                 <td style="text-align: center;font-size: 13px;">
-                    {{invoice.invoiceDate}}
+                    {{invoice.invoiceDate| date: 'dd-MM-yyyy'}}
                 </td>
                 <td style="text-align: center;font-size: 13px;">
-                    {{invoice.invoiceDeadlineDate}}
+                    {{invoice.invoiceDeadlineDate | date: 'dd-MM-yyyy'}}
                 </td>
                 <td style="text-align: center;">
                   {{invoice.invoiceTotalAmountS}} {{invoice.invoiceCurrency}}
@@ -133,7 +133,7 @@ Réglement clients
                                         <span *ngIf="paymentRule.paymentRulePaymentMethod === 'EFFET_ESCOMPTE'"> Effet d'escompte {{paymentRule.paymentRulesDetails}} </span>
 
                                     </td>
-                                    <td>{{paymentRule.paymentRuleDeadlineDate}}</td>
+                                    <td>{{paymentRule.paymentRuleDeadlineDate | date: 'dd-MM-yyyy'}}</td>
                                     <td>
                                         <span *ngIf="paymentRule.isValidated" class="customer-badge status-active">Rapproché</span>
                                         <span *ngIf="!paymentRule.isValidated" class="customer-badge status-progress">Non rapproché</span>
@@ -155,7 +155,7 @@ Réglement clients
                                            (click)="ValidatePR(paymentRule)"></i>
                                            -->
                                            <i  placement="top" ngbTooltip="Modifier ce réglement"  class="pi pi-pencil" style="margin-right: 7px; color: #6200ee"
-                                           (click)="ModifyPR(paymentRule)"></i>
+                                           (click)="ModifyPR(paymentRule,invoice)"></i>
                                            <i  placement="top" ngbTooltip="Supprimer ce réglement"  class="pi pi-trash"  style="margin-right: 7px; color: #6200ee"
                                            (click)="delPaymentRule(paymentRule)"></i>
                                          </div>
@@ -182,7 +182,7 @@ Réglement clients
        </ng-template>
    </p-table>
 </div>
-<p-dialog header="Nouveau réglement" [(visible)]="displayPaymentRuleModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+<p-dialog header="{{titleHeader}}" [(visible)]="displayPaymentRuleModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
 
           [draggable]="false" [resizable]="false">
   <br>

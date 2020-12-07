@@ -22,16 +22,21 @@ export class PaiementClientComponent implements OnInit {
     paymentRuleLabel: null,
     paymentRuleAccount: null,
     paymentRuleAmount: null,
-    paymentRulePaymentMethod: 'CHEQUE',
+    paymentRulePaymentMethod:'CHEQUE',
     paymentRuleNumber: null,
     PaymentRulesDetails: null,
     paymentRuleDeadlineDate: this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
-    paymentRuleOperationType: 'ENCAISSEMENT',
+    paymentRuleOperationType:'ENCAISSEMENT',
   };
   loading = false;
   invoice = null;
-  constructor(private UtilsService: UtilsServiceService,
-              public dialogService: DialogService, private confirmationService: ConfirmationService,
+  invoiceUpdate: any;
+  isUpdate=false;
+  titleHeader:any;
+  constructor(
+              private UtilsService: UtilsServiceService,
+              public dialogService: DialogService, 
+              private confirmationService: ConfirmationService,
               private datePipe: DatePipe) { }
 
   ngOnInit(): void {
@@ -44,6 +49,8 @@ export class PaiementClientComponent implements OnInit {
   addPaymentRule(data) {
     this.invoice = data;
     this.displayPaymentRuleModal = true;
+    this.titleHeader="Nouvel reglement";
+
   }
   payInvoices() {
     const invoicePayment = {
@@ -71,7 +78,41 @@ export class PaiementClientComponent implements OnInit {
   }
 
   savePaymentRule(validateAndAdd: boolean) {
+    console.log("error paymennt ");
+    if(this.isUpdate==true)
+    {
+      console.log("error ");
+      this.invoice=this.invoiceUpdate;
+      this.UtilsService.post(UtilsServiceService.API_INVOICE + '/updatePaymentRule/' + this.invoice.invoiceId, this.paymentRule).subscribe( response => {
 
+        this.UtilsService.showToast('success',
+        'Réglement modifiée avec succés',
+        `Un réglement a été modifiéé avec succés à la facture ${this.invoice.invoiceNumber}`);
+        if (!validateAndAdd) {
+          this.displayPaymentRuleModal = false;
+          this.initPaymentRule();
+          this.invoice = null;
+        } else {
+          this.paymentRule.paymentRuleNumber = null;
+          this.paymentRule.paymentRuleAmount = 0;
+          this.displayPaymentRuleModal = true;
+          this.invoice = response;
+        }
+  
+          this.getAllInvoices();
+        },
+        error => {this.UtilsService.showToast('danger',
+          'Erreur interne',
+          `Un erreur interne a été produit lors de modification du réglement`);
+          this.displayPaymentRuleModal = false;
+          this.initPaymentRule();
+      });
+      this.isUpdate=false;
+    }
+    else
+    {
+    console.log("modifier");
+    console.log(this.invoice.invoiceId);
     const context = this;
     this.UtilsService.post(UtilsServiceService.API_INVOICE + '/' + this.invoice.invoiceId, this.paymentRule).subscribe( response => {
 
@@ -97,6 +138,8 @@ export class PaiementClientComponent implements OnInit {
         this.displayPaymentRuleModal = false;
         this.initPaymentRule();
     });
+  }
+  this.displayPaymentRuleModal = false;
 
   }
 
@@ -121,13 +164,22 @@ export class PaiementClientComponent implements OnInit {
 	  this.paymentRule = reglement;
 	  this.displayValidatePaymentRuleModal = true;
   }
-  ModifyPR(reglement) {
-
-	  this.paymentRule = reglement;
-	  this.displayPaymentRuleModal = true;
+  ModifyPR(reglement,invoice) {
+    console.log("reglement d'une facture");
+    console.log(reglement);
+    console.log("invoice de reglement");
+    console.log(invoice);
+    this.selectedInvoices.length=0;
+    this.invoice=invoice;
+    this.invoiceUpdate=invoice; 
+    this.isUpdate=true;
+    this.paymentRule = reglement;
+    this.displayPaymentRuleModal = true;
+    this.titleHeader="Modification d'un reglement";
   }
   delPaymentRule(reglement) {
-
+    console.log("regle to delete");
+    console.log(reglement);
 	  this.paymentRule = reglement;
 	  this.displayDeletePaymentRuleModal = true;
   }

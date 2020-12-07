@@ -28,6 +28,9 @@ export class PaiementFournisseurComponent implements OnInit {
   };
   loading = false;
   invoice = null;
+  invoiceUpdate: any;
+  isUpdate=false;
+  titleHeader:any;
   constructor(private UtilsService: UtilsServiceService,
               public dialogService: DialogService, private confirmationService: ConfirmationService,
               private datePipe: DatePipe) { }
@@ -42,6 +45,7 @@ export class PaiementFournisseurComponent implements OnInit {
   addPaymentRule(data) {
     this.invoice = data;
     this.displayPaymentRuleModal = true;
+    this.titleHeader="Ajouter un reglement";
   }
   payInvoices() {
     const invoicePayment = {
@@ -68,15 +72,49 @@ export class PaiementFournisseurComponent implements OnInit {
 
   }
 
-  savePaymentRule(validateAndAdd) {
+  savePaymentRule(validateAndAdd: boolean) {
+    console.log("error paymennt ");
+    if(this.isUpdate==true)
+    {
+      console.log("error ");
+      this.invoice=this.invoiceUpdate;
+      this.UtilsService.post(UtilsServiceService.API_INVOICE + '/updatePaymentRule/' + this.invoice.invoiceId, this.paymentRule).subscribe( response => {
 
+        this.UtilsService.showToast('success',
+        'Réglement modifiée avec succés',
+        `Un réglement a été modifiéé avec succés à la facture ${this.invoice.invoiceNumber}`);
+        if (!validateAndAdd) {
+          this.displayPaymentRuleModal = false;
+          this.initPaymentRule();
+          this.invoice = null;
+        } else {
+          this.paymentRule.paymentRuleNumber = null;
+          this.paymentRule.paymentRuleAmount = 0;
+          this.displayPaymentRuleModal = true;
+          this.invoice = response;
+        }
+  
+          this.getAllInvoices();
+        },
+        error => {this.UtilsService.showToast('danger',
+          'Erreur interne',
+          `Un erreur interne a été produit lors de modification du réglement`);
+          this.displayPaymentRuleModal = false;
+          this.initPaymentRule();
+      });
+      this.isUpdate=false;
+    }
+    else
+    {
+    console.log("modifier");
+    console.log(this.invoice.invoiceId);
     const context = this;
     this.UtilsService.post(UtilsServiceService.API_INVOICE + '/' + this.invoice.invoiceId, this.paymentRule).subscribe( response => {
 
-        this.UtilsService.showToast('success',
-          'Réglement ajoutée avec succés',
-          `Un réglement a été ajoutée avec succés à la facture ${this.invoice.invoiceNumber}`);
-        if (!validateAndAdd) {
+      this.UtilsService.showToast('success',
+      'Réglement ajoutée avec succés',
+      `Un réglement a été ajoutée avec succés à la facture ${this.invoice.invoiceNumber}`);
+      if (!validateAndAdd) {
         this.displayPaymentRuleModal = false;
         this.initPaymentRule();
         this.invoice = null;
@@ -84,7 +122,7 @@ export class PaiementFournisseurComponent implements OnInit {
         this.paymentRule.paymentRuleNumber = null;
         this.paymentRule.paymentRuleAmount = 0;
         this.displayPaymentRuleModal = true;
-         this.invoice = response;
+        this.invoice = response;
       }
 
         context.getAllInvoices();
@@ -94,9 +132,16 @@ export class PaiementFournisseurComponent implements OnInit {
         `Un erreur interne a été produit lors de l'ajout du réglement`);
         this.displayPaymentRuleModal = false;
         this.initPaymentRule();
-      });
+    });
+  }
+  this.displayPaymentRuleModal = false;
 
   }
+
+  resetSelectedInvoices() {
+    this.selectedInvoices = [];
+  }
+
 
 
   getAllInvoices() {
@@ -116,10 +161,14 @@ export class PaiementFournisseurComponent implements OnInit {
     this.paymentRule = reglement;
     this.displayValidatePaymentRuleModal = true;
   }
-  ModifyPR(reglement) {
-
+  ModifyPR(reglement,invoice) {
+    this.selectedInvoices.length=0;
+    this.invoice=invoice;
+    this.invoiceUpdate=invoice; 
+    this.isUpdate=true;
     this.paymentRule = reglement;
     this.displayPaymentRuleModal = true;
+    this.titleHeader="Modifier un reglement";
   }
   deletePR(reglement) {
 

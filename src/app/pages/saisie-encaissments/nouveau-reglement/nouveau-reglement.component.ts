@@ -34,6 +34,11 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
   constructor(private UtilsService: UtilsServiceService) { }
 
   ngOnInit(): void {
+
+    console.log(" nouveau reglement ");
+    // console.log(this.seletcedInvoices);
+    // console.log(this.reglement);
+
     if (this.seletcedInvoices != null && this.seletcedInvoices.length !== 0) {
       let label = 'Reg Fact N° ';
       this.seletcedInvoices.forEach(invoice => {
@@ -60,7 +65,11 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
     this.getAllAccounts();
   }
   ngOnChanges(changes: SimpleChanges): void {
-    this.reglement.paymentRuleAmount = 0;
+    console.log("ng onchanges ");
+    console.log(this.reglement);
+    console.log(this.invoice);
+
+    //this.reglement.paymentRuleAmount = 0;
     console.log('selected ', this.seletcedInvoices);
     if (this.seletcedInvoices != null && this.seletcedInvoices.length !== 0) {
       let label = 'Reg Fact N° ';

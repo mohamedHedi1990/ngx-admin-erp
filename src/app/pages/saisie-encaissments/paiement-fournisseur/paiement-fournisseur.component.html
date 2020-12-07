@@ -69,10 +69,10 @@ Paiements fournissuers
                     {{invoice.provider.providerLabel}}
                 </td>
                 <td style="text-align: center;font-size: 13px;">
-                    {{invoice.invoiceDate}}
+                    {{invoice.invoiceDate| date: 'dd-MM-yyyy'}}
                 </td>
                 <td style="text-align: center;font-size: 13px;">
-                    {{invoice.invoiceDeadlineDate}}
+                    {{invoice.invoiceDeadlineDate| date: 'dd-MM-yyyy'}}
                 </td>
                 <td style="text-align: center;">
                   {{invoice.invoiceTotalAmountS}} {{invoice.invoiceCurrency}}
@@ -130,7 +130,7 @@ Paiements fournissuers
                                         <span *ngIf="paymentRule.paymentRulePaymentMethod === 'ESPECE'"> Espèce{{paymentRule.paymentRulesDetails}}</span>
                                         <span *ngIf="paymentRule.paymentRulePaymentMethod === 'EFFET_ENCAISSEMENT'"> Effet d'encaissement {{paymentRule.paymentRulesDetails}} </span>
                                         <span *ngIf="paymentRule.paymentRulePaymentMethod === 'EFFET_ESCOMPTE'"> Effet d'escompte {{paymentRule.paymentRulesDetails}} </span>                                    </td>
-                                    <td>{{paymentRule.paymentRuleDeadlineDate}}</td>
+                                    <td>{{paymentRule.paymentRuleDeadlineDate| date: 'dd-MM-yyyy'}}</td>
                                     <td>
                                         <span *ngIf="paymentRule.isValidated" class="customer-badge status-active">Rapproché</span>
                                         <span *ngIf="!paymentRule.isValidated" class="customer-badge status-progress">Non rapproché</span>
@@ -179,7 +179,7 @@ Paiements fournissuers
         </ng-template>
     </p-table>
 </div>
-<p-dialog header="Nouveau réglement" [(visible)]="displayPaymentRuleModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+<p-dialog header="{{titleHeader}}" [(visible)]="displayPaymentRuleModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
           [draggable]="false" [resizable]="false">
   <br>
   <ngx-nouveau-reglement [reglement]="paymentRule" [seletcedInvoices]="selectedInvoices"

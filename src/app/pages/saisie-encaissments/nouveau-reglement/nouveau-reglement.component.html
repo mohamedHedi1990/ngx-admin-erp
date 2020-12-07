@@ -1,6 +1,4 @@
-<div style="width: 90%;
-    margin: auto;">
-
+<div style="width: 90% ; margin: auto;">
     <div class="p-grid p-fluid">
       <div style="display: flex">
         <div class="mb-12 col-md-12 col-12">
@@ -14,8 +12,8 @@
                    -->
             <select  class="form-control p-field"
                     id="type" name="side" [(ngModel)]="reglement.paymentRuleAccount" [ngClass]="{
-        'is-invalid': reglement.paymentRuleAccount == null}" style="font-size: 13px" [compareWith]="compareAccount">
-              <option *ngFor="let a of accounts;" [ngValue]="a">{{a.accountLabel}}</option>
+                   'is-invalid': reglement.paymentRuleAccount == null}" style="font-size: 13px" [compareWith]="compareAccount">
+            <option *ngFor="let a of accounts;" [ngValue]="a">{{a.accountLabel}}</option>
             </select>
           </div>
         </div>
@@ -36,11 +34,16 @@
         <label for="amounth" class="p-float-label" style="font-size: 13px">Montant</label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
-          <input *ngIf="seletcedInvoices == null || seletcedInvoices.length === 0" type="number" class="form-control p-field"  id="amounth"
-                 [(ngModel)]="reglement.paymentRuleAmount " style="font-size: 13px"
-                  min="0" (change)="checkAmount()">
-          <input *ngIf="seletcedInvoices != null && seletcedInvoices.length !== 0" type="number" class="form-control p-field"  id="amounths"
-                 [(ngModel)]="reglement.paymentRuleAmountS " style="font-size: 13px" disabled="true">
+
+          <input *ngIf="seletcedInvoices == null || seletcedInvoices.length === 0" 
+            type="number" class="form-control p-field"  id="amounth"
+            [(ngModel)]="reglement.paymentRuleAmount" style="font-size: 13px"
+            min="0" (change)="checkAmount()">
+          <input *ngIf="seletcedInvoices != null && seletcedInvoices.length !== 0" 
+            type="number" class="form-control p-field"  id="amounths"
+            [(ngModel)]="reglement.paymentRuleAmountS" 
+            style="font-size: 13px" disabled="true">
+
         </div>
       </div>
       <div class="mb-12 col-md-12 col-12">

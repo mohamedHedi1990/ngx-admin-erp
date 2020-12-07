@@ -19,7 +19,7 @@ export class UtilsServiceService {
   public static API_TARIF = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/tarif';
   public static API_TIME_LINE = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/timeLine';
   public static API_PROVIDER_INVOICE = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/invoice-provider';
-  public static API_CUSTOMER_INVOICE = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/invoice-customer';
+  public static API_CUSTOMER_INVOICE = UtilsServiceService.REMOTE_ADDRESS  + 'api/invoice-customer/customers';
   public static API_INVOICE = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/invoice';
   public static API_TYPE_ENCAISSEMENT = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/encaissement-type';
   public static API_TYPE_DECAISSEMENT = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/decaissement-type';

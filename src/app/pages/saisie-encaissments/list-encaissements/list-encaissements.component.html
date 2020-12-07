@@ -55,7 +55,7 @@ Liste des encaissements
           {{encaissement.encaissementAmountS}} {{encaissement.encaissementCurrency}}
         </td>
         <td style="text-align: center;font-size: 13px;">
-          {{encaissement.encaissementDeadlineDate}}
+          {{encaissement.encaissementDeadlineDate | date: 'dd-MM-yyyy' }}
         </td>
 
         <td style="text-align: center;">
