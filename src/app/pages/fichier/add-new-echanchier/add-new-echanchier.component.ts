@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DatepickerComponent} from '../../forms/datepicker/datepicker.component';
 import {UtilsServiceService} from '../../../utils-service.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'ngx-add-new-echanchier',
@@ -16,10 +17,11 @@ export class AddNewEchanchierComponent implements OnInit {
   timeLineAccount: null,
   timeLineCreditNumber: null,
   timeLineInitialAmount: 0,
-  timeLineYearNumber: 1,
-  timeLineAnnuity: null,
+  timeLineAnnityNumber: 1,
+  timeLineAnnuity: 'Mensuelle',
   timeLineInterestRate: 0,
   timeLineTable: [],
+  timeLineStartDate: null,
 };
 line = {
   lineDate: new Date(Date.now()),
@@ -83,9 +85,12 @@ line = {
     },
   };
   accounts = [];
-  constructor(private UtilsService: UtilsServiceService) { }
+  constructor(private UtilsService: UtilsServiceService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
+    if(this.timeLine.timeLineId == null) {
+      this.timeLine.timeLineStartDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd'); 
+    } 
     this.initiateLine();
     this.getAllAccounts();
   }
@@ -143,7 +148,7 @@ checkTimeLineValid(): boolean {
     return this.timeLine.timeLineAccount == null || this.timeLine.timeLineAnnuity == null ||
       this.timeLine.timeLineInterestRate == null || this.timeLine.timeLineInitialAmount == null || this.timeLine.timeLineCreditNumber == null
   && this.timeLine.timeLineCreditNumber === '' || this.timeLine.timeLineLabel == null || this.timeLine.timeLineLabel === '' ||
-      this.timeLine.timeLineYearNumber == null;
+      this.timeLine.timeLineAnnityNumber == null;
 }
 
 onChangeInitialAmount(line?) {

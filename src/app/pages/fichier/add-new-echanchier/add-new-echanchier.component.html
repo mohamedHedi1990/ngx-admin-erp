@@ -118,25 +118,22 @@ Modifier un échénacier
     </div>
 
       <div style="display: flex">
-        <div class="mb-1 col-md-6 col-12 p-field">
-          <label for="y" class="p-float-label">Nombre d'années</label>
+        <div class="mb-1 col-md-3 col-12 p-field">
+          <label for="y" class="p-float-label">Nombre d'annuité</label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
             <input type="number" class="form-control p-field" id="y"
-                   [(ngModel)]="timeLine.timeLineYearNumber"   [ngClass]="{
-        'is-invalid': timeLine.timeLineYearNumber== null,
-        'is-valid': timeLine.timeLineYearNumber != null
+                   [(ngModel)]="timeLine.timeLineAnnityNumber"   [ngClass]="{
+        'is-invalid': timeLine.timeLineAnnityNumber== null,
+        'is-valid': timeLine.timeLineAnnityNumber != null
       }">
           </div>
         </div>
-        <div class="mb-1 col-md-6 col-12 p-field">
-          <label for="an" class="p-float-label">Anuuintée</label>
+        <div class="mb-1 col-md-3 col-12 p-field">
+          <label for="an" class="p-float-label">Annuité</label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-            <select class="form-control p-field" name="side" [(ngModel)]="timeLine.timeLineAnnuity" [ngClass]="{
-        'is-invalid': timeLine.timeLineAnnuity == null ,
-        'is-valid':timeLine.timeLineAnnuity != null}" id="an">
-              <option [ngValue]="null">-- Anuuintée --</option>
+            <select class="form-control p-field" name="side" [(ngModel)]="timeLine.timeLineAnnuity" id="an">
               <option value="Mensuelle">Mensuelle</option>
               <option value="Trimesterielle">Trimesterielle</option>
               <option value="Semesterielle">Semesterielle</option>
@@ -144,12 +141,27 @@ Modifier un échénacier
             </select>
           </div>
         </div>
+        <div class="mb-1 col-md-6 col-12 p-field">
+          <label for="y" class="p-float-label">Date de début</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+            <input type="date" class="form-control p-field" id="y"
+                   [(ngModel)]="timeLine.timeLineStartDate">
+          </div>
+        </div>
       </div>
     </div>
   </p-panel>
   <br>
   <p-panel header="Tableau d'échéancier" [toggleable]="true" collapsed="true">
-    <div class="card">
+
+      <div>
+        <button pButton pRipple label="Génerer le tableau d'échéancier" icon="pi pi-refresh" class="p-mr-2"
+        (click)="generateTimeLineTable()" style="background: #dee2e6;
+      color: black;
+      border: #dee2e6;"></button>
+      </div>
+      <!-- 
       <p-table #dt [value]="timeLine.timeLineTable" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
                [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]"
                [paginator]="true" currentPageReportTemplate="">
@@ -257,9 +269,7 @@ Modifier un échénacier
 
             <td style="text-align: center;">
               <div style="display: flex;">
-                <!--
-                <button pButton   placement="top" ngbTooltip="Modifier" pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 7px;" (click)="1"></button>
-                -->
+                
                 <i  placement="top" ngbTooltip="Supprimer"  class="pi pi-trash"  style="color: #6200ee" (click)="deleteLine(line)"></i>
               </div>
 
@@ -272,7 +282,8 @@ Modifier un échénacier
           </tr>
         </ng-template>
       </p-table>
-    </div>
+    -->
+ 
 
 
   </p-panel>

@@ -13,14 +13,15 @@ export class ListeEchenaciersComponent implements OnInit {
   loading = false;
   timeLine = {
     timeLineId: null,
-    timeLineLabel: '',
-    timeLineAccount: null,
-    timeLineCreditNumber: null,
-    timeLineInitialAmount: 0,
-    timeLineYearNumber: 1,
-    timeLineAnnuity: null,
-    timeLineInterestRate: 0,
-    timeLineTable: [],
+  timeLineLabel: '',
+  timeLineAccount: null,
+  timeLineCreditNumber: null,
+  timeLineInitialAmount: 0,
+  timeLineAnnityNumber: 1,
+  timeLineAnnuity: 'Mensuelle',
+  timeLineInterestRate: 0,
+  timeLineTable: [],
+  timeLineStartDate: null,
   };
   displayDeleteTimeLine = false;
   constructor(private UtilsService: UtilsServiceService,
@@ -37,14 +38,15 @@ export class ListeEchenaciersComponent implements OnInit {
   initTimeLine() {
     this.timeLine = {
       timeLineId: null,
-      timeLineLabel: '',
-      timeLineAccount: null,
-      timeLineCreditNumber: null,
-      timeLineInitialAmount: 0,
-      timeLineYearNumber: 1,
-      timeLineAnnuity: null,
-      timeLineInterestRate: 0,
-      timeLineTable: [],
+  timeLineLabel: '',
+  timeLineAccount: null,
+  timeLineCreditNumber: null,
+  timeLineInitialAmount: 0,
+  timeLineAnnityNumber: 1,
+  timeLineAnnuity: 'Mensuelle',
+  timeLineInterestRate: 0,
+  timeLineTable: [],
+  timeLineStartDate: null,
     };
   }
 
