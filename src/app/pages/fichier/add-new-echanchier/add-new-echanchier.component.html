@@ -154,14 +154,14 @@ Modifier un échénacier
   </p-panel>
   <br>
   <p-panel header="Tableau d'échéancier" [toggleable]="true" collapsed="true">
-
+<!--
       <div>
         <button pButton pRipple label="Génerer le tableau d'échéancier" icon="pi pi-refresh" class="p-mr-2"
         (click)="generateTimeLineTable()" style="background: #dee2e6;
       color: black;
       border: #dee2e6;"></button>
-      </div>
-      <!-- 
+      </div>-->
+      
       <p-table #dt [value]="timeLine.timeLineTable" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
                [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]"
                [paginator]="true" currentPageReportTemplate="">
@@ -282,7 +282,7 @@ Modifier un échénacier
           </tr>
         </ng-template>
       </p-table>
-    -->
+    
  
 
 

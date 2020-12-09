@@ -96,6 +96,7 @@ statusCards = [
 
         this.UtilsService.get(UtilsServiceService.API_HISTORIC_SOLD+ '/' + this.supervision.account.accountId + '/' + this.supervision.startDate
        ).subscribe( response => {
+         console.log('response    ', response);
         context.statusCards[0].value = this.UtilsService.convertAmountToString(''+ response.solde);
         context.statusCards[1].value = this.UtilsService.convertAmountToString(''+encaissement);
         context.statusCards[2].value = this.UtilsService.convertAmountToString(''+decaissement);
