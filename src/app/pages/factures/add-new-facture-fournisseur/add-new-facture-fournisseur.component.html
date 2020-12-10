@@ -35,7 +35,19 @@ Modifier une nouvelle facture fournisseur
         </div>
       </div>
       <div style="display: flex">
-        <div class="mb-1 col-md-6 col-12">
+        
+	  	<div class="mb-1 col-md-6 col-12 p-field">
+          <label for="invoiceNumber" class="p-float-label">Numéro</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field" id="invoiceNumber"
+                   [(ngModel)]="invoice.invoiceNumber" [ngClass]="{
+        'is-invalid': invoice.invoiceNumber == null || invoice.invoiceNumber == '' ,
+        'is-valid': invoice.invoiceNumber != null && invoice.invoiceNumber !== ''
+      }" style="font-size: 13px">
+          </div>
+        </div>
+        <div class="mb-1 col-md-4 col-12">
           <label for="type" class="p-float-label">Fournisseur</label>
           <div class="p-inputgroup p-fluid">
             <span class="p-inputgroup-addon"><i class="pi pi-shopping-cart"></i></span>
@@ -50,18 +62,7 @@ Modifier une nouvelle facture fournisseur
 
             </select>
           </div>
-        </div>
-		<div class="mb-1 col-md-4 col-12 p-field">
-          <label for="invoiceNumber" class="p-float-label">Numéro</label>
-          <div class="p-inputgroup">
-            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-            <input type="text" class="form-control p-field" id="invoiceNumber"
-                   [(ngModel)]="invoice.invoiceNumber" [ngClass]="{
-        'is-invalid': invoice.invoiceNumber == null || invoice.invoiceNumber == '' ,
-        'is-valid': invoice.invoiceNumber != null && invoice.invoiceNumber !== ''
-      }" style="font-size: 13px">
-          </div>
-        </div>
+        </div>  
 		<div class="mb-1 col-md-2 col-12 p-field">
           <label for="invoiceNumber" class="p-float-label">Devise</label>
           <div class="p-inputgroup">

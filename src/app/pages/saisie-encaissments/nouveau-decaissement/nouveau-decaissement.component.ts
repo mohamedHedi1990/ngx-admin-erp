@@ -11,7 +11,7 @@ export class NouveauDecaissementComponent implements OnInit {
   @Input() decaissement = {
     decaissementId: null,
     decaissementType: null,
-    decaissementDeadlineDate : null,
+    decaissementDeadlineDate : this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
     decaissementPaymentType: null,
     decaissementPaymentRuleNumber: null,
     decaissementPaymentRuleDetails: null,
@@ -56,14 +56,26 @@ export class NouveauDecaissementComponent implements OnInit {
     invoiceDeadlineDate: this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
     invoiceNet: 0,
     invoiceRs: 0,
-    invoiceRsType: 'VALUE',
+    invoiceRsType: 'POURCENTAGE',
     invoiceTotalAmount: 0,
 
   };
+  maxDateInvoiceDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+  minDateDeadlineDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
   rsAmount = null;
   dispalyDecaissementTypeModal = false;
   dispalyProviderModal = false;
   dispalyInvoiceProviderModal = false;
+  updateTotalAmount() {
+    if (this.invoice.invoiceRsType === 'POURCENTAGE') {
+      this.rsAmount = (this.invoice.invoiceRs * this.invoice.invoiceNet) / 100;
+    } else {
+      this.rsAmount = this.invoice.invoiceRs;
+    }
+    this.rsAmount=Math.round(this.rsAmount * 1000) / 1000
+    this.invoice.invoiceTotalAmount =this.invoice.invoiceNet- this.rsAmount ;
+    this.invoice.invoiceTotalAmount=Math.round(this.invoice.invoiceTotalAmount * 1000) / 1000
+  }
   compareAccount(a: any, b: any): boolean {
     if (a==null || b== null) return true;
     return a.accountId === b.accountId;
@@ -94,14 +106,6 @@ compareInvoice(a: any, b: any): boolean {
     this.getAllTypesDEcaissements();
   }
 
-  updateTotalAmount() {
-    if (this.invoice.invoiceRsType === 'POURCENTAGE') {
-      this.rsAmount = (this.invoice.invoiceRs * this.invoice.invoiceNet) / 100;
-    } else {
-      this.rsAmount = this.invoice.invoiceRs;
-    }
-    this.invoice.invoiceTotalAmount = this.rsAmount + this.invoice.invoiceNet;
-  }
   addNewContact() {
     this.provider.providerContacts.push({
       contactName : '',
@@ -197,7 +201,9 @@ invoiceNumber: 'REF12325565',
         });
   
     }
-
+    console.log("provider ");
+    console.log(this.decaissement.decaissementProvider.providerLabel);
+    this.invoice.provider=this.decaissement.decaissementProvider;
     
   }
 
@@ -336,8 +342,8 @@ invoiceNumber: 'REF12325565',
     invoiceCurrency: 'TND',
       invoiceNumber: '',
       provider: null,
-      invoiceDate: null,
-      invoiceDeadlineDate: null,
+      invoiceDate: this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
+      invoiceDeadlineDate: this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
       invoiceNet: 0,
       invoiceRs: 0,
       invoiceRsType: 'VALUE',

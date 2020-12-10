@@ -168,7 +168,7 @@ Modifier un encaissement
               <label for="type" class="p-float-label" style="font-size: 13px">Facture client<span style="color: red;">*</span></label>
             </div>
             <div style="float:right">
-              <i
+              <i [disabled]="encaissement.encaissementCustomer==null"
                 placement="top"
                 ngbTooltip="Ajouter une facture"
                 pRipple
@@ -180,7 +180,7 @@ Modifier un encaissement
 
           <div class="p-inputgroup p-fluid">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-            <select
+            <select [disabled]="encaissement.encaissementCustomer==null"
               class="form-control p-field"
               id="type"
               name="side"
@@ -233,7 +233,7 @@ Modifier un encaissement
               <span class="p-inputgroup-addon"
                 ><i class="pi pi-money-bill"></i
               ></span>
-              <input
+              <input [disabled]=true
                 type="number"
                 class="form-control p-field"
                 id="amounth"
@@ -345,7 +345,7 @@ Modifier un encaissement
  >Enregistrer
     </button>
   -->
-  <button [disabled]="checkEncaissementValid()" [ngClass]= "{'disabled': checkEncaissementValid()}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn" (click)="saveEncaissement()" style="margin-left: 10px;"></button>
+  <button [disabled]="checkEncaissementValid()" [ngClass]= "{'disabled': checkEncaissementValid()}" pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn" (click)="saveEncaissement()" style="margin-left: 10px;"></button>
 
 
   </div>
@@ -442,7 +442,7 @@ Modifier un encaissement
       <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="dispalyCustomerModal=false"></button>
 
       <button [disabled]="customer.customerLabel == null || customer.customerLabel === '' || customer.customerUniqueIdentifier == null || customer.customerUniqueIdentifier === ''"
-      [ngClass]= "{'disabled': customer.customerLabel == null || customer.customerLabel === '' || customer.customerUniqueIdentifier == null || customer.customerUniqueIdentifier === ''}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn"
+      [ngClass]= "{'disabled': customer.customerLabel == null || customer.customerLabel === '' || customer.customerUniqueIdentifier == null || customer.customerUniqueIdentifier === ''}" pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn"
       (click)="saveCustomer()" style="margin-left: 10px;"></button>
 
     </div>
@@ -450,7 +450,7 @@ Modifier un encaissement
 </p-dialog>
 
 <!--Ajouter une facture fournisseur-->
-<p-dialog header="Nouvelle facture pour le client {{customer.customerLabel}}" [(visible)]="dispalyInvoiceCustomerModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+<p-dialog *ngIf="encaissement.encaissementCustomer!=null" header="Nouvelle facture pour le client {{encaissement.encaissementCustomer.customerLabel}}" [(visible)]="dispalyInvoiceCustomerModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
           [draggable]="false" [resizable]="false">
   <br>
 
@@ -465,7 +465,7 @@ Modifier un encaissement
           <span class="p-inputgroup-addon"><i class="pi pi-shopping-cart"></i></span>
           <input *ngIf="invoice.invoiceId!= null" type="text" placeholder="Date" class="form-control p-field"  id="manager"
                  [(ngModel)]="invoice.customer.customerLabel " style="font-size: 13px" disabled="true">
-          <select *ngIf="invoice.invoiceId == null" class="form-control p-field" id="type" name="side" [(ngModel)]="invoice.customer"  style="font-size: 13px">
+          <select [disabled]=true *ngIf="invoice.invoiceId == null" class="form-control p-field" id="type" name="side" [(ngModel)]="invoice.customer"  style="font-size: 13px">
             <option [ngValue]="null">-- Client --</option>
             <option *ngFor="let c of customers;" [ngValue]="c">{{c.customerLabel}}</option>
 
@@ -504,7 +504,9 @@ Modifier un encaissement
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
             <input type="date" placeholder="Date" class="form-control p-field"  id="manager"
-                   [(ngModel)]="invoice.invoiceDate " style="font-size: 13px">
+                   [(ngModel)]="invoice.invoiceDate " style="font-size: 13px"
+                   [max]="maxDateInvoiceDate"
+                   >
           </div>
         </div>
 
@@ -513,7 +515,9 @@ Modifier un encaissement
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
             <input type="date" placeholder="Date" class="form-control p-field"  id="fin"
-                   [(ngModel)]="invoice.invoiceDeadlineDate " style="font-size: 13px">
+                   [(ngModel)]="invoice.invoiceDeadlineDate " style="font-size: 13px"
+                   [min]="minDateDeadlineDate"
+                   >
           </div>
         </div>
 
@@ -528,7 +532,7 @@ Modifier un encaissement
           <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
           <input type="number" class="form-control p-field"  id="net"
                  [(ngModel)]="invoice.invoiceNet " style="font-size: 13px" (change)="updateTotalAmount()"
-                 (change)="updateTotalAmount()">
+                >
         </div>
       </div>
 	  <div style="display: flex">
@@ -571,7 +575,7 @@ Modifier un encaissement
               <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="dispalyInvoiceCustomerModal=false"></button>
 
       <button [disabled]="invoice.invoiceNumber == null || invoice.invoiceNumber === '' || invoice.customer == null"
-      [ngClass]= "{'disabled': invoice.invoiceNumber == null || invoice.invoiceNumber === '' || invoice.customer == null}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn"
+      [ngClass]= "{'disabled': invoice.invoiceNumber == null || invoice.invoiceNumber === '' || invoice.customer == null}" pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn"
       (click)="saveInvoice()" style="margin-left: 10px;"></button>
 
     </div>

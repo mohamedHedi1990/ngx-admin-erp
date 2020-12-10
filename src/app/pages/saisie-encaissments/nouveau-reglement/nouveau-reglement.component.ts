@@ -30,7 +30,7 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
   @Input() seletcedInvoices: any[] = null;
 
   isPaymentAmountDisabled = false;
-
+  paymentOlderValue:any;
   constructor(private UtilsService: UtilsServiceService) { }
 
   ngOnInit(): void {
@@ -68,7 +68,7 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
     console.log("ng onchanges ");
     console.log(this.reglement);
     console.log(this.invoice);
-
+    this.paymentOlderValue=this.reglement.paymentRuleAmount;
     //this.reglement.paymentRuleAmount = 0;
     console.log('selected ', this.seletcedInvoices);
     if (this.seletcedInvoices != null && this.seletcedInvoices.length !== 0) {
@@ -132,8 +132,16 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
     if (this.reglement.paymentRuleAmount == null || this.reglement.paymentRuleAmount === '' || this.reglement.paymentRuleAmount < 0) {
       this.reglement.paymentRuleAmount = 0;
     } else if (this.invoice != null) {
+      if(this.paymentOlderValue==null || this.paymentOlderValue==0)
+      {
       if (this.reglement.paymentRuleAmount > (this.invoice.invoiceTotalAmount - this.invoice.invoicePayment)) {
         this.reglement.paymentRuleAmount = this.invoice.invoiceTotalAmount - this.invoice.invoicePayment;
+      }
+      }
+      else{
+        if (this.reglement.paymentRuleAmount > (this.invoice.invoiceTotalAmount - this.invoice.invoicePayment+this.paymentOlderValue)) {
+          this.reglement.paymentRuleAmount = this.invoice.invoiceTotalAmount - this.invoice.invoicePayment+this.paymentOlderValue;
+        }
       }
     }
   }

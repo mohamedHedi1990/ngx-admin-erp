@@ -34,10 +34,23 @@ export class AddNewFactureClientComponent implements OnInit {
               private datePipe: DatePipe) { }
 
   ngOnInit(): void {
+ // this.invoice.invoiceDate = this.UtilsService.now('yyyy-MM-dd');
+	if(this.invoice.invoiceId == null) {
     this.rsAmount = 0;
     this.invoice.invoiceRsType='POURCENTAGE'
-    this.invoice.invoiceDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+		this.invoice.invoiceDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.invoice.invoiceDeadlineDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+
+	} else {
+    this.rsAmount = 0;
+    if(this.invoice.invoiceRsType=='POURCENTAGE')
+    {
+      this.rsAmount = (this.invoice.invoiceRs * this.invoice.invoiceNet) / 100;
+
+    }
+		this.invoice.invoiceDate = this.datePipe.transform(this.invoice.invoiceDate, 'yyyy-MM-dd');
+    this.invoice.invoiceDeadlineDate = this.datePipe.transform( this.invoice.invoiceDeadlineDate, 'yyyy-MM-dd');
+	}
     this.maxDateInvoiceDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.minDateDeadlineDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     console.log(this.datePipe.transform(new Date(), 'dd-MM-yyyy'));
@@ -45,6 +58,8 @@ export class AddNewFactureClientComponent implements OnInit {
   }
 
   saveInvoice() {
+    console.log("Invoice to save ");
+    console.log(this.invoice);
     this.addNewCustomerInvoiceEvent.emit(this.invoice);
   }
 

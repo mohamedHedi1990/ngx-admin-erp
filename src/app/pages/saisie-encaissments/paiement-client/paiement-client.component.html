@@ -112,7 +112,7 @@ Réglement clients
           <!--
                                     <th style="width: 10%;font-size: 13px;text-align: center">Mode de paiement</th> -->
                                     <th style="width: 18%;font-size: 12px;text-align: center">Détails</th>
-                                    <th style="width: 12%;font-size: 12px;text-align: center">Date d'échénace</th>
+                                    <th style="width: 12%;font-size: 12px;text-align: center">Date d'échéance</th>
                                     <th style="width: 15%;font-size: 12px;text-align: center">Statut</th>
                                     <th style="width: 13%;font-size: 12px;text-align: center">Actions</th>
                                 </tr>
@@ -121,7 +121,7 @@ Réglement clients
                                 <tr style="font-size: 12px; text-align: center">
                                     <td>{{paymentRule.paymentRuleLabel}}</td>
                                     <td>{{paymentRule.paymentRuleAccount.accountLabel}}</td>
-                                    <td>{{paymentRule.paymentRuleAmountS}} {{invoice.invoiceCurrency}}</td>
+                                    <td>{{paymentRule.paymentRuleAmount}} {{invoice.invoiceCurrency}}</td>
                                   <!--
                                     <td>{{paymentRule.paymentRulePaymentMethod}}</td>-->
                                     <td>
@@ -149,7 +149,7 @@ Réglement clients
                                           <button pButton placement="top" ngbTooltip="Supprimer ce réglement" pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-mr-2" style="margin-right: 7px;"></button>
                                         </div>
                                         -->
-                                        <div *ngIf="!paymentRule.isValidated" style="text-align: center">
+                                        <div *ngIf="!paymentRule.isValidated && invoice.invoiceStatus=='OPENED'" style="text-align: center">
                                           <!--
                                            <i  placement="top" ngbTooltip="Valider ce réglement"  class="pi pi-check"  style="margin-right: 7px; color: #6200ee"
                                            (click)="ValidatePR(paymentRule)"></i>
@@ -159,9 +159,9 @@ Réglement clients
                                            <i  placement="top" ngbTooltip="Supprimer ce réglement"  class="pi pi-trash"  style="margin-right: 7px; color: #6200ee"
                                            (click)="delPaymentRule(paymentRule)"></i>
                                          </div>
-                     <div *ngIf="paymentRule.isValidated" style="text-align: center">
-                     - -
-                     </div>
+                                         <div *ngIf="(invoice.invoiceStatus=='CLOSED'&& paymentRule.isValidated)||(invoice.invoiceStatus=='CLOSED'&& !paymentRule.isValidated) " style="text-align: center">
+                                           - -
+                                         </div>
                                    </td>
                                </tr>
                            </ng-template>

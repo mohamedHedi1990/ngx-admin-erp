@@ -111,7 +111,7 @@ Paiements fournissuers
           <!--
                                     <th style="width: 10%;font-size: 13px;text-align: center">Mode de paiement</th> -->
                                     <th style="width: 18%;font-size: 12px;text-align: center">Détails</th>
-                                    <th style="width: 12%;font-size: 12px;text-align: center">Date d'échénace</th>
+                                    <th style="width: 12%;font-size: 12px;text-align: center">Date d'échéance</th>
                                     <th style="width: 15%;font-size: 12px;text-align: center">Statut</th>
                                     <th style="width: 13%;font-size: 12px;text-align: center">Actions</th>
                                 </tr>
@@ -146,7 +146,7 @@ Paiements fournissuers
                                           <button pButton placement="top" ngbTooltip="Supprimer ce réglement" pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-mr-2" style="margin-right: 7px;"></button>
                                         </div>
                                         -->
-                                        <div *ngIf="!paymentRule.isValidated" style="text-align: center">
+                                        <div *ngIf="!paymentRule.isValidated && invoice.invoiceStatus=='OPENED'" style="text-align: center">
                                           <!--
                                             <i  placement="top" ngbTooltip="Valider ce réglement"  class="pi pi-check"  style="margin-right: 7px; color: #6200ee"
                                             (click)="ValidatePR(paymentRule)"></i>
@@ -156,7 +156,7 @@ Paiements fournissuers
                                             <i  placement="top" ngbTooltip="Supprimer ce réglement"  class="pi pi-trash"  style="margin-right: 7px; color: #6200ee"
                                             (click)="delPaymentRule(paymentRule)"></i>
                                           </div>
-										  <div *ngIf="paymentRule.isValidated" style="text-align: center">
+										  <div *ngIf="(invoice.invoiceStatus=='CLOSED'&& paymentRule.isValidated)||(invoice.invoiceStatus=='CLOSED'&& !paymentRule.isValidated) " style="text-align: center">
 											- -
 										  </div>
                                     </td>
@@ -190,7 +190,7 @@ Paiements fournissuers
               (click)="displayPaymentRuleModal=false"></button>
       <button *ngIf="selectedInvoices.length === 0" pButton pRipple label="Valider et ajouter" icon="pi pi-check" class="p-button-success p-mr-2"
               (click)="savePaymentRule(true)"></button>
-      <button *ngIf="selectedInvoices.length === 0" pButton pRipple label="Ajouter" icon="pi pi-check" class="p-button-success p-mr-2"
+      <button *ngIf="selectedInvoices.length === 0" pButton pRipple label="valider " icon="pi pi-check" class="p-button-success p-mr-2"
               (click)="savePaymentRule(false)"></button>
 			   <button *ngIf="selectedInvoices.length !== 0" pButton pRipple label="Payer" icon="pi pi-check" class="p-button-success p-mr-2"
               (click)="payInvoices()"></button>

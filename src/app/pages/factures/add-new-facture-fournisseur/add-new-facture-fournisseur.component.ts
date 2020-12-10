@@ -33,16 +33,22 @@ export class AddNewFactureFournisseurComponent implements OnInit {
               private datePipe: DatePipe) { }
 
   ngOnInit(): void {
-    this.rsAmount = 0;
-    this.invoice.invoiceRsType='POURCENTAGE'
+    
 
     // this.invoice.invoiceDate = this.UtilsService.now('yyyy-MM-dd');
 	if(this.invoice.invoiceId == null) {
+    this.rsAmount = 0;
+    this.invoice.invoiceRsType='POURCENTAGE'
 		this.invoice.invoiceDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.invoice.invoiceDeadlineDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
 
 	} else {
+    this.rsAmount = 0;
+    if(this.invoice.invoiceRsType=='POURCENTAGE')
+    {
+      this.rsAmount = (this.invoice.invoiceRs * this.invoice.invoiceNet) / 100;
 
+    }
 		this.invoice.invoiceDate = this.datePipe.transform(this.invoice.invoiceDate, 'yyyy-MM-dd');
     this.invoice.invoiceDeadlineDate = this.datePipe.transform( this.invoice.invoiceDeadlineDate, 'yyyy-MM-dd');
 	}
@@ -53,7 +59,8 @@ export class AddNewFactureFournisseurComponent implements OnInit {
   }
 
   saveInvoice() {
-	  
+    console.log("Invoice to save ");
+    console.log(this.invoice);
     this.addNewProviderInvoiceEvent.emit(this.invoice);
   }
 

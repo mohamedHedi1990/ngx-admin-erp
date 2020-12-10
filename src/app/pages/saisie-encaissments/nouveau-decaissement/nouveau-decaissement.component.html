@@ -187,7 +187,7 @@ padding: 10px 10px 10px 10px !important;
               <label for="type" class="p-float-label" style="font-size: 13px">Facture fournisseur<span style="color: red;">*</span></label>
             </div>
             <div style="float:right">
-              <i
+              <i [disabled]="decaissement.decaissementProvider==null"
                 placement="top"
                 ngbTooltip="Ajouter une facture"
                 pRipple
@@ -199,7 +199,7 @@ padding: 10px 10px 10px 10px !important;
 
           <div class="p-inputgroup p-fluid">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-            <select
+            <select [disabled]="decaissement.decaissementProvider==null"
               class="form-control p-field"
               id="type"
               name="side"
@@ -251,8 +251,8 @@ padding: 10px 10px 10px 10px !important;
             <div class="p-inputgroup">
               <span class="p-inputgroup-addon"
                 ><i class="pi pi-money-bill"></i
-              ></span>
-              <input
+              ></span> 
+              <input [disabled]=true
                 type="number"
                 class="form-control p-field"
                 id="amounth"
@@ -364,7 +364,7 @@ padding: 10px 10px 10px 10px !important;
  >Enregistrer
     </button>
   -->
-  <button [disabled]="checkDecaissementValid()" [ngClass]= "{'disabled': checkDecaissementValid()}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn" (click)="saveDecaissement()" style="margin-left: 10px;"></button>
+  <button [disabled]="checkDecaissementValid()" [ngClass]= "{'disabled': checkDecaissementValid()}" pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn" (click)="saveDecaissement()" style="margin-left: 10px;"></button>
 
 
   </div>
@@ -469,7 +469,7 @@ padding: 10px 10px 10px 10px !important;
 </p-dialog>
 
 <!--Ajouter une facture fournisseur-->
-<p-dialog header="Nouvelle facture pour le fournisseur {{provider.providerLabel}}" [(visible)]="dispalyInvoiceProviderModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+<p-dialog *ngIf="decaissement.decaissementProvider" header="Nouvelle facture pour le fournisseur {{decaissement.decaissementProvider.providerLabel}}" [(visible)]="dispalyInvoiceProviderModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
           [draggable]="false" [resizable]="false">
   <br>
 
@@ -484,7 +484,7 @@ padding: 10px 10px 10px 10px !important;
           <span class="p-inputgroup-addon"><i class="pi pi-shopping-cart"></i></span>
           <input *ngIf="invoice.invoiceId!= null" type="text" placeholder="Date" class="form-control p-field"  id="manager"
                  [(ngModel)]="invoice.provider.providerLabel " style="font-size: 13px" disabled="true">
-          <select *ngIf="invoice.invoiceId == null" class="form-control p-field" id="type" name="side" [(ngModel)]="invoice.provider"  style="font-size: 13px">
+          <select [disabled]=true *ngIf="invoice.invoiceId == null" class="form-control p-field" id="type" name="side" [(ngModel)]="invoice.provider"  style="font-size: 13px">
             <option [ngValue]="null">-- Fournisseur --</option>
             <option *ngFor="let c of providers;" [ngValue]="c">{{c.providerLabel}}</option>
 
@@ -523,7 +523,8 @@ padding: 10px 10px 10px 10px !important;
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
             <input type="date" placeholder="Date" class="form-control p-field"  id="manager"
-                   [(ngModel)]="invoice.invoiceDate " style="font-size: 13px">
+                   [(ngModel)]="invoice.invoiceDate " style="font-size: 13px"
+                   [max]="maxDateInvoiceDate">
           </div>
         </div>
 
@@ -532,7 +533,8 @@ padding: 10px 10px 10px 10px !important;
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
             <input type="date" placeholder="Date" class="form-control p-field"  id="fin"
-                   [(ngModel)]="invoice.invoiceDeadlineDate " style="font-size: 13px">
+                   [(ngModel)]="invoice.invoiceDeadlineDate " style="font-size: 13px"
+                   [min]="minDateDeadlineDate">
           </div>
         </div>
 
@@ -546,7 +548,7 @@ padding: 10px 10px 10px 10px !important;
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
           <input type="number" class="form-control p-field"  id="net"
-                 [(ngModel)]="invoice.invoiceNet " style="font-size: 13px" (change)="updateTotalAmount()"
+                 [(ngModel)]="invoice.invoiceNet " style="font-size: 13px" 
                  (change)="updateTotalAmount()">
         </div>
       </div>
@@ -590,7 +592,7 @@ padding: 10px 10px 10px 10px !important;
               <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="dispalyInvoiceProviderModal=false"></button>
 
       <button [disabled]="invoice.invoiceNumber == null || invoice.invoiceNumber === '' || invoice.provider == null"
-      [ngClass]= "{'disabled': invoice.invoiceNumber == null || invoice.invoiceNumber === '' || invoice.provider == null}" pButton pRipple label="Ajouter" icon="pi pi-check" class="primaryBtn"
+      [ngClass]= "{'disabled': invoice.invoiceNumber == null || invoice.invoiceNumber === '' || invoice.provider == null}" pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn"
       (click)="saveInvoice()" style="margin-left: 10px;"></button>
 
     </div>

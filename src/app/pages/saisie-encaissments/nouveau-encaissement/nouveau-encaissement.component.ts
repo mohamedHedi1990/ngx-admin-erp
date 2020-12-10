@@ -12,7 +12,7 @@ export class NouveauEncaissementComponent implements OnInit {
   @Input() encaissement = {
     encaissementId: null,
     encaissementType: null,
-    encaissementDeadlineDate : null,
+    encaissementDeadlineDate : this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
     encaissementPaymentType: null,
     encaissementPaymentRuleNumber: null,
     encaissementPaymentRuleDetails: null,
@@ -53,18 +53,31 @@ export class NouveauEncaissementComponent implements OnInit {
 	invoiceCurrency: 'TND',
     invoiceNumber: '',
     customer: null,
-    invoiceDate: this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
+    invoiceDate:this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
     invoiceDeadlineDate: this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
     invoiceNet: 0,
     invoiceRs: 0,
-    invoiceRsType: 'VALUE',
+    invoiceRsType: 'POURCENTAGE',
     invoiceTotalAmount: 0,
 
   };
+
+  maxDateInvoiceDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+  minDateDeadlineDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
   rsAmount = null;
   dispalyEncaissementTypeModal = false;
   dispalyCustomerModal = false;
   dispalyInvoiceCustomerModal = false;
+  updateTotalAmount() {
+    if (this.invoice.invoiceRsType === 'POURCENTAGE') {
+      this.rsAmount = (this.invoice.invoiceRs * this.invoice.invoiceNet) / 100;
+    } else {
+      this.rsAmount = this.invoice.invoiceRs;
+    }
+    this.rsAmount=Math.round(this.rsAmount * 1000) / 1000
+    this.invoice.invoiceTotalAmount =this.invoice.invoiceNet- this.rsAmount ;
+    this.invoice.invoiceTotalAmount=Math.round(this.invoice.invoiceTotalAmount * 1000) / 1000
+  }
   compareAccount(a: any, b: any): boolean {
     if (a==null || b== null) return true;
     return a.accountId === b.accountId;
@@ -95,14 +108,7 @@ compareInvoice(a: any, b: any): boolean {
     this.getAllTypesEncaissements();
   }
 
-  updateTotalAmount() {
-    if (this.invoice.invoiceRsType === 'POURCENTAGE') {
-      this.rsAmount = (this.invoice.invoiceRs * this.invoice.invoiceNet) / 100;
-    } else {
-      this.rsAmount = this.invoice.invoiceRs;
-    }
-    this.invoice.invoiceTotalAmount = this.rsAmount + this.invoice.invoiceNet;
-  }
+  
   addNewContact() {
     this.customer.customerContacts.push({
       contactName : '',
@@ -112,11 +118,14 @@ compareInvoice(a: any, b: any): boolean {
     });
   }
   updateAmount() {
+    console.log("update amount ")
     if( this.encaissement.encaissementType != null &&
       this.encaissement.encaissementType.encaissementTypeValue ===
-        'PAIEMENT_FACTURE_FOURNISSEUR' && this.encaissement.encaissementInvoice != null) {
+        'REGLEMENT_FACTURE_CLIENT' && this.encaissement.encaissementInvoice != null) {
           const restantAmount = this.encaissement.encaissementInvoice.invoiceTotalAmount - this.encaissement.encaissementInvoice.invoicePayment;
           this.encaissement.encaissementAmount = restantAmount;
+          console.log("update amount ");
+          console.log(restantAmount);
         }
   }
   getAllAccounts() {
@@ -199,7 +208,9 @@ invoiceNumber: 'REF12325565',
   
     }
 
-    
+    console.log("customer client ");
+    console.log(this.encaissement.encaissementCustomer.customerLabel);
+    this.invoice.customer=this.encaissement.encaissementCustomer;
   }
 
   getAllCustomers() {
@@ -294,9 +305,9 @@ invoiceNumber: 'REF12325565',
       || this.encaissement.encaissementLabel == null
       || this.encaissement.encaissementBankAccount == null
       || (this.encaissement.encaissementInvoice == null && this.encaissement.encaissementType.encaissementType ===
-        'PAIEMENT_FACTURE_FOURNISSEUR')
+        'REGLEMENT_FACTURE_CLIENT')
         || (this.encaissement.encaissementCustomer == null && this.encaissement.encaissementType.encaissementType ===
-          'PAIEMENT_FACTURE_FOURNISSEUR');
+          'REGLEMENT_FACTURE_CLIENT');
   }
 
   initEncaissementType() {
@@ -315,7 +326,7 @@ invoiceNumber: 'REF12325565',
       invoiceId: null,
     invoiceCurrency: 'TND',
       invoiceNumber: '',
-      customer: null,
+      customer: this.encaissement.encaissementCustomer,
       invoiceDate: null,
       invoiceDeadlineDate: null,
       invoiceNet: 0,
