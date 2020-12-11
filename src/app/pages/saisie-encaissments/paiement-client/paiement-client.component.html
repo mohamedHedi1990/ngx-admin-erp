@@ -90,7 +90,7 @@ Réglement clients
                 <td style="text-align: center;">
                     <div *ngIf="invoice.invoiceStatus === 'OPENED'">
                         <i  placement="top" ngbTooltip="Ajouter un réglement"  class="pi pi-plus" style="margin-right: 7px; color: #6200ee"
-                        (click)="resetSelectedInvoices(); addPaymentRule(invoice)"></i>
+                        (click)="addPaymentRule(invoice)"></i>
                     </div>
 					<div *ngIf="invoice.invoiceStatus === 'CLOSED'" style="text-align: center">
                         - -

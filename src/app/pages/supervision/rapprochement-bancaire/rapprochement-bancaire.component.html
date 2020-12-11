@@ -113,13 +113,13 @@ Rapprochement bancaire
           <p-cellEditor>
             <ng-template pTemplate="input">
               <input style="font-size: 13px;" pInputText type="number"
-                     class="form-control p-field" [(ngModel)]="operation.operationAmount" (change)="changeOperationAmount(operation)" [disabled]="operation.isValidated">
+                     class="form-control p-field" [(ngModel)]="operation.operationAmount" (change)="changeOperationAmount(operation)" [disabled]="operation.validated">
             </ng-template>
             <ng-template pTemplate="output">
               <span class="customer-badge"  [ngClass]="{
                 'status-blocked': operation.opperationType === 'DECAISSEMENT',
                  'status-active': operation.opperationType === 'ENCAISSEMENT'}">
-                              <span *ngIf="operation.opperationType === 'DECAISSEMENT'">-</span>{{operation.operationAmountS}} {{operation.opperationCurrency}}
+                              <span *ngIf="operation.opperationType === 'DECAISSEMENT'">-</span>{{operation.operationAmountS}}
                   </span>
             </ng-template>
           </p-cellEditor>
@@ -129,17 +129,17 @@ Rapprochement bancaire
            <span class="customer-badge"  [ngClass]="{
         'status-blocked': operation.progressiveAmount < 0,
          'status-active': operation.progressiveAmount >= 0}">
-                       {{operation.progressiveAmountS}} {{operation.opperationCurrency}}
+                       {{operation.progressiveAmountS}}
            </span>
         </td>
         <td style="text-align: center;">
-          <span *ngIf="operation.isValidated" class="customer-badge status-active">Rapproché</span>
-          <span *ngIf="!operation.isValidated" class="customer-badge status-progress">Non rapproché</span>
+          <span *ngIf="operation.validated" class="customer-badge status-active">Rapproché</span>
+          <span *ngIf="!operation.validated" class="customer-badge status-progress">Non rapproché</span>
         </td>
         <td>
-          <i  *ngIf="!operation.isValidated" placement="top" ngbTooltip="Valider ce réglement"  class="pi pi-check"  style="margin-right: 7px; color: #6200ee"
+          <i  *ngIf="!operation.validated" placement="top" ngbTooltip="Valider ce réglement"  class="pi pi-check"  style="margin-right: 7px; color: #6200ee"
               (click)="rapprocherOperation(operation)"></i>
-          <span  *ngIf="operation.isValidated"> - -</span>
+          <span  *ngIf="operation.validated"> - -</span>
         </td>
       </tr>
     </ng-template>

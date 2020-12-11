@@ -92,14 +92,15 @@ export class PaiementClientComponent implements OnInit {
           this.displayPaymentRuleModal = false;
           this.initPaymentRule();
           this.invoice = null;
+          
         } else {
           this.paymentRule.paymentRuleNumber = null;
           this.paymentRule.paymentRuleAmount = 0;
           this.displayPaymentRuleModal = true;
           this.invoice = response;
         }
-  
-          this.getAllInvoices();
+        this.getAllInvoices();
+        this.isUpdate=false; 
         },
         error => {this.UtilsService.showToast('danger',
           'Erreur interne',
@@ -107,7 +108,7 @@ export class PaiementClientComponent implements OnInit {
           this.displayPaymentRuleModal = false;
           this.initPaymentRule();
       });
-      this.isUpdate=false;
+     
     }
     else
     {
@@ -123,14 +124,15 @@ export class PaiementClientComponent implements OnInit {
         this.displayPaymentRuleModal = false;
         this.initPaymentRule();
         this.invoice = null;
+        
       } else {
         this.paymentRule.paymentRuleNumber = null;
         this.paymentRule.paymentRuleAmount = 0;
         this.displayPaymentRuleModal = true;
         this.invoice = response;
       }
-
-        context.getAllInvoices();
+      this.getAllInvoices();
+        
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
@@ -139,7 +141,7 @@ export class PaiementClientComponent implements OnInit {
         this.initPaymentRule();
     });
   }
-  this.displayPaymentRuleModal = false;
+ 
 
   }
 

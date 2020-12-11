@@ -116,7 +116,12 @@ Liste des clients
 <p-dialog header="Supprimer un client" [(visible)]="displayDeleteClient" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
           [draggable]="false" [resizable]="false">
   <br>
-  Voulez-vous supprimer le client <span  class="customer-badge status-negotiation">{{client.customerLabel}}</span> ?
+  <div>
+    <span>La supression du client va supprimer toutes les données relatives à ce client ( ses contacts, ses factures, ses réglements, etc.)</span>
+  </div>
+  <br>
+  Voulez-vous toujours supprimer le client <span  class="customer-badge status-negotiation">{{client.customerLabel}}</span> ?
+  
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
       <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"

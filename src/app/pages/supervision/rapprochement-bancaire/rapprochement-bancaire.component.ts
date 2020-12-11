@@ -141,7 +141,7 @@ statusCards = [
 
  rapprocherOperation(operation) {
    const context = this;
-   this.UtilsService.put(UtilsServiceService.API_RAAPROCHEMENT_BANCAIRE + '/validate/' + operation.operationRealType + '/' + operation.operationRealId, null).subscribe( response => {
+   this.UtilsService.put(UtilsServiceService.API_RAAPROCHEMENT_BANCAIRE + '/validate/' + operation.operationRealType + '/' + operation.operationRealId, operation).subscribe( response => {
 
        this.UtilsService.showToast('success',
          'Opération validée avec succés',
