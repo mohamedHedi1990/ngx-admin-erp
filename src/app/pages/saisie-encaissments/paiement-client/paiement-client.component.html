@@ -150,8 +150,8 @@ padding: 10px 10px 10px 10px !important;
                 </td>
                 <td>{{paymentRule.paymentRuleDeadlineDate | date: 'dd-MM-yyyy'}}</td>
                 <td>
-                    <span *ngIf="paymentRule.isValidated" class="customer-badge status-active">Rapproché</span>
-                    <span *ngIf="!paymentRule.isValidated" class="customer-badge status-progress">Non rapproché</span>
+                    <span *ngIf="paymentRule.validated" class="customer-badge status-active">Rapproché</span>
+                    <span *ngIf="!paymentRule.validated" class="customer-badge status-progress">Non rapproché</span>
                 </td>
                 <td style="text-align: center;">
                     <!--
@@ -164,7 +164,7 @@ padding: 10px 10px 10px 10px !important;
                                           <button pButton placement="top" ngbTooltip="Supprimer ce réglement" pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-mr-2" style="margin-right: 7px;"></button>
                                         </div>
                                         -->
-                    <div *ngIf="!paymentRule.isValidated && invoice.invoiceStatus=='OPENED'" style="text-align: center">
+                    <div *ngIf="!paymentRule.validated" style="text-align: center">
                         <!--
                                            <i  placement="top" ngbTooltip="Valider ce réglement"  class="pi pi-check"  style="margin-right: 7px; color: #6200ee"
                                            (click)="ValidatePR(paymentRule)"></i>
@@ -174,7 +174,7 @@ padding: 10px 10px 10px 10px !important;
                         <i placement="top" ngbTooltip="Supprimer ce réglement" class="pi pi-trash"
                             style="margin-right: 7px; color: #6200ee" (click)="delPaymentRule(paymentRule)"></i>
                     </div>
-                    <div *ngIf="(invoice.invoiceStatus=='CLOSED'&& paymentRule.isValidated)||(invoice.invoiceStatus=='CLOSED'&& !paymentRule.isValidated) "
+                    <div *ngIf="paymentRule.validated"
                         style="text-align: center">
                         - -
                     </div>
