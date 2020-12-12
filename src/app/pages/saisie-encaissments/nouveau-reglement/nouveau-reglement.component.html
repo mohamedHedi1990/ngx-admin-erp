@@ -1,111 +1,111 @@
 <div style="width: 90% ; margin: auto;">
-    <div class="p-grid p-fluid">
-      <div style="display: flex">
-        <div class="mb-12 col-md-12 col-12">
-          <label for="type" class="p-float-label" style="font-size: 13px">Compte bancaire</label>
-          <div class="p-inputgroup p-fluid">
-            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-            <!--
+  <div class="p-grid p-fluid">
+    <div style="display: flex">
+      <div class="mb-12 col-md-12 col-12">
+        <label for="type" class="p-float-label" style="font-size: 13px">Compte bancaire</label>
+        <div class="p-inputgroup p-fluid">
+          <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+          <!--
             <input *ngIf="reglement.paymentRuleAccountBank!= null" type="text" placeholder="Date" class="form-control p-field"  id="compte"
                    style="font-size: 13px" disabled="true">
                    *ngIf="reglement.paymentRuleAccountBank  == null"
                    -->
-            <select  class="form-control p-field"
-                    id="type" name="side" [(ngModel)]="reglement.paymentRuleAccount" [ngClass]="{
-                   'is-invalid': reglement.paymentRuleAccount == null}" style="font-size: 13px" [compareWith]="compareAccount">
+          <select class="form-control p-field" id="type" name="side" [(ngModel)]="reglement.paymentRuleAccount"
+            [ngClass]="{
+                   'is-invalid': reglement.paymentRuleAccount == null}" style="font-size: 13px"
+            [compareWith]="compareAccount">
             <option *ngFor="let a of accounts;" [ngValue]="a">{{a.accountLabel}}</option>
-            </select>
-          </div>
-        </div>
-
-
-      </div>
-      <div class="mb-12 col-md-12 col-12">
-        <label for="amount" class="p-float-label" style="font-size: 13px">Libellé</label>
-        <div class="p-inputgroup">
-          <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-          <input type="text" class="form-control p-field"  id="amount"
-                 [(ngModel)]="reglement.paymentRuleLabel " style="font-size: 13px"
-                 (change)="checkLabel()">
-        </div>
-
-      </div>
-      <div class="mb-12 col-md-12 col-12">
-        <label for="amounth" class="p-float-label" style="font-size: 13px">Montant</label>
-        <div class="p-inputgroup">
-          <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
-
-          <input *ngIf="seletcedInvoices == null || seletcedInvoices.length === 0" 
-            type="number" class="form-control p-field"  id="amounth"
-            [(ngModel)]="reglement.paymentRuleAmount" style="font-size: 13px"
-            min="0" (change)="checkAmount()">
-          <input *ngIf="seletcedInvoices != null && seletcedInvoices.length !== 0" 
-            type="number" class="form-control p-field"  id="amounths"
-            [(ngModel)]="reglement.paymentRuleAmountS" 
-            style="font-size: 13px" disabled="true">
-
-        </div>
-      </div>
-      <div class="mb-12 col-md-12 col-12">
-        <label for="paie" class="p-float-label" style="font-size: 13px">Mode de payment</label>
-        <div class="p-inputgroup">
-          <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
-          <select class="form-control p-field" id="paie" name="side" [(ngModel)]="reglement.paymentRulePaymentMethod"  style="font-size: 13px;">
-            <!-- <option [ngValue]="null">-- Mode de payment --</option> -->
-            <option [ngValue]="'CHEQUE'">CHEQUE</option>
-            <option [ngValue]="'VIREMENT'">VIREMENT</option>
-            <option [ngValue]="'ESPECE'">ESPECE</option>
-            <option [ngValue]="'TRAITE'">TRAITE</option>
-
           </select>
         </div>
-
       </div>
-      <div class="p-grid p-fluid" *ngIf="reglement.paymentRulePaymentMethod === 'CHEQUE' ||
-reglement.paymentRulePaymentMethod === 'TRAITE'">
-        <div style="display: flex">
-          <div class="mb-12 col-md-12 col-12">
-            <label for="nbre" class="p-float-label" style="font-size: 13px">Numéro</label>
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-              <input type="text" class="form-control p-field"  id="nbre"
-                     [(ngModel)]="reglement.paymentRuleNumber " style="font-size: 13px">
-            </div>
-          </div>
 
 
+    </div>
+    <div class="mb-12 col-md-12 col-12">
+      <label for="amount" class="p-float-label" style="font-size: 13px">Libellé</label>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+        <input type="text" class="form-control p-field" id="amount" [(ngModel)]="reglement.paymentRuleLabel "
+          style="font-size: 13px" (change)="checkLabel()">
+      </div>
 
+    </div>
+    <div class="mb-12 col-md-12 col-12">
+      <label for="amounth" class="p-float-label" style="font-size: 13px">Montant</label>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
 
-        </div>
+        <input *ngIf="seletcedInvoices == null || seletcedInvoices.length === 0" type="number"
+          class="form-control p-field" id="amounth" [(ngModel)]="reglement.paymentRuleAmount" style="font-size: 13px"
+          min="0" (change)="checkAmount()">
+        <input *ngIf="seletcedInvoices != null && seletcedInvoices.length !== 0" type="number"
+          class="form-control p-field" id="amounths" [(ngModel)]="reglement.paymentRuleAmountS" style="font-size: 13px"
+          disabled="true">
 
       </div>
     </div>
-    <div class="p-grid p-fluid" *ngIf="reglement.paymentRulePaymentMethod === 'EFFET' ||
+    <div class="mb-12 col-md-12 col-12">
+      <label for="paie" class="p-float-label" style="font-size: 13px">Mode de payment</label>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
+        <select class="form-control p-field" id="paie" name="side" [(ngModel)]="reglement.paymentRulePaymentMethod"
+          style="font-size: 13px;">
+          <!-- <option [ngValue]="null">-- Mode de payment --</option> -->
+          <option [ngValue]="'CHEQUE'">CHEQUE</option>
+          <option [ngValue]="'VIREMENT'">VIREMENT</option>
+          <option [ngValue]="'ESPECE'">ESPECE</option>
+          <option [ngValue]="'TRAITE'">TRAITE</option>
+
+        </select>
+      </div>
+
+    </div>
+    <div class="p-grid p-fluid" *ngIf="reglement.paymentRulePaymentMethod === 'CHEQUE' ||
+reglement.paymentRulePaymentMethod === 'TRAITE'">
+      <div style="display: flex">
+        <div class="mb-12 col-md-12 col-12">
+          <label for="nbre" class="p-float-label" style="font-size: 13px">Numéro</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field" id="nbre" [ngClass]="{
+                'is-invalid': (reglement.paymentRulePaymentMethod === 'CHEQUE' ||
+                reglement.paymentRulePaymentMethod === 'TRAITE') && reglement.paymentRuleNumber == null}"
+              [(ngModel)]="reglement.paymentRuleNumber " style="font-size: 13px">
+          </div>
+        </div>
+
+
+
+
+      </div>
+
+    </div>
+  </div>
+  <div class="p-grid p-fluid" *ngIf="reglement.paymentRulePaymentMethod === 'EFFET' ||
 reglement.paymentRulePaymentMethod === 'VIREMENT' ||
 reglement.paymentRulePaymentMethod === 'ESPECE' ||
 reglement.paymentRulePaymentMethod === 'EFFET_ENCAISSEMENT' ||
 reglement.paymentRulePaymentMethod === 'EFFET_ESCOMPTE'">
-      <div style="display: flex">
-        <div class="mb-12 col-md-12 col-12">
-          <label for="details" class="p-float-label" style="font-size: 13px" style="font-size: 13px">Details</label>
-          <div class="p-inputgroup">
-            <span class="p-inputgroup-addon"><i class="pi pi-align-justify"></i></span>
-            <input type="text" class="form-control p-field"  id="details"
-                   [(ngModel)]="reglement.PaymentRulesDetails" style="font-size: 13px">
-          </div>
+    <div style="display: flex">
+      <div class="mb-12 col-md-12 col-12">
+        <label for="details" class="p-float-label" style="font-size: 13px" style="font-size: 13px">Details</label>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-align-justify"></i></span>
+          <input type="text" class="form-control p-field" id="details" [(ngModel)]="reglement.PaymentRulesDetails"
+            style="font-size: 13px">
         </div>
-
       </div>
 
     </div>
+
+  </div>
   <div class="mb-12 col-md-12 col-12">
     <label for="fin" class="p-float-label" style="font-size: 13px">Date de écheance </label>
     <div class="p-inputgroup">
       <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
-      <input type="date" placeholder="Date" class="form-control p-field"  id="fin"
-             [(ngModel)]="reglement.paymentRuleDeadlineDate" style="font-size: 13px">
+      <input type="date" placeholder="Date" class="form-control p-field" id="fin"
+        [(ngModel)]="reglement.paymentRuleDeadlineDate" style="font-size: 13px">
     </div>
   </div>
 
 </div>
-

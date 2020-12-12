@@ -8,9 +8,9 @@ describe('NouveauDecaissementComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NouveauDecaissementComponent ]
+      declarations: [NouveauDecaissementComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

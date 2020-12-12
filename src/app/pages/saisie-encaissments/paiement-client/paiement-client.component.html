@@ -3,31 +3,37 @@
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
-Réglement clients
+    Réglement clients
 </h4>
 <div class="card" style=" margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
-    <p-table #dt [value]="invoices" dataKey="invoiceId" styleClass="p-datatable-customers" [rowHover]="true" [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading" [paginator]="true" currentPageReportTemplate="" [filterDelay]="0"
-        [globalFilterFields]="['invoiceNumber','invoiceTotalAmount','invoiceDate','invoiceDeadlineDate','invoiceNet','customer.customerLabel','customer.customerUniqueIdentifier', 'createdAt', 'updatedAt']" [(selection)]="selectedInvoices">
-        <ng-template pTemplate="caption" >
-            <div >
-              <div class="p-d-flex p-ai-center p-jc-between" style=" width: 60%; display: inline-block;">
-                <span class="p-input-icon-left" style="width: 100%">
-                            <i class="pi pi-search"></i>
-                            <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher une facture client.." />
-                        </span>
+    <p-table #dt [value]="invoices" dataKey="invoiceId" styleClass="p-datatable-customers" [rowHover]="true" [rows]="5"
+        [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading" [paginator]="true"
+        currentPageReportTemplate="" [filterDelay]="0"
+        [globalFilterFields]="['invoiceNumber','invoiceTotalAmount','invoiceDate','invoiceDeadlineDate','invoiceNet','customer.customerLabel','customer.customerUniqueIdentifier', 'createdAt', 'updatedAt']"
+        [(selection)]="selectedInvoices">
+        <ng-template pTemplate="caption">
+            <div>
+                <div class="p-d-flex p-ai-center p-jc-between" style=" width: 60%; display: inline-block;">
+                    <span class="p-input-icon-left" style="width: 100%">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" style="margin-left: 5%; width: 93%;"
+                            class="searchInput, p-inputtext" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                            placeholder="Chercher une facture client.." />
+                    </span>
                 </div>
 
                 <div style="float:right">
-                  <button pButton pRipple label="Régler
+                    <button pButton pRipple label="Régler
 " icon="pi pi-plus" class="primaryBtn" (click)="displayPaymentRuleModal = true && titleHeader= 'Régler des factures'"
-                  [disabled]="selectedInvoices.length===0" [ngClass]= "{'disabled': selectedInvoices.length===0}"></button>
+                        [disabled]="selectedInvoices.length===0"
+                        [ngClass]="{'disabled': selectedInvoices.length===0}"></button>
                 </div>
             </div>
 
 
 
 
-          </ng-template>
+        </ng-template>
         <ng-template pTemplate="header">
             <tr style="text-align: center; font-size: 15px;">
                 <th style="width: 3rem"></th>
@@ -35,14 +41,17 @@ Réglement clients
                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th>
                 <th pSortableColumn="invoiceNumber" style="text-align: center; font-size: 13px;width: 10%">Numéro</th>
-                <th pSortableColumn="customer.customerLabel" style="text-align: center; font-size: 13px;width: 11%">Client</th>
+                <th pSortableColumn="customer.customerLabel" style="text-align: center; font-size: 13px;width: 11%">
+                    Client</th>
                 <th pSortableColumn="invoiceDate" style="text-align: center; font-size: 13px;width: 15%">Date facture
 
                 </th>
-                <th pSortableColumn="invoiceDeadlineDate" style="text-align: center;font-size: 13px;width: 17%">Date d'échéance
+                <th pSortableColumn="invoiceDeadlineDate" style="text-align: center;font-size: 13px;width: 17%">Date
+                    d'échéance
 
                 </th>
-                <th pSortableColumn="invoiceTotalAmount" style="text-align: center; font-size: 13px;width: 13%">Montant total
+                <th pSortableColumn="invoiceTotalAmount" style="text-align: center; font-size: 13px;width: 13%">Montant
+                    total
 
                 </th>
                 <th pSortableColumn="invoicePayment" style="text-align: center; font-size: 13px;width: 13%">Montant payé
@@ -55,12 +64,11 @@ Réglement clients
         <ng-template pTemplate="body" let-invoice let-expanded="expanded">
             <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
                 <td>
-                  <i *ngIf="!expanded" [pRowToggler]="invoice" class="pi pi-chevron-right"></i>
-                  <i *ngIf="expanded" [pRowToggler]="invoice" class="pi pi-chevron-down"></i>
+                    <i *ngIf="!expanded" [pRowToggler]="invoice" class="pi pi-chevron-right"></i>
+                    <i *ngIf="expanded" [pRowToggler]="invoice" class="pi pi-chevron-down"></i>
                 </td>
                 <td>
-                  <p-tableCheckbox [disabled]="invoice.invoiceStatus === 'CLOSED'" [value]="invoice"
-                                   [ngClass]="{
+                    <p-tableCheckbox [disabled]="invoice.invoiceStatus === 'CLOSED'" [value]="invoice" [ngClass]="{
         'disabledElement': invoice.invoiceStatus === 'CLOSED' }"></p-tableCheckbox>
                 </td>
                 <td style="text-align: center;font-size: 13px;">
@@ -76,23 +84,24 @@ Réglement clients
                     {{invoice.invoiceDeadlineDate | date: 'dd-MM-yyyy'}}
                 </td>
                 <td style="text-align: center;">
-                  {{invoice.invoiceTotalAmountS}} {{invoice.invoiceCurrency}}
+                    {{invoice.invoiceTotalAmountS}} {{invoice.invoiceCurrency}}
                 </td>
                 <td style="text-align: center;">
                     {{invoice.invoicePaymentS}} {{invoice.invoiceCurrency}}
                 </td>
                 <td style="text-align: center;">
                     <span *ngIf="invoice.invoiceStatus === 'CLOSED'" class="customer-badge status-active">Fermée</span>
-                    <span *ngIf="invoice.invoiceStatus === 'OPENED'" class="customer-badge status-progress">Ouverte</span>
+                    <span *ngIf="invoice.invoiceStatus === 'OPENED'"
+                        class="customer-badge status-progress">Ouverte</span>
                 </td>
 
 
                 <td style="text-align: center;">
                     <div *ngIf="invoice.invoiceStatus === 'OPENED'">
-                        <i  placement="top" ngbTooltip="Ajouter un réglement"  class="pi pi-plus" style="margin-right: 7px; color: #6200ee"
-                        (click)="addPaymentRule(invoice)"></i>
+                        <i placement="top" ngbTooltip="Ajouter un réglement" class="pi pi-plus"
+                            style="margin-right: 7px; color: #6200ee" (click)="addPaymentRule(invoice)"></i>
                     </div>
-					<div *ngIf="invoice.invoiceStatus === 'CLOSED'" style="text-align: center">
+                    <div *ngIf="invoice.invoiceStatus === 'CLOSED'" style="text-align: center">
                         - -
                     </div>
 
@@ -105,41 +114,47 @@ Réglement clients
                     <div class="p-p-3">
                         <p-table [value]="invoice.invoicePaymentRules" dataKey="id">
                             <ng-template pTemplate="header">
-                                <tr style="text-align: center">
-                                    <th style="width: 10%; font-size: 12px;text-align: center">Libellé</th>
-                                    <th style="width: 17%; font-size: 12px;text-align: center">Compte</th>
-                                    <th style="width: 15%;font-size: 12px;text-align: center">Montant</th>
-          <!--
+            <tr style="text-align: center">
+                <th style="width: 10%; font-size: 12px;text-align: center">Libellé</th>
+                <th style="width: 17%; font-size: 12px;text-align: center">Compte</th>
+                <th style="width: 15%;font-size: 12px;text-align: center">Montant</th>
+                <!--
                                     <th style="width: 10%;font-size: 13px;text-align: center">Mode de paiement</th> -->
-                                    <th style="width: 18%;font-size: 12px;text-align: center">Détails</th>
-                                    <th style="width: 12%;font-size: 12px;text-align: center">Date d'échéance</th>
-                                    <th style="width: 15%;font-size: 12px;text-align: center">Statut</th>
-                                    <th style="width: 13%;font-size: 12px;text-align: center">Actions</th>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="body" let-paymentRule>
-                                <tr style="font-size: 12px; text-align: center">
-                                    <td>{{paymentRule.paymentRuleLabel}}</td>
-                                    <td>{{paymentRule.paymentRuleAccount.accountLabel}}</td>
-                                    <td>{{paymentRule.paymentRuleAmount}} {{invoice.invoiceCurrency}}</td>
-                                  <!--
+                <th style="width: 18%;font-size: 12px;text-align: center">Détails</th>
+                <th style="width: 12%;font-size: 12px;text-align: center">Date d'échéance</th>
+                <th style="width: 15%;font-size: 12px;text-align: center">Statut</th>
+                <th style="width: 13%;font-size: 12px;text-align: center">Actions</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-paymentRule>
+            <tr style="font-size: 12px; text-align: center">
+                <td>{{paymentRule.paymentRuleLabel}}</td>
+                <td>{{paymentRule.paymentRuleAccount.accountLabel}}</td>
+                <td>{{paymentRule.paymentRuleAmount}} {{invoice.invoiceCurrency}}</td>
+                <!--
                                     <td>{{paymentRule.paymentRulePaymentMethod}}</td>-->
-                                    <td>
-                                        <span *ngIf="paymentRule.paymentRulePaymentMethod === 'CHEQUE'"> Chèque numéro {{paymentRule.paymentRuleNumber}} </span>
-                                        <span *ngIf="paymentRule.paymentRulePaymentMethod === 'TRAITE'"> Traite numéro {{paymentRule.paymentRuleNumber}}</span>
-                                        <span *ngIf="paymentRule.paymentRulePaymentMethod === 'VIREMENT'"> Virement{{paymentRule.paymentRulesDetails}}</span>
-                                        <span *ngIf="paymentRule.paymentRulePaymentMethod === 'ESPECE'"> Espèce{{paymentRule.paymentRulesDetails}}</span>
-                                        <span *ngIf="paymentRule.paymentRulePaymentMethod === 'EFFET_ENCAISSEMENT'"> Effet d'encaissement {{paymentRule.paymentRulesDetails}} </span>
-                                        <span *ngIf="paymentRule.paymentRulePaymentMethod === 'EFFET_ESCOMPTE'"> Effet d'escompte {{paymentRule.paymentRulesDetails}} </span>
+                <td>
+                    <span *ngIf="paymentRule.paymentRulePaymentMethod === 'CHEQUE'"> Chèque numéro
+                        {{paymentRule.paymentRuleNumber}} </span>
+                    <span *ngIf="paymentRule.paymentRulePaymentMethod === 'TRAITE'"> Traite numéro
+                        {{paymentRule.paymentRuleNumber}}</span>
+                    <span *ngIf="paymentRule.paymentRulePaymentMethod === 'VIREMENT'">
+                        Virement{{paymentRule.paymentRulesDetails}}</span>
+                    <span *ngIf="paymentRule.paymentRulePaymentMethod === 'ESPECE'">
+                        Espèce{{paymentRule.paymentRulesDetails}}</span>
+                    <span *ngIf="paymentRule.paymentRulePaymentMethod === 'EFFET_ENCAISSEMENT'"> Effet d'encaissement
+                        {{paymentRule.paymentRulesDetails}} </span>
+                    <span *ngIf="paymentRule.paymentRulePaymentMethod === 'EFFET_ESCOMPTE'"> Effet d'escompte
+                        {{paymentRule.paymentRulesDetails}} </span>
 
-                                    </td>
-                                    <td>{{paymentRule.paymentRuleDeadlineDate | date: 'dd-MM-yyyy'}}</td>
-                                    <td>
-                                        <span *ngIf="paymentRule.isValidated" class="customer-badge status-active">Rapproché</span>
-                                        <span *ngIf="!paymentRule.isValidated" class="customer-badge status-progress">Non rapproché</span>
-                                    </td>
-                                    <td style="text-align: center;">
-                                        <!--
+                </td>
+                <td>{{paymentRule.paymentRuleDeadlineDate | date: 'dd-MM-yyyy'}}</td>
+                <td>
+                    <span *ngIf="paymentRule.isValidated" class="customer-badge status-active">Rapproché</span>
+                    <span *ngIf="!paymentRule.isValidated" class="customer-badge status-progress">Non rapproché</span>
+                </td>
+                <td style="text-align: center;">
+                    <!--
                                         <div style="display: flex;text-align: center">
                                           <button pButton placement="top" ngbTooltip="Valider ce réglement" pRipple icon="pi pi-check" class="p-button-rounded p-button-info p-mr-2" style="margin-right: 7px;"
 										  (click)="ValidatePR(paymentRule)"></button>
@@ -149,87 +164,93 @@ Réglement clients
                                           <button pButton placement="top" ngbTooltip="Supprimer ce réglement" pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-mr-2" style="margin-right: 7px;"></button>
                                         </div>
                                         -->
-                                        <div *ngIf="!paymentRule.isValidated && invoice.invoiceStatus=='OPENED'" style="text-align: center">
-                                          <!--
+                    <div *ngIf="!paymentRule.isValidated && invoice.invoiceStatus=='OPENED'" style="text-align: center">
+                        <!--
                                            <i  placement="top" ngbTooltip="Valider ce réglement"  class="pi pi-check"  style="margin-right: 7px; color: #6200ee"
                                            (click)="ValidatePR(paymentRule)"></i>
                                            -->
-                                           <i  placement="top" ngbTooltip="Modifier ce réglement"  class="pi pi-pencil" style="margin-right: 7px; color: #6200ee"
-                                           (click)="ModifyPR(paymentRule,invoice)"></i>
-                                           <i  placement="top" ngbTooltip="Supprimer ce réglement"  class="pi pi-trash"  style="margin-right: 7px; color: #6200ee"
-                                           (click)="delPaymentRule(paymentRule)"></i>
-                                         </div>
-                                         <div *ngIf="(invoice.invoiceStatus=='CLOSED'&& paymentRule.isValidated)||(invoice.invoiceStatus=='CLOSED'&& !paymentRule.isValidated) " style="text-align: center">
-                                           - -
-                                         </div>
-                                   </td>
-                               </tr>
-                           </ng-template>
-                           <ng-template pTemplate="emptymessage">
-                               <tr style="font-size: 13px">
-                                   <td colspan="6">Aucun réglement trouvé pour cette facture.</td>
-                               </tr>
-                           </ng-template>
-                       </p-table>
-                   </div>
-               </td>
-           </tr>
-       </ng-template>
-       <ng-template pTemplate="emptymessage">
-           <tr style="font-size: 13px; text-align: left !important;">
-               <td colspan="8">Aucune facture client trouvée!</td>
-           </tr>
-       </ng-template>
-   </p-table>
+                        <i placement="top" ngbTooltip="Modifier ce réglement" class="pi pi-pencil"
+                            style="margin-right: 7px; color: #6200ee" (click)="ModifyPR(paymentRule,invoice)"></i>
+                        <i placement="top" ngbTooltip="Supprimer ce réglement" class="pi pi-trash"
+                            style="margin-right: 7px; color: #6200ee" (click)="delPaymentRule(paymentRule)"></i>
+                    </div>
+                    <div *ngIf="(invoice.invoiceStatus=='CLOSED'&& paymentRule.isValidated)||(invoice.invoiceStatus=='CLOSED'&& !paymentRule.isValidated) "
+                        style="text-align: center">
+                        - -
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr style="font-size: 13px">
+                <td colspan="6">Aucun réglement trouvé pour cette facture.</td>
+            </tr>
+        </ng-template>
+    </p-table>
 </div>
-<p-dialog header="{{titleHeader}}" [(visible)]="displayPaymentRuleModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+</td>
+</tr>
+</ng-template>
+<ng-template pTemplate="emptymessage">
+    <tr style="font-size: 13px; text-align: left !important;">
+        <td colspan="8">Aucune facture client trouvée!</td>
+    </tr>
+</ng-template>
+</p-table>
+</div>
+<p-dialog header="{{titleHeader}}" [(visible)]="displayPaymentRuleModal" [modal]="true" [style]="{width: '50vw'}"
+    [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <br>
+    <ngx-nouveau-reglement [reglement]="paymentRule" [seletcedInvoices]="selectedInvoices" [invoice]="invoice">
+    </ngx-nouveau-reglement>
+    <ng-template pTemplate="footer">
+        <div style="margin-top: 20px;">
+            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
+                (click)="displayPaymentRuleModal=false; initPaymentRule()"></button>
+            <button *ngIf="selectedInvoices.length === 0"
+                [disabled]="(paymentRule.paymentRulePaymentMethod=='CHEQUE'||paymentRule.paymentRulePaymentMethod=='TRAITE')&& paymentRule.paymentRuleNumber==null"
+                pButton pRipple label="Valider et ajouter" icon="pi pi-check" class="p-button-success p-mr-2"
+                (click)="savePaymentRule(true)"></button>
+            <button *ngIf="selectedInvoices.length === 0"
+                [disabled]="(paymentRule.paymentRulePaymentMethod=='CHEQUE'||paymentRule.paymentRulePaymentMethod=='TRAITE')&& paymentRule.paymentRuleNumber==null"
+                pButton pRipple label="Valider" icon="pi pi-check" class="p-button-success p-mr-2"
+                (click)="savePaymentRule(false)"></button>
+            <button *ngIf="selectedInvoices.length !== 0" pButton pRipple label="Payer" icon="pi pi-check"
+                class="p-button-success p-mr-2" (click)="payInvoices()"></button>
 
-          [draggable]="false" [resizable]="false">
-  <br>
-  <ngx-nouveau-reglement [reglement]="paymentRule" [seletcedInvoices]="selectedInvoices"
-  [invoice]="invoice"></ngx-nouveau-reglement>
-  <ng-template pTemplate="footer">
-    <div style="margin-top: 20px;">
-      <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
-              (click)="displayPaymentRuleModal=false; initPaymentRule()"></button>
-      <button *ngIf="selectedInvoices.length === 0" pButton pRipple label="Valider et ajouter" icon="pi pi-check" class="p-button-success p-mr-2"
-              (click)="savePaymentRule(true)"></button>
-      <button *ngIf="selectedInvoices.length === 0" pButton pRipple label="Valider" icon="pi pi-check" class="p-button-success p-mr-2"
-              (click)="savePaymentRule(false)"></button>
-			   <button *ngIf="selectedInvoices.length !== 0" pButton pRipple label="Payer" icon="pi pi-check" class="p-button-success p-mr-2"
-              (click)="payInvoices()"></button>
-
-    </div>
-  </ng-template>
+        </div>
+    </ng-template>
 
 </p-dialog>
-<p-dialog header="Valider un réglement" [(visible)]="displayValidatePaymentRuleModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
-         [draggable]="false" [resizable]="false">
- <br>
- Voulez-vous valider le réglement <span  class="customer-badge status-negotiation">{{paymentRule.paymentRuleLabel}}</span> ?
- <ng-template pTemplate="footer">
-   <div style="margin-top: 20px;">
-     <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
-             (click)="displayValidatePaymentRuleModal=false"></button>
+<p-dialog header="Valider un réglement" [(visible)]="displayValidatePaymentRuleModal" [modal]="true"
+    [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <br>
+    Voulez-vous valider le réglement <span
+        class="customer-badge status-negotiation">{{paymentRule.paymentRuleLabel}}</span> ?
+    <ng-template pTemplate="footer">
+        <div style="margin-top: 20px;">
+            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
+                (click)="displayValidatePaymentRuleModal=false"></button>
 
-        <button pButton pRipple label="Valider" icon="pi pi-check" class="p-button-success p-mr-2"
-             (click)="validatePaymentRule()"></button>
+            <button pButton pRipple label="Valider" icon="pi pi-check" class="p-button-success p-mr-2"
+                (click)="validatePaymentRule()"></button>
 
-   </div>
- </ng-template>
+        </div>
+    </ng-template>
 </p-dialog>
-<p-dialog header="Supprimer un réglement" [(visible)]="displayDeletePaymentRuleModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
-         [draggable]="false" [resizable]="false">
- <br>
- Voulez-vous supprimer le réglement <span  class="customer-badge status-negotiation">{{paymentRule.paymentRuleLabel}}</span> ?
- <ng-template pTemplate="footer">
-   <div style="margin-top: 20px;">
-     <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
-             (click)="displayDeletePaymentRuleModal=false"></button>
+<p-dialog header="Supprimer un réglement" [(visible)]="displayDeletePaymentRuleModal" [modal]="true"
+    [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <br>
+    Voulez-vous supprimer le réglement <span
+        class="customer-badge status-negotiation">{{paymentRule.paymentRuleLabel}}</span> ?
+    <ng-template pTemplate="footer">
+        <div style="margin-top: 20px;">
+            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
+                (click)="displayDeletePaymentRuleModal=false"></button>
 
-        <button pButton pRipple label="Valider" icon="pi pi-check" class="p-button-success p-mr-2"
-             (click)="deletePaymentRule()"></button>
+            <button pButton pRipple label="Valider" icon="pi pi-check" class="p-button-success p-mr-2"
+                (click)="deletePaymentRule()"></button>
 
-   </div>
- </ng-template>
+        </div>
+    </ng-template>
 </p-dialog>

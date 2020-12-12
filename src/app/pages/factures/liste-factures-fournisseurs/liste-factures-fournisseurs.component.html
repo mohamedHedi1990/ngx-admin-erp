@@ -3,47 +3,51 @@
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
-Liste des factures fournisseurs
+  Liste des factures fournisseurs
 </h4>
-<div *ngIf="!showProviderInvoiceWindow" class="card" style=" margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
-  <p-table #dt [value]="invoices" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
-           [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
-           [paginator]="true" currentPageReportTemplate=""
-           [filterDelay]="0" [globalFilterFields]="['invoiceNumber','invoiceTotalAmount','invoiceDate','invoiceDeadlineDate','invoiceNet','provider.providerLabel','provider.providerUniqueIdentifier', 'createdAt', 'updatedAt']">
+<div *ngIf="!showProviderInvoiceWindow" class="card"
+  style=" margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
+  <p-table #dt [value]="invoices " dataKey="id" styleClass="p-datatable-customers" [rowHover]="true" [rows]="5"
+    [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading" [paginator]="true"
+    currentPageReportTemplate="" [filterDelay]="0" [sort]="invoiceDate"
+    [globalFilterFields]="['invoiceNumber','invoiceTotalAmount','invoiceDate','invoiceDeadlineDate','invoiceNet','provider.providerLabel','provider.providerUniqueIdentifier', 'createdAt', 'updatedAt']">
 
-    <ng-template pTemplate="caption" >
-      <div >
+    <ng-template pTemplate="caption">
+      <div>
         <div class="p-d-flex p-ai-center p-jc-between" style=" width: 60%; display: inline-block;">
           <span class="p-input-icon-left" style="width: 100%">
-                      <i class="pi pi-search"></i>
-                      <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher une facture fournisseur.." />
-                  </span>
-          </div>
-  
-          <div style="float:right">
-            <button pButton pRipple label="Nouvelle facture" icon="pi pi-plus" class="primaryBtn" (click)="showProviderInvoiceWindow = true"></button>
-          </div>
-      </div>
-        
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"
+              (input)="dt.filterGlobal($event.target.value, 'contains')"
+              placeholder="Chercher une facture fournisseur.." />
+          </span>
+        </div>
 
-     
+        <div style="float:right">
+          <button pButton pRipple label="Nouvelle facture" icon="pi pi-plus" class="primaryBtn"
+            (click)="showProviderInvoiceWindow = true"></button>
+        </div>
+      </div>
+
+
+
 
     </ng-template>
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 15px;">
-        <th  style="text-align: center; font-size: 13px;width: 11%">Numéro</th>
-        <th  style="text-align: center; font-size: 13px;width: 10%">Fournisseur</th>
-        <th  style="text-align: center; font-size: 13px;width: 15%">Date facture</th>
+        <th style="text-align: center; font-size: 13px;width: 11%">Numéro</th>
+        <th style="text-align: center; font-size: 13px;width: 10%">Fournisseur</th>
+        <th style="text-align: center; font-size: 13px;width: 15%">Date facture</th>
         <th style="text-align: center;font-size: 13px;width: 17%">Date d'échéance</th>
-		    <th  style="text-align: center; font-size: 13px;width: 14%">Montant facture</th>
-		    <th  style="text-align: center; font-size: 13px;width: 14%">Montant payé</th>
-        <th   style="text-align: center; font-size: 13px;width: 10%">Statut</th>
+        <th style="text-align: center; font-size: 13px;width: 14%">Montant facture</th>
+        <th style="text-align: center; font-size: 13px;width: 14%">Montant payé</th>
+        <th style="text-align: center; font-size: 13px;width: 10%">Statut</th>
         <th style="width: 9%;font-size: 13px;text-align: center;">Actions</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-invoice>
       <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
-        <td  style="text-align: center;font-size: 13px;">
+        <td style="text-align: center;font-size: 13px;">
           {{invoice.invoiceNumber}}
         </td>
         <td style="text-align: center;font-size: 13px;">
@@ -68,9 +72,11 @@ Liste des factures fournisseurs
 
 
         <td style="text-align: center;">
-          <div >
-            <i   *ngIf="invoice.invoiceStatus === 'OPENED'" placement="top" ngbTooltip="Modifier"  class="pi pi-pencil"  style="margin-right: 7px; color: #6200ee" (click)="editInvoice(invoice)"></i>
-            <i    placement="top" ngbTooltip="Supprimer"  class="pi pi-trash" (click)="deleteInvoice(invoice)" style="color: #6200ee"></i>
+          <div>
+            <i *ngIf="invoice.invoiceStatus === 'OPENED'" placement="top" ngbTooltip="Modifier" class="pi pi-pencil"
+              style="margin-right: 7px; color: #6200ee" (click)="editInvoice(invoice)"></i>
+            <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" (click)="deleteInvoice(invoice)"
+              style="color: #6200ee"></i>
           </div>
         </td>
       </tr>
@@ -86,20 +92,22 @@ Liste des factures fournisseurs
 <ngx-add-new-client *ngIf="showClientWindow" [client]="client" (addNewClientEvent)="saveNewClient($event)"
                     (cancelEvent)="hideClientWindow(); initClient();"></ngx-add-new-client>
                     -->
-<ngx-add-new-facture-fournisseur *ngIf="showProviderInvoiceWindow" [invoice]="invoice" (addNewProviderInvoiceEvent)="saveInvoice($event)"
-                            (cancelEvent)="hideInvoiceWindow(); initInvoice();"></ngx-add-new-facture-fournisseur>
+<ngx-add-new-facture-fournisseur *ngIf="showProviderInvoiceWindow" [invoice]="invoice"
+  (addNewProviderInvoiceEvent)="saveInvoice($event)" (cancelEvent)="hideInvoiceWindow(); initInvoice();">
+</ngx-add-new-facture-fournisseur>
 
-                            <p-dialog header="Supprimer une facture client" [(visible)]="displayDeleteProviderInvoice" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
-          [draggable]="false" [resizable]="false">
+<p-dialog header="Supprimer une facture client" [(visible)]="displayDeleteProviderInvoice" [modal]="true"
+  [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
   <br>
-  Voulez-vous supprimer la facture fournisseur <span  class="customer-badge status-negotiation">{{invoice.invoiceNumber}}</span> ?
+  Voulez-vous supprimer la facture fournisseur <span
+    class="customer-badge status-negotiation">{{invoice.invoiceNumber}}</span> ?
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
       <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
-              (click)="displayDeleteProviderInvoice=false"></button>
+        (click)="displayDeleteProviderInvoice=false"></button>
 
-			   <button pButton pRipple label="Supprimer" icon="pi pi-check" class="p-button-danger p-mr-2"
-              (click)="delInvoice()"></button>
+      <button pButton pRipple label="Supprimer" icon="pi pi-check" class="p-button-danger p-mr-2"
+        (click)="delInvoice()"></button>
 
     </div>
   </ng-template>

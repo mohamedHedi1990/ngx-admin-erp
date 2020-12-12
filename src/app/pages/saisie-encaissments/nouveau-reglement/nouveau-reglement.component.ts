@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {UtilsServiceService} from '../../../utils-service.service';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { UtilsServiceService } from '../../../utils-service.service';
 @Component({
   selector: 'ngx-nouveau-reglement',
   templateUrl: './nouveau-reglement.component.html',
@@ -21,7 +21,7 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
 
     invoiceNumber: '',
     invoiceTotalAmount: 0,
-    invoicePayment : 0,
+    invoicePayment: 0,
 
   }
   @Output() addNewReglementEvent = new EventEmitter();
@@ -30,7 +30,7 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
   @Input() seletcedInvoices: any[] = null;
 
   isPaymentAmountDisabled = false;
-  paymentOlderValue:any;
+  paymentOlderValue: any;
   constructor(private UtilsService: UtilsServiceService) { }
 
   ngOnInit(): void {
@@ -42,9 +42,9 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
     if (this.seletcedInvoices != null && this.seletcedInvoices.length !== 0) {
       let label = 'Reg Fact N° ';
       this.seletcedInvoices.forEach(invoice => {
-        if(invoice.invoiceStatus !== 'CLOSED') {
-          this.reglement.paymentRuleAmount =  this.reglement.paymentRuleAmount + (invoice.invoiceTotalAmount - invoice.invoicePayment);
-          if(label === 'Reg Fact N° ') {
+        if (invoice.invoiceStatus !== 'CLOSED') {
+          this.reglement.paymentRuleAmount = this.reglement.paymentRuleAmount + (invoice.invoiceTotalAmount - invoice.invoicePayment);
+          if (label === 'Reg Fact N° ') {
             label = label + invoice.invoiceNumber;
           } else {
             label = label + ' , ' + invoice.invoiceNumber;
@@ -68,15 +68,15 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
     console.log("ng onchanges ");
     console.log(this.reglement);
     console.log(this.invoice);
-    this.paymentOlderValue=this.reglement.paymentRuleAmount;
+    this.paymentOlderValue = this.reglement.paymentRuleAmount;
     //this.reglement.paymentRuleAmount = 0;
     console.log('selected ', this.seletcedInvoices);
     if (this.seletcedInvoices != null && this.seletcedInvoices.length !== 0) {
       let label = 'Reg Fact N° ';
       this.seletcedInvoices.forEach(invoice => {
-        if(invoice.invoiceStatus !== 'CLOSED') {
-          this.reglement.paymentRuleAmount =  this.reglement.paymentRuleAmount + (invoice.invoiceTotalAmount - invoice.invoicePayment);
-          if(label === 'Reg Fact N° ') {
+        if (invoice.invoiceStatus !== 'CLOSED') {
+          this.reglement.paymentRuleAmount = this.reglement.paymentRuleAmount + (invoice.invoiceTotalAmount - invoice.invoicePayment);
+          if (label === 'Reg Fact N° ') {
             label = label + invoice.invoiceNumber;
           } else {
             label = label + ' , ' + invoice.invoiceNumber;
@@ -89,21 +89,23 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
       this.isPaymentAmountDisabled = true;
       this.reglement.paymentRuleLabel = label;
     } else {
-      if(this.invoice != null) {
+      if (this.invoice != null) {
         this.reglement.paymentRuleLabel = 'Reg Fact N° ' + this.invoice.invoiceNumber;
       }
 
+
     }
+    this.getAllAccounts();
   }
   getAllAccounts() {
 
     const context = this;
-    this.UtilsService.get(UtilsServiceService.API_ACCOUNT).subscribe( response => {
-        context.accounts = response;
-        if(context.accounts != null && context.accounts.length !==0) {
-          context.reglement.paymentRuleAccount = context.accounts[0];
-        }
-      },
+    this.UtilsService.get(UtilsServiceService.API_ACCOUNT).subscribe(response => {
+      context.accounts = response;
+      if (context.accounts != null && context.accounts.length !== 0) {
+        context.reglement.paymentRuleAccount = context.accounts[0];
+      }
+    },
       error => {
         this.UtilsService.showToast('danger',
           'Erreur interne',
@@ -113,46 +115,59 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
   }
 
   compareAccount(a: any, b: any): boolean {
-    if (a==null || b== null) return true;
+    if (a == null || b == null) return true;
     return a.accountId === b.accountId;
   }
   compareDeacissementType(a: any, b: any): boolean {
-    if (a==null || b== null)return true;
+    if (a == null || b == null) return true;
     return a.encaissementTypeValue === b.encaissementTypeValue;
   }
   compareCustomer(a: any, b: any): boolean {
-    if (a==null || b== null) return true;
+    if (a == null || b == null) return true;
     return a.customerId === b.customerId;
   }
   compareInvoice(a: any, b: any): boolean {
-    if (a==null || b== null) return true;
+    if (a == null || b == null) return true;
     return a.invoiceId === b.invoiceId;
   }
   checkAmount() {
     if (this.reglement.paymentRuleAmount == null || this.reglement.paymentRuleAmount === '' || this.reglement.paymentRuleAmount < 0) {
       this.reglement.paymentRuleAmount = 0;
     } else if (this.invoice != null) {
-      if(this.paymentOlderValue==null || this.paymentOlderValue==0)
-      {
-      if (this.reglement.paymentRuleAmount > (this.invoice.invoiceTotalAmount - this.invoice.invoicePayment)) {
-        this.reglement.paymentRuleAmount = this.invoice.invoiceTotalAmount - this.invoice.invoicePayment;
-      }
-      }
-      else{
-        if (this.reglement.paymentRuleAmount > (this.invoice.invoiceTotalAmount - this.invoice.invoicePayment+this.paymentOlderValue)) {
-          this.reglement.paymentRuleAmount = this.invoice.invoiceTotalAmount - this.invoice.invoicePayment+this.paymentOlderValue;
+      if (this.paymentOlderValue == null || this.paymentOlderValue == 0) {
+        // this for use case add rule
+        if (this.reglement.paymentRuleAmount > (this.invoice.invoiceTotalAmount - this.invoice.invoicePayment)) {
+          this.reglement.paymentRuleAmount = this.invoice.invoiceTotalAmount - this.invoice.invoicePayment;
+          this.reglement.paymentRuleAmount = Math.round(this.reglement.paymentRuleAmount * 100) / 100
         }
+      }
+      else {
+        //use for use case update rule
+        if (this.reglement.paymentRuleAmount > (this.invoice.invoiceTotalAmount - this.invoice.invoicePayment + this.paymentOlderValue)) {
+          this.reglement.paymentRuleAmount = this.invoice.invoiceTotalAmount - this.invoice.invoicePayment + this.paymentOlderValue;
+          this.reglement.paymentRuleAmount = Math.round(this.reglement.paymentRuleAmount * 100) / 100
+
+        }
+      }
+    }
+    else {
+      if (this.reglement.paymentRuleAmount > (this.invoice.invoiceTotalAmount - this.invoice.invoicePayment + this.paymentOlderValue)) {
+        this.reglement.paymentRuleAmount = this.invoice.invoiceTotalAmount - this.invoice.invoicePayment + this.paymentOlderValue;
       }
     }
   }
 
+
+
+
+
   checkLabel() {
-    if(this.reglement.paymentRuleLabel == null || this.reglement.paymentRuleLabel === '') {
+    if (this.reglement.paymentRuleLabel == null || this.reglement.paymentRuleLabel === '') {
       if (this.seletcedInvoices != null && this.seletcedInvoices.length !== 0) {
         let label = 'Reg Fact N° ';
         this.seletcedInvoices.forEach(invoice => {
           if (invoice.invoiceStatus !== 'CLOSED') {
-            if(label === 'Reg Fact N° ') {
+            if (label === 'Reg Fact N° ') {
               label = label + invoice.invoiceNumber;
             } else {
               label = label + ' , ' + invoice.invoiceNumber;
@@ -166,4 +181,6 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
       }
     }
   }
+
+
 }

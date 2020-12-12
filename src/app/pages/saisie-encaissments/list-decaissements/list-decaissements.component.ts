@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {UtilsServiceService} from '../../../utils-service.service';
-import {DialogService} from 'primeng/dynamicdialog';
-import {ConfirmationService} from 'primeng/api';
+import { UtilsServiceService } from '../../../utils-service.service';
+import { DialogService } from 'primeng/dynamicdialog';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'ngx-list-decaissements',
@@ -17,7 +17,7 @@ export class ListDecaissementsComponent implements OnInit {
   displayValidateDecaissement = false;
   displayDeleteDecaissement = false;
   constructor(private UtilsService: UtilsServiceService,
-              public dialogService: DialogService, private confirmationService: ConfirmationService) { }
+    public dialogService: DialogService, private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
     this.initDecaissement();
@@ -26,25 +26,26 @@ export class ListDecaissementsComponent implements OnInit {
   saveDecaissement(decaissement) {
 
     const context = this;
-    this.UtilsService.post(UtilsServiceService.API_DECAISSEMENT, decaissement).subscribe( response => {
-        this.hideDecaissementWindow();
-        if ( decaissement.decaissementId == null) {
-          this.UtilsService.showToast('success',
-            'Décaissement ajouté avec succés',
-            `Le décaissement  ${decaissement.decaissementLabel} a été ajouté avec succcés`);
-        } else {
-          this.UtilsService.showToast('success',
-            'Décaissement modfié avec succés',
-            `Le décaissement ${decaissement.decaissementLabel} a été modifié avec succcés`);
-        }
-        context.getAllDecaissements();
-        context.initDecaissement();
-         this.showDecaissementWindow = false;
-      },
-      error => {this.UtilsService.showToast('danger',
-        'Erreur interne',
-        `Un erreur interne a été produit lors de l'enregistrement du décaissement  ${decaissement.decaissementLabel}`);
-        }); 
+    this.UtilsService.post(UtilsServiceService.API_DECAISSEMENT, decaissement).subscribe(response => {
+      this.hideDecaissementWindow();
+      if (decaissement.decaissementId == null) {
+        this.UtilsService.showToast('success',
+          'Décaissement ajouté avec succés',
+          `Le décaissement  ${decaissement.decaissementLabel} a été ajouté avec succcés`);
+      } else {
+        this.UtilsService.showToast('success',
+          'Décaissement modfié avec succés',
+          `Le décaissement ${decaissement.decaissementLabel} a été modifié avec succcés`);
+      }
+      context.getAllDecaissements();
+      context.initDecaissement();
+      this.showDecaissementWindow = false;
+    },
+      error => {
+        this.UtilsService.showToast('danger',
+          'Erreur interne',
+          `Un erreur interne a été produit lors de l'enregistrement du décaissement  ${decaissement.decaissementLabel}`);
+      });
 
   }
   hideDecaissementWindow() {
@@ -54,9 +55,9 @@ export class ListDecaissementsComponent implements OnInit {
 
   getAllDecaissements() {
     const context = this;
-    this.UtilsService.get(UtilsServiceService.API_DECAISSEMENT).subscribe( response => {
-        context.decaissments = response;
-      },
+    this.UtilsService.get(UtilsServiceService.API_DECAISSEMENT).subscribe(response => {
+      context.decaissments = response;
+    },
       error => {
         this.UtilsService.showToast('danger',
           'Erreur interne',
@@ -72,17 +73,18 @@ export class ListDecaissementsComponent implements OnInit {
   delDecaissement() {
     const context = this;
     const url = UtilsServiceService.API_DECAISSEMENT + '/' + this.decaissement.decaissementId;
-    this.UtilsService.delete(url).subscribe( response => {
-        this.UtilsService.showToast('success',
-          'Décaissement supprimé avec succés',
-          `Le décaissement  ${this.decaissement.decaissementLabel} a été supprimé avec succcés`);
-          this.displayDeleteDecaissement = false;
-        context.getAllDecaissements();
-        this.initDecaissement();
-      },
-      error => {this.UtilsService.showToast('danger',
-        'Erreur interne',
-        `Un erreur interne a été produit lors de la suppression du décaissement  ${this.decaissement.decaissementLabel}`);
+    this.UtilsService.delete(url).subscribe(response => {
+      this.UtilsService.showToast('success',
+        'Décaissement supprimé avec succés',
+        `Le décaissement  ${this.decaissement.decaissementLabel} a été supprimé avec succcés`);
+      this.displayDeleteDecaissement = false;
+      context.getAllDecaissements();
+      this.initDecaissement();
+    },
+      error => {
+        this.UtilsService.showToast('danger',
+          'Erreur interne',
+          `Un erreur interne a été produit lors de la suppression du décaissement  ${this.decaissement.decaissementLabel}`);
       });
 
 
@@ -95,18 +97,18 @@ export class ListDecaissementsComponent implements OnInit {
   initDecaissement() {
     this.decaissement = {
       decaissementId: null,
-    decaissementType: null,
-    decaissementDeadlineDate : null,
-    decaissementPaymentType: null,
-    decaissementPaymentRuleNumber: null,
-    decaissementPaymentRuleDetails: null,
-    decaissementAmount : null,
-    decaissementLabel: null,
-    decaissementDetails : null,
-    decaissementInvoice : null,
-    decaissementBankAccount : null,
-    decaissementChequeImpaye: null,
-    decaissementCurrency: 'TND',
+      decaissementType: null,
+      decaissementDeadlineDate: null,
+      decaissementPaymentType: null,
+      decaissementPaymentRuleNumber: null,
+      decaissementPaymentRuleDetails: null,
+      decaissementAmount: null,
+      decaissementLabel: null,
+      decaissementDetails: null,
+      decaissementInvoice: null,
+      decaissementBankAccount: null,
+      decaissementChequeImpaye: null,
+      decaissementCurrency: 'TND',
 
     };
   }
@@ -116,23 +118,24 @@ export class ListDecaissementsComponent implements OnInit {
     this.decaissement = decaissement;
   }
 
-  validateDecaissement()  {
-	  const context = this;
-    this.UtilsService.put(UtilsServiceService.API_DECAISSEMENT + '/' + this.decaissement.decaissementId, null).subscribe( response => {
+  validateDecaissement() {
+    const context = this;
+    this.UtilsService.put(UtilsServiceService.API_DECAISSEMENT + '/' + this.decaissement.decaissementId, null).subscribe(response => {
 
       this.UtilsService.showToast('success',
-      'Décaissement validé avec succés',
-      `Le décaissement ${this.decaissement.decaissementLabel} a été validé avec succés`);
+        'Décaissement validé avec succés',
+        `Le décaissement ${this.decaissement.decaissementLabel} a été validé avec succés`);
       this.displayValidateDecaissement = false;
-       context.getAllDecaissements();
-	   this.initDecaissement();
-      },
-      error => {this.UtilsService.showToast('danger',
-        'Erreur interne',
-        `Un erreur interne a été produit lors de la validation du décaissement ${this.decaissement.decaissementLabel}`);
+      context.getAllDecaissements();
+      this.initDecaissement();
+    },
+      error => {
+        this.UtilsService.showToast('danger',
+          'Erreur interne',
+          `Un erreur interne a été produit lors de la validation du décaissement ${this.decaissement.decaissementLabel}`);
         this.displayValidateDecaissement = false;
-		this.initDecaissement();
-    });
+        this.initDecaissement();
+      });
 
 
   }

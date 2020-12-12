@@ -3,25 +3,28 @@
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
-Liste des encaissements
+  Liste des encaissements
 </h4>
-<div *ngIf="!showEncaissementWindow" class="card" style="margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
-  <p-table #dt [value]="encaissements" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
-           [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
-           [paginator]="true" currentPageReportTemplate=""
-           [filterDelay]="0" [globalFilterFields]="['encaissementDeadlineDate','encaissementType.encaissementTypeLabel','encaissementAmount','encaissementLabel','encaissementInvoice.invoiceNumber', 'encaissementBankAccount.accountLabel','createdAt', 'updatedAt']">
-    <ng-template pTemplate="caption" >
-      <div >
+<div *ngIf="!showEncaissementWindow" class="card"
+  style="margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
+  <p-table #dt [value]="encaissements" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true" [rows]="5"
+    [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading" [paginator]="true"
+    currentPageReportTemplate="" [filterDelay]="0"
+    [globalFilterFields]="['encaissementDeadlineDate','encaissementType.encaissementTypeLabel','encaissementAmount','encaissementLabel','encaissementInvoice.invoiceNumber', 'encaissementBankAccount.accountLabel','createdAt', 'updatedAt']">
+    <ng-template pTemplate="caption">
+      <div>
         <div class="p-d-flex p-ai-center p-jc-between" style=" width: 60%; display: inline-block;">
           <span class="p-input-icon-left" style="width: 100%">
-                      <i class="pi pi-search"></i>
-                      <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher un encaissement.." />
-                  </span>
-          </div>
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"
+              (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher un encaissement.." />
+          </span>
+        </div>
 
-          <div style="float:right">
-            <button pButton pRipple label="Nouveau encaissement" icon="pi pi-plus" class="primaryBtn" (click)="showEncaissementWindow = true"></button>
-          </div>
+        <div style="float:right">
+          <button pButton pRipple label="Nouveau encaissement" icon="pi pi-plus" class="primaryBtn"
+            (click)="showEncaissementWindow = true"></button>
+        </div>
       </div>
 
 
@@ -30,19 +33,19 @@ Liste des encaissements
     </ng-template>
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 13px;">
-        <th  style="text-align: center; font-size: 13px;width: 12%">Encaissement</th>
-        <th  style="text-align: center; font-size: 13px;width: 10%">Type</th>
-        <th  style="text-align: center; font-size: 13px;width: 12%">Banque</th>
-        <th  style="text-align: center; font-size: 13px;width: 12%">Montant</th>
-        <th  style="text-align: center;font-size: 13px;width: 15%">Date d'échéance</th>
+        <th style="text-align: center; font-size: 13px;width: 12%">Encaissement</th>
+        <th style="text-align: center; font-size: 13px;width: 10%">Type</th>
+        <th style="text-align: center; font-size: 13px;width: 12%">Banque</th>
+        <th style="text-align: center; font-size: 13px;width: 12%">Montant</th>
+        <th style="text-align: center;font-size: 13px;width: 15%">Date d'échéance</th>
         <th style="text-align: center; font-size: 13px;width: 25%">Détails</th>
-        <th  style="text-align: center; font-size: 13px;width: 12%">Statut</th>
+        <th style="text-align: center; font-size: 13px;width: 12%">Statut</th>
         <th style="width: 10%;font-size: 13px;text-align: center;">Actions</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-encaissement>
       <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
-        <td  style="text-align: center;font-size: 13px;">
+        <td style="text-align: center;font-size: 13px;">
           {{encaissement.encaissementLabel}}
         </td>
         <td style="text-align: center;font-size: 13px;">
@@ -60,13 +63,18 @@ Liste des encaissements
 
         <td style="text-align: center;">
           <div>
-            <span>Paiement par <span class="customer-badge status-label">{{encaissement.encaissementPaymentType}} </span><span *ngIf="
+            <span>Paiement par <span class="customer-badge status-label">{{encaissement.encaissementPaymentType}}
+              </span><span *ngIf="
             encaissement.encaissementPaymentType === 'CHEQUE' ||
             encaissement.encaissementPaymentType === 'TRAITE'
             ">(No: {{encaissement.encaissementPaymentRuleNumber}})</span></span>
           </div>
           <div>
-            <span *ngIf="encaissement.encaissementType.encaissementTypeValue === 'REGLEMENT_FACTURE_CLIENT'"> Encaissement pour la facture numéro <span class="customer-badge status-label">{{encaissement.encaissementInvoice.invoiceNumber}} </span>pour le client <span class="customer-badge status-label">{{encaissement.encaissementCustomer.customerLabel}}</span></span>
+            <span *ngIf="encaissement.encaissementType.encaissementTypeValue === 'REGLEMENT_FACTURE_CLIENT'">
+              Encaissement pour la facture numéro <span
+                class="customer-badge status-label">{{encaissement.encaissementInvoice.invoiceNumber}} </span>pour le
+              client <span
+                class="customer-badge status-label">{{encaissement.encaissementCustomer.customerLabel}}</span></span>
           </div>
           <!--
           <div>
@@ -74,7 +82,8 @@ Liste des encaissements
           </div>
           -->
           <div>
-            <span *ngIf="encaissement.encaissementType.encaissementTypeValue !== 'REGLEMENT_FACTURE_CLIENT'">{{encaissement.encaissementLabel}}</span>
+            <span
+              *ngIf="encaissement.encaissementType.encaissementTypeValue !== 'REGLEMENT_FACTURE_CLIENT'">{{encaissement.encaissementLabel}}</span>
           </div>
           <div>
             <i>{{encaissement.encaissementDetails}}</i>
@@ -88,16 +97,18 @@ Liste des encaissements
 
 
         <td style="text-align: center;">
-          <div  *ngIf="!encaissement.isValidated" style="text-align: center;">
+          <div *ngIf="!encaissement.isValidated" style="text-align: center;">
             <!--
             <i ngbTooltip="Valider"  class="pi pi-check"  style="margin-right: 7px; color: #6200ee" (click)="showValidateEncaissementWindow(encaissement)"></i>
             -->
-            <i ngbTooltip="Modifier"  class="pi pi-pencil"  style="margin-right: 7px;color: #6200ee" (click)="editEncaissement(encaissement)"></i>
-            <i placement="top" ngbTooltip="Supprimer"  class="pi pi-trash" (click)="deleteEncaissement(encaissement)" style="color: #6200ee"></i>
+            <i ngbTooltip="Modifier" class="pi pi-pencil" style="margin-right: 7px;color: #6200ee"
+              (click)="editEncaissement(encaissement)"></i>
+            <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" (click)="deleteEncaissement(encaissement)"
+              style="color: #6200ee"></i>
           </div>
           <div *ngIf="encaissement.isValidated" style="text-align: center">
             - -
-            </div>
+          </div>
 
         </td>
       </tr>
@@ -110,36 +121,38 @@ Liste des encaissements
   </p-table>
 </div>
 <ngx-nouveau-encaissement *ngIf="showEncaissementWindow" [encaissement]="encaissement"
-(addNewEncaissementEvent)="saveEncaissement($event)"
-(cancelEvent)="hideEncaissementWindow()"></ngx-nouveau-encaissement>
+  (addNewEncaissementEvent)="saveEncaissement($event)" (cancelEvent)="hideEncaissementWindow()">
+</ngx-nouveau-encaissement>
 
 
-<p-dialog header="Valider un encaissement" [(visible)]="displayValidateEncaissement" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
-          [draggable]="false" [resizable]="false">
+<p-dialog header="Valider un encaissement" [(visible)]="displayValidateEncaissement" [modal]="true"
+  [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
   <br>
-  Voulez-vous valider l'encaissement <span  class="customer-badge status-negotiation">{{encaissement.encaissementLabel}}</span> ?
+  Voulez-vous valider l'encaissement <span
+    class="customer-badge status-negotiation">{{encaissement.encaissementLabel}}</span> ?
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
       <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
-              (click)="displayValidateEncaissement=false"></button>
+        (click)="displayValidateEncaissement=false"></button>
 
-			   <button pButton pRipple label="Valider" icon="pi pi-check" class="p-button-success p-mr-2"
-              (click)="validateEncaissement()"></button>
+      <button pButton pRipple label="Valider" icon="pi pi-check" class="p-button-success p-mr-2"
+        (click)="validateEncaissement()"></button>
 
     </div>
   </ng-template>
 </p-dialog>
-<p-dialog header="Supprimer un encaissement" [(visible)]="displayDeleteEncaissement" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
-          [draggable]="false" [resizable]="false">
+<p-dialog header="Supprimer un encaissement" [(visible)]="displayDeleteEncaissement" [modal]="true"
+  [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
   <br>
-  Voulez-vous supprimer l'encaissement <span  class="customer-badge status-negotiation">{{encaissement.encaissementLabel}}</span> ?
+  Voulez-vous supprimer l'encaissement <span
+    class="customer-badge status-negotiation">{{encaissement.encaissementLabel}}</span> ?
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
       <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
-              (click)="displayDeleteEncaissement=false"></button>
+        (click)="displayDeleteEncaissement=false"></button>
 
-			   <button pButton pRipple label="Supprimer" icon="pi pi-check" class="p-button-danger p-mr-2"
-              (click)="delEncaissement()"></button>
+      <button pButton pRipple label="Supprimer" icon="pi pi-check" class="p-button-danger p-mr-2"
+        (click)="delEncaissement()"></button>
 
     </div>
   </ng-template>

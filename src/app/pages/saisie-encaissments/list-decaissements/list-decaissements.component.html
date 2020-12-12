@@ -3,25 +3,28 @@
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
-Liste des décaissements
+  Liste des décaissements
 </h4>
-<div *ngIf="!showDecaissementWindow" class="card" style= "margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
-  <p-table #dt [value]="decaissments" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
-           [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
-           [paginator]="true" currentPageReportTemplate=""
-           [filterDelay]="0" [globalFilterFields]="['decaissementDeadlineDate','decaissementType.decaissementTypeLabel','decaissementAmount','decaissementLabel','decaissementInvoice.invoiceNumber', 'decaissementBankAccount.accountLabel','createdAt', 'updatedAt']">
-    <ng-template pTemplate="caption" >
-      <div >
+<div *ngIf="!showDecaissementWindow" class="card"
+  style="margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
+  <p-table #dt [value]="decaissments" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true" [rows]="5"
+    [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading" [paginator]="true"
+    currentPageReportTemplate="" [filterDelay]="0"
+    [globalFilterFields]="['decaissementDeadlineDate','decaissementType.decaissementTypeLabel','decaissementAmount','decaissementLabel','decaissementInvoice.invoiceNumber', 'decaissementBankAccount.accountLabel','createdAt', 'updatedAt']">
+    <ng-template pTemplate="caption">
+      <div>
         <div class="p-d-flex p-ai-center p-jc-between" style=" width: 60%; display: inline-block;">
           <span class="p-input-icon-left" style="width: 100%">
-                      <i class="pi pi-search"></i>
-                      <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher un décaissement.." />
-                  </span>
-          </div>
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"
+              (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher un décaissement.." />
+          </span>
+        </div>
 
-          <div style="float:right">
-            <button pButton pRipple label="Nouveau décaissement" icon="pi pi-plus" class="primaryBtn" (click)="showDecaissementWindow = true"></button>
-          </div>
+        <div style="float:right">
+          <button pButton pRipple label="Nouveau décaissement" icon="pi pi-plus" class="primaryBtn"
+            (click)="showDecaissementWindow = true"></button>
+        </div>
       </div>
 
 
@@ -32,17 +35,19 @@ Liste des décaissements
       <tr style="text-align: center; font-size: 13px;">
         <th pSortableColumn="decaissementLabel" style="text-align: center; font-size: 13px;width: 12%">Décaissement</th>
         <th pSortableColumn="decaissementTypeLabel" style="text-align: center; font-size: 13px;width: 10%">Type</th>
-        <th pSortableColumn="decaissementBankAccount.accountLabel" style="text-align: center; font-size: 13px;width: 12%">Banque</th>
+        <th pSortableColumn="decaissementBankAccount.accountLabel"
+          style="text-align: center; font-size: 13px;width: 12%">Banque</th>
         <th pSortableColumn="decaissementAmount" style="text-align: center; font-size: 13px;width: 12%">Montant</th>
-        <th pSortableColumn="decaissementDeadlineDate" style="text-align: center;font-size: 13px;width: 15%">Date d'échéance</th>
+        <th pSortableColumn="decaissementDeadlineDate" style="text-align: center;font-size: 13px;width: 15%">Date
+          d'échéance</th>
         <th style="text-align: center; font-size: 13px;width: 25%">Détails</th>
-        <th pSortableColumn="decaissementStatus"  style="text-align: center; font-size: 13px;width: 12%">Statut</th>
+        <th pSortableColumn="decaissementStatus" style="text-align: center; font-size: 13px;width: 12%">Statut</th>
         <th style="width: 10%;font-size: 13px;text-align: center;">Actions</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-decaissement>
       <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
-        <td  style="text-align: center;font-size: 13px;">
+        <td style="text-align: center;font-size: 13px;">
           {{decaissement.decaissementLabel}}
         </td>
         <td style="text-align: center;font-size: 13px;">
@@ -60,19 +65,27 @@ Liste des décaissements
 
         <td style="text-align: center;">
           <div>
-            <span>Paiement par <span class="customer-badge status-label">{{decaissement.decaissementPaymentType}} </span><span *ngIf="
+            <span>Paiement par <span class="customer-badge status-label">{{decaissement.decaissementPaymentType}}
+              </span><span *ngIf="
               decaissement.decaissementPaymentType === 'CHEQUE' ||
               decaissement.decaissementPaymentType === 'TRAITE'
             ">(No: {{decaissement.decaissementPaymentRuleNumber}})</span></span>
           </div>
           <div>
-            <span *ngIf="decaissement.decaissementType.decaissementTypeValue === 'PAIEMENT_FACTURE_FOURNISSEUR'"> Decaissmement pour la facture numéro <span class="customer-badge status-label">{{decaissement.decaissementInvoice.invoiceNumber}} </span>pour le fournisseur <span class="customer-badge status-label">{{decaissement.decaissementProvider.providerLabel}}</span></span>
+            <span *ngIf="decaissement.decaissementType.decaissementTypeValue === 'PAIEMENT_FACTURE_FOURNISSEUR'">
+              Decaissmement pour la facture numéro <span
+                class="customer-badge status-label">{{decaissement.decaissementInvoice.invoiceNumber}} </span>pour le
+              fournisseur <span
+                class="customer-badge status-label">{{decaissement.decaissementProvider.providerLabel}}</span></span>
           </div>
           <div>
-            <span *ngIf="decaissement.decaissementType.decaissementTypeValue === 'CHEQUE_IMPAYE'"> Decaissmement le chèque impayé numéro <span class="customer-badge status-label">{{decaissement.decaissementChequeImpaye}} </span></span>
+            <span *ngIf="decaissement.decaissementType.decaissementTypeValue === 'CHEQUE_IMPAYE'"> Decaissmement le
+              chèque impayé numéro <span class="customer-badge status-label">{{decaissement.decaissementChequeImpaye}}
+              </span></span>
           </div>
           <div>
-            <span *ngIf="decaissement.decaissementType.decaissementTypeValue !== 'CHEQUE_IMPAYE'
+            <span
+              *ngIf="decaissement.decaissementType.decaissementTypeValue !== 'CHEQUE_IMPAYE'
             && decaissement.decaissementType.decaissementTypeValue !== 'PAIEMENT_FACTURE_FOURNISSEUR'">{{decaissement.decaissementLabel}}</span>
           </div>
           <div>
@@ -87,59 +100,63 @@ Liste des décaissements
 
 
         <td style="text-align: center;">
-          <div  *ngIf="!decaissement.isValidated" style="text-align: center;">
+          <div *ngIf="!decaissement.isValidated" style="text-align: center;">
             <!--
            <i ngbTooltip="Valider"  class="pi pi-check"  style="margin-right: 7px; color: #6200ee" (click)="showValidateDecaisementWindow(decaissement)"></i>
            -->
-           <i ngbTooltip="Modifier"  class="pi pi-pencil"  style="margin-right: 7px;color: #6200ee" (click)="editDecaissement(decaissement)"></i>
-           <i placement="top" ngbTooltip="Supprimer"  class="pi pi-trash" (click)="deleteDecaissement(decaissement)" style="color: #6200ee"></i>
-         </div>
-         <div *ngIf="decaissement.isValidated" style="text-align: center">
-           - -
-           </div>
+            <i ngbTooltip="Modifier" class="pi pi-pencil" style="margin-right: 7px;color: #6200ee"
+              (click)="editDecaissement(decaissement)"></i>
+            <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" (click)="deleteDecaissement(decaissement)"
+              style="color: #6200ee"></i>
+          </div>
+          <div *ngIf="decaissement.isValidated" style="text-align: center">
+            - -
+          </div>
 
-       </td>
-     </tr>
-   </ng-template>
-   <ng-template pTemplate="emptymessage">
-     <tr style="font-size: 13px">
-       <td colspan="8" style="text-align: left !important;">Aucun décaissement trouvé!</td>
-     </tr>
-   </ng-template>
- </p-table>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr style="font-size: 13px">
+        <td colspan="8" style="text-align: left !important;">Aucun décaissement trouvé!</td>
+      </tr>
+    </ng-template>
+  </p-table>
 </div>
 <ngx-nouveau-decaissement *ngIf="showDecaissementWindow" [decaissement]="decaissement"
-(addNewDecaissementEvent)="saveDecaissement($event)"
-(cancelEvent)="hideDecaissementWindow()"></ngx-nouveau-decaissement>
+  (addNewDecaissementEvent)="saveDecaissement($event)" (cancelEvent)="hideDecaissementWindow()">
+</ngx-nouveau-decaissement>
 
 
-<p-dialog header="Valider un décaissement" [(visible)]="displayValidateDecaissement" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
-         [draggable]="false" [resizable]="false">
- <br>
- Voulez-vous valider le décaissement <span  class="customer-badge status-negotiation">{{decaissement.decaissementLabel}}</span> ?
- <ng-template pTemplate="footer">
-   <div style="margin-top: 20px;">
-     <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
-             (click)="displayValidateDecaissement=false"></button>
+<p-dialog header="Valider un décaissement" [(visible)]="displayValidateDecaissement" [modal]="true"
+  [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+  <br>
+  Voulez-vous valider le décaissement <span
+    class="customer-badge status-negotiation">{{decaissement.decaissementLabel}}</span> ?
+  <ng-template pTemplate="footer">
+    <div style="margin-top: 20px;">
+      <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
+        (click)="displayValidateDecaissement=false"></button>
 
-        <button pButton pRipple label="Valider" icon="pi pi-check" class="p-button-success p-mr-2"
-             (click)="validateDecaissement()"></button>
+      <button pButton pRipple label="Valider" icon="pi pi-check" class="p-button-success p-mr-2"
+        (click)="validateDecaissement()"></button>
 
-   </div>
- </ng-template>
+    </div>
+  </ng-template>
 </p-dialog>
-<p-dialog header="Supprimer un décaissement" [(visible)]="displayDeleteDecaissement" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
-         [draggable]="false" [resizable]="false">
- <br>
- Voulez-vous supprimer le décaissement <span  class="customer-badge status-negotiation">{{decaissement.decaissementLabel}}</span> ?
- <ng-template pTemplate="footer">
-   <div style="margin-top: 20px;">
-     <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
-             (click)="displayDeleteDecaissement=false"></button>
+<p-dialog header="Supprimer un décaissement" [(visible)]="displayDeleteDecaissement" [modal]="true"
+  [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+  <br>
+  Voulez-vous supprimer le décaissement <span
+    class="customer-badge status-negotiation">{{decaissement.decaissementLabel}}</span> ?
+  <ng-template pTemplate="footer">
+    <div style="margin-top: 20px;">
+      <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
+        (click)="displayDeleteDecaissement=false"></button>
 
-        <button pButton pRipple label="Supprimer" icon="pi pi-check" class="p-button-danger p-mr-2"
-             (click)="delDecaissement()"></button>
+      <button pButton pRipple label="Supprimer" icon="pi pi-check" class="p-button-danger p-mr-2"
+        (click)="delDecaissement()"></button>
 
-   </div>
- </ng-template>
+    </div>
+  </ng-template>
 </p-dialog>
