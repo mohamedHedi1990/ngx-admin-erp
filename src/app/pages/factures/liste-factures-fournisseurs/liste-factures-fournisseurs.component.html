@@ -99,8 +99,11 @@ padding: 10px 10px 10px 10px !important;
 <p-dialog header="Supprimer une facture client" [(visible)]="displayDeleteProviderInvoice" [modal]="true"
   [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
   <br>
-  Voulez-vous supprimer la facture fournisseur <span
-    class="customer-badge status-negotiation">{{invoice.invoiceNumber}}</span> ?
+          <div>
+            <span>La supression d'une facture va supprimer toutes les reglements relatives à cette facture</span>
+          </div>
+          <br>
+  Voulez-vous toujours supprimer la facture fournisseur <span class="customer-badge status-negotiation">{{invoice.invoiceNumber}}</span> ?
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
       <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"

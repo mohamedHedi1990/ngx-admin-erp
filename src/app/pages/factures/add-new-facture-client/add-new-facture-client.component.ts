@@ -67,8 +67,8 @@ export class AddNewFactureClientComponent implements OnInit {
   }
 
   checkInvoiceValid(): boolean {
-    return this.invoice.invoiceNumber == null || this.invoice.invoiceNumber === '' &&
-      this.invoice.customer == null;
+  
+    return this.invoice.invoiceNumber == null || this.invoice.invoiceNumber === '' ||this.invoice.customer == null;
   }
   getAllCustomers() {
 

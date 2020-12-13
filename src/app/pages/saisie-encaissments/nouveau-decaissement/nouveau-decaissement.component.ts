@@ -97,6 +97,8 @@ compareInvoice(a: any, b: any): boolean {
    }
 
   ngOnInit(): void {
+    this.decaissement.decaissementDeadlineDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+
     this.getAllAccounts();
     if (this.decaissement.decaissementProvider != null) {
       this.getAllInvoiceProviders();
@@ -126,6 +128,8 @@ compareInvoice(a: any, b: any): boolean {
     const context = this;
     this.UtilsService.get(UtilsServiceService.API_ACCOUNT).subscribe( response => {
         context.accounts = response;
+        if(response!=null)
+        this.decaissement.decaissementBankAccount=response[0];
       },
       error => {
         this.UtilsService.showToast('danger',
@@ -159,6 +163,7 @@ compareInvoice(a: any, b: any): boolean {
     this.UtilsService.post(UtilsServiceService.API_PROVIDER, this.provider).subscribe( response => {
       this.dispalyProviderModal = false;
       this.getAllProviders();
+      this.invoice.provider=response;
       this.decaissement.decaissementProvider = response;
       this.UtilsService.showToast('success',
       'Fournisseur ajouté avec succés',

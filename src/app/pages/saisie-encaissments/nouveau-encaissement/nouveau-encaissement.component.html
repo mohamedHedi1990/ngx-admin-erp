@@ -44,7 +44,7 @@ padding: 10px 10px 10px 10px !important;
               [(ngModel)]="encaissement.encaissementBankAccount" style="font-size: 13px" [compareWith]="compareAccount"
               (change)="changeAccount()">
 
-              <option *ngIf="encaissement.encaissementId == null" [ngValue]="null">-- Compte bancaire --</option>
+              <!-- <option *ngIf="encaissement.encaissementId == null" [ngValue]="null">-- Compte bancaire --</option> -->
               <option *ngFor="let a of accounts" [ngValue]="a">
                 {{ a.accountLabel }}
               </option>
@@ -469,7 +469,7 @@ padding: 10px 10px 10px 10px !important;
       <button pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary"
         (click)="dispalyInvoiceCustomerModal=false"></button>
 
-      <button [disabled]="invoice.invoiceNumber == null || invoice.invoiceNumber === '' || invoice.customer == null"
+      <button 
         [ngClass]="{'disabled': invoice.invoiceNumber == null || invoice.invoiceNumber === '' || invoice.customer == null}"
         pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn" (click)="saveInvoice()"
         style="margin-left: 10px;"></button>

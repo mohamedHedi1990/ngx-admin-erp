@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { UtilsServiceService } from '../../../utils-service.service';
 @Component({
@@ -31,7 +32,7 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
 
   isPaymentAmountDisabled = false;
   paymentOlderValue: any;
-  constructor(private UtilsService: UtilsServiceService) { }
+  constructor(private UtilsService: UtilsServiceService,private datePipe: DatePipe) { }
 
   ngOnInit(): void {
 
@@ -95,6 +96,7 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
 
 
     }
+    this.reglement.paymentRuleDeadlineDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd')
     this.getAllAccounts();
   }
   getAllAccounts() {

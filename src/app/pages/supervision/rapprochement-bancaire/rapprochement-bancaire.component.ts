@@ -83,12 +83,23 @@ statusCards = [
         context.operations = response;
         let decaissement = 0;
         let encaissement = 0;
+        let decaissementValid = 0;
+          let encaissementValid = 0;
         context.operations.forEach(element => {
-          if(element.opperationType === 'DECAISSEMENT') {
+          console.log("elemnt");
+          console.log(element);
+          if(element.opperationType === 'DECAISSEMENT' ) {
             decaissement = decaissement + element.operationAmount;
-          } else {
+          } else  {
             encaissement = encaissement + element.operationAmount;
           }
+          
+          if(element.opperationType === 'DECAISSEMENT' && element.validated==true ) {
+            decaissementValid = decaissementValid + element.operationAmount;
+          } else if(element.opperationType === 'ENCAISSEMENT' && element.validated==true) {
+            encaissementValid = encaissementValid + element.operationAmount;
+          }
+       
         });
 
 
@@ -100,7 +111,7 @@ statusCards = [
         context.statusCards[0].value = this.UtilsService.convertAmountToString(''+ response.solde);
         context.statusCards[1].value = this.UtilsService.convertAmountToString(''+encaissement);
         context.statusCards[2].value = this.UtilsService.convertAmountToString(''+decaissement);
-        const finalAmount = response.solde + encaissement - decaissement;
+        const finalAmount = response.solde + encaissementValid - decaissementValid;
         context.statusCards[3].value = this.UtilsService.convertAmountToString('' + finalAmount);
         this.loading = false;
           },

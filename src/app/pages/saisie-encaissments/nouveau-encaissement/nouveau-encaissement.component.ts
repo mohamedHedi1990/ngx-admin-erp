@@ -99,6 +99,7 @@ compareInvoice(a: any, b: any): boolean {
    }
 
   ngOnInit(): void {
+    this.encaissement.encaissementDeadlineDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.getAllAccounts();
     if (this.encaissement.encaissementCustomer != null) {
       this.getAllInvoiceCustomers();
@@ -132,6 +133,9 @@ compareInvoice(a: any, b: any): boolean {
     const context = this;
     this.UtilsService.get(UtilsServiceService.API_ACCOUNT).subscribe( response => {
         context.accounts = response;
+        if(response!=null)
+        this.encaissement.encaissementBankAccount=response[0];
+
       },
       error => {
         this.UtilsService.showToast('danger',
@@ -166,6 +170,7 @@ compareInvoice(a: any, b: any): boolean {
       this.dispalyCustomerModal = false;
       this.getAllCustomers();
       this.encaissement.encaissementCustomer = response;
+      this.invoice.customer=response;
       this.UtilsService.showToast('success',
       'Fournisseur ajouté avec succés',
       `Le fournisseur  ${this.customer.customerLabel} a été ajouté avec succés`);
@@ -196,7 +201,7 @@ invoiceNumber: 'REF12325565',
     this.invoices = [];
     if (this.encaissement.encaissementCustomer != null) {
       const context = this;
-      this.UtilsService.get(`${UtilsServiceService.API_CUSTOMER_INVOICE}/by-customer-id/${this.encaissement.encaissementCustomer.customerId}`).subscribe( response => {
+      this.UtilsService.get(`${UtilsServiceService.API_CUSTOMER_INVOICE}/by-customer-id-and-opened-invoice/${this.encaissement.encaissementCustomer.customerId}`).subscribe( response => {
           context.invoices = response;
           console.log('invoices --------------------------------- ', context.invoices);
         },

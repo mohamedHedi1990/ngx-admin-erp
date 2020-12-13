@@ -68,7 +68,7 @@ export class AddNewFactureFournisseurComponent implements OnInit {
   }
 
   checkInvoiceValid(): boolean {
-    return this.invoice.invoiceNumber == null || this.invoice.invoiceNumber === '' &&
+    return this.invoice.invoiceNumber == null || this.invoice.invoiceNumber === '' ||
       this.invoice.provider == null;
   }
   getAllProviders() {
