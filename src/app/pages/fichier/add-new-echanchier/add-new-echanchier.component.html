@@ -213,7 +213,7 @@ Modifier un échénacier
                          class="form-control p-field" [(ngModel)]="line.lineDate">
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{line.lineDate}}
+                  {{line.lineDate| date: 'dd-MM-yyyy'}}
                 </ng-template>
               </p-cellEditor>
             </td>

@@ -24,6 +24,7 @@ export class ListeFacturesClientsComponent implements OnInit {
   saveInvoice(invoice) {
 
     const context = this;
+    invoice.invoiceTotalAmount = Math.round(invoice.invoiceTotalAmount * 1000) / 1000.
     this.UtilsService.post(UtilsServiceService.API_CUSTOMER_INVOICE, invoice).subscribe(response => {
       this.hideInvoiceWindow();
       if (invoice.invoiceId == null) {

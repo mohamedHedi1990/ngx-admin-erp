@@ -25,24 +25,18 @@ Liste des échénaciers
   </ng-template>
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 15px;">
-        <th  style="text-align: center; font-size: 13px;    width: 15%;">Echéanchier</th>
-        <th  style="text-align: center; font-size: 13px;    width: 15%;">Compte bancaire</th>
         <th style=" text-align: center;font-size: 13px;    width: 15%;">Numéro de crédit</th>
         <th style=" text-align: center;font-size: 13px;    width: 15%;">Montant initial</th>
         <th style=" text-align: center;font-size: 13px;    width: 15%;">Taux intéret (en %)</th>
-        <th  style=" text-align: center;font-size: 13px;    width: 15%;">Nombre des années</th>
+        <th style=" text-align: center;font-size: 13px;    width: 15%;">Annuité</th>
+        <th style=" text-align: center;font-size: 13px;    width: 15%;">Nombre d'anuuité </th>
+        <th style=" text-align: center;font-size: 13px;    width: 15%;">Date de début</th>
         <th style="width: 10%;font-size: 13px; text-align: center;">Actions</th>
       </tr>
 
     </ng-template>
     <ng-template pTemplate="body" let-line>
       <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
-        <td  style="text-align: center;font-size: 13px;">
-          {{line.timeLineLabel}}
-        </td>
-        <td style="text-align: center;font-size: 13px;">
-          {{line.timeLineAccount.accountLabel}}
-        </td>
         <td style="text-align: center;font-size: 13px;">
           {{line.timeLineCreditNumber}}
         </td>
@@ -53,7 +47,13 @@ Liste des échénaciers
           {{line.timeLineInterestRateS}}
         </td>
         <td style="text-align: center;font-size: 13px;">
-          {{line.timeLineYearNumber}}
+          {{line.timeLineAnnuity}}
+        </td>
+        <td style="text-align: center;font-size: 13px;">
+          {{line.timeLineAnnityNumber}}
+        </td>
+        <td style="text-align: center;font-size: 13px;">
+          {{line.timeLineStartDate}}
         </td>
 
         <td style="text-align: center;font-size: 13px;">

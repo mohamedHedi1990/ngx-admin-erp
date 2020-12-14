@@ -140,14 +140,14 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
         // this for use case add rule
         if (this.reglement.paymentRuleAmount > (this.invoice.invoiceTotalAmount - this.invoice.invoicePayment)) {
           this.reglement.paymentRuleAmount = this.invoice.invoiceTotalAmount - this.invoice.invoicePayment;
-          this.reglement.paymentRuleAmount = Math.round(this.reglement.paymentRuleAmount * 100) / 100
+          this.reglement.paymentRuleAmount = Math.round(this.reglement.paymentRuleAmount * 1000) / 1000
         }
       }
       else {
         //use for use case update rule
         if (this.reglement.paymentRuleAmount > (this.invoice.invoiceTotalAmount - this.invoice.invoicePayment + this.paymentOlderValue)) {
           this.reglement.paymentRuleAmount = this.invoice.invoiceTotalAmount - this.invoice.invoicePayment + this.paymentOlderValue;
-          this.reglement.paymentRuleAmount = Math.round(this.reglement.paymentRuleAmount * 100) / 100
+          this.reglement.paymentRuleAmount = Math.round(this.reglement.paymentRuleAmount * 1000) / 1000
 
         }
       }

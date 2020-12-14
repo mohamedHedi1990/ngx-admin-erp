@@ -195,8 +195,8 @@ invoiceNumber: 'REF12325565',
     this.invoices = [];
     if (this.decaissement.decaissementProvider != null) {
       const context = this;
-      this.UtilsService.get(`${UtilsServiceService.API_PROVIDER_INVOICE}/by-provider-id/${this.decaissement.decaissementProvider.providerId}`).subscribe( response => {
-          context.invoices = response;
+      this.UtilsService.get(`${UtilsServiceService.API_PROVIDER_INVOICE}/by-provider-id-and-opened-invoice/${this.decaissement.decaissementProvider.providerId}`).subscribe( response => {
+        context.invoices = response;
           console.log('invoices --------------------------------- ', context.invoices);
         },
         error => {

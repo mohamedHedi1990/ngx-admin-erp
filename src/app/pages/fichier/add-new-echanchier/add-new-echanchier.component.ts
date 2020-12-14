@@ -24,7 +24,7 @@ export class AddNewEchanchierComponent implements OnInit {
   timeLineStartDate: null,
 };
 line = {
-  lineDate: new Date(Date.now()),
+  lineDate: this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
   initialAmount: 0,
   initialAmountS: '0',
   interests: 0,
@@ -99,6 +99,10 @@ line = {
     const context = this;
     this.UtilsService.get(UtilsServiceService.API_ACCOUNT).subscribe( response => {
         context.accounts = response;
+        if(response!=null && context.accounts.length !== 0)
+        {
+         this.timeLine.timeLineAccount=response[0];
+        }
       },
       error => {
         this.UtilsService.showToast('danger',
@@ -109,7 +113,7 @@ line = {
   }
  initiateLine() {
    this.line = {
-     lineDate: new Date(Date.now()),
+     lineDate: this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
      initialAmount: 0,
   initialAmountS: '0',
   interests: 0,
@@ -119,7 +123,7 @@ line = {
   total: 0,
   totalS: '0',
    };
-   this.line.lineDate = new Date();
+   this.line.lineDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
  }
  addLine() { 
     this.timeLine.timeLineTable.push(this.line);
