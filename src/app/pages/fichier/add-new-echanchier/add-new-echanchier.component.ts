@@ -127,7 +127,7 @@ line = {
  }
  addLine() { 
     this.timeLine.timeLineTable.push(this.line);
-    this.initiateLine();
+    //this.initiateLine();
  }
   saveEcenachier() {
     this.addNewEchenacierEvent.emit(this.timeLine);
