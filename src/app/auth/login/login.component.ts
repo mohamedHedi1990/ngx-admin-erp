@@ -11,13 +11,17 @@ import { AuthServiceService } from '../../services/auth-service.service';
   styleUrls: ['./login.component.scss'],
 
 })
-export class NgxLoginComponent extends NbLoginComponent {
-  user: any = {};
+export class NgxLoginComponent {
+  user: any = {
+    password: null,
+    matricule: null
+  };
   loginRequest:LoginRequest;
+  
   testAuth=false;
-  constructor(protected service: NbAuthService,@Inject(NB_AUTH_OPTIONS) protected options,
-    cd: ChangeDetectorRef,router: Router,private serviceAuth:AuthServiceService) {
-    super(service, options, cd, router);
+  constructor(
+    private router: Router,private serviceAuth:AuthServiceService) {
+
   }
 
 login()

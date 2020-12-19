@@ -20,7 +20,7 @@
            fieldSize="large"
            autofocus
            [status]="matricule.dirty ? (matricule.invalid  ? 'danger' : 'primary') : 'basic'"
-           [required]="getConfigValue('forms.validation.matricule.required')"
+           
            [attr.aria-invalid]="matricule.invalid && matricule.touched ? true : null">
     <ng-container *ngIf="matricule.invalid && matricule.touched">
       <p class="caption status-danger" *ngIf="matricule.errors?.required">
@@ -45,7 +45,7 @@
            placeholder="Mot de passe"
            fieldSize="large"
            [status]="password.dirty ? (password.invalid  ? 'danger' : 'primary') : 'basic'"
-           [required]="getConfigValue('forms.validation.password.required')"
+          
            [attr.aria-invalid]="password.invalid && password.touched ? true : null">
     <ng-container *ngIf="password.invalid && password.touched ">
       <p class="caption status-danger" *ngIf="password.errors?.required">
@@ -61,8 +61,8 @@
           fullWidth
           status="primary"
           size="large"
-          [disabled]="submitted || !form.valid"
-          [class.btn-pulse]="submitted">
+          
+          >
     Connexion
   </button>
 </form>
