@@ -1,6 +1,6 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbAuthJWTToken, NbAuthModule, NbDummyAuthStrategy, NbPasswordAuthStrategy } from '@nebular/auth';
+import {  NbAuthModule, NbDummyAuthStrategy, NbPasswordAuthStrategy } from '@nebular/auth';
 import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 import { of as observableOf } from 'rxjs';
 
@@ -52,6 +52,7 @@ import { StatsProgressBarService } from './mock/stats-progress-bar.service';
 import { VisitorsAnalyticsService } from './mock/visitors-analytics.service';
 import { SecurityCamerasService } from './mock/security-cameras.service';
 import { MockDataModule } from './mock/mock-data.module';
+//import { NbAuthJWTToken } from '@nebular/auth/services/token/token';
 
 const socialLinks = [
   {
@@ -109,7 +110,7 @@ export const NB_CORE_PROVIDERS = [
       NbPasswordAuthStrategy.setup({
         name: 'email',
         token: {
-          class: NbAuthJWTToken,
+        //  class: NbAuthJWTToken,
 
           key: 'token', // this parameter tells where to look for the token
         },

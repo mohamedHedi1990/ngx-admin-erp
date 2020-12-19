@@ -6,7 +6,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
@@ -26,11 +26,11 @@ import {FormsModule} from '@angular/forms';
 import { AuthServiceService } from './services/auth-service.service';
 import { AuthGuardService } from './services/AuthGuard.service';
 import { InterceptService } from './services/InterceptService.service';
+import { UtilsServiceService } from './utils-service.service';
 
 @NgModule({
   declarations: [AppComponent],
     imports: [
-       
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
@@ -53,7 +53,13 @@ import { InterceptService } from './services/InterceptService.service';
     providers:[
       AuthGuardService,
       AuthServiceService,
-      InterceptService,
+      UtilsServiceService,
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: InterceptService,
+        multi: true
+      },
+  
     ],
   bootstrap: [AppComponent],
 })

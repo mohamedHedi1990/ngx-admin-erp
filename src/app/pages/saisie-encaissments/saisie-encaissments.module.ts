@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PaiementFournisseurComponent } from './paiement-fournisseur/paiement-fournisseur.component';
 import {SaisieEncaissmentsRoutingModule} from './saisie-encaissments-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {TableModule} from 'primeng/table';
 import {CheckboxModule} from 'primeng/checkbox';
 import {ButtonModule} from 'primeng/button';
@@ -38,10 +38,12 @@ import { PaiementClientComponent } from './paiement-client/paiement-client.compo
 import { NouveauDecaissementComponent } from './nouveau-decaissement/nouveau-decaissement.component';
 import { ListEncaissementsComponent } from './list-encaissements/list-encaissements.component';
 import { NouveauEncaissementComponent } from './nouveau-encaissement/nouveau-encaissement.component';
+import { InterceptService } from '../../services/InterceptService.service';
 
 @NgModule({
   declarations: [PaiementFournisseurComponent, NouveauReglementComponent, ListDecaissementsComponent, PaiementClientComponent, NouveauDecaissementComponent, ListEncaissementsComponent, NouveauEncaissementComponent],
   imports: [
+    HttpClientModule,
     CommonModule,
     SaisieEncaissmentsRoutingModule,
     CommonModule,
@@ -64,6 +66,10 @@ import { NouveauEncaissementComponent } from './nouveau-encaissement/nouveau-enc
     NbUserModule, FormsModule,
     ModalModule.forRoot(), Ng2SmartTableModule, PanelModule, DialogModule,
   ],
-  providers: [UtilsServiceService, ConfirmationService, DialogService],
+  providers: [UtilsServiceService,  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: InterceptService,
+    multi: true
+  },ConfirmationService, DialogService],
 })
 export class SaisieEncaissmentsModule { }

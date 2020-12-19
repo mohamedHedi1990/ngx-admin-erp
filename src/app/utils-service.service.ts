@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrService} from '@nebular/theme';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {DatePipe} from '@angular/common';
 @Injectable({
@@ -32,10 +32,11 @@ export class UtilsServiceService {
   public static API_RAAPROCHEMENT_BANCAIRE= UtilsServiceService.API_SUIVIE_TRESERORIE + '/' + 'rapprochement-bancaire';
   public static API_HISTORIC_SOLD = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/historic-account-sold';
 
-
+  header = new HttpHeaders();
 
   constructor(private toastrService: NbToastrService, private httpClient: HttpClient,
               private datePipe: DatePipe) {
+              
   }
 
   public showToast(type: NbComponentStatus, title: string, body: string) {

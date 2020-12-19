@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {TableModule} from 'primeng/table';
@@ -35,11 +35,13 @@ import {DatePipe, registerLocaleData} from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import localeFrExtra from '@angular/common/locales/extra/fr';
 import {LOCALE_ID} from '@angular/core';
+import { InterceptService } from '../../services/InterceptService.service';
 registerLocaleData(localeFr, 'fr', localeFrExtra);
 
 @NgModule({
   declarations: [ListeFacturesFournisseursComponent, ListeFacturesClientsComponent, AddNewFactureClientComponent, AddNewFactureFournisseurComponent],
   imports: [
+    HttpClientModule,
     CommonModule,
     ConfirmDialogModule,
     FacturesRoutingModule,
@@ -56,11 +58,15 @@ registerLocaleData(localeFr, 'fr', localeFrExtra);
     NbInputModule,
     NbRadioModule,
     NbSelectModule,
-    HttpClientModule,
     DynamicDialogModule,
     NbUserModule, FormsModule,
     ModalModule.forRoot(), Ng2SmartTableModule, PanelModule, DialogModule,
   ],
-  providers: [UtilsServiceService, ConfirmationService, DialogService,  { provide: LOCALE_ID, useValue: "fr-FR" }],
+  providers: [UtilsServiceService,
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: InterceptService,
+    multi: true
+  }, ConfirmationService, DialogService,  { provide: LOCALE_ID, useValue: "fr-FR" }],
 })
 export class FacturesModule { }
