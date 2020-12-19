@@ -109,8 +109,8 @@ statusCards = [
        ).subscribe( response => {
          console.log('response    ', response);
         context.statusCards[0].value = this.UtilsService.convertAmountToString(''+ response.solde);
-        context.statusCards[1].value = this.UtilsService.convertAmountToString(''+encaissement);
-        context.statusCards[2].value = this.UtilsService.convertAmountToString(''+decaissement);
+        context.statusCards[1].value = this.UtilsService.convertAmountToString(''+decaissementValid);
+        context.statusCards[2].value = this.UtilsService.convertAmountToString(''+decaissementValid);
         const finalAmount = response.solde + encaissementValid - decaissementValid;
         context.statusCards[3].value = this.UtilsService.convertAmountToString('' + finalAmount);
         this.loading = false;
