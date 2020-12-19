@@ -5,6 +5,9 @@ import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { TestBed } from '@angular/core/testing';
+import { Route } from '@angular/compiler/src/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-header',
@@ -38,14 +41,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
+  userMenu = [ { title: 'Profile'}, { title: 'Log out' } ];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private themeService: NbThemeService,
               private userService: UserData,
               private layoutService: LayoutService,
-              private breakpointService: NbMediaBreakpointsService) {
+              private breakpointService: NbMediaBreakpointsService,
+              private router: Router) {
+                this.menuService.onItemClick().subscribe(( event ) => {
+                  this.onItemSelection(event.item.title);
+                })
   }
 
   ngOnInit() {
@@ -54,7 +61,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.userService.getUsers()
       .pipe(takeUntil(this.destroy$))
       .subscribe((users: any) => this.user = users.nick);
-
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
       .pipe(
@@ -83,7 +89,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   toggleSidebar(): boolean {
     this.sidebarService.toggle(true, 'menu-sidebar');
     this.layoutService.changeLayoutSize();
-
     return false;
   }
 
@@ -91,4 +96,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.menuService.navigateHome();
     return false;
   }
+  onItemSelection(item)
+  {
+    console.log(item)
+    console.log("item logout")
+    if(item==="Log out")
+    {
+      this.router.navigateByUrl("/auth/login");
+      localStorage.removeItem('token');
+    }
+  }
+  
 }

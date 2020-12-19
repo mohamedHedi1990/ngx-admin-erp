@@ -23,10 +23,13 @@ import {
   NbWindowModule,
 } from '@nebular/theme';
 import {FormsModule} from '@angular/forms';
+import { AuthServiceService } from './services/auth-service.service';
+import { AuthGuardService } from './services/AuthGuard.service';
 
 @NgModule({
   declarations: [AppComponent],
     imports: [
+       
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
@@ -45,6 +48,10 @@ import {FormsModule} from '@angular/forms';
         CoreModule.forRoot(),
         ThemeModule.forRoot(),
         FormsModule,
+    ],
+    providers:[
+      AuthGuardService,
+      AuthServiceService
     ],
   bootstrap: [AppComponent],
 })
