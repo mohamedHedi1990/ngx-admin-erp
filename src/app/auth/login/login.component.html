@@ -16,7 +16,6 @@
            #matricule="ngModel"
            name="Matricule"
            id="input-Matricule"
-           pattern=".{8,20}"
            placeholder="Matricule"
            fieldSize="large"
            autofocus
@@ -47,8 +46,6 @@
            fieldSize="large"
            [status]="password.dirty ? (password.invalid  ? 'danger' : 'primary') : 'basic'"
            [required]="getConfigValue('forms.validation.password.required')"
-           [minlength]="6"
-           [maxlength]="20"
            [attr.aria-invalid]="password.invalid && password.touched ? true : null">
     <ng-container *ngIf="password.invalid && password.touched ">
       <p class="caption status-danger" *ngIf="password.errors?.required">

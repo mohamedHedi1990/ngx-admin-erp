@@ -25,6 +25,7 @@ import {
 import {FormsModule} from '@angular/forms';
 import { AuthServiceService } from './services/auth-service.service';
 import { AuthGuardService } from './services/AuthGuard.service';
+import { InterceptService } from './services/InterceptService.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -51,7 +52,8 @@ import { AuthGuardService } from './services/AuthGuard.service';
     ],
     providers:[
       AuthGuardService,
-      AuthServiceService
+      AuthServiceService,
+      InterceptService,
     ],
   bootstrap: [AppComponent],
 })

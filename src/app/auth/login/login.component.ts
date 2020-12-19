@@ -30,7 +30,7 @@ login()
     (data:JwtResponse)=>{
       console.log("success");
       console.log(data);
-      localStorage.setItem('token',data.jwt);
+      localStorage.setItem('token',data.token);
       this.router.navigateByUrl("/pages/dashboard");
       this.testAuth=false;
     },

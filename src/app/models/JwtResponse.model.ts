@@ -1,5 +1,5 @@
 export class JwtResponse{
-    jwt:string;
+    token:string;
 
    id:number;
 
