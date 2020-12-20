@@ -60,19 +60,27 @@ export class ListeTarifsBancaireComponent implements OnInit {
   saveNewComissions(account) {
 
     const context = this;
-    this.UtilsService.post(UtilsServiceService.API_ACCOUNT, account).subscribe( response => {
+    account.accountComissions.forEach(element => {
+      console.log(element);
+      let bank=account;
+      bank.accountContacts=[];
+      bank.accountComissions=[];
+      element.bankAccount=bank;
+      console.log(element);
+      this.UtilsService.post(UtilsServiceService.API_COMISSION, element).subscribe( response => {
         this.hideTarifBancaireWindow();
 
           this.UtilsService.showToast('success',
             'Compte bancaire modfié avec succés',
-            `Le compte banciare  ${account.accountLabel} a été modifié avec succcés`);
+            `Le compte bancaire  ${account.accountLabel} a été modifié avec succcés`);
 
         context.getAllAccounts();
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
-        `Un erreur interne a été produit lors de la modification des comissions pour le compte banciare ${account.accountLabel}`); });
-
+        `Un erreur interne a été produit lors de la modification des comissions pour le compte banciare ${account.accountLabel}`); 
+      });
+    });
   }
 
   delComission() {

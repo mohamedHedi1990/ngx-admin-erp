@@ -128,14 +128,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/modal-overlays/popover',
       },*/
     ],
-  },{
+  },
+  {
     title: 'Simulation de tresorerie',
-    icon: 'browser-outline',
+    icon: 'clipboard-outline',
     children: [
       {
         title: 'Etat engagé',
         link: '/pages/suivi-tresorerie/etat-engage',
-        icon: 'browser-outline',
+        icon: 'clipboard-outline',
+      },
+      {
+        title: 'Etat non engagé',
+        link: '/pages/suivi-tresorerie/non-etat-engage',
+        icon: 'clipboard-outline',
       },
       /*
       {

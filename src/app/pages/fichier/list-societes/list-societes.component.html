@@ -13,7 +13,7 @@ Votre société
     <ng-template pTemplate="caption" >
       
         <div class="p-d-flex p-ai-center p-jc-between" style="  width: 100%; display: inline-block;">
-          <div style="float:right" *ngIf="societes.length === 0">
+          <div style="float:right" *ngIf="societes!=null && societes.length !=null && societes.length === 0">
             <button pButton pRipple label="Ajouter votre societé" icon="pi pi-plus" class="primaryBtn" (click)="showSocieteWindow = true"></button>
           </div>
       </div>

@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { EtatEngageComponent } from './etat-engage/etat-engage.component';
 import { EtatGlobalTreserorieComponent } from './etat-global-treserorie/etat-global-treserorie.component';
 import { EtatNonEngageComponent } from './etat-non-engage/etat-non-engage.component';
-import { GlobalSupervisionComponent } from './global-supervision/global-supervision.component';
 import { RapprochementBancaireComponent } from './rapprochement-bancaire/rapprochement-bancaire.component';
 
 const routes: Routes = [{
@@ -19,7 +18,7 @@ const routes: Routes = [{
       component: EtatEngageComponent,
     },
     {
-      path: 'etat-non-engage',
+      path: 'non-etat-engage',
       component: EtatNonEngageComponent,
     },
     {

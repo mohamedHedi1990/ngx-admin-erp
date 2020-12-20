@@ -99,7 +99,7 @@ statusCards = [
           } else if(element.opperationType === 'ENCAISSEMENT' && element.validated==true) {
             encaissementValid = encaissementValid + element.operationAmount;
           }
-       
+          
         });
 
 
@@ -109,10 +109,10 @@ statusCards = [
        ).subscribe( response => {
          console.log('response    ', response);
         context.statusCards[0].value = this.UtilsService.convertAmountToString(''+ response.solde);
-        context.statusCards[1].value = this.UtilsService.convertAmountToString(''+decaissementValid);
-        context.statusCards[2].value = this.UtilsService.convertAmountToString(''+decaissementValid);
+        context.statusCards[1].value = this.UtilsService.convertAmountToString(''+encaissementValid.toFixed(3));
+        context.statusCards[2].value = this.UtilsService.convertAmountToString(''+decaissementValid.toFixed(3));
         const finalAmount = response.solde + encaissementValid - decaissementValid;
-        context.statusCards[3].value = this.UtilsService.convertAmountToString('' + finalAmount);
+        context.statusCards[3].value = this.UtilsService.convertAmountToString('' + finalAmount.toFixed(3));
         this.loading = false;
           },
           error => {
