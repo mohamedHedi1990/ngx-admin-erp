@@ -36,9 +36,9 @@ import {ConfirmationService} from 'primeng/api';
 import { EtatGlobalTreserorieComponent } from './etat-global-treserorie/etat-global-treserorie.component';
 import { EtatNonEngageComponent } from './etat-non-engage/etat-non-engage.component';
 import { RapprochementBancaireComponent } from './rapprochement-bancaire/rapprochement-bancaire.component';
-
+import { EtatEngageComponent } from './etat-engage/etat-engage.component';
 @NgModule({
-  declarations: [GlobalSupervisionComponent, StatusCardComponent, EtatGlobalTreserorieComponent, EtatNonEngageComponent, RapprochementBancaireComponent],
+  declarations: [GlobalSupervisionComponent, StatusCardComponent, EtatGlobalTreserorieComponent, EtatNonEngageComponent, EtatEngageComponent, RapprochementBancaireComponent],
   imports: [
     CommonModule,
     SupervisionRoutingModule,

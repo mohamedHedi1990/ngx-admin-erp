@@ -1,0 +1,140 @@
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
+<h4 style="background: #E7E8E8;
+padding: 10px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;margin-left: 10px">
+Etat prévisionnel de trésereorie engagé
+</h4>
+<div class="card" style="margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
+  <div style="display: flex; margin: 3%">
+    <div class="mb-12 col-md-6 col-12">
+      <label for="type" class="p-float-label" style="font-size: 13px"
+        >Compte bancaire</label
+      >
+      <div class="p-inputgroup p-fluid">
+        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+        <select
+          class="form-control p-field"
+          id="type"
+          name="side"
+          [(ngModel)]="supervision.account"
+
+          style="font-size: 13px"
+          (change)="supervisionFn()"
+          [compareWith]="compareAccount"
+          >
+
+          <option *ngIf="supervision.account == null" [ngValue]="null">-- Compte bancaire --</option>
+          <option *ngFor="let a of accounts" [ngValue]="a">
+            {{ a.accountLabel }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="mb-12 col-md-3 col-12">
+      <label for="fin" class="p-float-label" style="font-size: 13px"
+        >Date de début
+      </label>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+        <input 
+          type="date"
+          placeholder="Date"
+          class="form-control p-field"
+          id="fin"
+          [(ngModel)]="supervision.startDate"
+          style="font-size: 13px"
+          disabled="true"
+          >
+
+      </div>
+    </div>
+    <div class="mb-12 col-md-3 col-12">
+      <label for="fin" class="p-float-label" style="font-size: 13px"
+        >Date de fin
+      </label>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+        <input
+          type="date"
+          placeholder="Date"
+          class="form-control p-field"
+          id="fin"
+          [(ngModel)]="supervision.endDate"
+          style="font-size: 13px"
+          (change)="supervisionFn()"
+          [min]="supervision.startDate"
+          >
+
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xxxl-3 col-md-6" *ngFor="let statusCard of statusCards">
+      <ngx-status-card [title]="statusCard.title" [type]="statusCard.type" [value]="statusCard.value">
+        <i [ngClass]="statusCard.iconClass"></i>
+      </ngx-status-card>
+    </div>
+  </div>
+  <p-table #dt [value]="operations" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+           [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+           [paginator]="true" currentPageReportTemplate=""
+           [filterDelay]="0">
+    <ng-template pTemplate="header">
+      <tr style="text-align: center; font-size: 13px;">
+        <th style="text-align: center; font-size: 13px;width: 20%">Date d'échéance</th>
+        <th style="text-align: center; font-size: 13px;width: 40%">Opération</th>
+        <!--
+        <th style="text-align: center; font-size: 13px;width: 50%">Détails</th>
+        -->
+        <th style="text-align: center; font-size: 13px;width: 20%">Montant</th>
+        <th style="text-align: center; font-size: 13px;width: 20%">Solde progressive</th>
+      </tr>
+    </ng-template>
+    <!--
+    [ngClass]="{
+        'green-tr': operation.opperationType === 'ENCAISSEMENT',
+        'red-tr': operation.opperationType === 'DECAISSEMENT'
+      }"
+
+    -->
+    <ng-template pTemplate="body" let-operation>
+      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
+        <td  style="text-align: center;font-size: 13px;">
+          {{operation.operationDate}}
+        </td>
+        <td style="text-align: center;font-size: 13px;">
+          <div>{{operation.opperationLabel}}</div>
+          <div *ngIf="operation.opperationFacultatifLabel != null || operation.opperationFacultatifLabel !==''"><i> {{operation.opperationFacultatifLabel}}</i></div>
+        </td>
+        <!--
+        <td style="text-align: center;font-size: 13px;">
+          <div>{{operation.opperationDetails[0]}}
+            <span *ngIf="operation.opperationDetails[1] != null && operation.opperationDetails[1] !== ''"> (No: {{operation.opperationDetails[1]}} )</span></div>
+          <div><i>{{operation.opperationDetails[2]}}</i></div>
+        </td>
+        -->
+        <td style="text-align: center;font-size: 13px;">
+          <span class="customer-badge"  [ngClass]="{
+        'status-blocked': operation.opperationType === 'DECAISSEMENT',
+         'status-active': operation.opperationType === 'ENCAISSEMENT'}">
+                      <span *ngIf="operation.opperationType === 'DECAISSEMENT'">-</span>{{operation.operationAmountS}} {{operation.opperationCurrency}}
+          </span>
+        </td>
+        <td style="text-align: center;font-size: 13px;">
+           <span class="customer-badge"  [ngClass]="{
+        'status-blocked': operation.progressiveAmount < 0,
+         'status-active': operation.progressiveAmount >= 0}">
+                       <span *ngIf="operation.progressiveAmount < 0">-</span>{{operation.progressiveAmountS}} {{operation.opperationCurrency}}
+           </span>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr style="font-size: 13px">
+        <td colspan="8" style="text-align: left !important;">Aucune opération trouvée pour cette pèriode!</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
