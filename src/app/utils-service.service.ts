@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrService} from '@nebular/theme';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {DatePipe} from '@angular/common';
 @Injectable({
@@ -10,6 +10,7 @@ export class UtilsServiceService {
   // public static REMOTE_ADDRESS = 'http://212.129.62.79:8090/';
   public static REMOTE_ADDRESS = 'http://localhost:8090/';
   // public static REMOTE_ADDRESS = 'https://erp-forecast-bi-services.herokuapp.com';
+  public static API_AUTH=UtilsServiceService.REMOTE_ADDRESS+'api/auth/signin'
   public static API_USER = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/user';
   public static API_COMPANY = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/company';
   public static API_PROVIDER = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/provider';
@@ -31,10 +32,11 @@ export class UtilsServiceService {
   public static API_RAAPROCHEMENT_BANCAIRE= UtilsServiceService.API_SUIVIE_TRESERORIE + '/' + 'rapprochement-bancaire';
   public static API_HISTORIC_SOLD = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/historic-account-sold';
 
-
+  header = new HttpHeaders();
 
   constructor(private toastrService: NbToastrService, private httpClient: HttpClient,
               private datePipe: DatePipe) {
+              
   }
 
   public showToast(type: NbComponentStatus, title: string, body: string) {

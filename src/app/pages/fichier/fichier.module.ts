@@ -1,5 +1,5 @@
 import { ListContactsComponent } from './list-contacts/list-contacts.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SocietesComponent } from './societes/societes.component';
@@ -50,10 +50,12 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 import { ListSocietesComponent } from './list-societes/list-societes.component';
 import { AddNewSocieteComponent } from './add-new-societe/add-new-societe.component';
+import { InterceptService } from '../../services/InterceptService.service';
 @NgModule({
   declarations: [SocietesComponent, SaisirSocieteComponent, DetailsSocieteComponent, ListClientsComponent, ListContactsComponent, AddNewClientComponent, NewContactComponent, ListFournisseursComponent, AddNewProviderComponent, ListeContactsComponent, ListeTarifsBancaireComponent, AddNewTarifsBancaireComponent, AddNewEchanchierComponent,
           ListeEchenaciersComponent, ListComptesComponent, AddNewCompteComponent, NouvelleComissionComponent, ListSocietesComponent, AddNewSocieteComponent],
   imports: [
+    HttpClientModule,
     CommonModule,
     ConfirmDialogModule,
     FichierRoutingModule,
@@ -75,6 +77,11 @@ import { AddNewSocieteComponent } from './add-new-societe/add-new-societe.compon
     NbUserModule, FormsModule,
     ModalModule.forRoot(), Ng2SmartTableModule, PanelModule, DialogModule,
   ],
-  providers: [UtilsServiceService, ConfirmationService, DialogService],
+  providers: [UtilsServiceService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptService,
+      multi: true
+    },  ConfirmationService, DialogService],
 })
 export class FichierModule { }

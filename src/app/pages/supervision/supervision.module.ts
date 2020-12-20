@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {SupervisionRoutingModule} from './supervision-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {TableModule} from 'primeng/table';
 import {CheckboxModule} from 'primeng/checkbox';
 import {ButtonModule} from 'primeng/button';
@@ -36,10 +36,13 @@ import {ConfirmationService} from 'primeng/api';
 import { EtatGlobalTreserorieComponent } from './etat-global-treserorie/etat-global-treserorie.component';
 import { EtatNonEngageComponent } from './etat-non-engage/etat-non-engage.component';
 import { RapprochementBancaireComponent } from './rapprochement-bancaire/rapprochement-bancaire.component';
+import { InterceptService } from '../../services/InterceptService.service';
 import { EtatEngageComponent } from './etat-engage/etat-engage.component';
+
 @NgModule({
   declarations: [GlobalSupervisionComponent, StatusCardComponent, EtatGlobalTreserorieComponent, EtatNonEngageComponent, EtatEngageComponent, RapprochementBancaireComponent],
   imports: [
+    HttpClientModule,
     CommonModule,
     SupervisionRoutingModule,
     CommonModule,
@@ -62,6 +65,11 @@ import { EtatEngageComponent } from './etat-engage/etat-engage.component';
     NbUserModule, FormsModule,
     ModalModule.forRoot(), Ng2SmartTableModule, PanelModule, DialogModule,
   ],
-  providers: [UtilsServiceService, ConfirmationService, DialogService],
+  providers: [UtilsServiceService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptService,
+      multi: true
+    }, ConfirmationService, DialogService],
 })
 export class SupervisionModule { }
