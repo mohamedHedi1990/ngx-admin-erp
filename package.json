@@ -39,7 +39,7 @@
     "@angular/animations": "^9.0.4",
     "@angular/cdk": "^9.1.2",
     "@angular/common": "^9.0.4",
-    "@angular/compiler": "^9.0.4",
+    "@angular/compiler": "^9.1.13",
     "@angular/core": "^9.0.4",
     "@angular/forms": "^9.0.4",
     "@angular/google-maps": "^9.1.0",
@@ -95,7 +95,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.900.4",
-    "@angular/cli": "^9.0.4",
+    "@angular/cli": "^9.1.13",
     "@angular/compiler-cli": "^9.0.4",
     "@angular/language-service": "9.0.4",
     "@compodoc/compodoc": "1.0.1",
