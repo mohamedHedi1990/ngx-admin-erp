@@ -11,7 +11,8 @@ export class EtatEngageComponent implements OnInit {
   operations = [];
   accounts = [];
   loading = false;
-  constructor(private UtilsService: UtilsServiceService, private datePipe: DatePipe) { }
+  today = new Date();
+  tomorrow = new Date() ;
 supervision= {
   account: null,
   startDate: this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
@@ -46,6 +47,10 @@ statusCards = [
   }
 
 ];
+constructor(private UtilsService: UtilsServiceService, private datePipe: DatePipe) { 
+  this.tomorrow.setDate(this.today.getDate()+1);
+  this.supervision.startDate = this.datePipe.transform(this.tomorrow,'yyyy-MM-dd');
+}
   ngOnInit(): void {
     this.getAllAccounts();
   }
@@ -90,10 +95,10 @@ statusCards = [
             encaissement = encaissement + element.operationAmount;
           }
         });
-        context.statusCards[1].value = this.UtilsService.convertAmountToString(''+encaissement);
-        context.statusCards[2].value = this.UtilsService.convertAmountToString(''+decaissement);
+        context.statusCards[1].value = this.UtilsService.convertAmountToString(''+encaissement.toFixed(3));
+        context.statusCards[2].value = this.UtilsService.convertAmountToString(''+decaissement.toFixed(3));
         const finalAmount = this.accountInitialAmount + encaissement - decaissement;
-        context.statusCards[3].value = this.UtilsService.convertAmountToString('' + finalAmount);
+        context.statusCards[3].value = this.UtilsService.convertAmountToString('' + finalAmount.toFixed(3));
       },
       error => {
         this.UtilsService.showToast('danger',
