@@ -48,8 +48,8 @@ statusCards = [
 
 ];
 constructor(private UtilsService: UtilsServiceService, private datePipe: DatePipe) { 
-  this.tomorrow.setDate(this.today.getDate()+1);
-  this.supervision.startDate = this.datePipe.transform(this.tomorrow,'yyyy-MM-dd');
+  // this.tomorrow.setDate(this.today.getDate()+1);
+  this.supervision.startDate = this.datePipe.transform(new Date(),'yyyy-MM-dd');
 }
   ngOnInit(): void {
     this.getAllAccounts();
@@ -95,10 +95,25 @@ constructor(private UtilsService: UtilsServiceService, private datePipe: DatePip
             encaissement = encaissement + element.operationAmount;
           }
         });
-        context.statusCards[1].value = this.UtilsService.convertAmountToString(''+encaissement.toFixed(3));
-        context.statusCards[2].value = this.UtilsService.convertAmountToString(''+decaissement.toFixed(3));
-        const finalAmount = this.accountInitialAmount + encaissement - decaissement;
+        this.UtilsService.get(UtilsServiceService.API_HISTORIC_SOLD+ '/' + this.supervision.account.accountId + '/' + this.supervision.startDate
+       ).subscribe( response => {
+         console.log('response    ', response);
+         context.statusCards[0].value = this.UtilsService.convertAmountToString(''+ response.solde.toFixed(3));
+         context.statusCards[1].value = this.UtilsService.convertAmountToString(''+encaissement.toFixed(3));
+         context.statusCards[2].value = this.UtilsService.convertAmountToString(''+decaissement.toFixed(3));
+
+        const finalAmount = response.solde + encaissement - decaissement;
+        
         context.statusCards[3].value = this.UtilsService.convertAmountToString('' + finalAmount.toFixed(3));
+        this.loading = false;
+          },
+          error => {
+            this.loading = false;
+            this.UtilsService.showToast('danger',
+              'Erreur interne',
+              `Un erreur interne a été produit lors du chargement du montant initial au début de cette période`);
+          });
+
       },
       error => {
         this.UtilsService.showToast('danger',
