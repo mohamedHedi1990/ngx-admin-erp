@@ -57,6 +57,11 @@ export class AddNewFactureFournisseurComponent implements OnInit {
     this.getAllProviders();
   }
 
+  compareProvider(a: any, b: any): boolean {
+    if (a==null || b== null) return true;
+    return a.providerId === b.providerId;
+  }
+
   saveInvoice() {
     console.log("Invoice to save ");
     console.log(this.invoice);

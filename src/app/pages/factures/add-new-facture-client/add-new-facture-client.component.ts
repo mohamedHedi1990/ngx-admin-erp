@@ -56,6 +56,11 @@ export class AddNewFactureClientComponent implements OnInit {
     this.getAllCustomers();
   }
 
+  compareCustomer(a: any, b: any): boolean {
+    if (a==null || b== null) return true;
+    return a.customerId === b.customerId;
+  }
+
   saveInvoice() {
     console.log("Invoice to save ");
     console.log(this.invoice);
