@@ -139,7 +139,7 @@ export class AddNewFactureFournisseurComponent implements OnInit {
     this.invoice.invoiceDeadlineInNumberOfDays = time;
   }
   removeItem(id){
-   et index = this.providers_edit.findIndex(c => c.customerId === id);
+   et index = this.providers_edit.findIndex(c => c.providerId === id);
     this.providers_edit.splice(index,1);
     
  }
