@@ -58,7 +58,7 @@ Modifier une nouvelle facture fournisseur
                     <option  [ngValue]="invoice.provider" 
                     [selected]="true"> {{invoice.provider.providerLabel}}
                   </option>
-                    <option *ngFor="let c of providers;" [ngValue]="c">{{c.providerLabel}}</option>
+                    <option *ngFor="let c of providers_edit;" [ngValue]="c">{{c.providerLabel}}</option>
       
                   </select>
             <select *ngIf="invoice.invoiceId == null" class="form-control p-field" id="type" name="side" [(ngModel)]="invoice.provider" [ngClass]="{
