@@ -51,13 +51,16 @@ Modifier une nouvelle facture fournisseur
           <label for="type" class="p-float-label">Fournisseur</label>
           <div class="p-inputgroup p-fluid">
             <span class="p-inputgroup-addon"><i class="pi pi-shopping-cart"></i></span>
-            <input *ngIf="invoice.invoiceId!= null" type="text" placeholder="Date" class="form-control p-field"  id="manager"
-                   [(ngModel)]="invoice.provider.providerLabel " style="font-size: 13px" disabled="true">
-            <select *ngIf="invoice.invoiceId == null" class="form-control p-field" id="type" name="side" [(ngModel)]="invoice.provider" [ngClass]="{
+            <select  class="form-control p-field" id="type" name="side" [(ngModel)]="invoice.provider" [ngClass]="{
         'is-invalid': invoice.provider == null ,
         'is-valid':invoice.provider != null
       }" style="font-size: 13px">
-              <option [ngValue]="null">-- Fournisseur --</option>
+               <option *ngIf="invoice.invoiceId != null || invoice.provider.providerId == currentInvoiceProvider.providerId" 
+                      [ngValue]="currentInvoiceProvider" 
+                      [selected]="true"> {{currentInvoiceProvider.providerLabel}} 
+              </option>
+      
+		<option *ngIf="invoice.invoiceId == null" [ngValue]="null">-- Fournisseur --</option>
               <option *ngFor="let c of providers;" [ngValue]="c">{{c.providerLabel}}</option>
 
             </select>

@@ -23,10 +23,12 @@ export class AddNewFactureFournisseurComponent implements OnInit {
     invoiceDeadlineInNumberOfDays: 0,
 
   };
+
   rsAmount = null;
   @Output() addNewProviderInvoiceEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();
   providers = [];
+  currentInvoiceProvider ;
   maxDateInvoiceDate;
   minDateDeadlineDate;
   constructor(private UtilsService: UtilsServiceService,
@@ -50,6 +52,9 @@ export class AddNewFactureFournisseurComponent implements OnInit {
       }
       this.invoice.invoiceDate = this.datePipe.transform(this.invoice.invoiceDate, 'yyyy-MM-dd');
       this.invoice.invoiceDeadlineDate = this.datePipe.transform(this.invoice.invoiceDeadlineDate, 'yyyy-MM-dd');
+      this.currentInvoiceProvider= this.invoice.provider ;
+      console.log('currentInvoiceProvider = ',this.currentInvoiceProvider);
+      console.log('invoice.customer.providerId = ',this.invoice.provider.providerId);
     }
     this.maxDateInvoiceDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.minDateDeadlineDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
@@ -76,6 +81,15 @@ export class AddNewFactureFournisseurComponent implements OnInit {
     const context = this;
     this.UtilsService.get(UtilsServiceService.API_PROVIDER).subscribe(response => {
       context.providers = response;
+      console.log('providers =' ,context.providers);
+      if(context.providers.length != 0){
+        if (this.invoice.invoiceId != null) {
+        
+          
+          this.removeItem(this.currentInvoiceProvider.providerId);
+          
+        }
+    }
     },
       error => {
         this.UtilsService.showToast('danger',
@@ -124,5 +138,10 @@ export class AddNewFactureFournisseurComponent implements OnInit {
     const time = (limitDate.valueOf() - invoiceDate.valueOf()) / 86400000;
     this.invoice.invoiceDeadlineInNumberOfDays = time;
   }
+  removeItem(id){
+    let index = this.providers.findIndex(c => c.customerId === id);
+    this.providers.splice(index,1);
+    
+ }
 
 }

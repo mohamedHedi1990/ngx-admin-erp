@@ -30,6 +30,8 @@ export class AddNewFactureClientComponent implements OnInit {
   clients = [];
   maxDateInvoiceDate;
   minDateDeadlineDate;
+  
+  currentInvoiceCustomer;
   constructor(private UtilsService: UtilsServiceService,
     private datePipe: DatePipe) { }
 
@@ -49,11 +51,17 @@ export class AddNewFactureClientComponent implements OnInit {
       }
       this.invoice.invoiceDate = this.datePipe.transform(this.invoice.invoiceDate, 'yyyy-MM-dd');
       this.invoice.invoiceDeadlineDate = this.datePipe.transform(this.invoice.invoiceDeadlineDate, 'yyyy-MM-dd');
+      this.currentInvoiceCustomer= this.invoice.customer ;
+      console.log('currentInvoiceCustomer = ',this.currentInvoiceCustomer);
+      console.log('invoice.customer.customerId = ',this.invoice.customer.customerId);
     }
     this.maxDateInvoiceDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.minDateDeadlineDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     console.log(this.datePipe.transform(new Date(), 'dd-MM-yyyy'));
     this.getAllCustomers();
+
+
+
   }
 
   saveInvoice() {
@@ -75,6 +83,15 @@ export class AddNewFactureClientComponent implements OnInit {
     const context = this;
     this.UtilsService.get(UtilsServiceService.API_CLIENT).subscribe(response => {
       context.clients = response;
+      console.log('clients =' ,context.clients);
+      if(context.clients.length != 0){
+        if (this.invoice.invoiceId != null) {
+        
+          
+          this.removeItem(this.currentInvoiceCustomer.customerId);
+        
+        }
+    }
     },
       error => {
         this.UtilsService.showToast('danger',
@@ -125,4 +142,9 @@ export class AddNewFactureClientComponent implements OnInit {
     this.invoice.invoiceDeadlineInNumberOfDays = time;
 
   }
+  removeItem(id){
+    let index = this.clients.findIndex(c => c.customerId === id);
+    this.clients.splice(index,1);
+    
+ }
 }
