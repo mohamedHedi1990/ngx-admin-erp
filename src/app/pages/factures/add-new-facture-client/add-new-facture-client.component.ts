@@ -28,6 +28,7 @@ export class AddNewFactureClientComponent implements OnInit {
   @Output() addNewCustomerInvoiceEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();
   clients = [];
+  clients_edit =[];
   maxDateInvoiceDate;
   minDateDeadlineDate;
   constructor(private UtilsService: UtilsServiceService,
