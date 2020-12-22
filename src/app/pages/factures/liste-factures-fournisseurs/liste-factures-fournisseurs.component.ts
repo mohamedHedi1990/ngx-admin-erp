@@ -109,19 +109,19 @@ export class ListeFacturesFournisseursComponent implements OnInit {
     };
   }
 
-  closeInvoice() {
+  closeInvoice(invoice) {
     const context = this;
-    const url = UtilsServiceService.API_INVOICE + '/' + this.invoice.invoiceId;
+    const url = UtilsServiceService.API_INVOICE + '/' + invoice.invoiceId;
     this.UtilsService.put(url, null).subscribe(response => {
       this.UtilsService.showToast('success',
         'Facture fermée avec succés',
-        `La facture fournisseur numéro  ${this.invoice.invoiceNumber} a été fermée avec succcés`);
+        `La facture fournisseur numéro  ${invoice.invoiceNumber} a été fermée avec succcés`);
       context.getAllInvoices();
     },
       error => {
         this.UtilsService.showToast('danger',
           'Erreur interne',
-          `Un erreur interne a été produit lors de la fermeture de facture fournisseur numéro  ${this.invoice.invoiceNumber}`);
+          `Un erreur interne a été produit lors de la fermeture de facture fournisseur numéro  ${invoice.invoiceNumber}`);
       });
 
 
