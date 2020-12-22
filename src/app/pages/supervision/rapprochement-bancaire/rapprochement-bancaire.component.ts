@@ -111,7 +111,9 @@ statusCards = [
          context.statusCards[0].value = this.UtilsService.convertAmountToString(''+ response.solde.toFixed(3));
          context.statusCards[1].value = this.UtilsService.convertAmountToString(''+encaissementValid.toFixed(3));
          context.statusCards[2].value = this.UtilsService.convertAmountToString(''+decaissementValid.toFixed(3));
+
         const finalAmount = response.solde + encaissementValid - decaissementValid;
+        
         context.statusCards[3].value = this.UtilsService.convertAmountToString('' + finalAmount.toFixed(3));
         this.loading = false;
           },
