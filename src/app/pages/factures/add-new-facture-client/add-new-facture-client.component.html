@@ -50,17 +50,25 @@ padding: 10px 10px 10px 10px !important;
           <label for="type" class="p-float-label">Client</label>
           <div class="p-inputgroup p-fluid">
             <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-            
-            <select  class="form-control p-field" id="type" name="side"
+            <select *ngIf="invoice.invoiceId != null" class="form-control p-field" id="type" name="side"
                     [(ngModel)]="invoice.customer" [ngClass]="{
         'is-invalid': invoice.customer == null ,
         'is-valid':invoice.customer != null
       }" style="font-size: 13px">
-             <option *ngIf="invoice.invoiceId != null || invoice.customer.customerId == currentInvoiceCustomer.customerId" 
-                      [ngValue]="currentInvoiceCustomer" 
-                      [selected]="true"> {{currentInvoiceCustomer.customerLabel}} 
+
+              <option *ngIf="invoice.customer.customerId" 
+                      [ngValue]="invoice.customer" 
+                      [selected]="true"> {{invoice.customer.customerLabel}} 
               </option>
-              <option *ngIf="invoice.invoiceId == null" [ngValue]="null">-- Client --</option>
+              <option *ngFor="let c of clients_edit;" [ngValue]="c">{{c.customerLabel}}</option>
+
+            </select>
+            <select *ngIf="invoice.invoiceId == null" class="form-control p-field" id="type" name="side"
+                    [(ngModel)]="invoice.customer" [ngClass]="{
+        'is-invalid': invoice.customer == null ,
+        'is-valid':invoice.customer != null
+      }" style="font-size: 13px">
+              <option [ngValue]="null">-- Client --</option>
               <option *ngFor="let c of clients;" [ngValue]="c">{{c.customerLabel}}</option>
 
             </select>
