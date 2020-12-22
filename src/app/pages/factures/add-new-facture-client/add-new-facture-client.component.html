@@ -56,7 +56,7 @@ padding: 10px 10px 10px 10px !important;
         'is-valid':invoice.customer != null
       }" style="font-size: 13px">
 
-              <option *ngIf="invoice.customer.customerId" 
+              <option *ngIf="invoice.customer.customerId !=null" 
                       [ngValue]="invoice.customer" 
                       [selected]="true"> {{invoice.customer.customerLabel}} 
               </option>
