@@ -28,7 +28,7 @@ export class AddNewFactureFournisseurComponent implements OnInit {
   @Output() addNewProviderInvoiceEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();
   providers = [];
-  currentInvoiceProvider ;
+   providers_edit =[];
   maxDateInvoiceDate;
   minDateDeadlineDate;
   constructor(private UtilsService: UtilsServiceService,
@@ -52,9 +52,7 @@ export class AddNewFactureFournisseurComponent implements OnInit {
       }
       this.invoice.invoiceDate = this.datePipe.transform(this.invoice.invoiceDate, 'yyyy-MM-dd');
       this.invoice.invoiceDeadlineDate = this.datePipe.transform(this.invoice.invoiceDeadlineDate, 'yyyy-MM-dd');
-      this.currentInvoiceProvider= this.invoice.provider ;
-      console.log('currentInvoiceProvider = ',this.currentInvoiceProvider);
-      console.log('invoice.customer.providerId = ',this.invoice.provider.providerId);
+      
     }
     this.maxDateInvoiceDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.minDateDeadlineDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
@@ -82,12 +80,14 @@ export class AddNewFactureFournisseurComponent implements OnInit {
     this.UtilsService.get(UtilsServiceService.API_PROVIDER).subscribe(response => {
       context.providers = response;
       console.log('providers =' ,context.providers);
-      if(context.providers.length != 0){
+      context.providers_edit = response ;
+      console.log('providers =' ,context.providers);
+      if(context.providers_edit.length != 0){
         if (this.invoice.invoiceId != null) {
         
-          
-          this.removeItem(this.currentInvoiceProvider.providerId);
-          
+          console.log('ooook1',this.providers);
+          this.removeItem(this.invoice.provider.providerId);
+          console.log('ooook1',this.providers);
         }
     }
     },
@@ -139,8 +139,8 @@ export class AddNewFactureFournisseurComponent implements OnInit {
     this.invoice.invoiceDeadlineInNumberOfDays = time;
   }
   removeItem(id){
-    let index = this.providers.findIndex(c => c.customerId === id);
-    this.providers.splice(index,1);
+   et index = this.providers_edit.findIndex(c => c.customerId === id);
+    this.providers_edit.splice(index,1);
     
  }
 
