@@ -123,8 +123,8 @@ Modifier une nouvelle facture fournisseur
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
             <input type="number" class="form-control p-field"  id="net"
-                   [(ngModel)]="invoice.invoiceNet " style="font-size: 13px" 
-                   (change)="updateTotalAmount()">
+                   [(ngModel)]="invoice.invoiceTotalAmount" style="font-size: 13px" 
+                   (change)="updateNetAmount()">
           </div>
         </div>
         <div class="mb-12 col-md-4 col-12">
@@ -133,7 +133,7 @@ Modifier une nouvelle facture fournisseur
             <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
             <input type="number" class="form-control p-field"  id="rs"
                    [(ngModel)]="invoice.invoiceRs " style="font-size: 13px" 
-                   (change)="updateTotalAmount()">
+                   (change)="updateNetAmount()">
           </div>
           <span *ngIf="invoice.invoiceRsType === 'POURCENTAGE'" style="font-size: 12px;"><i>Soit valeur de {{rsAmount}}</i></span>
         </div>
@@ -141,7 +141,7 @@ Modifier une nouvelle facture fournisseur
           <label for="rs" class="p-float-label">RS type</label>
           <select class="form-control p-field" id="type" name="side" 
           [(ngModel)]="invoice.invoiceRsType"
-            (change)="updateTotalAmount()" style="font-size: 13px;">
+            (change)="updateNetAmount()" style="font-size: 13px;">
             <option [ngValue]="'VALUE'">Valeur</option>
             <option [ngValue]="'POURCENTAGE'">Pourcentage</option>
 
@@ -154,7 +154,7 @@ Modifier une nouvelle facture fournisseur
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
           <input type="number" class="form-control p-field"  id="amount"
-                 [(ngModel)]="invoice.invoiceTotalAmount " disabled="true" style="font-size: 13px">
+                 [(ngModel)]="invoice.invoiceNet" disabled="true" style="font-size: 13px">
         </div>
       </div>
     </div>
