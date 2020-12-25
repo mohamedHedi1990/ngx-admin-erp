@@ -13,6 +13,7 @@ export class EtatEngageComponent implements OnInit {
   loading = false;
   today = new Date();
   tomorrow = new Date() ;
+  minStartDate = new Date();
 supervision= {
   account: null,
   startDate: this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
@@ -62,6 +63,7 @@ constructor(private UtilsService: UtilsServiceService, private datePipe: DatePip
       this.getOperationsBetweenTwoDates();
     }
   }
+  
   getAllAccounts() {
     const context = this;
     this.UtilsService.get(UtilsServiceService.API_ACCOUNT).subscribe( response => {
@@ -70,6 +72,7 @@ constructor(private UtilsService: UtilsServiceService, private datePipe: DatePip
           this.supervision.account = response[0];
           this.statusCards[0].value = '' +  this.supervision.account.accountInitialAmount;
           this.statusCards[0].value = this.UtilsService.convertAmountToString(this.statusCards[0].value );
+          
           this.getOperationsBetweenTwoDates();
         }
       },

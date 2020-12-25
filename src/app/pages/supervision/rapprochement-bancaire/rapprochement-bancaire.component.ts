@@ -19,6 +19,7 @@ supervision= {
   endDate: this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
 };
 accountInitialAmount = 0;
+minStartDate = new Date();
 statusCards = [
   {
       title: 'Solde début période',
@@ -63,6 +64,7 @@ statusCards = [
         context.accounts = response;
         if(response.length !== 0) {
           this.supervision.account = response[0];
+          this.getFirstDate();
           this.getOperationsBetweenTwoDates();
         }
       },
@@ -136,7 +138,23 @@ statusCards = [
     if (a==null || b== null) return true;
     return a.accountId === b.accountId;
  }
+ getFirstDate() {
+  this.loading = true;
+  this.UtilsService.get(UtilsServiceService.API_HISTORIC_SOLD+ '/' + this.supervision.account.accountId
+  ).subscribe( response => {
+    console.log('response    ', response);
+     this.minStartDate = response.date;
+   this.loading = false;
 
+     },
+     error => {
+       this.loading = false;
+       this.UtilsService.showToast('danger',
+         'Erreur interne',
+         `Un erreur interne a été produit lors du chargement du montant initial au début de cette période`);
+     });
+
+}
  changeOperationAmount(operation) {
   const context = this;
   this.loading = true;
