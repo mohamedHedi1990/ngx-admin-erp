@@ -50,15 +50,16 @@ padding: 10px 10px 10px 10px !important;
           <label for="type" class="p-float-label">Client</label>
           <div class="p-inputgroup p-fluid">
             <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+            <!-- 
             <input *ngIf="invoice.invoiceId!= null" type="text" placeholder="Date" class="form-control p-field"
                    id="manager"
                    [(ngModel)]="invoice.customer.customerLabel " style="font-size: 13px" disabled="true">
-            <select *ngIf="invoice.invoiceId == null" class="form-control p-field" id="type" name="side"
+            -->
+                   <select class="form-control p-field" id="type" name="side"
                     [(ngModel)]="invoice.customer" [ngClass]="{
         'is-invalid': invoice.customer == null ,
         'is-valid':invoice.customer != null
-      }" style="font-size: 13px">
-              <option [ngValue]="null">-- Client --</option>
+      }" style="font-size: 13px" [compareWith]="compareCustomer">
               <option *ngFor="let c of clients;" [ngValue]="c">{{c.customerLabel}}</option>
 
             </select>
@@ -125,8 +126,8 @@ padding: 10px 10px 10px 10px !important;
       <div class="p-inputgroup">
         <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
         <input type="number" class="form-control p-field" id="net"
-               [(ngModel)]="invoice.invoiceNet " style="font-size: 13px" 
-               (change)="updateTotalAmount()">
+               [(ngModel)]="invoice.invoiceTotalAmount" style="font-size: 13px" 
+               (change)="updateNetAmount()">
       </div>
     </div>
     <div class="mb-12 col-md-4 col-12">
@@ -135,7 +136,7 @@ padding: 10px 10px 10px 10px !important;
         <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
         <input type="number" class="form-control p-field" id="rs"
                [(ngModel)]="invoice.invoiceRs " style="font-size: 13px" 
-               (change)="updateTotalAmount()">
+               (change)="updateNetAmount()">
       </div>
       <span *ngIf="invoice.invoiceRsType === 'POURCENTAGE'" style="font-size: 12px;"><i>Soit valeur de {{rsAmount}}</i></span>
     </div>
@@ -143,7 +144,7 @@ padding: 10px 10px 10px 10px !important;
       <label for="rs" class="p-float-label">RS type</label>
       <select class="form-control p-field" id="type" name="side" 
             [(ngModel)]="invoice.invoiceRsType"
-              (change)="updateTotalAmount()" style="font-size: 13px;">
+              (change)="updateNetAmount()" style="font-size: 13px;">
         <option [ngValue]="'VALUE'">Valeur</option>
         <option [ngValue]="'POURCENTAGE'">Pourcentage</option>
 
@@ -156,7 +157,7 @@ padding: 10px 10px 10px 10px !important;
     <div class="p-inputgroup">
       <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
       <input type="number" class="form-control p-field" id="amount"
-             [(ngModel)]="invoice.invoiceTotalAmount " disabled="true" style="font-size: 13px">
+             [(ngModel)]="invoice.invoiceNet " disabled="true" style="font-size: 13px">
     </div>
   </div>
 </div>

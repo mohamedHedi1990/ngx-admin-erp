@@ -37,9 +37,10 @@ import { EtatGlobalTreserorieComponent } from './etat-global-treserorie/etat-glo
 import { EtatNonEngageComponent } from './etat-non-engage/etat-non-engage.component';
 import { RapprochementBancaireComponent } from './rapprochement-bancaire/rapprochement-bancaire.component';
 import { InterceptService } from '../../services/InterceptService.service';
+import { EtatEngageComponent } from './etat-engage/etat-engage.component';
 
 @NgModule({
-  declarations: [GlobalSupervisionComponent, StatusCardComponent, EtatGlobalTreserorieComponent, EtatNonEngageComponent, RapprochementBancaireComponent],
+  declarations: [GlobalSupervisionComponent, StatusCardComponent, EtatGlobalTreserorieComponent, EtatNonEngageComponent, EtatEngageComponent, RapprochementBancaireComponent],
   imports: [
     HttpClientModule,
     CommonModule,

@@ -57,6 +57,11 @@ export class AddNewFactureFournisseurComponent implements OnInit {
     this.getAllProviders();
   }
 
+  compareProvider(a: any, b: any): boolean {
+    if (a==null || b== null) return true;
+    return a.providerId === b.providerId;
+  }
+
   saveInvoice() {
     console.log("Invoice to save ");
     console.log(this.invoice);
@@ -85,15 +90,15 @@ export class AddNewFactureFournisseurComponent implements OnInit {
 
   }
 
-  updateTotalAmount() {
+  updateNetAmount() {
     if (this.invoice.invoiceRsType === 'POURCENTAGE') {
       this.rsAmount = (this.invoice.invoiceRs * this.invoice.invoiceNet) / 100;
     } else {
       this.rsAmount = this.invoice.invoiceRs;
     }
     this.rsAmount = Math.round(this.rsAmount * 1000) / 1000
-    this.invoice.invoiceTotalAmount = this.invoice.invoiceNet - this.rsAmount;
-    this.invoice.invoiceTotalAmount = Math.round(this.invoice.invoiceTotalAmount * 1000) / 1000
+    this.invoice.invoiceNet = this.invoice.invoiceTotalAmount - this.rsAmount;
+    this.invoice.invoiceNet = Math.round(this.invoice.invoiceNet * 1000) / 1000
   }
   changeInvoiceDate() {
     this.minDateDeadlineDate = this.invoice.invoiceDate;

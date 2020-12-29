@@ -73,9 +73,11 @@ padding: 10px 10px 10px 10px !important;
 
         <td style="text-align: center;">
           <div>
-            <i *ngIf="invoice.invoiceStatus === 'OPENED'" placement="top" ngbTooltip="Modifier" class="pi pi-pencil"
+            <i  placement="top" ngbTooltip="Modifier" class="pi pi-pencil"
               style="margin-right: 7px; color: #6200ee" (click)="editInvoice(invoice)"></i>
             <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" (click)="deleteInvoice(invoice)"
+              style="margin-right: 7px; color: #6200ee"></i>
+              <i *ngIf="invoice.invoiceStatus === 'OPENED'" placement="top" ngbTooltip="Fermer" class="pi pi-lock" (click)="closeInvoice(invoice)"
               style="color: #6200ee"></i>
           </div>
         </td>

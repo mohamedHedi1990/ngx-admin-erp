@@ -41,7 +41,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Profile'}, { title: 'Log out' } ];
+  //userMenu = [ { title: 'Profile'}, { title: 'Log out' } ];
+  userMenu = [ { title: 'Déconnecter' } ];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
@@ -100,7 +101,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   {
     console.log(item)
     console.log("item logout")
-    if(item==="Log out")
+    if(item==="Déconnecter")
     {
       this.router.navigateByUrl("/auth/login");
       localStorage.removeItem('token');

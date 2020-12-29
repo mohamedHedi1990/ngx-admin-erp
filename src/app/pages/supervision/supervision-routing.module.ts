@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { EtatEngageComponent } from './etat-engage/etat-engage.component';
 import { EtatGlobalTreserorieComponent } from './etat-global-treserorie/etat-global-treserorie.component';
 import { EtatNonEngageComponent } from './etat-non-engage/etat-non-engage.component';
 import { GlobalSupervisionComponent } from './global-supervision/global-supervision.component';
@@ -15,7 +16,7 @@ const routes: Routes = [{
     },
     {
       path: 'etat-engage',
-      component: GlobalSupervisionComponent,
+      component: EtatEngageComponent,
     },
     {
       path: 'etat-non-engage',
