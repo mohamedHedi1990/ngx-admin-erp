@@ -45,6 +45,8 @@ export class ListComptesComponent implements OnInit {
   saveNewAccount() {
 
     const context = this;
+    this.account.accountInitialAmount = Math.round( this.account.accountInitialAmount * 1000) / 1000
+
     this.UtilsService.post(UtilsServiceService.API_ACCOUNT, this.account).subscribe( response => {
         this.hideAccountWindow();
         if ( context.account.accountId == null) {

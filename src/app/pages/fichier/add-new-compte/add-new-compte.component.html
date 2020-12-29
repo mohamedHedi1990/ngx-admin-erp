@@ -2,33 +2,33 @@
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
-Ajouter un nouveau compte bancaire
+  Ajouter un nouveau compte bancaire
 </h4>
 <h4 *ngIf="account.accountId != null" style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
-Modifier un compte bancaire
-<div><span class="customer-badge status-label">{{account.accountLabel}}</span></div>
+  Modifier un compte bancaire
+  <div><span class="customer-badge status-label">{{account.accountLabel}}</span></div>
 </h4>
 <div style="width: 90%; margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
-    <p-panel header="Informations sur la banque" [toggleable]="true">
+  <p-panel header="Informations sur la banque" [toggleable]="true">
     <div class="p-grid p-fluid">
       <div *ngIf="account.accountId != null" style="display: flex">
         <div class="mb-1 col-md-6 col-12 p-field">
           <label for="creationDate" class="p-float-label">Date de création</label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-            <input type="text" class="form-control p-field" id="creationDate"
-                   [(ngModel)]="account.createdAt" disabled="true">
+            <input type="text" class="form-control p-field" id="creationDate" [(ngModel)]="account.createdAt"
+              disabled="true">
           </div>
         </div>
         <div class="mb-1 col-md-6 col-12">
           <label for="modificationDate" class="p-float-label">Date de dernière modification</label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-            <input type="text" class="form-control p-field"  id="modificationDate"
-                   [(ngModel)]="account.updatedAt " disabled="true">
+            <input type="text" class="form-control p-field" id="modificationDate" [(ngModel)]="account.updatedAt "
+              disabled="true">
           </div>
         </div>
       </div>
@@ -38,8 +38,10 @@ Modifier un compte bancaire
 
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-            <input type="text" class="form-control p-field" id="accountBank"
-                   [(ngModel)]="account.accountBank" [ngClass]="{
+            <input type="text" class="form-control p-field" id="accountBank" 
+          
+            [(ngModel)]="account.accountBank"
+              [ngClass]="{
         'is-invalid': account.accountBank == null || account.accountBank == '' ,
         'is-valid': account.accountBank != null && account.accountBank !== ''
       }">
@@ -49,179 +51,183 @@ Modifier un compte bancaire
           <label for="accountBankAdress" class="p-float-label">Adresse</label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-list"></i></span>
-            <input type="text" class="form-control p-field"  id="accountBankAdress"
-                   [(ngModel)]="account.accountBankAdress ">
+            <input type="text" class="form-control p-field" id="accountBankAdress"
+              [(ngModel)]="account.accountBankAdress ">
           </div>
         </div>
 
 
       </div>
-    </div></p-panel>
-    <p-panel header="Informations sur l'agence" [toggleable]="true">
-        <div class="p-grid p-fluid">
-          <div style="display: flex">
-            <div class="mb-1 col-md-6 col-12">
-              <label for="accountAgency" class="p-float-label">Agence:</label>
-              <div class="p-inputgroup">
-                <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-                <input type="text" class="form-control p-field"  id="accountAgency"
-                       [(ngModel)]="account.accountAgency " [ngClass]="{
+    </div>
+  </p-panel>
+  <p-panel header="Informations sur l'agence" [toggleable]="true">
+    <div class="p-grid p-fluid">
+      <div style="display: flex">
+        <div class="mb-1 col-md-6 col-12">
+          <label for="accountAgency" class="p-float-label">Agence:</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field" id="accountAgency" [(ngModel)]="account.accountAgency "
+              [ngClass]="{
         'is-invalid': account.accountAgency  == null || account.accountAgency  == '' ,
         'is-valid': account.accountAgency != null && account.accountAgency  !== ''
       }">
-              </div>
-            </div>
-            <div class="mb-1 col-md-6 col-12 p-field">
-              <label for="accountAgencyAdress" class="p-float-label"> Adresse: </label>
-
-              <div class="p-inputgroup">
-                <span class="p-inputgroup-addon"><i class="pi pi-list"></i></span>
-                <input type="text" class="form-control p-field" id="accountAgencyAdress"
-                       [(ngModel)]="account.accountAgencyAdress" >
-              </div>
-            </div>
-
-
-
-          </div></div>
-      <div class="p-grid p-fluid">
-        <div style="display: flex">
-          <div class="mb-1 col-md-12 col-12">
-            <label for="CustomerName" class="p-float-label">Nom chargé clientéle:</label>
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-              <input type="text" class="form-control p-field"  id="CustomerName"
-                     [(ngModel)]="account.accountChargeCustomerName " >
-            </div>
           </div>
+        </div>
+        <div class="mb-1 col-md-6 col-12 p-field">
+          <label for="accountAgencyAdress" class="p-float-label"> Adresse: </label>
 
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-list"></i></span>
+            <input type="text" class="form-control p-field" id="accountAgencyAdress"
+              [(ngModel)]="account.accountAgencyAdress">
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+    <div class="p-grid p-fluid">
+      <div style="display: flex">
+        <div class="mb-1 col-md-12 col-12">
+          <label for="CustomerName" class="p-float-label">Nom chargé clientéle:</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+            <input type="text" class="form-control p-field" id="CustomerName"
+              [(ngModel)]="account.accountChargeCustomerName ">
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+    <div class="p-grid p-fluid">
+      <div style="display: flex">
+        <div class="mb-1 col-md-6 col-12 p-field">
+          <label for="accountChargeCustomerPhoneNumber" class="p-float-label">Numero Tel :</label>
+
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-mobile"></i></span>
+            <input type="text" class="form-control p-field" id="accountChargeCustomerPhoneNumber"
+              [(ngModel)]="account.accountChargeCustomerPhoneNumber">
+          </div>
 
         </div>
+        <div class="mb-1 col-md-6 col-12 p-field">
+          <label for="accountChargeCustomerEmail" class="p-float-label">Email :</label>
+
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
+            <input type="text" class="form-control p-field" id="accountChargeCustomerEmail"
+              [(ngModel)]="account.accountChargeCustomerEmail">
+          </div>
         </div>
-      <div class="p-grid p-fluid">
-        <div style="display: flex">
-          <div class="mb-1 col-md-6 col-12 p-field">
-            <label for="accountChargeCustomerPhoneNumber" class="p-float-label">Numero Tel :</label>
-
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon"><i class="pi pi-mobile"></i></span>
-              <input type="text" class="form-control p-field" id="accountChargeCustomerPhoneNumber"
-                     [(ngModel)]="account.accountChargeCustomerPhoneNumber">
-            </div>
-
-          </div>
-          <div class="mb-1 col-md-6 col-12 p-field">
-            <label for="accountChargeCustomerEmail" class="p-float-label">Email :</label>
-
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
-              <input type="text" class="form-control p-field" id="accountChargeCustomerEmail"
-                     [(ngModel)]="account.accountChargeCustomerEmail">
-            </div>
-          </div>
 
 
 
 
-        </div></div>
+      </div>
+    </div>
 
-    </p-panel>
+  </p-panel>
 
-    <p-panel header="Informations sur le compte bancaire" [toggleable]="true">
-      <div class="p-grid p-fluid">
-        <div style="display: flex">
-          <div class="mb-1 col-md-4 col-12">
-            <label for="accountLabel" class="p-float-label">Libellé Compte</label>
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-              <input type="text" class="form-control p-field"  id="accountLabel"
-                     [(ngModel)]="account.accountLabel " [ngClass]="{
+  <p-panel header="Informations sur le compte bancaire" [toggleable]="true">
+    <div class="p-grid p-fluid">
+      <div style="display: flex">
+        <div class="mb-1 col-md-4 col-12">
+          <label for="accountLabel" class="p-float-label">Libellé Compte</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field" id="accountLabel" [(ngModel)]="account.accountLabel "
+              [ngClass]="{
         'is-invalid': account.accountLabel  == null || account.accountLabel  == '' ,
         'is-valid': account.accountLabel != null && account.accountLabel  !== ''
       }">
-            </div>
           </div>
-          <div class="mb-1 col-md-4 col-12 p-field">
-            <label for="accountBank" class="p-float-label">Numero Compte:</label>
+        </div>
+        <div class="mb-1 col-md-4 col-12 p-field">
+          <label for="accountBank" class="p-float-label">Numero Compte:</label>
 
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-              <input type="text" class="form-control p-field" id="accountNumber"
-                     [(ngModel)]="account.accountNumber" [ngClass]="{
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field" id="accountNumber" [(ngModel)]="account.accountNumber"
+              [ngClass]="{
         'is-invalid': account.accountNumber == null || account.accountNumber == '' ,
         'is-valid': account.accountNumber != null && account.accountNumber !== ''
       }">
-            </div>
           </div>
+        </div>
 
-          <div class="mb-1 col-md-4 col-12">
-            <label for="accountRIB" class="p-float-label">Numero RIB:</label>
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-              <input type="text" class="form-control p-field"  id="accountRIB"
-                     [(ngModel)]="account.accountRIB " [ngClass]="{
-        'is-invalid': account.accountRIB  == null || account.accountRIB  == '' ,
-        'is-valid': account.accountRIB != null && account.accountRIB  !== ''
+        <div class="mb-1 col-md-4 col-12">
+          <label for="accountRIB" class="p-float-label">Numero RIB:</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field" id="accountRIB"
+            maxlength="20" minlength="20"
+             [(ngModel)]="account.accountRIB " [ngClass]="{
+        'is-invalid': account.accountRIB  == null || account.accountRIB  == '' || account.accountRIB.length!=20   ,
+        'is-valid': (account.accountRIB != null && account.accountRIB  !== '')&&account.accountRIB.length==20 
       }">
-            </div>
           </div>
+        </div>
 
-        </div></div>
-      <div class="p-grid p-fluid">
-        <div style="display: flex">
-          <div class="mb-1 col-md-6 col-12">
-            <label for="accountAmount" class="p-float-label">Solde initial:</label>
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-              <input type="number" class="form-control p-field"  id="accountAmount"
-                     [(ngModel)]="account.accountInitialAmount" [ngClass]="{
+      </div>
+    </div>
+    <div class="p-grid p-fluid">
+      <div style="display: flex">
+        <div class="mb-1 col-md-6 col-12">
+          <label for="accountAmount" class="p-float-label">Solde initial:</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="number" class="form-control p-field" id="accountAmount"
+              [(ngModel)]="account.accountInitialAmount" [ngClass]="{
         'is-invalid': account.accountInitialAmount  == null || account.accountInitialAmount  == '' ,
         'is-valid': account.accountInitialAmount != null && account.accountInitialAmount  !== ''
       }">
-            </div>
           </div>
-          <div class="mb-1 col-md-6 col-12 p-field">
-            <label for="accountCurrency" class="p-float-label">Devise :</label>
+        </div>
+        <div class="mb-1 col-md-6 col-12 p-field">
+          <label for="accountCurrency" class="p-float-label">Devise :</label>
 
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon"><i class="pi pi-dollar"></i></span>
-              <select class="form-control p-field" name="currency" [(ngModel)]="account.accountCurrency" id="cb">
-                      <option [ngValue]="'TND'">TND</option>
-                      <option [ngValue]="'EUR'">EUR</option>
-                    </select>
-            </div>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-dollar"></i></span>
+            <select class="form-control p-field" name="currency" [(ngModel)]="account.accountCurrency" id="cb">
+              <option [ngValue]="'TND'">TND</option>
+              <option [ngValue]="'EUR'">EUR</option>
+            </select>
           </div>
+        </div>
 
 
 
 
 
-        </div></div>
+      </div>
+    </div>
 
-    </p-panel>
+  </p-panel>
   <br>
   <p-panel header="Configuration des contacts" [toggleable]="true" collapsed="true">
     <div>
-      <button pButton pRipple label="Nouveau contact" icon="pi pi-user-plus" class="p-mr-2"
-              (click)="addNewContact()" style="background: #dee2e6;
+      <button pButton pRipple label="Nouveau contact" icon="pi pi-user-plus" class="p-mr-2" (click)="addNewContact()"
+        style="background: #dee2e6;
     color: black;
     border: #dee2e6;"></button>
     </div>
-   <div *ngFor="let contact of account.accountContacts" style="padding-bottom: 50px;">
-    <ngx-new-contact [contact]="contact"></ngx-new-contact>
-  </div>
+    <div *ngFor="let contact of account.accountContacts" style="padding-bottom: 50px;">
+      <ngx-new-contact [contact]="contact"></ngx-new-contact>
+    </div>
 
   </p-panel>
   <div class="p-panel p-panel-header" style="margin-top: 20px;float: right; padding: 2%;">
 
-    <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="cancel()"></button>
+    <button pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="cancel()"></button>
 
-      <button [disabled]="checkAccountValid()"
-      [ngClass]= "{'disabled': checkAccountValid()}" pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn"
-      (click)="saveAccount()" style="margin-left: 10px;"></button>
+    <button [disabled]="checkAccountValid()" [ngClass]="{'disabled': checkAccountValid()}" pButton pRipple
+      label="Enregistrer" icon="pi pi-check" class="primaryBtn" (click)="saveAccount()"
+      style="margin-left: 10px;"></button>
   </div>
 
 
 </div>
-
-

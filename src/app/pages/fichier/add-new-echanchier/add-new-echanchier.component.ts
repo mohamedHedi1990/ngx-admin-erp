@@ -127,7 +127,7 @@ line = {
  }
  addLine() { 
     this.timeLine.timeLineTable.push(this.line);
-    //this.initiateLine();
+    this.initiateLine();
  }
   saveEcenachier() {
     this.addNewEchenacierEvent.emit(this.timeLine);
@@ -171,7 +171,8 @@ onChangeTva(line?) {
 deleteLine(line) {
   for(let i=0; i<this.timeLine.timeLineTable.length ; i++) {
     const element = this.timeLine.timeLineTable[i];
-    if(element.timeLineEntryId != null && element.timeLineEntryId === line.timeLineEntryId) {
+    if(element != null && element === line) {
+
      this.timeLine.timeLineTable.splice(i, 1);
       break;
     }

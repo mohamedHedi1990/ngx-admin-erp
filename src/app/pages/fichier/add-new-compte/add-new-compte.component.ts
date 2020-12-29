@@ -44,7 +44,7 @@ export class AddNewCompteComponent implements OnInit {
     this.account.accountBank == null || this.account.accountBank === '' ||
       this.account.accountCurrency == null || this.account.accountCurrency === '' ||
       this.account.accountNumber == null || this.account.accountNumber === '' ||
-      this.account.accountRIB == null || this.account.accountRIB === '' ||
+      this.account.accountRIB == null || this.account.accountRIB === '' ||this.account.accountRIB.length!=20
       this.account.accountLabel == null || this.account.accountLabel === '';
   }
   saveAccount() {
