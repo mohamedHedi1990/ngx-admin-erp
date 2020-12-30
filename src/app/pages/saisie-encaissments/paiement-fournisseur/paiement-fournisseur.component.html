@@ -98,20 +98,21 @@ Paiements fournissuers
                 </td>
             </tr>
         </ng-template>
-        <ng-template pTemplate="rowexpansion" let-invoice>
+        <ng-template pTemplate="rowexpansion" let-invoice >
             <tr>
-                <td colspan="10">
-                    <div class="p-p-3">
-                        <p-table [value]="invoice.invoicePaymentRules" dataKey="id">
+                <td colspan="10"  style="background-color: #13d3ce ;">
+                    <div class="p-p-3" >
+                        <p-table  [value]="invoice.invoicePaymentRules" dataKey="id" >
                             <ng-template pTemplate="header">
                                 <tr style="text-align: center">
                                     <th style="width: 10%; font-size: 12px;text-align: center">Libellé</th>
                                     <th style="width: 17%; font-size: 12px;text-align: center">Compte</th>
-                                    <th style="width: 15%;font-size: 12px;text-align: center">Montant</th>
+                                    <th style="width: 12%;font-size: 12px;text-align: center">Date d'échéance</th>
+
           <!--
                                     <th style="width: 10%;font-size: 13px;text-align: center">Mode de paiement</th> -->
                                     <th style="width: 18%;font-size: 12px;text-align: center">Détails</th>
-                                    <th style="width: 12%;font-size: 12px;text-align: center">Date d'échéance</th>
+                                    <th style="width: 15%;font-size: 12px;text-align: center">Montant</th>
                                     <th style="width: 15%;font-size: 12px;text-align: center">Statut</th>
                                     <th style="width: 13%;font-size: 12px;text-align: center">Actions</th>
                                 </tr>
@@ -120,7 +121,8 @@ Paiements fournissuers
                                 <tr style="font-size: 12px; text-align: center">
                                     <td>{{paymentRule.paymentRuleLabel}}</td>
                                     <td>{{paymentRule.paymentRuleAccount.accountLabel}}</td>
-                                    <td>{{paymentRule.paymentRuleAmountS}} {{invoice.invoiceCurrency}}</td>
+                                    <td>{{paymentRule.paymentRuleDeadlineDate| date: 'dd-MM-yyyy'}}</td>
+
                                   <!--
                                     <td>{{paymentRule.paymentRulePaymentMethod}}</td>-->
                                     <td>
@@ -130,7 +132,8 @@ Paiements fournissuers
                                         <span *ngIf="paymentRule.paymentRulePaymentMethod === 'ESPECE'"> Espèce{{paymentRule.paymentRulesDetails}}</span>
                                         <span *ngIf="paymentRule.paymentRulePaymentMethod === 'EFFET_ENCAISSEMENT'"> Effet d'encaissement {{paymentRule.paymentRulesDetails}} </span>
                                         <span *ngIf="paymentRule.paymentRulePaymentMethod === 'EFFET_ESCOMPTE'"> Effet d'escompte {{paymentRule.paymentRulesDetails}} </span>                                    </td>
-                                    <td>{{paymentRule.paymentRuleDeadlineDate| date: 'dd-MM-yyyy'}}</td>
+                                    <td>{{paymentRule.paymentRuleAmountS}} {{invoice.invoiceCurrency}}</td>
+
                                     <td>
                                         <span *ngIf="paymentRule.validated" class="customer-badge status-active">Rapproché</span>
                                         <span *ngIf="!paymentRule.validated" class="customer-badge status-progress">Non rapproché</span>
