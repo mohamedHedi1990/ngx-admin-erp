@@ -129,7 +129,7 @@ export class RapprochementBancaireComponent implements OnInit {
 
        
         //add by lamia
-        this.UtilsService.get(UtilsServiceService.API_HISTORIC_SOLD + '/findLastRapprochment/' + this.supervision.account.accountId + '/' + this.supervision.startDate
+        this.UtilsService.get(UtilsServiceService.API_HISTORIC_SOLD + '/findLastRapprochment/' + this.supervision.account.accountId 
         ).subscribe(response => {
           console.log('response historic   ', response);
           this.lastRapprochementDate=response.createdAt;
@@ -140,12 +140,12 @@ export class RapprochementBancaireComponent implements OnInit {
         this.UtilsService.get(UtilsServiceService.API_HISTORIC_SOLD + '/' + this.supervision.account.accountId + '/' + this.supervision.startDate
         ).subscribe(response => {
           console.log('response    ', response);
-          context.statusCards[0].value = this.UtilsService.convertAmountToString('' + response.solde.toFixed(3)+' date de dernière rapprochement:' +this.datePipe.transform(this.lastRapprochementDate, 'dd-MM-yyyy'));
-          context.statusCards[1].value = this.UtilsService.convertAmountToString('' + encaissementValid.toFixed(3));
-          context.statusCards[2].value = this.UtilsService.convertAmountToString('' + decaissementValid.toFixed(3));
+          context.statusCards[0].value = this.UtilsService.convertAmountToString('' + response.solde.toFixed(3)+'date de dernière rapprochement:' +this.datePipe.transform(this.lastRapprochementDate, 'dd-MM-yyyy'));
+         // context.statusCards[1].value = this.UtilsService.convertAmountToString('' + encaissementValid.toFixed(3));
+         // context.statusCards[2].value = this.UtilsService.convertAmountToString('' + decaissementValid.toFixed(3));
           const finalAmount = response.solde + encaissementValid - decaissementValid;
-
-          context.statusCards[3].value = this.UtilsService.convertAmountToString('' + finalAmount.toFixed(3));
+          console.log("solde fin periode :"+this.UtilsService.convertAmountToString('' + finalAmount.toFixed(3)))
+          context.statusCards[1].value = this.UtilsService.convertAmountToString('' + finalAmount.toFixed(3));
           this.loading = false;
         },
           error => {
