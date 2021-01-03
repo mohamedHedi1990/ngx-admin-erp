@@ -99,9 +99,9 @@ Etat prévisionnel de trésereorie engagé
 
     -->
     <ng-template pTemplate="body" let-operation>
-      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
+      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;"   [ngStyle]="{'background-color':compareTwoDate(operation.operationDate , startDate)==true ? '#13d3ce' : '#FFFFFF' }">
         <td  style="text-align: center;font-size: 13px;">
-          {{operation.operationDate}}
+          {{operation.operationDate | date: 'dd-MM-yyyy'}}
         </td>
         <td style="text-align: center;font-size: 13px;">
           <div>{{operation.opperationLabel}}</div>

@@ -29,7 +29,8 @@ import { InterceptService } from './services/InterceptService.service';
 import { UtilsServiceService } from './utils-service.service';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent   , 
+  ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,

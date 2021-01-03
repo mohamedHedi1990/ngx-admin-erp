@@ -14,6 +14,7 @@ export class EtatEngageComponent implements OnInit {
   today = new Date();
   tomorrow = new Date() ;
   minStartDate = new Date();
+  startDate:any;
 supervision= {
   account: null,
   startDate: this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
@@ -86,10 +87,29 @@ constructor(private UtilsService: UtilsServiceService, private datePipe: DatePip
   }
   getOperationsBetweenTwoDates() {
     const context = this;
+    this.startDate = this.supervision.startDate;
+
+    this.UtilsService.get(UtilsServiceService.API_RAAPROCHEMENT_BANCAIRE + '/' + this.supervision.account.accountId + '/' + this.supervision.startDate)
+      .subscribe((response) => {
+        this.operations = response;
+        console.log("sucess raprochement lamia");
+        console.log(response);
+        console.log("size before concat ");
+        console.log(this.operations.length);
+        console.log("operations apres concat");
+        console.log(this.operations);
+        console.log("size after concat");
+        console.log(this.operations.length);
+      }, (error) => {
+        console.log("error raprochement lamia");
+      }
+      )
     this.UtilsService.get(UtilsServiceService.API_GLOBAL_SUPERVISION + '/' + this.supervision.account.accountId + '/' + this.supervision.startDate
     + '/' + this.supervision.endDate).subscribe( response => {
-        context.operations = response;
-        let decaissement = 0;
+      this.operations = this.operations.concat(response);
+      console.log("operations");
+      console.log(context.operations);
+      let decaissement = 0;
         let encaissement = 0;
         context.operations.forEach(element => {
           if(element.opperationType === 'DECAISSEMENT') {
@@ -129,4 +149,10 @@ constructor(private UtilsService: UtilsServiceService, private datePipe: DatePip
     if (a==null || b== null) return true;
     return a.accountId === b.accountId;
  }
+ compareTwoDate(d1: any, d2: any) {
+  var date1 = Date.parse(d1);
+  var date2 = Date.parse(d2);
+  return date1 < date2
+
+}
 }

@@ -94,10 +94,10 @@ Rapprochement bancaire
 
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-operation>
-      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
+    <ng-template pTemplate="body" let-operation let-rowIndex="rowIndex" >
+      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;"   [ngStyle]="{'background-color':compareTwoDate(operation.operationDate , startDate)==true ? '#13d3ce' : '#FFFFFF' }" >
         <td  style="text-align: center;font-size: 13px;">
-          {{operation.operationDate  | date: 'dd-MM-yyyy'}}
+          {{operation.operationDate  | date: 'dd-MM-yyyy'}} 
         </td>
         <td style="text-align: center;font-size: 13px;">
           <div>{{operation.opperationLabel}}</div>
