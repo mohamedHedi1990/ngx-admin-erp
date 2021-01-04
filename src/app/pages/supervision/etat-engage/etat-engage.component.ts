@@ -26,6 +26,7 @@ statusCards = [
       iconClass: 'nb-square-outline',
       type: 'primary',
       value: '0' ,
+      date: '',
     
   },
   {
@@ -33,26 +34,37 @@ statusCards = [
     iconClass: 'nb-arrow-dropdown',
     type: 'success',
     value: '0',
+    date: '',
   },
   {
     title: 'Total des décaissements',
     iconClass: 'nb-arrow-dropup',
     type: 'danger',
     value: '0',
+    date: '',
   },
   {
     title: 'Montant final',
     iconClass: 'nb-checkmark',
     type: 'success',
-    value: '0'
+    value: '0',
+    date: '',
   }
 
 ];
+encaissement = 0;
+decaissement = 0;
 constructor(private UtilsService: UtilsServiceService, private datePipe: DatePipe) { 
   // this.tomorrow.setDate(this.today.getDate()+1);
   this.supervision.startDate = this.datePipe.transform(new Date(),'yyyy-MM-dd');
 }
   ngOnInit(): void {
+    this.decaissement = 0;
+    this.encaissement = 0;
+    this.statusCards[1].value = this.UtilsService.convertAmountToString(''+this.encaissement.toFixed(3));
+    this.statusCards[2].value = this.UtilsService.convertAmountToString(''+this.decaissement.toFixed(3));
+    const finalDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy HH:mm:ss');
+    this.statusCards[3].date = finalDate;
     this.getAllAccounts();
   }
   supervisionFn() {
@@ -66,22 +78,38 @@ constructor(private UtilsService: UtilsServiceService, private datePipe: DatePip
   
   getAllAccounts() {
     const context = this;
+    this.loading = true;
     this.UtilsService.get(UtilsServiceService.API_ACCOUNT).subscribe( response => {
         context.accounts = response;
         if(response.length !== 0) {
           this.supervision.account = response[0];
+          //this.getFirstDate();
           this.statusCards[0].value = '' +  this.supervision.account.accountInitialAmount;
           this.statusCards[0].value = this.UtilsService.convertAmountToString(this.statusCards[0].value );
-          
-          this.getOperationsBetweenTwoDates();
+          this.statusCards[3].value = this.statusCards[0].value;
+          this.UtilsService.get(UtilsServiceService.API_HISTORIC_SOLD+ '/' + this.supervision.account.accountId
+       ).subscribe( response => {
+         console.log('response    ', response);
+         context.statusCards[0].date = response.createdAt;
+         this.getOperationsBetweenTwoDates();
+       
+          },
+          error => {
+            this.loading = false;
+            this.UtilsService.showToast('danger',
+              'Erreur interne',
+              `Un erreur interne a été produit lors du chargement de la date de dernier rapprochement`);
+          });
+         
         }
       },
       error => {
+        this.loading = false;
         this.UtilsService.showToast('danger',
           'Erreur interne',
           `Un erreur interne a été produit lors du chargement des comptes`);
       });
-      
+
 
   }
   getOperationsBetweenTwoDates() {
@@ -91,31 +119,42 @@ constructor(private UtilsService: UtilsServiceService, private datePipe: DatePip
         context.operations = response;
         let decaissement = 0;
         let encaissement = 0;
+        let finalAmount = this.supervision.account.accountInitialAmount;
         context.operations.forEach(element => {
           if(element.opperationType === 'DECAISSEMENT') {
             decaissement = decaissement + element.operationAmount;
+            if(!element.validated) {
+              finalAmount = finalAmount - element.operationAmount;
+            }
           } else {
             encaissement = encaissement + element.operationAmount;
+            if(!element.validated) {
+              finalAmount = finalAmount + element.operationAmount;
+            }
           }
         });
-        this.UtilsService.get(UtilsServiceService.API_HISTORIC_SOLD+ '/' + this.supervision.account.accountId + '/' + this.supervision.startDate
+        context.statusCards[1].value = this.UtilsService.convertAmountToString(''+encaissement.toFixed(3));
+        context.statusCards[2].value = this.UtilsService.convertAmountToString(''+decaissement.toFixed(3));
+
+      // const finalAmount = this.supervision.account.accountInitialAmount + encaissement - decaissement;
+       
+       context.statusCards[3].value = this.UtilsService.convertAmountToString('' + finalAmount.toFixed(3));
+       //const finalDate = this.datePipe.transform(new Date(this.supervision.endDate), 'dd-MM-yyyy HH:mm:ss');
+       this.statusCards[3].date = this.datePipe.transform(new Date(this.supervision.endDate), 'dd-MM-yyyy');
+       this.loading = false;
+
+        /*this.UtilsService.get(UtilsServiceService.API_HISTORIC_SOLD+ '/' + this.supervision.account.accountId
        ).subscribe( response => {
          console.log('response    ', response);
          context.statusCards[0].value = this.UtilsService.convertAmountToString(''+ response.solde.toFixed(3));
-         context.statusCards[1].value = this.UtilsService.convertAmountToString(''+encaissement.toFixed(3));
-         context.statusCards[2].value = this.UtilsService.convertAmountToString(''+decaissement.toFixed(3));
-
-        const finalAmount = response.solde + encaissement - decaissement;
         
-        context.statusCards[3].value = this.UtilsService.convertAmountToString('' + finalAmount.toFixed(3));
-        this.loading = false;
           },
           error => {
             this.loading = false;
             this.UtilsService.showToast('danger',
               'Erreur interne',
               `Un erreur interne a été produit lors du chargement du montant initial au début de cette période`);
-          });
+          });*/
 
       },
       error => {

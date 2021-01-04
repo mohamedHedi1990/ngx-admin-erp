@@ -71,7 +71,8 @@ Etat prévisionnel de trésereorie engagé
   </div>
   <div class="row">
     <div class="col-xxxl-3 col-md-6" *ngFor="let statusCard of statusCards">
-      <ngx-status-card [title]="statusCard.title" [type]="statusCard.type" [value]="statusCard.value">
+      <ngx-status-card [title]="statusCard.title" [type]="statusCard.type" [value]="statusCard.value"
+      [date]="statusCard.date">
         <i [ngClass]="statusCard.iconClass"></i>
       </ngx-status-card>
     </div>
@@ -83,12 +84,13 @@ Etat prévisionnel de trésereorie engagé
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 13px;">
         <th style="text-align: center; font-size: 13px;width: 20%">Date d'échéance</th>
-        <th style="text-align: center; font-size: 13px;width: 40%">Opération</th>
+        <th style="text-align: center; font-size: 13px;width: 30%">Opération</th>
         <!--
         <th style="text-align: center; font-size: 13px;width: 50%">Détails</th>
         -->
-        <th style="text-align: center; font-size: 13px;width: 20%">Montant</th>
+        <th style="text-align: center; font-size: 13px;width: 15%">Montant</th>
         <th style="text-align: center; font-size: 13px;width: 20%">Solde progressive</th>
+        <th style="text-align: center; font-size: 13px;width: 15%">Statut</th>
       </tr>
     </ng-template>
     <!--
@@ -99,9 +101,10 @@ Etat prévisionnel de trésereorie engagé
 
     -->
     <ng-template pTemplate="body" let-operation>
-      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
+      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;"
+      [ngStyle]="{'background-color':!operation.isInTheSimulatedPeriod ? '#13d3ce' : '#FFFFFF' }">
         <td  style="text-align: center;font-size: 13px;">
-          {{operation.operationDate}}
+          {{operation.operationDate | date: 'dd-MM-yyyy'}}
         </td>
         <td style="text-align: center;font-size: 13px;">
           <div>{{operation.opperationLabel}}</div>
@@ -125,8 +128,12 @@ Etat prévisionnel de trésereorie engagé
            <span class="customer-badge"  [ngClass]="{
         'status-blocked': operation.progressiveAmount < 0,
          'status-active': operation.progressiveAmount >= 0}">
-                       <span *ngIf="operation.progressiveAmount < 0">-</span>{{operation.progressiveAmountS}} {{operation.opperationCurrency}}
+                       <span *ngIf="operation.progressiveAmount < 0"></span>{{operation.progressiveAmountS}} {{operation.opperationCurrency}}
            </span>
+        </td>
+        <td style="text-align: center;">
+          <span *ngIf="operation.validated" class="customer-badge status-active">Rapproché</span>
+          <span *ngIf="!operation.validated" class="customer-badge status-progress">Non rapproché</span>
         </td>
       </tr>
     </ng-template>

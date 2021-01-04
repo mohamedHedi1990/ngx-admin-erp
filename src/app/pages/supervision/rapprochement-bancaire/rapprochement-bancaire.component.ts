@@ -26,29 +26,41 @@ statusCards = [
       iconClass: 'nb-square-outline',
       type: 'primary',
       value: '0' ,
+      date: '',
 
   },
   {
-    title: 'Total des encaissements',
+    title: 'Encaissements rapprochés',
     iconClass: 'nb-arrow-dropdown',
     type: 'success',
     value: '0',
+    date: '',
   },
   {
-    title: 'Total des décaissements',
+    title: 'Décaissements rapprochés',
     iconClass: 'nb-arrow-dropup',
     type: 'danger',
     value: '0',
+    date: '',
   },
   {
     title: 'Solde fin période',
     iconClass: 'nb-checkmark',
     type: 'success',
-    value: '0'
+    value: '0',
+    date: '',
   }
 
 ];
+decaissementValid = 0;
+encaissementValid = 0;
   ngOnInit(): void {
+    this.decaissementValid = 0;
+    this.encaissementValid = 0;
+    this.statusCards[1].value = this.UtilsService.convertAmountToString(''+this.encaissementValid.toFixed(3));
+    this.statusCards[2].value = this.UtilsService.convertAmountToString(''+this.decaissementValid.toFixed(3));
+    const finalDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy HH:mm:ss');
+    this.statusCards[3].date = finalDate;
     this.getAllAccounts();
   }
   supervisionFn() {
@@ -64,8 +76,24 @@ statusCards = [
         context.accounts = response;
         if(response.length !== 0) {
           this.supervision.account = response[0];
-          this.getFirstDate();
-          this.getOperationsBetweenTwoDates();
+          //this.getFirstDate();
+          this.statusCards[0].value = '' +  this.supervision.account.accountInitialAmount;
+          this.statusCards[0].value = this.UtilsService.convertAmountToString(this.statusCards[0].value );
+          this.statusCards[3].value = this.statusCards[0].value;
+          this.UtilsService.get(UtilsServiceService.API_HISTORIC_SOLD+ '/' + this.supervision.account.accountId
+       ).subscribe( response => {
+         console.log('response    ', response);
+         context.statusCards[0].date = response.createdAt;
+         this.getOperationsBetweenTwoDates();
+       
+          },
+          error => {
+            this.loading = false;
+            this.UtilsService.showToast('danger',
+              'Erreur interne',
+              `Un erreur interne a été produit lors du chargement de la date de dernier rapprochement`);
+          });
+         
         }
       },
       error => {
@@ -83,7 +111,7 @@ statusCards = [
     this.UtilsService.get(UtilsServiceService.API_RAAPROCHEMENT_BANCAIRE + '/' + this.supervision.account.accountId + '/' + this.supervision.startDate
     + '/' + this.supervision.endDate).subscribe( response => {
         context.operations = response;
-        let decaissement = 0;
+        /*let decaissement = 0;
         let encaissement = 0;
         let decaissementValid = 0;
           let encaissementValid = 0;
@@ -103,20 +131,19 @@ statusCards = [
           }
        
         });
+        
 
+       const finalAmount = this.supervision.account.accountInitialAmount + encaissementValid - decaissementValid;
+       
+       context.statusCards[3].value = this.UtilsService.convertAmountToString('' + finalAmount.toFixed(3));*/
 
+this.loading = false;
 
-
-        this.UtilsService.get(UtilsServiceService.API_HISTORIC_SOLD+ '/' + this.supervision.account.accountId + '/' + this.supervision.startDate
+        /*this.UtilsService.get(UtilsServiceService.API_HISTORIC_SOLD+ '/' + this.supervision.account.accountId + '/' + this.supervision.startDate
        ).subscribe( response => {
          console.log('response    ', response);
          context.statusCards[0].value = this.UtilsService.convertAmountToString(''+ response.solde.toFixed(3));
-         context.statusCards[1].value = this.UtilsService.convertAmountToString(''+encaissementValid.toFixed(3));
-         context.statusCards[2].value = this.UtilsService.convertAmountToString(''+decaissementValid.toFixed(3));
-
-        const finalAmount = response.solde + encaissementValid - decaissementValid;
-        
-        context.statusCards[3].value = this.UtilsService.convertAmountToString('' + finalAmount.toFixed(3));
+     
         this.loading = false;
           },
           error => {
@@ -124,7 +151,7 @@ statusCards = [
             this.UtilsService.showToast('danger',
               'Erreur interne',
               `Un erreur interne a été produit lors du chargement du montant initial au début de cette période`);
-          });
+          });*/
 
       },
       error => {
@@ -173,10 +200,22 @@ statusCards = [
  rapprocherOperation(operation) {
    const context = this;
    this.UtilsService.put(UtilsServiceService.API_RAAPROCHEMENT_BANCAIRE + '/validate/' + operation.operationRealType + '/' + operation.operationRealId, operation).subscribe( response => {
-
-       this.UtilsService.showToast('success',
+    if(operation.opperationType === 'DECAISSEMENT' ) {
+      this.decaissementValid = this.decaissementValid + operation.operationAmount;
+    } else  {
+      this.encaissementValid = this.encaissementValid + operation.operationAmount;
+    }
+    this.statusCards[1].value = this.UtilsService.convertAmountToString(''+this.encaissementValid.toFixed(3));
+    this.statusCards[2].value = this.UtilsService.convertAmountToString(''+this.decaissementValid.toFixed(3));
+    const finalAmount = this.supervision.account.accountInitialAmount + this.encaissementValid - this.decaissementValid;
+       
+    this.statusCards[3].value = this.UtilsService.convertAmountToString('' + finalAmount.toFixed(3));
+    const finalDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy HH:mm:ss');
+    this.statusCards[3].date = finalDate;
+    this.UtilsService.showToast('success',
          'Opération validée avec succés',
          `L'opération ${operation.operationLabel} a été validée avec succés`);
+        
        this.getOperationsBetweenTwoDates();
      },
      error => {this.UtilsService.showToast('danger',

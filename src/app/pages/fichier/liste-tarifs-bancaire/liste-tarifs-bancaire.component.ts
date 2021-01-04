@@ -58,16 +58,17 @@ export class ListeTarifsBancaireComponent implements OnInit {
     this.displayDeleteTarif = true;
   }
   saveNewComissions(account) {
-
+    let ListCommisions=[];
     const context = this;
-    account.accountComissions.forEach(element => {
+    /*account.accountComissions.forEach(element => {
       console.log(element);
       let bank=account;
       bank.accountContacts=[];
       bank.accountComissions=[];
       element.bankAccount=bank;
-      console.log(element);
-      this.UtilsService.post(UtilsServiceService.API_COMISSION, element).subscribe( response => {
+      ListCommisions.push(element);
+      console.log(element);*/
+      this.UtilsService.post(UtilsServiceService.API_COMISSION + '/' + this.account.accountId + '/saveAndUpdateAllCommission', account.accountComissions).subscribe( response => {
         this.hideTarifBancaireWindow();
 
           this.UtilsService.showToast('success',
@@ -80,7 +81,7 @@ export class ListeTarifsBancaireComponent implements OnInit {
         'Erreur interne',
         `Un erreur interne a été produit lors de la modification des comissions pour le compte banciare ${account.accountLabel}`); 
       });
-    });
+    // });
   }
 
   delComission() {
