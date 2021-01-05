@@ -100,7 +100,7 @@ Paiements fournissuers
         </ng-template>
         <ng-template pTemplate="rowexpansion" let-invoice>
             <tr>
-                <td colspan="10" style="background-color: #13d3ce ;">
+                <td colspan="10" style="background-color: #6200ee ;">
                     <div class="p-p-3">
                         <p-table [value]="invoice.invoicePaymentRules" dataKey="id">
                             <ng-template pTemplate="header">
@@ -167,7 +167,7 @@ Paiements fournissuers
                             </ng-template>
                             <ng-template pTemplate="emptymessage">
                                 <tr style="font-size: 13px">
-                                    <td colspan="6">Aucun réglement trouvé pour cette facture.</td>
+                                    <td colspan="7" style="text-align: left !important;">Aucun réglement trouvé pour cette facture.</td>
                                 </tr>
                             </ng-template>
                         </p-table>
