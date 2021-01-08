@@ -44,7 +44,8 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
       let label = 'Reg Fact N° ';
       this.seletcedInvoices.forEach(invoice => {
         if (invoice.invoiceStatus !== 'CLOSED') {
-          this.reglement.paymentRuleAmount = this.reglement.paymentRuleAmount + (invoice.invoiceTotalAmount - invoice.invoicePayment);
+          this.reglement.paymentRuleAmount = 0;
+          //this.reglement.paymentRuleAmount = this.reglement.paymentRuleAmount + (invoice.invoiceTotalAmount - invoice.invoicePayment);
           if (label === 'Reg Fact N° ') {
             label = label + invoice.invoiceNumber;
           } else {
@@ -55,7 +56,7 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
 
       });
       this.reglement.paymentRuleAmountS = this.UtilsService.convertAmountToString('' + this.reglement.paymentRuleAmount);
-      this.isPaymentAmountDisabled = true;
+      //this.isPaymentAmountDisabled = true;
       this.reglement.paymentRuleLabel = label;
     } else {
       if (this.invoice != null) {
@@ -76,7 +77,8 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
       let label = 'Reg Fact N° ';
       this.seletcedInvoices.forEach(invoice => {
         if (invoice.invoiceStatus !== 'CLOSED') {
-          this.reglement.paymentRuleAmount = this.reglement.paymentRuleAmount + (invoice.invoiceTotalAmount - invoice.invoicePayment);
+          this.reglement.paymentRuleAmount = 0;
+          //this.reglement.paymentRuleAmount = this.reglement.paymentRuleAmount + (invoice.invoiceTotalAmount - invoice.invoicePayment);
           if (label === 'Reg Fact N° ') {
             label = label + invoice.invoiceNumber;
           } else {

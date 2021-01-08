@@ -38,7 +38,7 @@ padding: 10px 10px 10px 10px !important;
             <tr style="text-align: center; font-size: 15px;">
                 <th style="width: 3rem"></th>
                 <th style="width: 2rem">
-                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    
                 </th>
                 <th pSortableColumn="invoiceNumber" style="text-align: center; font-size: 13px;width: 10%">Numéro</th>
                 <th pSortableColumn="customer.customerLabel" style="text-align: center; font-size: 13px;width: 11%">
@@ -68,8 +68,9 @@ padding: 10px 10px 10px 10px !important;
                     <i *ngIf="expanded" [pRowToggler]="invoice" class="pi pi-chevron-down"></i>
                 </td>
                 <td>
-                    <p-tableCheckbox [disabled]="invoice.invoiceStatus === 'CLOSED'" [value]="invoice" [ngClass]="{
+                    <p-tableCheckbox *ngIf="!invoice.associted" [disabled]="invoice.invoiceStatus === 'CLOSED'" [value]="invoice" [ngClass]="{
         'disabledElement': invoice.invoiceStatus === 'CLOSED' }"></p-tableCheckbox>
+        <i *ngIf="invoice.associted" placement="top" ngbTooltip="Factures associés" class="pi pi-paperclip" style="cursor: default;"></i>
                 </td>
                 <td style="text-align: center;font-size: 13px;">
                     {{invoice.invoiceNumber}}
@@ -78,10 +79,12 @@ padding: 10px 10px 10px 10px !important;
                     {{invoice.customer.customerLabel}}
                 </td>
                 <td style="text-align: center;font-size: 13px;">
-                    {{invoice.invoiceDate| date: 'dd-MM-yyyy'}}
+                    <span *ngIf="!invoice.associted">{{invoice.invoiceDate| date: 'dd-MM-yyyy'}}</span>
+                    <span *ngIf="invoice.associted">{{invoice.invoiceDates}}</span>
                 </td>
                 <td style="text-align: center;font-size: 13px;">
-                    {{invoice.invoiceDeadlineDate | date: 'dd-MM-yyyy'}}
+                    <span *ngIf="!invoice.associted">{{invoice.invoiceDeadlineDate | date: 'dd-MM-yyyy'}}</span>
+                    <span *ngIf="invoice.associted">{{invoice.invoiceDeadlineDates}}</span>
                 </td>
                 <td style="text-align: center;">
                     {{invoice.invoiceTotalAmountS}} {{invoice.invoiceCurrency}}
@@ -90,18 +93,21 @@ padding: 10px 10px 10px 10px !important;
                     {{invoice.invoicePaymentS}} {{invoice.invoiceCurrency}}
                 </td>
                 <td style="text-align: center;">
-                    <span *ngIf="invoice.invoiceStatus === 'CLOSED'" class="customer-badge status-active">Fermée</span>
-                    <span *ngIf="invoice.invoiceStatus === 'OPENED'"
+                    <span *ngIf="invoice.invoiceStatus === 'CLOSED' && !invoice.associted" class="customer-badge status-active">Fermée</span>
+                    <span *ngIf="invoice.invoiceStatus === 'OPENED' && !invoice.associted"
                         class="customer-badge status-progress">Ouverte</span>
+                        <span *ngIf="invoice.invoiceStatus === 'CLOSED' && invoice.associted" class="customer-badge status-active">Fermées</span>
+                        <span *ngIf="invoice.invoiceStatus === 'OPENED' && invoice.associted"
+                            class="customer-badge status-progress">Ouvertes</span>
                 </td>
 
 
                 <td style="text-align: center;">
-                    <div *ngIf="invoice.invoiceStatus === 'OPENED'">
+                    <div *ngIf="invoice.invoiceStatus === 'OPENED' && !invoice.associted">
                         <i placement="top" ngbTooltip="Ajouter un réglement" class="pi pi-plus"
                             style="margin-right: 7px; color: #6200ee" (click)="addPaymentRule(invoice)"></i>
                     </div>
-                    <div *ngIf="invoice.invoiceStatus === 'CLOSED'" style="text-align: center">
+                    <div *ngIf="invoice.invoiceStatus === 'CLOSED' || invoice.associted" style="text-align: center">
                         - -
                     </div>
 

@@ -149,7 +149,7 @@ export class PaiementFournisseurComponent implements OnInit {
 
   getAllInvoices() {
     const context = this;
-    this.UtilsService.get(UtilsServiceService.API_PROVIDER_INVOICE).subscribe(response => {
+    this.UtilsService.get(UtilsServiceService.API_PROVIDER_INVOICE + '/with-attached-invoices').subscribe(response => {
       context.invoices = response;
       console.log('invoices ', this.invoices);
     },
