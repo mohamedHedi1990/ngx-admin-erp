@@ -91,6 +91,9 @@ padding: 10px 10px 10px 10px !important;
                 </td>
                 <td style="text-align: center;">
                     {{invoice.invoicePaymentS}} {{invoice.invoiceCurrency}}
+                    <i *ngIf="invoice.invoiceStatus === 'OPENED' && invoice.associationNumber !== 0" class="pi pi-exclamation-triangle"
+                    placement="top" ngbTooltip="Le montant payé pour cette facture n'est pas précis. Cette facture a été associée avec des autres factures sur un ou plusieurs réglements communs"
+                    style="margin-right: 7px;"></i>
                 </td>
                 <td style="text-align: center;">
                     <span *ngIf="invoice.invoiceStatus === 'CLOSED' && !invoice.associted" class="customer-badge status-active">Fermée</span>
@@ -107,8 +110,12 @@ padding: 10px 10px 10px 10px !important;
                         <i placement="top" ngbTooltip="Ajouter un réglement" class="pi pi-plus"
                             style="margin-right: 7px; color: #6200ee" (click)="addPaymentRule(invoice)"></i>
                     </div>
-                    <div *ngIf="invoice.invoiceStatus === 'CLOSED' || invoice.associted" style="text-align: center">
+                    <div *ngIf="invoice.invoiceStatus === 'CLOSED'" style="text-align: center">
                         - -
+                    </div>
+                    <div *ngIf="invoice.invoiceStatus === 'OPENED' && invoice.associted">
+                        <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash"
+                            style="margin-right: 7px; color: #6200ee" (click)="deleteAttachedInvoices(invoice)"></i>
                     </div>
 
                 </td>

@@ -52,6 +52,19 @@ export class PaiementClientComponent implements OnInit {
     this.titleHeader = "Nouvel reglement";
 
   }
+
+  deleteAttachedInvoices(invoice) {
+    this.UtilsService.delete(UtilsServiceService.API_CUSTOMER_ATTACHED_INVOICES  + '/' + invoice.associatedAttachedInvoicesId).subscribe(response => {
+      this.getAllInvoices();
+      this.UtilsService.showToast('success',
+      'Réglements attachés supprimés avec succés',
+      `Un ou des réglements associés ont été supprimés avec succés`);
+    }, error => {
+      this.UtilsService.showToast('danger',
+      'Erreur interne',
+      `Un erreur interne lors de suppression de(s) réglement(s) associés`);
+    });
+  }
   payInvoices() {
     const invoicePayment = {
       selectedInvoices: this.selectedInvoices,
@@ -83,7 +96,7 @@ export class PaiementClientComponent implements OnInit {
     if (this.isUpdate == true) {
       console.log("error ");
       this.invoice = this.invoiceUpdate;
-      this.UtilsService.post(UtilsServiceService.API_INVOICE + '/updatePaymentRule/' + this.invoice.invoiceId, this.paymentRule).subscribe(response => {
+      this.UtilsService.post(UtilsServiceService.API_INVOICE + '/updatePaymentRule/' + this.invoice.invoiceId + '/CUSTOMER', this.paymentRule).subscribe(response => {
 
         this.UtilsService.showToast('success',
           'Réglement modifiée avec succés',
@@ -215,7 +228,7 @@ export class PaiementClientComponent implements OnInit {
   deletePaymentRule() {
 
     const context = this;
-    this.UtilsService.delete(UtilsServiceService.API_PAYMENT_RULE + '/' + this.paymentRule.paymentRuleId).subscribe(response => {
+    this.UtilsService.delete(UtilsServiceService.API_PAYMENT_RULE + '/' + this.paymentRule.paymentRuleId + '/CUSTOMER').subscribe(response => {
 
       this.UtilsService.showToast('success',
         'Réglement supprimé avec succés',

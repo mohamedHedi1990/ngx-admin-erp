@@ -73,12 +73,25 @@ export class PaiementFournisseurComponent implements OnInit {
 
   }
 
+  deleteAttachedInvoices(invoice) {
+    this.UtilsService.delete(UtilsServiceService.API_PROVIDER_ATTACHED_INVOICES  + '/' + invoice.associatedAttachedInvoicesId).subscribe(response => {
+      this.getAllInvoices();
+      this.UtilsService.showToast('success',
+      'Réglements attachés supprimés avec succés',
+      `Un ou des réglements associés ont été supprimés avec succés`);
+    }, error => {
+      this.UtilsService.showToast('danger',
+      'Erreur interne',
+      `Un erreur interne lors de suppression de(s) réglement(s) associés`);
+    });
+  }
+
   savePaymentRule(validateAndAdd: boolean) {
     console.log("error paymennt ");
     if (this.isUpdate == true) {
       console.log("error ");
       this.invoice = this.invoiceUpdate;
-      this.UtilsService.post(UtilsServiceService.API_INVOICE + '/updatePaymentRule/' + this.invoice.invoiceId, this.paymentRule).subscribe(response => {
+      this.UtilsService.post(UtilsServiceService.API_INVOICE + '/updatePaymentRule/' + this.invoice.invoiceId + '/PROVIDER', this.paymentRule).subscribe(response => {
 
         this.UtilsService.showToast('success',
           'Réglement modifiée avec succés',
@@ -206,7 +219,7 @@ export class PaiementFournisseurComponent implements OnInit {
   deletePaymentRule() {
 
     const context = this;
-    this.UtilsService.delete(UtilsServiceService.API_PAYMENT_RULE + '/' + this.paymentRule.paymentRuleId).subscribe(response => {
+    this.UtilsService.delete(UtilsServiceService.API_PAYMENT_RULE + '/' + this.paymentRule.paymentRuleId + '/PROVIDER').subscribe(response => {
 
       this.UtilsService.showToast('success',
         'Réglement supprimé avec succés',
