@@ -19,6 +19,7 @@ export class NgxLoginComponent {
   loginRequest:LoginRequest;
   
   testAuth=false;
+  authFailed = false;
   constructor(
     private router: Router,private serviceAuth:AuthServiceService) {
 
@@ -29,18 +30,21 @@ login()
   console.log("login user ");
   console.log(this.user.matricule);
   console.log(this.user.password);
+ 
   this.loginRequest=new LoginRequest(this.user.matricule,this.user.password);
   this.serviceAuth.login(this.loginRequest).subscribe(
     (data:JwtResponse)=>{
       console.log("success");
       console.log(data);
       localStorage.setItem('token',data.token);
+      this.authFailed = false;
       this.router.navigateByUrl("/pages/dashboard");
       this.testAuth=false;
     },
     (error)=>{
       console.log("error");
       this.testAuth=true;
+      this.authFailed = true;
     }
     )
 } 
