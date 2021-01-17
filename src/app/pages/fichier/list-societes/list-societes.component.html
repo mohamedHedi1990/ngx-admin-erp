@@ -24,17 +24,22 @@ Votre société
     </ng-template>
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 15px;">
-        <th pSortableColumn="campanyName" style="text-align: center; font-size: 13px;width: 20%">Dénomination</th>
-        <th pSortableColumn="campanyUniqueIdentifier" style="text-align: center; font-size: 13px;width: 20%">Identifiant</th>
+        <th style="width: 15%; text-align: center;">Logo</th>
+        <th pSortableColumn="campanyName" style="text-align: center; font-size: 13px;width: 15%">Dénomination</th>
+        <th pSortableColumn="campanyUniqueIdentifier" style="text-align: center; font-size: 13px;width: 15%">Identifiant unique</th>
         <th pSortableColumn="campanyAddress" style="text-align: center;font-size: 13px;width: 30%">Adresse</th>
 
 
-        <th pSortableColumn="companyManagerName"  style="text-align: center; font-size: 13px;width: 20%">Nom du responsable</th>
+        <th pSortableColumn="companyManagerName"  style="text-align: center; font-size: 13px;width: 15%">Nom du responsable</th>
 
         <th style="width: 10%;font-size: 13px; text-align: center;">Actions</th>      </tr>
     </ng-template>
     <ng-template pTemplate="body" let-societe>
       <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
+        <td>
+          <img *ngIf="societe.companyLogoUrl != null" [src]=" sanitizer.bypassSecurityTrustResourceUrl(societe.companyLogoUrl )"
+          style="width: 100px; height: 60px;">
+        </td>
         <td style="text-align: center;font-size: 13px;">
           {{societe.campanyName}}
         </td>

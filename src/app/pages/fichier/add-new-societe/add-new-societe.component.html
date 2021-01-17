@@ -1,96 +1,184 @@
-<h4 *ngIf="societe.campanyId == null" style="background: #E7E8E8; 
-padding: 10px 10px 10px 10px !important;
+<h4
+  *ngIf="societe.campanyId == null"
+  style="
+    background: #e7e8e8;
+    padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
-    color: #222b45;margin-left: 10px">
-Ajouter votre société
+    color: #222b45;
+    margin-left: 10px;
+  "
+>
+  Ajouter votre société
 </h4>
-<h4 *ngIf="societe.campanyId != null" style="background: #E7E8E8; 
-padding: 10px 10px 10px 10px !important;
+<h4
+  *ngIf="societe.campanyId != null"
+  style="
+    background: #e7e8e8;
+    padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
-    color: #222b45;margin-left: 10px">
-Modifier votre société
-<div><span class="customer-badge status-label">{{societe.campanyName}}</span></div>
+    color: #222b45;
+    margin-left: 10px;
+  "
+>
+  Modifier votre société
+  <div>
+    <span class="customer-badge status-label">{{ societe.campanyName }}</span>
+  </div>
 </h4>
-<div style="width: 90%; margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
-    <div class="p-grid p-fluid" style="margin: 3%">
+<div
+  style="
+    width: 90%;
+    margin: auto;
+    margin-top: 3%;
+    border-color: #e7e8e8 !important;
+    border: solid;
+  "
+>
+  <p-panel header="Configuration génerale" [toggleable]="false">
+    <div>
+      <input type="button" id="loadFile" value="Choisir le logo de votre société" onclick="document.getElementById('file').click();" style="margin-bottom: 2%;" class="primaryBtn"/>
+        <input id="file" #file type="file" accept='image/*' (change)="preview(file.files)" style="display: none" />
+        <div style="padding-bottom: 5%; text-align: center;">
+          <img *ngIf="imgURL" [src]="imgURL" style="width:100%">
+        </div>
+    </div>
+    <div class="p-grid p-fluid">
       <div *ngIf="societe.campanyId != null" style="display: flex">
         <div class="mb-1 col-md-6 col-12 p-field">
-          <label for="creationDate" class="p-float-label">Date de création</label>
+          <label for="creationDate" class="p-float-label"
+            >Date de création</label
+          >
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-            <input type="text" class="form-control p-field" id="creationDate"
-                   [(ngModel)]="societe.createdAt" disabled="true">
+            <input
+              type="text"
+              class="form-control p-field"
+              id="creationDate"
+              [(ngModel)]="societe.createdAt"
+              disabled="true"
+            />
           </div>
         </div>
         <div class="mb-1 col-md-6 col-12">
-          <label for="modificationDate" class="p-float-label">Date de dernière modification</label>
+          <label for="modificationDate" class="p-float-label"
+            >Date de dernière modification</label
+          >
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-            <input type="text" class="form-control p-field"  id="modificationDate"
-                   [(ngModel)]="societe.updatedAt " disabled="true">
+            <input
+              type="text"
+              class="form-control p-field"
+              id="modificationDate"
+              [(ngModel)]="societe.updatedAt"
+              disabled="true"
+            />
           </div>
         </div>
       </div>
       <div style="display: flex">
         <div class="mb-1 col-md-6 col-12 p-field">
-          <label for="societeLabel" class="p-float-label">Dénomination Societe</label>
+          <label for="societeLabel" class="p-float-label"
+            >Dénomination Societe</label
+          >
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-            <input type="text" class="form-control p-field" id="societeLabel"
-                   [(ngModel)]="societe.campanyName" [ngClass]="{
-        'is-invalid': societe.campanyName == null || societe.campanyName == '' ,
-        'is-valid': societe.campanyName != null && societe.campanyName !== ''
-      }">
+            <input
+              type="text"
+              class="form-control p-field"
+              id="societeLabel"
+              [(ngModel)]="societe.campanyName"
+              [ngClass]="{
+                'is-invalid':
+                  societe.campanyName == null || societe.campanyName == '',
+                'is-valid':
+                  societe.campanyName != null && societe.campanyName !== ''
+              }"
+            />
           </div>
         </div>
         <div class="mb-1 col-md-6 col-12">
-          <label for="identifiant" class="p-float-label">Identifiant unique</label>
+          <label for="identifiant" class="p-float-label"
+            >Identifiant unique</label
+          >
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-            <input type="text" class="form-control p-field"  id="identifiant"
-                   [(ngModel)]="societe.campanyUniqueIdentifier " [ngClass]="{
-        'is-invalid': societe.campanyUniqueIdentifier  == null || societe.campanyUniqueIdentifier  == '' ,
-        'is-valid': societe.campanyUniqueIdentifier  != null && societe.campanyUniqueIdentifier  !== ''
-      }">
+            <input
+              type="text"
+              class="form-control p-field"
+              id="identifiant"
+              [(ngModel)]="societe.campanyUniqueIdentifier"
+              [ngClass]="{
+                'is-invalid':
+                  societe.campanyUniqueIdentifier == null ||
+                  societe.campanyUniqueIdentifier == '',
+                'is-valid':
+                  societe.campanyUniqueIdentifier != null &&
+                  societe.campanyUniqueIdentifier !== ''
+              }"
+            />
           </div>
         </div>
       </div>
-      <!--
       <div style="display: flex">
         <div class="mb-1 col-md-6 col-12">
           <label for="tel" class="p-float-label">Téléphone </label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-check"></i></span>
-            <input type="number" class="form-control" placeholder="-- Téléphone  --" id="tel"
-                   [(ngModel)]="societe.campanyPhoneNumber " [ngClass]="{
-        'is-invalid': societe.campanyPhoneNumber  == null || societe.campanyPhoneNumber  == '' ,
-        'is-valid': societe.campanyPhoneNumber  != null && societe.campanyPhoneNumber  != ''
-      }">
+            <input
+              type="number"
+              class="form-control"
+              placeholder="-- Téléphone  --"
+              id="tel"
+              [(ngModel)]="societe.campanyPhoneNumber"
+              [ngClass]="{
+                'is-invalid':
+                  societe.campanyPhoneNumber == null ||
+                  societe.campanyPhoneNumber == '',
+                'is-valid':
+                  societe.campanyPhoneNumber != null &&
+                  societe.campanyPhoneNumber != ''
+              }"
+            />
           </div>
         </div>
         <div class="mb-1 col-md-6 col-12">
           <label for="mail" class="p-float-label">Email </label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-check"></i></span>
-            <input type="text" class="form-control" placeholder="-- Email  --" id="mail"
-                   [(ngModel)]="societe.campanyEmail " [ngClass]="{
-        'is-invalid': societe.campanyEmail  == null || societe.campanyEmail  == '' ,
-        'is-valid': societe.campanyEmail  != null && societe.campanyEmail  != ''
-      }">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="-- Email  --"
+              id="mail"
+              [(ngModel)]="societe.campanyEmail"
+              [ngClass]="{
+                'is-invalid':
+                  societe.campanyEmail == null || societe.campanyEmail == '',
+                'is-valid':
+                  societe.campanyEmail != null && societe.campanyEmail != ''
+              }"
+            />
           </div>
         </div>
       </div>
--->
-
       <div class="p-col-12 mb-1 col-md-12 p-field">
         <label for="manager" class="p-float-label">Responsable </label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-          <input type="text" class="form-control p-field"  id="manager"
-                 [(ngModel)]="societe.companyManagerName " [ngClass]="{
-        'is-invalid': societe.companyManagerName  == null || societe.companyManagerName  == '' ,
-        'is-valid': societe.companyManagerName  != null && societe.companyManagerName  !== ''
-      }">
+          <input
+            type="text"
+            class="form-control p-field"
+            id="manager"
+            [(ngModel)]="societe.companyManagerName"
+            [ngClass]="{
+              'is-invalid':
+                societe.companyManagerName == null ||
+                societe.companyManagerName == '',
+              'is-valid':
+                societe.companyManagerName != null &&
+                societe.companyManagerName !== ''
+            }"
+          />
         </div>
       </div>
 
@@ -98,24 +186,49 @@ Modifier votre société
         <label for="adress" class="p-float-label">Adresse </label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-list"></i></span>
-          <textarea id="story" name="story" rows="3" class="form-control p-field"  pInputText  style="width: 100%;"  id ="adress" [(ngModel)]="societe.campanyAddress " [ngClass]="{
-        'is-invalid': societe.campanyAddress  == null || societe.campanyAddress  == '' ,
-        'is-valid': societe.campanyAddress  != null && societe.campanyAddress  != ''
-      }"
+          <textarea
+            id="story"
+            name="story"
+            rows="3"
+            class="form-control p-field"
+            pInputText
+            style="width: 100%"
+            id="adress"
+            [(ngModel)]="societe.campanyAddress"
+            [ngClass]="{
+              'is-invalid':
+                societe.campanyAddress == null || societe.campanyAddress == '',
+              'is-valid':
+                societe.campanyAddress != null && societe.campanyAddress != ''
+            }"
           ></textarea>
         </div>
       </div>
     </div>
-  <br>
+  </p-panel>
+  <div
+    class="p-panel p-panel-header"
+    style="margin-top: 20px; float: right; padding: 2%"
+  >
+    <button
+      pButton
+      pRipple
+      label="Annuler"
+      icon="pi pi-times"
+      class="btn btn-secondary"
+      (click)="cancel()"
+    ></button>
 
-  <div class="p-panel p-panel-header" style="margin-top: 20px;float: right; padding: 2%;">
-
-    <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="cancel()"></button>
-
-      <button [disabled]="checkCompanyValid()"
-      [ngClass]= "{'disabled':  checkCompanyValid()}" pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn" 
-      (click)="saveSociete()" style="margin-left: 10px;"></button>
+    <button
+      [disabled]="checkCompanyValid()"
+      [ngClass]="{ disabled: checkCompanyValid() }"
+      pButton
+      pRipple
+      label="Enregistrer"
+      icon="pi pi-check"
+      class="primaryBtn"
+      (click)="saveSociete()"
+      style="margin-left: 10px"
+    ></button>
   </div>
-
-
 </div>

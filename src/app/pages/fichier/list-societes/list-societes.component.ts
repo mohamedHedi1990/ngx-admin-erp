@@ -3,6 +3,7 @@ import {UtilsServiceService} from '../../../utils-service.service';
 import {SmartTableData} from '../../../@core/data/smart-table';
 import {DialogService} from 'primeng/dynamicdialog';
 import {ConfirmationService} from 'primeng/api';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'ngx-list-societes',
@@ -20,7 +21,8 @@ export class ListSocietesComponent implements OnInit {
 
   constructor(private service: SmartTableData, private UtilsService: UtilsServiceService,
               public dialogService: DialogService,
-               private confirmationService: ConfirmationService) {
+               private confirmationService: ConfirmationService,
+               private sanitizer: DomSanitizer) {
 
   }
 
@@ -30,11 +32,16 @@ export class ListSocietesComponent implements OnInit {
 
     this.getAllSocietes();
   }
+  async  saveNewSociete(companyObject) {
+    let company = await this.UtilsService.post_promise(UtilsServiceService.API_COMPANY, companyObject.company);
+    console.log('company  ', company);
+    this.saveLogo(company.campanyId, companyObject.logo)
+  }
 
-  saveNewSociete() {
+  saveNewSocieteWithoutLogo() {
 
     const context = this;
-    this.UtilsService.post(UtilsServiceService.API_COMPANY, this.societe).subscribe( response => {
+    this.UtilsService.post_promise(UtilsServiceService.API_COMPANY, this.societe).then( response => {
         this.hideSocieteWindow();
         if ( context.societe.campanyId == null) {
           this.UtilsService.showToast('success',
@@ -52,6 +59,27 @@ export class ListSocietesComponent implements OnInit {
         'Erreur interne',
         `Un erreur interne a été produit lors de la souvegarde du societé ${this.societe.campanyName}`); });
 
+  }
+
+  saveLogo(companyId, logo) {
+    const formData = new FormData();
+    formData.append('file', logo);
+    this.UtilsService.post(UtilsServiceService.API_FILE + '/logo/' + companyId, formData).subscribe(response => {
+      this.hideSocieteWindow();
+        if ( this.societe.campanyId == null) {
+          this.UtilsService.showToast('success',
+            'Societe ajoutée avec succés',
+            `Le societé  ${this.societe.campanyName} a été ajoutée avec succcés`);
+        } else {
+          this.UtilsService.showToast('success',
+            'Societé modfiée avec succés',
+            `Le societé  ${this.societe.campanyName} a été modifiée avec succcés`);
+        }
+        this.getAllSocietes();
+        this.initSociete();
+    },  error => {this.UtilsService.showToast('danger',
+    'Erreur interne',
+    `Un erreur interne a été produit lors de la souvegarde du societé ${this.societe.campanyName}`); });
   }
 
   getAllSocietes() {

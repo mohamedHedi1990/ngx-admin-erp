@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'ngx-add-new-societe',
   templateUrl: './add-new-societe.component.html',
@@ -16,16 +17,31 @@ export class AddNewSocieteComponent implements OnInit {
     campanyEmail: '',
     companyManagerName: '',
     companyPictureUrl: [],
+    companyLogoUrl: null,
   };
   @Output() addNewSocieteEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();
-  constructor() { }
+
+  imagePath;
+  imgURL: any;
+  logo = null;
+  messageLogoErrorType ='seulement les fichiers de type image sont autorisés!'
+  showerrorTypeLogo = false;
+
+  constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
+    if(this.societe.companyLogoUrl != null) {
+      this.imgURL = this.societe.companyLogoUrl;
+    }
   }
 
   saveSociete() {
-    this.addNewSocieteEvent.emit(this.societe);
+    const companyObject = {
+      company: this.societe,
+      logo: this.logo
+    }
+    this.addNewSocieteEvent.emit(companyObject);
   }
 
   cancel() {
@@ -39,7 +55,24 @@ export class AddNewSocieteComponent implements OnInit {
       this.societe.companyManagerName == null || this.societe.companyManagerName === '';
   }
 
+  preview(files) {
+    if (files.length === 0) {
+      return;
+    }
+    this.logo = files[0];
+    const mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.showerrorTypeLogo = true;
+      return;
+    }
 
+    const reader = new FileReader();
+    this.imagePath = files;
+    reader.readAsDataURL(files[0]);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
+    };
+  }
 
 
 }

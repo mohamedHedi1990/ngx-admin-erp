@@ -8,9 +8,9 @@ import {DatePipe} from '@angular/common';
 })
 export class UtilsServiceService {
   // public static REMOTE_ADDRESS = 'http://212.129.62.79:8090/';
-  public static REMOTE_ADDRESS = 'http://localhost:8090/';
+  public static REMOTE_ADDRESS = 'http://localhost:8090';
   // public static REMOTE_ADDRESS = 'https://erp-forecast-bi-services.herokuapp.com';
-  public static API_AUTH=UtilsServiceService.REMOTE_ADDRESS+'api/auth/signin'
+  public static API_AUTH=UtilsServiceService.REMOTE_ADDRESS+'/' +'api/auth/signin'
   public static API_USER = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/user';
   public static API_COMPANY = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/company';
   public static API_PROVIDER = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/provider';
@@ -33,7 +33,7 @@ export class UtilsServiceService {
   public static API_HISTORIC_SOLD = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/historic-account-sold';
   public static API_PROVIDER_ATTACHED_INVOICES = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/provider-attahced-invoices';
   public static API_CUSTOMER_ATTACHED_INVOICES = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/customer-attahced-invoices';
-
+  public static API_FILE = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/file';
   header = new HttpHeaders();
 
   constructor(private toastrService: NbToastrService, private httpClient: HttpClient,
@@ -60,6 +60,11 @@ export class UtilsServiceService {
   public post(url: string, object: any): Observable<any> {
 
     return this.httpClient.post(url, object);
+  }
+
+  public post_promise(url: string, object: any): Promise<any> {
+
+    return this.httpClient.post(url, object).toPromise();
   }
 
   public put(url: string, object: any): Observable<any> {
