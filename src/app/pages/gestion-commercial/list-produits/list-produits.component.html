@@ -1,29 +1,31 @@
-<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
-<h4 *ngIf="!showClientWindow" style="background: #E7E8E8; 
+<h4 *ngIf="!showProduitWindow" style="background: #E7E8E8; 
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
-  Liste des clients
+Liste des produits
 </h4>
-<div *ngIf="!showClientWindow" class="card"
+
+
+<div *ngIf="!showProduitWindow" class="card"
   style=" margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
-  <p-table #dt [value]="clients" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true" [rows]="5"
+  <p-table #dt [value]="produits" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true" [rows]="5"
     [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading" [paginator]="true"
     currentPageReportTemplate="" [filterDelay]="0"
-    [globalFilterFields]="['customerLabel','customerUniqueIdentifier','customerAddress','customerTel','customerEmail','customerManagerName','createdAt', 'updatedAt']">
+    [globalFilterFields]="['productLabel','productReference','productDescription','productUrlImage','productType','productUnite','productHTTC','productTaux','productTVA','productPrixVente','productPrixHT','createdAt', 'updatedAt']"
+    >
     <ng-template pTemplate="caption">
       <div>
         <div class="p-d-flex p-ai-center p-jc-between" style=" width: 60%; display: inline-block;">
           <span class="p-input-icon-left" style="width: 100%">
             <i class="pi pi-search"></i>
-            <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"
-              (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher un client.." />
+            <input pInputText type="text" style=" width: 93%;" class="searchInput p-inputtext"
+              (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher un produit.." />
           </span>
         </div>
 
         <div style="float:right">
-          <button pButton pRipple label="Nouveau client" icon="pi pi-plus" class="primaryBtn"
-            (click)="showClientWindow = true"></button>
+          <button pButton pRipple label="Nouveau produit" icon="pi pi-plus" class="primaryBtn"
+            (click)="showProduitWindow = true"></button>
         </div>
       </div>
 
@@ -33,16 +35,19 @@ padding: 10px 10px 10px 10px !important;
     </ng-template>
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 13px;">
-        <th style="text-align: center; font-size: 13px;width: 20%;">Dénomination</th>
-        <th style="text-align: center; font-size: 13px;width: 20%">Identifiant</th>
-        <th style="text-align: center;font-size: 13px;width: 30%">Adresse</th>
+        <th style="text-align: center; font-size: 13px;width: 20%;">Libellé</th>
+        <th style="text-align: center; font-size: 13px;width: 20%">Reférence</th>
+        <th style="text-align: center;font-size: 13px;width: 20%">Type</th>
+        <th style="text-align: center;font-size: 13px;width: 20%">Unité</th>
+
         <!--
 		<th pSortableColumn="customerTel" style="text-align: center; font-size: 15px;">Télephone</th>
 		<th pSortableColumn="customerEmail" style="text-align: center; font-size: 15px;">Email</th>
 		!-->
 
-        <th pSortableColumn="customerManagerName" style="text-align: center; font-size: 13px;width: 20%">Nom du
-          responsable</th>
+        <th style="text-align: center; font-size: 13px;width: 20%">Prix HT</th>
+        <th style="text-align: center; font-size: 13px;width: 20%">Prix TTC</th>
+
         <!--
           <th pSortableColumn="createdAt">Date de création</th>
           <th pSortableColumn="updatedAt">Date de modfication</th>
@@ -69,17 +74,20 @@ padding: 10px 10px 10px 10px !important;
       </tr>
       -->
     </ng-template>
-    <ng-template pTemplate="body" let-client>
+    <ng-template pTemplate="body" let-produit>
       <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
         <td style="text-align: center;font-size: 13px;">
-          {{client.customerLabel}}
+          {{produit.productLabel}}
         </td>
         <td style="text-align: center;font-size: 13px;">
-          {{client.customerUniqueIdentifier}}
+          {{produit.productReference}}
         </td>
         <td style="text-align: center;font-size: 13px;">
-          {{client.customerAddress}}
+          {{produit.productType}}
         </td>
+        <td style="text-align: center;font-size: 13px;">
+            {{produit.productUnite}}
+          </td>
         <!--
         <td style="text-align: center;">
           {{client.customerTel}}
@@ -90,8 +98,11 @@ padding: 10px 10px 10px 10px !important;
         -->
 
         <td style="text-align: center;font-size: 13px;">
-          {{client.customerManagerName}}
+          {{produit.productPrixHTS}}
         </td>
+        <td style="text-align: center;font-size: 13px;">
+            {{produit.productTTCS}}
+          </td>
         <!--
                 <td>
                   {{client.createdAt}}
@@ -102,12 +113,11 @@ padding: 10px 10px 10px 10px !important;
         -->
         <td style="text-align: center;">
           <div>
-            <i placement="top" ngbTooltip="Contacter" class="pi pi-users" style="margin-right: 7px;color: #6200ee"
-              (click)="showContacts(client)"></i>
+            
             <i placement="top" ngbTooltip="Modifier" class="pi pi-pencil" style="margin-right: 7px;color: #6200ee"
-              (click)="editClient(client)"></i>
+              (click)="editProduit(produit)"></i>
             <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" style="color: #6200ee"
-              (click)="deleteClient(client)"></i>
+              (click)="deleteProduit(produit)"></i>
           </div>
 
         </td>
@@ -115,34 +125,32 @@ padding: 10px 10px 10px 10px !important;
     </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr style="font-size: 13px">
-        <td colspan="8" style="text-align: left !important;">Aucun client trouvé!</td>
+        <td colspan="8" style="text-align: left !important;">Aucun produit trouvé!</td>
       </tr>
     </ng-template>
   </p-table>
 </div>
 
-<p-dialog header="Supprimer un client" [(visible)]="displayDeleteClient" [modal]="true" [style]="{width: '50vw'}"
+
+
+
+<p-dialog header="Supprimer un produit" [(visible)]="displayDeleteProduit" [modal]="true" [style]="{width: '50vw'}"
   [baseZIndex]="10000" [draggable]="false" [resizable]="false">
-  <br>
-  <div>
-    <span>La supression du client va supprimer toutes les données relatives à ce client ( ses contacts, ses factures,
-      ses réglements, etc.)</span>
-  </div>
-  <br>
-  Voulez-vous toujours supprimer le client <span
-    class="customer-badge status-negotiation">{{client.customerLabel}}</span> ?
+  
+  Voulez-vous toujours supprimer le produit <span
+    class="customer-badge status-negotiation">{{produit.productLabel}}</span> ?
 
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
       <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
-        (click)="displayDeleteClient=false"></button>
+        (click)="displayDeleteProduit=false"></button>
 
       <button pButton pRipple label="Supprimer" icon="pi pi-check" class="p-button-danger p-mr-2"
-        (click)="delClient()"></button>
+        (click)="delProduit()"></button>
 
     </div>
   </ng-template>
 </p-dialog>
 
-<ngx-add-new-client *ngIf="showClientWindow" [client]="client" (addNewClientEvent)="saveNewClient($event)"
-  (cancelEvent)="hideClientWindow(); initClient();"></ngx-add-new-client>
+<ngx-add-new-produit *ngIf="showProduitWindow" [produit]="produit" (addNewProduitEvent)="saveNewProduit($event)"
+  (cancelEvent)="hideProduitWindow(); initProduit();"></ngx-add-new-produit>

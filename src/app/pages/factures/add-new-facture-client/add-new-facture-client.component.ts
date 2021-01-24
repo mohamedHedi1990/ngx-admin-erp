@@ -111,7 +111,6 @@ export class AddNewFactureClientComponent implements OnInit {
     limitDate = new Date(this.invoice.invoiceDeadlineDate);
     const time = (limitDate.valueOf() - invoiceDate.valueOf()) / 86400000;
     this.invoice.invoiceDeadlineInNumberOfDays = time;
-    this.minDateDeadlineDate
 
 
   }
@@ -130,4 +129,5 @@ export class AddNewFactureClientComponent implements OnInit {
     this.invoice.invoiceDeadlineInNumberOfDays = time;
 
   }
+  
 }

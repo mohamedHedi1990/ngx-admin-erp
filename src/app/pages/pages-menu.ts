@@ -69,6 +69,23 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
+    title: 'Gestion commercial',
+    icon: 'edit-2-outline',
+    children: [
+      {
+        title: 'Produits',
+        link: '/pages/gestion-commercial/list-produits',
+		icon: 'file-outline',
+      },
+      {
+        title: 'Bons Livraison',
+       link: '/pages/gestion-commercial/list-bon-livraison',
+		    icon: 'file-outline',
+      },
+
+    ],
+  },
+  {
     title: 'Saisie tresorerie',
     icon: 'keypad-outline',
     children: [

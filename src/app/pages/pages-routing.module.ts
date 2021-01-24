@@ -20,6 +20,11 @@ const routes: Routes = [{
         .then(m => m.FacturesModule),
     },
     {
+      path: 'gestion-commercial',
+      loadChildren: () => import('./gestion-commercial/gestion-commercial.module')
+        .then(m => m.GestionCommercialModule),
+    },
+    {
       path: 'saisie-tresorerie',
       loadChildren: () => import('./saisie-encaissments/saisie-encaissments.module')
         .then(m => m.SaisieEncaissmentsModule),

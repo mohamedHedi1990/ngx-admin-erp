@@ -1,0 +1,121 @@
+<h4 *ngIf="!showBonLivraisonGeneratedWindow && !showBonLivraisonTemplate" style="background: #E7E8E8;
+padding: 10px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;margin-left: 10px">
+    Liste des bons livraison générées
+</h4>
+<div *ngIf="!showBonLivraisonGeneratedWindow && !showBonLivraisonTemplate" class="card"
+    style=" margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
+    <p-table #dt [value]="bonLivraisons" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true" [rows]="5"
+        [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading" [paginator]="true"
+        currentPageReportTemplate="" [filterDelay]="0">
+        <ng-template pTemplate="caption">
+            <div>
+                <div class="p-d-flex p-ai-center p-jc-between" style=" width: 60%; display: inline-block;">
+                    <span class="p-input-icon-left" style="width: 100%">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" style="margin-left: 5%; width: 93%;"
+                            class="searchInput, p-inputtext" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                            placeholder="Chercher une bon livraison.." />
+                    </span>
+                </div>
+
+                <div style="float:right">
+                    <button pButton pRipple label="Ajouter un bon de livraison" icon="pi pi-plus" class="primaryBtn"
+                        (click)="showBonLivraisonGeneratedWindow = true"></button>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr style="text-align: center; font-size: 15px;">
+                <th style="text-align: center; font-size: 13px;width: 10%">Numéro</th>
+                <th style="text-align: center; font-size: 13px;width: 10%">Client</th>
+                <th style="text-align: center; font-size: 13px;width: 15%">Date de bon de livraison</th>
+                <th style="text-align: center;font-size: 13px;width: 17%">Date d'échéance</th>
+                <th style="text-align: center; font-size: 13px;width: 14%">Montant HT brute</th>
+                <th style="text-align: center; font-size: 13px;width: 14%">Montant HT</th>
+                <th style="text-align: center; font-size: 13px;width: 14%">Total taxes</th>
+                <th style="text-align: center; font-size: 13px;width: 14%">Montant TTC</th>
+                <th style="width: 10%;font-size: 13px; text-align: center;">Actions</th>
+            </tr>
+
+        </ng-template>
+        <ng-template pTemplate="body" let-bonLivraison>
+            <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
+                <td style="text-align: center;font-size: 13px;">
+                    {{bonLivraison.bonLivraisonNumber}}
+                </td>
+                <td style="text-align: center;font-size: 13px;">
+                    {{bonLivraison.customer.customerLabel}}
+                </td>
+                <td style="text-align: center;font-size: 13px;">
+                    {{bonLivraison.bonLivraisonDate | date: 'dd-MM-yyyy'}}
+                </td>
+                <td style="text-align: center;font-size: 13px;">
+                    {{bonLivraison.bonLivraisonDeadlineDate | date: 'dd-MM-yyyy'}}
+                </td>
+                <td style="text-align: center;">
+                    {{bonLivraison.totalHTBrutS}} {{bonLivraison.bonLivraisonCurrency}}
+                </td>
+                <td style="text-align: center;">
+                    {{bonLivraison.totalHTS}} {{bonLivraison.bonLivraisonCurrency}}
+                </td>
+              <td style="text-align: center;font-size: 13px;">
+                {{bonLivraison.totalTaxeS}}
+              </td>
+                <td style="text-align: center;font-size: 13px;">
+                {{bonLivraison.totalTTCS}}
+                </td>
+
+
+
+                <td style="text-align: center;">
+                    <div>
+                      <i placement="top" ngbTooltip="Visualiser" class="pi pi-eye" (click)="ShowBonLivraisonTemplate(bonLivraison)"
+                         style="margin-right: 7px; color: #6200ee"></i>
+
+                      <i placement="top" ngbTooltip="Modifier" class="pi pi-pencil"
+                         style="margin-right: 7px; color: #6200ee" (click)="editBonLivraison(bonLivraison)"></i>
+                      <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" (click)="deleteBonLivraison(bonLivraison)"
+                            style="margin-right: 7px; color: #6200ee"></i>
+
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr style="font-size: 13px">
+                <td colspan="8" style="text-align: left !important;">Aucune bon livraison générée trouvée!</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+
+
+<p-dialog header="Supprimer un bon livraison généré" [(visible)]="displayDeleteBonLivraison" [modal]="true" [style]="{width: '50vw'}"
+  [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+
+  Voulez-vous toujours supprimer le bon livraison  <span
+    class="customer-badge status-negotiation">{{bonLivraison.bonLivraisonNumber}}</span> ?
+
+  <ng-template pTemplate="footer">
+    <div style="margin-top: 20px;">
+      <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
+        (click)="displayDeleteBonLivraison=false"></button>
+
+      <button pButton pRipple label="Supprimer" icon="pi pi-check" class="p-button-danger p-mr-2"
+        (click)="delBonLivraison()"></button>
+
+    </div>
+  </ng-template>
+</p-dialog>
+
+<ngx-add-new-bon-livraison *ngIf="showBonLivraisonGeneratedWindow" [bonLivraison]="bonLivraison"
+  (addNewBonLivraisonEvent)="generateInvoice($event)" (cancelEvent)="hideBonLivraisonWindow(); initBonLivraison();">
+</ngx-add-new-bon-livraison>
+
+
+<ngx-bon-livraison-template *ngIf="showBonLivraisonTemplate" [bonLivraison]="bonLivraison"
+                      (cancelTemplateEvent)="hideTemplateWindow()">
+</ngx-bon-livraison-template>

@@ -1,10 +1,10 @@
-<h4 *ngIf="client.customerId  == null" style="background: #E7E8E8; 
+<h4 *ngIf="client.customerId  == null" style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
 Ajouter un nouveau client
 </h4>
-<h4 *ngIf="client.customerId != null" style="background: #E7E8E8; 
+<h4 *ngIf="client.customerId != null" style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
@@ -82,16 +82,41 @@ Modifier un client
           </div>
         </div>
   -->
-
-        <div class="p-col-12 mb-1 col-md-12 p-field">
-          <label for="manager" class="p-float-label">Responsable </label>
+        <div style="display: flex;">
+        <div class="p-col-6 mb-1 col-md-6 p-field">
+          <label for="tel" class="p-float-label">Tél </label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-            <input type="text" class="form-control p-field"  id="manager"
-                   [(ngModel)]="client.customerManagerName ">
+            <input type="tel" class="form-control p-field"  id="tel"
+                   [(ngModel)]="client.customerTel "
+                   [ngClass]="{
+        'is-invalid': client.customerTel  == null || client.customerTel  == '' ,
+        'is-valid': client.customerTel  != null && client.customerTel  !== ''
+      }">
           </div>
         </div>
+        <div class="p-col-6 mb-1 col-md-6 p-field">
+          <label for="email" class="p-float-label">Email </label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+            <input type="text" class="form-control p-field"  id="email"
+                   [(ngModel)]="client.customerEmail"
+                   [ngClass]="{
+        'is-invalid': client.customerEmail  == null || client.customerEmail  == '' ,
+        'is-valid': client.customerEmail  != null && client.customerEmail  !== ''
+      }">
+          </div>
+        </div>
+        </div>
 
+        <div class="p-col-12 mb-1 col-md-12 p-field">
+        <label for="manager" class="p-float-label">Responsable </label>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+          <input type="text" class="form-control p-field"  id="manager"
+                 [(ngModel)]="client.customerManagerName ">
+        </div>
+      </div>
         <div class="p-col-12 mb-1 col-md-12 p-field">
           <label for="adress" class="p-float-label">Adresse </label>
           <div class="p-inputgroup">
@@ -119,7 +144,7 @@ Modifier un client
     <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="cancel()"></button>
 
       <button [disabled]="checkClientValid()"
-      [ngClass]= "{'disabled':  checkClientValid()}" pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn" 
+      [ngClass]= "{'disabled':  checkClientValid()}" pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn"
       (click)="saveClient()" style="margin-left: 10px;"></button>
   </div>
 

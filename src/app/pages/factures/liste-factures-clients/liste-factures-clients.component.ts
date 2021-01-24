@@ -54,6 +54,8 @@ export class ListeFacturesClientsComponent implements OnInit {
     const context = this;
     this.UtilsService.get(UtilsServiceService.API_CUSTOMER_INVOICE).subscribe(response => {
       context.invoices = response;
+      console.log("all invoice customers");
+      console.log(response);
     },
       error => {
         this.UtilsService.showToast('danger',

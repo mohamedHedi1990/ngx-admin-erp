@@ -11,16 +11,18 @@ export class UtilsServiceService {
   public static REMOTE_ADDRESS = 'http://localhost:8090';
   // public static REMOTE_ADDRESS = 'https://erp-forecast-bi-services.herokuapp.com';
   public static API_AUTH=UtilsServiceService.REMOTE_ADDRESS+'/' +'api/auth/signin'
+  public static API_BONLIVRAISON=UtilsServiceService.REMOTE_ADDRESS+'/'+'api/bonlivraison';
   public static API_USER = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/user';
   public static API_COMPANY = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/company';
   public static API_PROVIDER = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/provider';
   public static API_ACCOUNT = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/account';
   public static API_COMISSION = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/comission';
   public static API_CLIENT = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/customer';
+  public static API_PRODUIT = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/product';
   public static API_TARIF = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/tarif';
   public static API_TIME_LINE = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/timeLine';
   public static API_PROVIDER_INVOICE = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/invoice-provider';
-  public static API_CUSTOMER_INVOICE = UtilsServiceService.REMOTE_ADDRESS  + 'api/invoice-customer';
+  public static API_CUSTOMER_INVOICE = UtilsServiceService.REMOTE_ADDRESS  +'/'+ 'api/invoice-customer';
   public static API_INVOICE = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/invoice';
   public static API_TYPE_ENCAISSEMENT = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/encaissement-type';
   public static API_TYPE_DECAISSEMENT = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/decaissement-type';
@@ -34,11 +36,13 @@ export class UtilsServiceService {
   public static API_PROVIDER_ATTACHED_INVOICES = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/provider-attahced-invoices';
   public static API_CUSTOMER_ATTACHED_INVOICES = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/customer-attahced-invoices';
   public static API_FILE = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/file';
+  static API_BONLIVRAISONLINE= UtilsServiceService.REMOTE_ADDRESS+'/'+'api/bonlivraisonline';
+
   header = new HttpHeaders();
 
   constructor(private toastrService: NbToastrService, private httpClient: HttpClient,
               private datePipe: DatePipe) {
-              
+
   }
 
   public showToast(type: NbComponentStatus, title: string, body: string) {

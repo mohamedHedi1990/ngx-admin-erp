@@ -1,0 +1,184 @@
+
+<h4 *ngIf="produit.productId  == null" style="background: #E7E8E8;
+padding: 10px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;margin-left: 10px">
+    Ajouter un nouveau produit
+</h4>
+<h4 *ngIf="produit.productId != null" style="background: #E7E8E8;
+padding: 10px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;margin-left: 10px">
+    Modifier un produit
+    <div><span class="customer-badge status-label">{{produit.productLabel}}</span></div>
+</h4>
+
+<div style="width: 90%; margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
+    <p-panel header="Informations génerales" [toggleable]="false">
+        <div class="p-grid p-fluid">
+            <div *ngIf="produit.productId != null" style="display: flex">
+                <div class="mb-1 col-md-6 col-12 p-field">
+                    <label for="creationDate" class="p-float-label">Date de création</label>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                        <input type="text" class="form-control p-field" id="creationDate"
+                            [(ngModel)]="produit.createdAt" disabled="true">
+                    </div>
+                </div>
+                <div class="mb-1 col-md-6 col-12">
+                    <label for="modificationDate" class="p-float-label">Date de dernière modification</label>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                        <input type="text" class="form-control p-field" id="modificationDate"
+                            [(ngModel)]="produit.updatedAt " disabled="true">
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex">
+                <div class="mb-1 col-md-4 col-12 p-field">
+                    <label for="produitLabel" class="p-float-label">Libellé</label>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                        <input type="text" class="form-control p-field" id="produitLabel"
+                            [(ngModel)]="produit.productLabel" [ngClass]="{
+        'is-invalid': produit.productLabel == null || produit.productLabel == '' ,
+        'is-valid': produit.productLabel != null && produit.productLabel !== ''
+      }">
+                    </div>
+                </div>
+                <div class="mb-1 col-md-4 col-12">
+                    <label for="reference" class="p-float-label">Référence</label>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                        <input type="text" class="form-control p-field" id="reference"
+                            [(ngModel)]="produit.productReference" [ngClass]="{
+        'is-invalid': produit.productReference == null || produit.productReference  == '' ,
+        'is-valid': produit.productReference  != null && produit.productReference  !== ''
+      }">
+                    </div>
+                </div>
+
+                <div class="mb-1 col-md-4 col-12">
+                    <label for="producttype" class="p-float-label">Type :</label>
+
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-list"></i></span>
+                        <select class="form-control p-field" name="type" [(ngModel)]="produit.productType"
+                            id="producttype">
+                            <option [ngValue]="'MATERIEL'">Matériel</option>
+                            <option [ngValue]="'SERVICE'">Service</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex">
+
+                <div class="p-col-12 mb-1 col-md-12 p-field">
+                    <label for="Description" class="p-float-label">Détails </label>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-list"></i></span>
+                        <textarea id="Description " name="Description " rows="3" class="form-control p-field" pInputText
+                            style="width: 100%;" id="adress" [(ngModel)]="produit.productDescription">
+                        </textarea>
+                    </div>
+                </div>
+
+                <!-- <div class="p-col-12 mb-1 col-md-6 p-field">
+                    <label for="Image" class="p-float-label">Image </label>
+                    <p-fileUpload #form id="upload" mode="basic" icon="pi pi-file-excel" [showCancelButton]="true"
+                        accept="image/*" [maxFileSize]="1000000" label="Choose" chooseLabel="Choose"
+                        styleClass="primaryBtn" (onSelect)="selectFile($event,form)" (onBeforeUpload)="clear($event)">
+                    </p-fileUpload>
+                </div> -->
+
+            </div>
+        </div>
+    </p-panel>
+    <br>
+    <p-panel header="Prix de vente" [toggleable]="false">
+        <div class="p-grid p-fluid">
+            <div style="display: flex">
+                <div class="mb-1 col-md-4 col-12">
+                    <label for="prixHt" class="p-float-label">Prix HT</label>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
+                        <input type="number" class="form-control p-field" id="prixHt"
+                            [(ngModel)]="produit.productPrixHT" style="font-size: 13px"
+                            (change)="updatePrixTTC()"
+                           >
+                    </div>
+                </div>
+
+
+
+                
+                <div class="mb-1 col-md-4 col-12">
+                    <label for="tva" class="p-float-label">TVA (%)</label>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                        <input type="number" class="form-control p-field" id="tva" [(ngModel)]="produit.productTVA"
+                        (change)="updatePrixTTC()"
+                            style="font-size: 13px"
+                            >
+                    </div>
+                </div>
+                <div class="mb-1 col-md-4 col-12">
+                    <label for="tauxFodec" class="p-float-label">FODEC (%)</label>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                        <input type="number" class="form-control p-field" id="tauxFodec"
+                            [(ngModel)]="produit.productFodec" style="font-size: 13px"
+                            (change)="updatePrixTTC()"
+                            >
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex">
+                
+                <div class="mb-1 col-md-8 col-12">
+                    <label for="prixTTC" class="p-float-label">Prix TTC</label>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                        <input type="number" class="form-control p-field" id="prixTTC" [(ngModel)]="produit.productTTC"
+                            style="font-size: 13px" disabled="true">
+                    </div>
+                </div>
+                <div class="mb-1 col-md-4 col-12">
+                    <label for="unite" class="p-float-label">Unité :</label>
+
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-list"></i></span>
+                        <select class="form-control p-field" name="" [(ngModel)]="produit.productUnite" id="unite">
+                            <option [ngValue]="'PIECE'">Piéce</option>
+                            <option [ngValue]="'METRE_CARRE'">Métre carré</option>
+                            <option [ngValue]="'KILOGRAMME'">kilogramme</option>
+                            <option [ngValue]="'METRE'">Métre</option>
+                            <option [ngValue]="'JOUR'">Jour</option>
+                            <option [ngValue]="'HEURE'">Heure</option>
+                            <option [ngValue]="'KILOMETRE'">kilométre</option>
+                            <option [ngValue]="'CENTIMETRE'">Centimétre</option>
+                            <option [ngValue]="'MOIS'">Mois</option>
+                            <option [ngValue]="'ANNEE'">Année</option>
+                            <option [ngValue]="'QUARTER'">Quarter</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </p-panel>
+
+    <br>
+
+    <div class="p-panel p-panel-header" style="margin-top: 20px;float: right; padding: 2%;">
+
+        <button pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary"
+            (click)="cancel()"></button>
+
+        <button [disabled]="checkProductValid()" [ngClass]="{'disabled':  checkProductValid()}" pButton pRipple
+            label="Enregistrer" icon="pi pi-check" class="primaryBtn" (click)="saveProduit()"
+            style="margin-left: 10px;"></button>
+    </div>
+</div>

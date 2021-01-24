@@ -1,0 +1,107 @@
+<div class="row">
+  <div class="d-flex justify-content-end col-md-12 text-align-left">
+    <button pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary"
+    (click)="cancel()" style="margin-right: 10px;"></button>
+    <button pButton pRipple class="primaryBtn" (click)="generatePDF()"
+    label="Télécharger PDF" icon="pi pi-file-pdf"></button>
+  </div>
+  <div id="bonlivraison"  class="col-md-12" style="height: 11.6929in;width: 8.2677in;margin-top:10px">
+    <nb-card style="width: 100%;height: 100%">
+      <nb-card-body>
+        <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+            <img [src]="company.companyLogoUrl" style="height:80px">
+          </div>
+          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+            <h1>{{company.campanyName}}</h1>
+          </div>
+        </div>
+        <div style="margin-top:30px" class="row col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7">
+            <h5>Bon Livraison N°: {{bonLivraison.bonLivraisonNumber}}</h5>
+            <h5>Date : {{bonLivraison.bonLivraisonDate}}</h5>
+          </div>
+          <div style="border: 2px solid #000"class="row col-xl-5 col-lg-5 col-md-5 col-sm-5">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+              <span style="font-weight: bold;">Adresse à : </span><br>
+              <span style="font-weight: bold;">FM/CIN : </span><br>
+              <span style="font-weight: bold;">Tél : </span>
+            </div>
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+              <span>{{bonLivraison.customer.customerAddress}}</span><br>
+              <span>{{bonLivraison.customer.customerUniqueIdentifier}}</span><br>
+              <span>{{bonLivraison.customer.customerTel}}</span>
+            </div>
+
+          </div>
+        </div>
+          <table style="margin-top:30px" class="table col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <th style="width:20%">Réference</th>
+            <th style="width:30%">Désignation</th>
+            <th style="width:10%">Qté</th>
+            <th style="width:13%">P.HT</th>
+            <th style="width:5%">TVA</th>
+            <th style="width:5%">Rémise</th>
+            <th style="width:17%">Montant Ht</th>
+            <tr *ngFor="let invoiceLine of bonLivraison.bonLivraisonLines">
+              <td class="text-left" style="width:20%;">{{invoiceLine.product.productReference}}</td>
+              <td class="text-left" style="width:30%;">{{invoiceLine.product.productDescription}}</td>
+              <td class="text-right" style="width:10%;">{{invoiceLine.quantity}}</td>
+              <td class="text-right" style="width:13%;">{{invoiceLine.product.productPrixHT}}</td>
+              <td class="text-right" style="width:5%;">{{invoiceLine.product.productTVA}}%</td>
+              <td class="text-right" style="width:5%;">{{invoiceLine.remiseTaux}}</td>
+              <td class="text-right" style="width:17%;">{{invoiceLine.montantHt}}</td>
+            </tr>
+          </table>
+        <div class="row" style="width:95%;position: absolute;bottom: 110px;">
+          <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
+            <table style="margin-top:15px" class="table col-xl-12 col-lg-12 col-md-12 col-sm-12">
+              <th style="width:60%">Nom de la Taxe</th>
+              <th style="width:40%">Montant</th>
+              <tr><td class="text-left" >FODEC</td><td class="text-right">{{bonLivraison.totalFodec}}</td></tr>
+              <tr><td class="text-left">TVA</td><td class="text-right">{{bonLivraison.totalTVA}}</td></tr>
+              <tr><td class="text-left">Taxe Fiscal</td><td class="text-right">{{bonLivraison.timbreFiscal}}</td></tr>
+              <tr style="border-top: 1px solid #000 "><td class="text-center font-weight-bold">Total</td><td class="text-right">{{bonLivraison.totalTaxe}}</td></tr>
+            </table>
+          </div>
+          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+          </div>
+          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+           <table style="margin-top:15px" class="table">
+             <tr style="height:40px;border: 1px solid #000"><td class="text-left font-weight-bold">Total Ht Brut</td><td class="text-right">{{bonLivraison.totalHTBrut}}</td></tr>
+             <tr style="height:40px;border: 1px solid #000"><td class="text-left font-weight-bold">Remise</td><td class="text-right">{{bonLivraison.remise}}</td></tr>
+             <tr style="height:40px;border: 1px solid #000"><td class="text-left font-weight-bold">Total Ht</td><td class="text-right">{{bonLivraison.totalHT}}</td></tr>
+             <tr style="height:40px;border: 1px solid #000"><td class="text-left font-weight-bold">Total Taxe</td><td class="text-right">{{bonLivraison.totalTaxe}}</td></tr>
+             <tr style="height:40px;border: 1px solid #000"><td class="text-left font-weight-bold">Total TCC</td><td class="text-right">{{bonLivraison.totalTTC}}</td></tr>
+           </table>
+          </div>
+          </div>
+
+        <div class="row" style="width:95%;position: absolute;bottom: 80px;">
+          <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
+            <span class="text-center font-weight-bold">Arrêtée la présente bon livraison à la somme de : </span>
+          </div>
+          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+          </div>
+          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+            <span class="text-center font-weight-bold">Cachet et signature</span>
+          </div>
+        </div>
+      </nb-card-body>
+      <nb-card-footer>
+        <div class="row">
+          <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7">
+            <span class="text-center font-weight-bold">Siége Social : {{company.campanyAddress}} </span><br>
+
+          </div>
+          <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+            <span class="text-center font-weight-bold">Tél : </span><span>+216 31 50 34</span><br>
+          </div>
+          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+            <span class="text-center font-weight-bold">FAX : </span><span>+216 71 765 275</span><br>
+          </div>
+        </div>
+      </nb-card-footer>
+    </nb-card>
+  </div>
+</div>
