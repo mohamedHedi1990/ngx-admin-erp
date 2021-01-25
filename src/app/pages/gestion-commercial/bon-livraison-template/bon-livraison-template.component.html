@@ -26,16 +26,19 @@
     <nb-card style="width: 100%; height: 100%">
       <nb-card-body>
         <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12">
-          <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
             <img [src]="company.companyLogoUrl" style="height: 100%;
-            width: 45%;
+            width: 60%;
             margin: 2%;" />
           </div>
-          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4" style="text-align: center;
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6" style="text-align: center;
           margin-top: 2%;">
             <span style="font-style: italic;    font-weight: 700;
             font-size: 29px;
-            line-height: normal;">{{ company.campanyName }}</span>
+            line-height: normal;">{{ company.campanyName }}</span><br>
+            <span style="font-style: italic;    font-weight: 700;
+            font-size: 20px;
+            line-height: normal;">{{company.campanyDetail}}</span>
           </div>
         </div>
         <div
@@ -82,7 +85,7 @@
             <br />
             <div style="margin-top: 30px; display: flex; font-size: 18px;
             font-weight: bold; width: 100%">
-              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+              <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                 <div>
                   <span>MF/CIN : </span>
                 </div>
@@ -90,17 +93,17 @@
                 <span>TEL : </span>
                 </div>
               </div>
-              <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+              <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
                 <div>
                   <span>{{
                     bonLivraison.customer.customerUniqueIdentifier
                   }}</span>
                 </div>
-                
+
                 <div style="margin-top: 15px;margin-bottom: 15px;">
                   <span>{{ bonLivraison.customer.customerTel }}</span>
                 </div>
-               
+
               </div>
             </div>
           </div>
@@ -200,7 +203,7 @@
 
         <div class="row" style="width: 95%; position: absolute; bottom: 80px">
           <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
-            <!-- 
+            <!--
             <span class="text-center font-weight-bold"
               >Arrêtée la présente bon livraison à la somme de :
             </span>
@@ -216,21 +219,27 @@
       </nb-card-body>
       <nb-card-footer>
         <div class="row">
-          <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7">
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
             <span class="text-center font-weight-bold"
               style="line-height: normal;
               font-style: italic;">Siége Social : {{ company.campanyAddress }} </span
             ><br />
           </div>
-          <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
             <span class="text-center font-weight-bold">Tél : </span
             ><span>+216 {{ company.campanyPhoneNumber }}</span
             ><br />
+            <span class="text-center font-weight-bold">TVA : </span
+            ><span>{{ company.campanyUniqueIdentifier }}</span
+          ><br />
           </div>
           <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
             <span class="text-center font-weight-bold">FAX : </span
             ><span>+216 {{ company.campanyFaxNumber }}</span
             ><br />
+            <span class="text-center font-weight-bold">RC : </span
+            ><span>{{ company.campanyRCNumber }}</span
+          ><br />
           </div>
         </div>
       </nb-card-footer>

@@ -12,6 +12,9 @@ export class BonLivraisonTemplateComponent implements OnInit {
   @Output() cancelTemplateEvent = new EventEmitter();
   @Input() bonLivraison:any;
   company:any= {
+    campanyDetail: '',
+    campanyRCNumber: '',
+    campanyFax: '',
     campanyAddress: '',
     campanyEmail: '',
     campanyId: null,

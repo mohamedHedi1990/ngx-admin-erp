@@ -141,6 +141,9 @@ export class ListSocietesComponent implements OnInit {
     this.societe = {
       campanyId: null,
       campanyName: '',
+      campanyDetail: '',
+      campanyRCNumber: '',
+      campanyFax: '',
       companyManagerName: '',
       customerAddress: '',
       campanyUniqueIdentifier: '',
