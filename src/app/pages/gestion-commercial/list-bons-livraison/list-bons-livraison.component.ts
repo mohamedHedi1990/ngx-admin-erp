@@ -85,6 +85,7 @@ export class ListBonsLivraisonComponent implements OnInit {
   }
 
   ShowBonLivraisonTemplate(bonLivraison) {
+    this.initBonLivraison();
     this.bonLivraison=bonLivraison;
     this.showBonLivraisonTemplate=true;
   }
@@ -120,5 +121,10 @@ export class ListBonsLivraisonComponent implements OnInit {
 
   hideTemplateWindow() {
     this.showBonLivraisonTemplate=false;
+  }
+
+  showBonLivraisonWindow() {
+    this.initBonLivraison();
+    this.showBonLivraisonGeneratedWindow = true;
   }
 }
