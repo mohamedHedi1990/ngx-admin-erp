@@ -10,6 +10,9 @@ export class AddNewSocieteComponent implements OnInit {
   @Input() societe = {
     campanyId: null,
     campanyName: '',
+    campanyDetail: '',
+    campanyRCNumber: '',
+    campanyFax: '',
     campanyAddress: '',
     campanyUniqueIdentifier: '',
     campanyPhoneNumber: '',
@@ -52,7 +55,9 @@ export class AddNewSocieteComponent implements OnInit {
     return this.societe.campanyAddress == null || this.societe.campanyAddress === '' ||
       this.societe.campanyName == null || this.societe.campanyName === '' ||
       this.societe.campanyUniqueIdentifier == null || this.societe.campanyUniqueIdentifier === '' ||
-      this.societe.companyManagerName == null || this.societe.companyManagerName === '';
+      this.societe.companyManagerName == null || this.societe.companyManagerName === '' ||
+      this.societe.campanyRCNumber == null || this.societe.campanyRCNumber === ''
+      ;
   }
 
   preview(files) {

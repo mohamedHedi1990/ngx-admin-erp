@@ -96,9 +96,31 @@
             />
           </div>
         </div>
+        <div class="mb-1 col-md-6 col-12 p-field">
+          <label for="societeDetail" class="p-float-label"
+          >Un petit mot à propos la société (facultatif)</label
+          >
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input
+              type="text"
+              class="form-control p-field"
+              id="societeDetail"
+              [(ngModel)]="societe.campanyDetail"
+              [ngClass]="{
+                'is-invalid':
+                  societe.campanyDetail == null || societe.campanyDetail == '',
+                'is-valid':
+                  societe.campanyDetail != null && societe.campanyDetail !== ''
+              }"
+            />
+          </div>
+        </div>
+      </div>
+      <div style="display: flex">
         <div class="mb-1 col-md-6 col-12">
           <label for="identifiant" class="p-float-label"
-            >Identifiant unique</label
+          >Identifiant unique</label
           >
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
@@ -118,9 +140,52 @@
             />
           </div>
         </div>
-      </div>
-      <div style="display: flex">
         <div class="mb-1 col-md-6 col-12">
+          <label for="rcNumber" class="p-float-label"
+          >Numéro Registre de commerce</label
+          >
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input
+              type="text"
+              class="form-control p-field"
+              id="rcNumber"
+              [(ngModel)]="societe.campanyRCNumber"
+              [ngClass]="{
+                'is-invalid':
+                  societe.campanyRCNumber == null ||
+                  societe.campanyRCNumber == '',
+                'is-valid':
+                  societe.campanyRCNumber != null &&
+                  societe.campanyRCNumber !== ''
+              }"
+            />
+          </div>
+        </div>
+
+      </div>
+        <div class="p-col-12 mb-1 col-md-12 p-field">
+          <label for="manager" class="p-float-label">Responsable </label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+            <input
+              type="text"
+              class="form-control p-field"
+              id="manager"
+              [(ngModel)]="societe.companyManagerName"
+              [ngClass]="{
+              'is-invalid':
+                societe.companyManagerName == null ||
+                societe.companyManagerName == '',
+              'is-valid':
+                societe.companyManagerName != null &&
+                societe.companyManagerName !== ''
+            }"
+            />
+          </div>
+        </div>
+      <div style="display: flex">
+        <div class="mb-1 col-md-3 col-12">
           <label for="tel" class="p-float-label">Téléphone </label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-check"></i></span>
@@ -141,6 +206,27 @@
             />
           </div>
         </div>
+
+      <div class="mb-1 col-md-3 col-12">
+        <label for="fax" class="p-float-label">Fax </label>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+          <input
+            type="text"
+            class="form-control p-field"
+            id="fax"
+            [(ngModel)]="societe.campanyFax"
+            [ngClass]="{
+              'is-invalid':
+                societe.campanyFax == null ||
+                societe.campanyFax == '',
+              'is-valid':
+                societe.campanyFax != null &&
+                societe.campanyFax !== ''
+            }"
+          />
+        </div>
+      </div>
         <div class="mb-1 col-md-6 col-12">
           <label for="mail" class="p-float-label">Email </label>
           <div class="p-inputgroup">
@@ -160,28 +246,9 @@
             />
           </div>
         </div>
-      </div>
-      <div class="p-col-12 mb-1 col-md-12 p-field">
-        <label for="manager" class="p-float-label">Responsable </label>
-        <div class="p-inputgroup">
-          <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-          <input
-            type="text"
-            class="form-control p-field"
-            id="manager"
-            [(ngModel)]="societe.companyManagerName"
-            [ngClass]="{
-              'is-invalid':
-                societe.companyManagerName == null ||
-                societe.companyManagerName == '',
-              'is-valid':
-                societe.companyManagerName != null &&
-                societe.companyManagerName !== ''
-            }"
-          />
-        </div>
-      </div>
 
+
+      </div>
       <div class="p-col-12 mb-1 col-md-12 p-field">
         <label for="adress" class="p-float-label">Adresse </label>
         <div class="p-inputgroup">
@@ -204,7 +271,7 @@
           ></textarea>
         </div>
       </div>
-      
+
     </div>
   </p-panel>
   <div
