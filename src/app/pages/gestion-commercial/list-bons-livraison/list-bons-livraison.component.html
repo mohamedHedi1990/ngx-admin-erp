@@ -71,9 +71,10 @@ padding: 10px 10px 10px 10px !important;
 
                 <td style="text-align: center;">
                     <div>
-                      <i placement="top" ngbTooltip="Visualiser" class="pi pi-eye" (click)="ShowBonLivraisonTemplate(bonLivraison)"
+                      <i placement="top" ngbTooltip="Visualisation Complet" class="pi pi-eye" (click)="ShowBonLivraisonTemplate(bonLivraison,true)"
                          style="margin-right: 7px; color: #6200ee"></i>
-
+                      <i placement="top" ngbTooltip="Visualisation Réduite" class="pi pi-eye-slash" (click)="ShowBonLivraisonTemplate(bonLivraison,false)"
+                         style="margin-right: 7px; color: #6200ee"></i>
                       <i placement="top" ngbTooltip="Modifier" class="pi pi-pencil"
                          style="margin-right: 7px; color: #6200ee" (click)="editBonLivraison(bonLivraison)"></i>
                       <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" (click)="deleteBonLivraison(bonLivraison)"
@@ -116,6 +117,6 @@ padding: 10px 10px 10px 10px !important;
 </ngx-add-new-bon-livraison>
 
 
-<ngx-bon-livraison-template *ngIf="showBonLivraisonTemplate" [bonLivraison]="bonLivraison"
+<ngx-bon-livraison-template *ngIf="showBonLivraisonTemplate" [bonLivraison]="bonLivraison" [complet]="complet"
                       (cancelTemplateEvent)="hideTemplateWindow()">
 </ngx-bon-livraison-template>

@@ -9,6 +9,7 @@ import {UtilsServiceService} from "../../../utils-service.service";
   styleUrls: ['./bon-livraison-template.component.scss']
 })
 export class BonLivraisonTemplateComponent implements OnInit {
+  @Input() complet;
   @Output() cancelTemplateEvent = new EventEmitter();
   @Input() bonLivraison:any;
   company:any= {

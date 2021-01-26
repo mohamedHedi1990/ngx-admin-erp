@@ -16,6 +16,7 @@ export class ListBonsLivraisonComponent implements OnInit {
   bonLivraison = null;
   displayDeleteBonLivraison = false;
   titleHeaderInvoice;
+  private complet: any;
 
 
   constructor(private service: SmartTableData, private utilsService: UtilsServiceService,
@@ -84,7 +85,8 @@ export class ListBonsLivraisonComponent implements OnInit {
     this.showBonLivraisonGeneratedWindow=false;
   }
 
-  ShowBonLivraisonTemplate(bonLivraison) {
+  ShowBonLivraisonTemplate(bonLivraison,complet) {
+    this.complet=complet;
     this.initBonLivraison();
     this.bonLivraison=bonLivraison;
     this.showBonLivraisonTemplate=true;
