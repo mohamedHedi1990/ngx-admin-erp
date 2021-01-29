@@ -11,9 +11,7 @@ export class AddNewBonLivraisonComponent implements OnInit {
   @Input() bonLivraison = {
     bonLivraisonId: null,
     bonLivraisonNumber: '',
-    bonLivraisonDeadlineInNumberOfDays: 0,
     bonLivraisonCurrency: 'TND',
-    bonLivraisonDeadlineDate: null,
     bonLivraisonDate: null,
     customer: null,
     products: null,
@@ -66,7 +64,6 @@ export class AddNewBonLivraisonComponent implements OnInit {
   constructor(private UtilsService: UtilsServiceService, private datePipe: DatePipe) { }
   ngOnInit(): void {
     this.bonLivraison.bonLivraisonDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-    this.bonLivraison.bonLivraisonDeadlineDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.maxDateInvoiceDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.minDateDeadlineDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.initiateLine();
@@ -74,7 +71,6 @@ export class AddNewBonLivraisonComponent implements OnInit {
     this.getAllProdcuts();
     this.initProduit();
    this.bonLivraison.bonLivraisonLines.forEach(line=>{
-     console.log("line invoice");
      this.timeLine.timeLineTable.push(line)
    })
   }
@@ -131,34 +127,8 @@ export class AddNewBonLivraisonComponent implements OnInit {
     if (a == null || b == null) return true;
     return a.customerId === b.customerId;
   }
-  changeInvoiceDate() {
-    this.minDateDeadlineDate = this.bonLivraison.bonLivraisonDate;
-    if (this.bonLivraison.bonLivraisonDate > this.bonLivraison.bonLivraisonDeadlineDate) {
-      this.bonLivraison.bonLivraisonDeadlineDate = this.bonLivraison.bonLivraisonDate;
-
-    }
-    const invoiceDate = new Date(this.bonLivraison.bonLivraisonDate);
-    let limitDate: Date;
-    limitDate = new Date(this.bonLivraison.bonLivraisonDeadlineDate);
-    const time = (limitDate.valueOf() - invoiceDate.valueOf()) / 86400000;
-    this.bonLivraison.bonLivraisonDeadlineInNumberOfDays = time;
 
 
-  }
-  changeNumberOfDeadlineDaysNumber() {
-    const invoiceDate = new Date(this.bonLivraison.bonLivraisonDate);
-    let limitDate: Date;
-    limitDate = new Date(this.bonLivraison.bonLivraisonDate);
-    limitDate.setDate(invoiceDate.getDate() + this.bonLivraison.bonLivraisonDeadlineInNumberOfDays);
-    this.bonLivraison.bonLivraisonDeadlineDate = this.datePipe.transform(limitDate, 'yyyy-MM-dd');
-  }
-  changeDeadLineDate() {
-    const limitDate = new Date(this.bonLivraison.bonLivraisonDeadlineDate);
-    const invoiceDate = new Date(this.bonLivraison.bonLivraisonDate);
-    const time = (limitDate.valueOf() - invoiceDate.valueOf()) / 86400000;
-    this.bonLivraison.bonLivraisonDeadlineInNumberOfDays = time;
-
-  }
   initiateLine() {
     this.line = {
       product: {

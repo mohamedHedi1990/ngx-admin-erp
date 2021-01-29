@@ -13,6 +13,7 @@ export class ListBonsLivraisonComponent implements OnInit {
   showBonLivraisonTemplate=false;
   showBonLivraisonGeneratedWindow=false;
   bonLivraisons: any[];
+  selectedBL = [];
   bonLivraison = null;
   displayDeleteBonLivraison = false;
   titleHeaderInvoice;
@@ -128,5 +129,25 @@ export class ListBonsLivraisonComponent implements OnInit {
   showBonLivraisonWindow() {
     this.initBonLivraison();
     this.showBonLivraisonGeneratedWindow = true;
+  }
+
+  genererFacture(){
+    let blsId=[];
+    this.selectedBL.forEach(value => {
+      blsId.push(value.bonLivraisonId);
+    })
+    const context = this;
+    this.utilsService.post(UtilsServiceService.API_FACTURE,blsId).subscribe(response => {
+        this.utilsService.showToast('success',
+          'Facture Généré avec succé',
+          `La Facture a été généré avec succé`)
+          this.selectedBL = [];
+      this.getAllBonLivraisons();
+      },
+      error => {
+        this.utilsService.showToast('danger',
+          'Erreur interne',
+          `Un erreur interne a été produit lors de géneration du facture`);
+      });
   }
 }

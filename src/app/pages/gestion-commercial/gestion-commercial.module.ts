@@ -25,9 +25,11 @@ import {FileUploadModule} from 'primeng/fileupload';
 import { ListBonsLivraisonComponent } from './list-bons-livraison/list-bons-livraison.component';
 import { AddNewBonLivraisonComponent } from './add-new-bon-livraison/add-new-bon-livraison.component';
 import { BonLivraisonTemplateComponent } from './bon-livraison-template/bon-livraison-template.component';
+import { ListFacturesComponent } from './list-factures/list-factures.component';
+import { FactureTemplateComponent } from './facture-template/facture-template.component';
 
 @NgModule({
-  declarations: [ListProduitsComponent,AddNewProduitComponent, ListBonsLivraisonComponent, AddNewBonLivraisonComponent, BonLivraisonTemplateComponent],
+  declarations: [ListProduitsComponent,AddNewProduitComponent, ListBonsLivraisonComponent, AddNewBonLivraisonComponent, BonLivraisonTemplateComponent, ListFacturesComponent, FactureTemplateComponent],
   imports: [
     FileUploadModule,
     HttpClientModule,

@@ -82,6 +82,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
        link: '/pages/gestion-commercial/list-bon-livraison',
 		    icon: 'file-outline',
       },
+      {
+        title: 'Factures Génerée',
+        link: '/pages/gestion-commercial/list-factures',
+        icon: 'file-outline',
+      },
 
     ],
   },

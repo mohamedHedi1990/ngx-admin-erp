@@ -6,9 +6,10 @@ padding: 10px 10px 10px 10px !important;
 </h4>
 <div *ngIf="!showBonLivraisonGeneratedWindow && !showBonLivraisonTemplate" class="card"
     style=" margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
-    <p-table #dt [value]="bonLivraisons" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true" [rows]="5"
+    <p-table #dt [value]="bonLivraisons" dataKey="bonLivraisonId" styleClass="p-datatable-customers" [rowHover]="true" [rows]="5"
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading" [paginator]="true"
-        currentPageReportTemplate="" [filterDelay]="0">
+        currentPageReportTemplate="" [filterDelay]="0"
+             [(selection)]="selectedBL">
         <ng-template pTemplate="caption">
             <div>
                 <div class="p-d-flex p-ai-center p-jc-between" style=" width: 60%; display: inline-block;">
@@ -19,7 +20,10 @@ padding: 10px 10px 10px 10px !important;
                             placeholder="Chercher une bon livraison.." />
                     </span>
                 </div>
-
+              <button pButton pRipple label="Génerer Facture
+" icon="pi pi-plus" class="primaryBtn" (click)="genererFacture()"
+                      [disabled]="selectedBL.length===0"
+                      [ngClass]="{'disabled': selectedBL.length===0}"></button>
                 <div style="float:right">
                     <button pButton pRipple label="Ajouter un bon de livraison" icon="pi pi-plus" class="primaryBtn"
                         (click)="showBonLivraisonWindow()"></button>
@@ -28,21 +32,25 @@ padding: 10px 10px 10px 10px !important;
         </ng-template>
         <ng-template pTemplate="header">
             <tr style="text-align: center; font-size: 15px;">
-                <th style="text-align: center; font-size: 13px;width: 10%">Numéro</th>
+              <th style="text-align: center; font-size: 13px;width: 3%"></th>
+              <th style="text-align: center; font-size: 13px;width: 10%">Numéro</th>
                 <th style="text-align: center; font-size: 13px;width: 10%">Client</th>
                 <th style="text-align: center; font-size: 13px;width: 15%">Date de bon de livraison</th>
-                <th style="text-align: center;font-size: 13px;width: 17%">Date d'échéance</th>
+                <!--<th style="text-align: center;font-size: 13px;width: 17%">Date d'échéance</th>-->
                 <th style="text-align: center; font-size: 13px;width: 14%">Montant HT brute</th>
                 <th style="text-align: center; font-size: 13px;width: 14%">Montant HT</th>
-                <th style="text-align: center; font-size: 13px;width: 14%">Total taxes</th>
+               <!-- <th style="text-align: center; font-size: 13px;width: 14%">Total taxes</th> -->
                 <th style="text-align: center; font-size: 13px;width: 14%">Montant TTC</th>
-                <th style="width: 10%;font-size: 13px; text-align: center;">Actions</th>
+                <th style="width: 7%;font-size: 13px; text-align: center;">Actions</th>
             </tr>
 
         </ng-template>
         <ng-template pTemplate="body" let-bonLivraison>
             <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
-                <td style="text-align: center;font-size: 13px;">
+              <td>
+              <p-tableCheckbox [value]="bonLivraison" ></p-tableCheckbox>
+              </td>
+              <td style="text-align: center;font-size: 13px;">
                     {{bonLivraison.bonLivraisonNumber}}
                 </td>
                 <td style="text-align: center;font-size: 13px;">
@@ -51,18 +59,18 @@ padding: 10px 10px 10px 10px !important;
                 <td style="text-align: center;font-size: 13px;">
                     {{bonLivraison.bonLivraisonDate | date: 'dd-MM-yyyy'}}
                 </td>
-                <td style="text-align: center;font-size: 13px;">
+               <!-- <td style="text-align: center;font-size: 13px;">
                     {{bonLivraison.bonLivraisonDeadlineDate | date: 'dd-MM-yyyy'}}
-                </td>
+                </td> -->
                 <td style="text-align: center;">
                     {{bonLivraison.totalHTBrutS}} {{bonLivraison.bonLivraisonCurrency}}
                 </td>
                 <td style="text-align: center;">
                     {{bonLivraison.totalHTS}} {{bonLivraison.bonLivraisonCurrency}}
                 </td>
-              <td style="text-align: center;font-size: 13px;">
+              <!--<td style="text-align: center;font-size: 13px;">
                 {{bonLivraison.totalTaxeS}}
-              </td>
+              </td> -->
                 <td style="text-align: center;font-size: 13px;">
                 {{bonLivraison.totalTTCS}}
                 </td>

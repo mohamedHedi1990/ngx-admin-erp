@@ -37,6 +37,7 @@ export class UtilsServiceService {
   public static API_CUSTOMER_ATTACHED_INVOICES = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/customer-attahced-invoices';
   public static API_FILE = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/file';
   static API_BONLIVRAISONLINE= UtilsServiceService.REMOTE_ADDRESS+'/'+'api/bonlivraisonline';
+  static API_FACTURE=UtilsServiceService.REMOTE_ADDRESS+'/'+'api/facture';
 
   header = new HttpHeaders();
 

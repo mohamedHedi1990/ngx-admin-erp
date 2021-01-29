@@ -81,30 +81,11 @@ padding: 10px 10px 10px 10px !important;
                     <div class="p-inputgroup">
                         <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
                         <input type="date" placeholder="Date" class="form-control p-field" id="bonLivraisonDate"
-                            [(ngModel)]="bonLivraison.bonLivraisonDate" [max]="maxDateInvoiceDate"
-                            (change)="changeInvoiceDate()" style="font-size: 13px">
+                            [(ngModel)]="bonLivraison.bonLivraisonDate"
+                             style="font-size: 13px">
                     </div>
                 </div>
 
-                <div class="mb-12 col-md-4 col-12">
-                    <label for="daysNumber" class="p-float-label">Nombre des jours avant la date d'échéance </label>
-                    <div class="p-inputgroup">
-                        <input type="number" class="form-control p-field" id="daysNumber" length="3" min="0"
-                            [(ngModel)]="bonLivraison.bonLivraisonDeadlineInNumberOfDays"
-                            style="font-size: 13px" (change)="changeNumberOfDeadlineDaysNumber()">
-                    </div>
-                </div>
-
-                <div class="mb-12 col-md-4 col-12">
-                    <label for="bonLivraisonDeadlineDate" class="p-float-label">Date d'écheance </label>
-                    <div class="p-inputgroup">
-                        <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
-                        <input type="date" placeholder="Date" class="form-control p-field"
-                            id="bonLivraisonDeadlineDate"
-                            [(ngModel)]="bonLivraison.bonLivraisonDeadlineDate" style="font-size: 13px"
-                            [min]="minDateDeadlineDate" (change)="changeDeadLineDate()">
-                    </div>
-                </div>
 
             </div>
         </div>

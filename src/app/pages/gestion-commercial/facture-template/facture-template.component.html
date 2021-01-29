@@ -1,0 +1,244 @@
+<div class="row template">
+  <div class="d-flex justify-content-end col-md-12 text-align-left">
+    <button
+      pButton
+      pRipple
+      label="Annuler"
+      icon="pi pi-times"
+      class="btn btn-secondary"
+      (click)="cancel()"
+      style="margin-right: 10px"
+    ></button>
+    <button
+      pButton
+      pRipple
+      class="primaryBtn"
+      (click)="generatePDF()"
+      label="Télécharger PDF"
+      icon="pi pi-file-pdf"
+    ></button>
+  </div>
+  <div
+    id="facture"
+    class="col-md-12"
+    style="height: 11.6929in; width: 8.2677in; margin-top: 10px"
+  >
+    <nb-card style="width: 100%; height: 100%">
+      <nb-card-body>
+        <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+            <img [src]="company.companyLogoUrl" style="height: 100%;
+            width: 60%;
+            margin: 2%;" />
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6" style="text-align: center;
+          margin-top: 2%;">
+            <span style="font-style: italic;    font-weight: 700;
+            font-size: 29px;
+            line-height: normal;">{{ company.campanyName }}</span><br>
+            <span style="font-style: italic;    font-weight: 700;
+            font-size: 20px;
+            line-height: normal;">{{company.campanyDetail}}</span>
+          </div>
+        </div>
+        <div
+          style="margin-top: 2%"
+          class="row col-xl-12 col-lg-12 col-md-12 col-sm-12"
+        >
+          <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7">
+            <div style="display: flex; margin-top: 5%;">
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <h5 style="font-weight: bold; font-size: 37px;">Facture N°:</h5>
+                <h5 style="margin-top: 16%;">Date :</h5>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <h5 style="font-weight: bold; font-size: 37px;">
+                  {{ facture.factureNumber }}
+                </h5>
+                <h5 style="margin-top: 16%;">{{ facture.factureDate | date: 'dd/MM/yyyy'}}</h5>
+              </div>
+            </div>
+          </div>
+          <div
+            style="border: 2px solid #000;
+            border-style: dashed solid !important"
+            class="row col-xl-5 col-lg-5 col-md-5 col-sm-5"
+          >
+            <div style="text-align: center; width: 100%">
+              <div style="margin-top: 8px;
+              margin-bottom: 18px;">
+                <span
+                  style="font-weight: bold; font-size: 21px; font-style: italic"
+                >Adressée à :
+                </span>
+              </div>
+              <div style="font-weight: bold;
+              font-size: 22px;
+              margin-bottom: 10px;
+              text-transform: uppercase;">
+                <span>{{ facture.customer.customerLabel }}</span>
+              </div>
+              <div style="text-transform: uppercase">
+                <span>{{ facture.customer.customerAddress }}</span>
+              </div>
+            </div>
+            <br />
+            <div style="margin-top: 30px; display: flex; font-size: 18px;
+            font-weight: bold; width: 100%">
+              <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                <div>
+                  <span>MF/CIN : </span>
+                </div>
+                <div style="margin-top: 15px; margin-bottom: 15px;">
+                  <span>TEL : </span>
+                </div>
+              </div>
+              <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+                <div>
+                  <span>{{
+                    facture.customer.customerUniqueIdentifier
+                    }}</span>
+                </div>
+
+                <div style="margin-top: 15px;margin-bottom: 15px;">
+                  <span>{{ facture.customer.customerTel }}</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <table
+          style="margin-top: 30px"
+          class="table col-xl-12 col-lg-12 col-md-12 col-sm-12"
+        >
+          <th style="width: 20%">Réference</th>
+          <th style="width: 30%">Désignation</th>
+          <th style="width: 10%">Qté</th>
+          <th *ngIf="complet" style="width: 13%">P.HT</th>
+          <th *ngIf="complet" style="width: 5%">TVA</th>
+          <th *ngIf="complet" style="width: 5%">Remise</th>
+          <th *ngIf="complet" style="width: 17%">Montant HT</th>
+          <tr *ngFor="let invoiceLine of facture.factureLines">
+            <td class="text-left" style="width: 20%">
+              {{ invoiceLine.product.productReference }}
+            </td>
+            <td class="text-left" style="width: 30%">
+              {{ invoiceLine.product.productLabel }}
+            </td>
+            <td class="text-right" style="width: 10%">
+              {{ invoiceLine.quantity }}
+            </td>
+            <td *ngIf="complet" class="text-right" style="width: 13%">
+              {{ invoiceLine.product.productPrixHT }}
+            </td>
+            <td *ngIf="complet" class="text-right" style="width: 5%">
+              {{ invoiceLine.product.productTVA }}%
+            </td>
+            <td *ngIf="complet" class="text-right" style="width: 5%">
+              {{ invoiceLine.remiseTaux }}%
+            </td>
+            <td *ngIf="complet" class="text-right" style="width: 17%">
+              {{ invoiceLine.montantHt }}
+            </td>
+          </tr>
+        </table>
+        <div class="row" style="width: 95%; position: absolute; bottom: 110px" *ngIf="complet">
+          <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
+            <table
+              style="margin-top: 15px"
+              class="table col-xl-12 col-lg-12 col-md-12 col-sm-12"
+            >
+              <th style="width: 60%">Nom de la Taxe</th>
+              <th style="width: 40%">Montant</th>
+              <tr>
+                <td class="text-left">FODEC</td>
+                <td class="text-right">{{ facture.totalFodec }}</td>
+              </tr>
+              <tr>
+                <td class="text-left">TVA</td>
+                <td class="text-right">{{ facture.totalTVA }}</td>
+              </tr>
+              <tr>
+                <td class="text-left">Timbre fiscal</td>
+                <td class="text-right">{{ facture.timbreFiscal }}</td>
+              </tr>
+              <tr style="border-top: 1px solid #000">
+                <td class="text-center font-weight-bold">Total</td>
+                <td class="text-right">{{ facture.totalTaxe }}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3"></div>
+          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+            <table style="margin-top: 15px" class="table">
+              <tr style="height: 40px; border: 1px solid #000; line-height: normal;">
+                <td class="text-left font-weight-bold" style="
+                width: 40%;">Total HT Brut</td>
+                <td class="text-right">{{ facture.totalHTBrut }}</td>
+              </tr>
+              <tr style="height: 40px; border: 1px solid #000">
+                <td style="
+                width: 40%;" class="text-left font-weight-bold">Remise</td>
+                <td class="text-right">{{ facture.remise }}</td>
+              </tr>
+              <tr style="height: 40px; border: 1px solid #000">
+                <td style="
+                width: 40%;" class="text-left font-weight-bold">Total HT</td>
+                <td class="text-right">{{ facture.totalHT }}</td>
+              </tr>
+              <tr style="height: 40px; border: 1px solid #000">
+                <td style="
+                width: 40%;" class="text-left font-weight-bold">Total Taxe</td>
+                <td class="text-right">{{ facture.totalTaxe }}</td>
+              </tr>
+              <tr style="height: 40px; border: 1px solid #000">
+                <td style="
+                width: 40%;" class="text-left font-weight-bold">Total TCC</td>
+                <td class="text-right">{{ facture.totalTTC }}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="row" style="width: 95%; position: absolute; bottom: 80px">
+          <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
+
+          </div>
+          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3"></div>
+          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+            <span class="text-center font-weight-bold"
+            >Cachet et signature</span
+            >
+          </div>
+        </div>
+      </nb-card-body>
+      <nb-card-footer>
+        <div class="row">
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+            <span class="text-center font-weight-bold"
+                  style="line-height: normal;
+              font-style: italic;">Siége Social : {{ company.campanyAddress }} </span
+            ><br />
+          </div>
+          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+            <span class="text-center font-weight-bold">Tél : </span
+            ><span>+216 {{ company.campanyPhoneNumber }}</span
+          ><br />
+            <span class="text-center font-weight-bold">TVA : </span
+            ><span>{{ company.campanyUniqueIdentifier }}</span
+          ><br />
+          </div>
+          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+            <span class="text-center font-weight-bold">FAX : </span
+            ><span>+216 {{ company.campanyFaxNumber }}</span
+          ><br />
+            <span class="text-center font-weight-bold">RC : </span
+            ><span>{{ company.campanyRCNumber }}</span
+          ><br />
+          </div>
+        </div>
+      </nb-card-footer>
+    </nb-card>
+  </div>
+</div>
