@@ -108,9 +108,12 @@ export class UtilsServiceService {
       } else if(array[1].length === 2) {
         array[1] = "." + array[1] + "0";
         return array[0] + array[1];
+      }else if(array[1].length > 3){
+        return array[0] + "." + array[1].substring(0,3);
       }
       return array[0] + '.' + array[1];
-    } else {
+    }
+    else {
       amount = initialAmount + '.000';
       return amount;
     }

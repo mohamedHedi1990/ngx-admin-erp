@@ -1,6 +1,7 @@
 import { EventEmitter, Output, ViewChild } from '@angular/core';
 import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import {UtilsServiceService} from "../../../utils-service.service";
 
 @Component({
   selector: 'ngx-add-new-produit',
@@ -18,6 +19,7 @@ export class AddNewProduitComponent implements OnInit {
     productTVA:0,
     productFodec:0,
     productTTC:0,
+    productTTCS:'0.000',
     productUnite:'PIECE',
     productType:'MATERIEL'
   };
@@ -28,7 +30,7 @@ export class AddNewProduitComponent implements OnInit {
   form:any=null;
   selectedFile:any=null;
  disabled=true;
-  constructor() { }
+  constructor(private utilsService:UtilsServiceService) { }
 
   ngOnInit(): void {
   }
@@ -70,6 +72,8 @@ export class AddNewProduitComponent implements OnInit {
     this.produit.productPrixHT =0;
   }
    this.produit.productTTC=this.produit.productPrixHT*(1+this.produit.productTVA /100)*(1+this.produit.productFodec /100);
+  this.produit.productTTC=Math.round(this.produit.productTTC * 1000) / 1000;
+  this.produit.productTTCS=this.utilsService.convertAmountToString(String(this.produit.productTTC));
  }
   hideProduitWindow() {
     this.showProduitWindow = false;

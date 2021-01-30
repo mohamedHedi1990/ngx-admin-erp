@@ -139,8 +139,8 @@ export class ListBonsLivraisonComponent implements OnInit {
     const context = this;
     this.utilsService.post(UtilsServiceService.API_FACTURE,blsId).subscribe(response => {
         this.utilsService.showToast('success',
-          'Facture Généré avec succé',
-          `La Facture a été généré avec succé`)
+          'Facture Générée avec succés',
+          `La Facture ${response.factureNumber} a été généré avec succés`)
           this.selectedBL = [];
       this.getAllBonLivraisons();
       },

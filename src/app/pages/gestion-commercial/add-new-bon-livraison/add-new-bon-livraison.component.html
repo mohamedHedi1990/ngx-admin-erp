@@ -106,7 +106,7 @@ padding: 10px 10px 10px 10px !important;
                     <th style="text-align: center;font-size: 13px;width: 10%">Prix HT</th>
                     <th style="text-align: center; font-size: 13px; width: 10%">TVA (%)</th>
                     <th style="text-align: center; font-size: 13px; width: 10%">FODEC (%)</th>
-                    <th style="text-align: center; font-size: 13px; width: 10%">Remise</th>
+                    <th style="text-align: center; font-size: 13px; width: 10%">Remise (%)</th>
                     <th style="text-align: center; font-size: 13px; width: 10%">Montant HT</th>
                     <th style="width:9%"></th>
                 </tr>
@@ -150,7 +150,7 @@ padding: 10px 10px 10px 10px !important;
                             class="form-control p-field" [(ngModel)]="line.remiseTaux" (change)="calculPrixTotal()">
                     </th>
                     <th style="font-size: 13px;">
-                        <input style="font-size: 13px;" pInputText type="number" placeholder="Toatal anuiité"
+                        <input style="font-size: 13px;" pInputText type="number" placeholder="Total HT"
                             class="form-control p-field" [(ngModel)]="line.montantHt" disabled="true">
                     </th>
                     <th>
@@ -242,7 +242,7 @@ padding: 10px 10px 10px 10px !important;
                                class="form-control p-field" [(ngModel)]="line.remiseTaux"  (change)="calculPrixTotalEdited(line)">
                       </ng-template>
                       <ng-template pTemplate="output">
-                        {{line.remiseTaux}}
+                        {{line.remiseTaux}} %
                       </ng-template>
                     </p-cellEditor>
                   </td>

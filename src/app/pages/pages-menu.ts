@@ -18,7 +18,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },*/
   {
     title: 'Fichier',
-    icon: 'file-outline',
+    icon: 'settings-2-outline',
     children: [
       {
         title: 'Sociétés',
@@ -70,22 +70,22 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Gestion commercial',
-    icon: 'edit-2-outline',
+    icon: 'collapse-outline',
     children: [
       {
         title: 'Produits',
         link: '/pages/gestion-commercial/list-produits',
-		icon: 'file-outline',
+		icon: 'cube-outline',
       },
       {
-        title: 'Bons Livraison',
+        title: 'Bons de livraisons',
        link: '/pages/gestion-commercial/list-bon-livraison',
-		    icon: 'file-outline',
+		    icon: 'clipboard-outline',
       },
       {
-        title: 'Factures Génerée',
+        title: 'Factures Génerées',
         link: '/pages/gestion-commercial/list-factures',
-        icon: 'file-outline',
+        icon: 'file-text-outline',
       },
 
     ],
@@ -97,33 +97,33 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Règlements Clients',
         link: '/pages/saisie-tresorerie/reglement-client',
-        icon: 'keypad-outline',
+        icon: 'arrow-circle-down-outline',
       },
       {
         title: 'Paiements Fournisseurs',
         link: '/pages/saisie-tresorerie/paiement-fournisseur',
-        icon: 'keypad-outline',
+        icon: 'arrow-circle-up-outline',
       },
       {
         title: 'Encaissements',
         link: '/pages/saisie-tresorerie/encaissements',
-        icon: 'keypad-outline',
+        icon: 'arrow-downward-outline',
       },
       {
         title: 'Décaissements',
         link: '/pages/saisie-tresorerie/decaissements',
-        icon: 'keypad-outline',
+        icon: 'arrow-upward-outline',
       },
     ],
   },
   {
     title: 'Rapprochement',
-    icon: 'browser-outline',
+    icon: 'calendar-outline',
     children: [
       {
         title: 'Rapprochement bancaire',
         link: '/pages/suivi-tresorerie/rapprochement-bancaire',
-        icon: 'browser-outline',
+        icon: 'calendar-outline',
       },
       /*
       {
@@ -153,12 +153,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Simulation de tresorerie',
-    icon: 'browser-outline',
+    icon: 'activity-outline',
     children: [
       {
         title: 'Etat engagé',
         link: '/pages/suivi-tresorerie/etat-engage',
-        icon: 'browser-outline',
+        icon: 'activity-outline',
       },
       /*
       {

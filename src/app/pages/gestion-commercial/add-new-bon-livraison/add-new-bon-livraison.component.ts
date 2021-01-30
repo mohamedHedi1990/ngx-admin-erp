@@ -183,6 +183,7 @@ export class AddNewBonLivraisonComponent implements OnInit {
     this.initiateLine();
   }
 
+
   cancel() {
     this.cancelEvent.emit();
   }
