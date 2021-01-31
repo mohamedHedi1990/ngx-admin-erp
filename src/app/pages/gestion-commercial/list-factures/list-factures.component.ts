@@ -10,6 +10,7 @@ import {ConfirmationService} from "primeng/api";
   styleUrls: ['./list-factures.component.scss']
 })
 export class ListFacturesComponent implements OnInit {
+  showFactureWindow=false;
 
   showFactureTemplate=false;
   showFactureGeneratedWindow=false;
@@ -102,5 +103,34 @@ export class ListFacturesComponent implements OnInit {
   hideTemplateWindow() {
     this.showFactureTemplate=false;
   }
+
+  hideFactureWindow() {
+    this.showFactureWindow=false;
+  }
+
+
+  editFacture(facture)
+  {
+    this.facture=facture;
+    this.titleHeaderInvoice="Modifier une facture "+facture.factureNumber;
+    this.showFactureWindow = true;
+  }
+
+  saveFacture(facture) {
+    const context = this;
+    this.utilsService.post(UtilsServiceService.API_FACTURE,facture).subscribe(response => {
+        this.utilsService.showToast('success',
+          'Facture modifiée avec succé',
+          `La Facture a été modifié avec succé`);
+        this.hideFactureWindow();
+        context.getAllFactures();
+      },
+      error => {
+        this.utilsService.showToast('danger',
+          'Erreur interne',
+          `Un erreur interne a été produit lors de modification de facture`);
+      });
+  }
+
 
 }

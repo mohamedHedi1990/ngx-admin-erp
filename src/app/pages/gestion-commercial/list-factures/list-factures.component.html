@@ -1,10 +1,10 @@
-<h4 *ngIf="!showFactureGeneratedWindow && !showFactureTemplate" style="background: #E7E8E8;
+<h4 *ngIf="!showFactureWindow && !showFactureTemplate" style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
   Liste des factures générées
 </h4>
-<div *ngIf="!showFactureGeneratedWindow && !showFactureTemplate" class="card"
+<div *ngIf="!showFactureWindow && !showFactureTemplate" class="card"
      style=" margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
   <p-table #dt [value]="factures" dataKey="factureId" styleClass="p-datatable-customers" [rowHover]="true" [rows]="5"
            [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading" [paginator]="true"
@@ -60,7 +60,7 @@ padding: 10px 10px 10px 10px !important;
           {{facture.totalTaxeS}}
         </td> -->
         <td style="text-align: center;font-size: 13px;">
-          {{facture.totalTTCS}}
+          {{facture.totalTTCS}} {{facture.factureCurrency}}
         </td>
 
 
@@ -71,7 +71,10 @@ padding: 10px 10px 10px 10px !important;
                style="margin-right: 7px; color: #6200ee"></i>
             <i placement="top" ngbTooltip="Visualisation réduite" class="pi pi-eye-slash" (click)="ShowFactureTemplate(facture,false)"
                style="margin-right: 7px; color: #6200ee"></i>
-           <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" (click)="deleteFacture(facture)"
+            <i placement="top" ngbTooltip="Modifier" class="pi pi-pencil"
+               style="margin-right: 7px; color: #6200ee" (click)="editFacture(facture)"></i>
+
+            <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" (click)="deleteFacture(facture)"
                style="margin-right: 7px; color: #6200ee"></i>
 
           </div>
@@ -109,3 +112,6 @@ padding: 10px 10px 10px 10px !important;
 <ngx-facture-template *ngIf="showFactureTemplate" [facture]="facture" [complet]="complet"
                             (cancelTemplateEvent)="hideTemplateWindow()">
 </ngx-facture-template>
+<ngx-edit-facture *ngIf="showFactureWindow" [facture]="facture"
+                           (editFactureEvent)="saveFacture($event)" (cancelEvent)="hideFactureWindow(); initFacture();">
+</ngx-edit-facture>

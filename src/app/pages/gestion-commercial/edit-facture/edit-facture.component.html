@@ -1,0 +1,394 @@
+<h4 *ngIf="facture.factureId != null" style="background: #E7E8E8;
+padding: 10px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;margin-left: 10px">
+  Modifier une facture
+  <div><span class="customer-badge status-label">{{facture.factureNumber}}</span></div>
+</h4>
+<div style="width: 90%;
+    margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
+  <p-panel [toggleable]="false">
+    <div class="p-grid p-fluid">
+      <div *ngIf="facture.factureId!=null" style="display: flex">
+        <div class="mb-1 col-md-6 col-12 p-field">
+          <label for="creationDate" class="p-float-label">Date de création</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field" id="creationDate"
+                   [(ngModel)]="facture.createdAt" disabled="true">
+          </div>
+        </div>
+        <div class="mb-1 col-md-6 col-12">
+          <label for="modificationDate" class="p-float-label">Date de dernière modification</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field" id="modificationDate"
+                   [(ngModel)]="facture.updatedAt " disabled="true">
+          </div>
+        </div>
+      </div>
+      <div style="display: flex">
+        <div class="mb-1 col-md-6 col-12 p-field">
+          <label for="factureNumber" class="p-float-label">Numéro</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field" id="factureNumber"
+                   [(ngModel)]="facture.factureNumber" [ngClass]="{
+                  'is-invalid': facture.factureNumber == null || facture.factureNumber == '' ,
+                  'is-valid': facture.factureNumber != null && facture.factureNumber !== ''
+                }" style="font-size: 13px" disabled="true">
+          </div>
+        </div>
+
+        <div class="mb-1 col-md-4 col-12">
+          <label for="client" class="p-float-label">Client</label>
+          <div class="p-inputgroup p-fluid">
+            <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+            <select class="form-control p-field" id="client" name="side"
+                    [(ngModel)]="facture.customer" style="font-size: 13px" [compareWith]="compareCustomer">
+              <option *ngFor="let c of clients;" [ngValue]="c">{{c.customerLabel}}</option>
+
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-1 col-md-2 col-12 p-field">
+          <label for="factureCurrency" class="p-float-label">Devise</label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-dollar"></i></span>
+            <select class="form-control p-field" id="factureCurrency" name="side"
+                    [(ngModel)]="facture.factureCurrency" style="font-size: 13px" [compareWith]="compareCurrency">
+              <option value="TND">TND</option>
+
+            </select>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="p-grid p-fluid">
+      <div style="display: flex">
+
+        <div class="mb-1 col-md-4 col-12">
+          <label for="manager" class="p-float-label">Date de facture </label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+            <input type="date" placeholder="Date" class="form-control p-field" id="manager"
+                   [(ngModel)]="facture.factureDate"
+                   [max]="maxDateFactureDate"
+                   (change)="changeFactureDate()"
+                   style="font-size: 13px">
+          </div>
+        </div>
+
+        <div class="mb-12 col-md-4 col-12">
+          <label for="fin" class="p-float-label">Nombre des jours avant la date d'échéance </label>
+          <div class="p-inputgroup">
+            <input type="number" class="form-control p-field" id="daysNumber" length="3" min="0"
+                   [(ngModel)]="facture.factureDeadlineInNumberOfDays" style="font-size: 13px"
+                   (change)="changeNumberOfDeadlineDaysNumber()"
+            >
+          </div>
+        </div>
+
+        <div class="mb-12 col-md-4 col-12">
+          <label for="fin" class="p-float-label">Date d'écheance </label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+            <input type="date" placeholder="Date" class="form-control p-field" id="fin"
+                   [(ngModel)]="facture.factureDeadlineDate" style="font-size: 13px"
+                   [min]="minDateDeadlineDate"
+                   (change)="changeDeadLineDate()">
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+  </p-panel>
+
+  <br>
+  <p-panel header="Tableau de produits" [toggleable]="false">
+
+    <p-table #dt [value]="timeLine.timeLineTable" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+             [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [paginator]="true"
+             currentPageReportTemplate="">
+      <ng-template pTemplate="header">
+        <tr style="text-align: center; font-size: 13px;">
+          <th style="text-align: center; font-size: 13px; width: 20%;">Designation</th>
+          <th style="text-align: center; font-size: 13px; width: 15%;">Réference</th>
+          <th style="text-align: center; font-size: 13px; width: 10%;">Quantite</th>
+          <th style="text-align: center;font-size: 13px;width: 10%">Prix HT</th>
+          <th style="text-align: center; font-size: 13px; width: 10%">TVA (%)</th>
+          <th style="text-align: center; font-size: 13px; width: 10%">FODEC (%)</th>
+          <th style="text-align: center; font-size: 13px; width: 10%">Remise (%)</th>
+          <th style="text-align: center; font-size: 13px; width: 10%">Montant HT</th>
+          <th style="width:9%"></th>
+        </tr>
+
+        <tr>
+          <th style="font-size: 13px;">
+            <div class="p-inputgroup p-fluid">
+
+              <select class="form-control p-field" id="produit" name="side" [(ngModel)]="line.product"
+                      style="font-size: 13px" (ngModelChange)="calculPrixTotal()">
+                <option *ngFor="let p of produits;" [ngValue]="p">{{p.productLabel}}</option>
+
+              </select>
+              <i placement="top" ngbTooltip="Ajouter un produit" class="pi pi-plus"
+                 style="margin: 9px; color: #086aac" (click)="showProduitModal()"></i>
+            </div>
+          </th>
+          <th style="font-size: 13px;">
+            <input style="font-size: 13px;" pInputText type="text" placeholder="Réference"
+                   class="form-control p-field" [(ngModel)]="line.product.productReference" disabled="true">
+          </th>
+          <th style="font-size: 13px;">
+            <input style="font-size: 13px;" pInputText type="number" placeholder="nombre des unités"
+                   class="form-control p-field" [(ngModel)]="line.quantity" (change)="calculPrixTotal()" min="1">
+          </th>
+
+          <th style="font-size: 13px;">
+            <input style="font-size: 13px;" pInputText type="number" placeholder="prixHT"
+                   class="form-control p-field" [(ngModel)]="line.product.productPrixHT" disabled="true">
+          </th>
+          <th style="font-size: 13px;">
+            <input style="font-size: 13px;" pInputText type="number" placeholder="Toatal anuiité"
+                   class="form-control p-field" [(ngModel)]="line.product.productTVA" disabled="true">
+          </th>
+          <th style="font-size: 13px;">
+            <input style="font-size: 13px;" pInputText type="number" class="form-control p-field"
+                   [(ngModel)]="line.product.productFodec" disabled="true">
+          </th>
+          <th style="font-size: 13px;">
+            <input style="font-size: 13px;" pInputText type="number" placeholder="Toatal anuiité"
+                   class="form-control p-field" [(ngModel)]="line.remiseTaux" (change)="calculPrixTotal()">
+          </th>
+          <th style="font-size: 13px;">
+            <input style="font-size: 13px;" pInputText type="number" placeholder="Total HT"
+                   class="form-control p-field" [(ngModel)]="line.montantHt" disabled="true">
+          </th>
+          <th>
+            <button pButton placement="top" ngbTooltip="Ajouter" pRipple icon="pi pi-plus"
+                    class="p-button-rounded p-mr-2" style="margin-right: 7px;
+                      background-color: #6200ee; border-color: #6200ee;" (click)="addLine()" [disabled]="line.product.productId==null"></button>
+          </th>
+        </tr>
+
+      </ng-template>
+      <ng-template pTemplate="body" let-line let-rowIndex="rowIndex">
+        <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
+          <td pEditableColumn style="text-align: center;">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <select class="form-control p-field" id="produit" name="side" [(ngModel)]="line.product"
+                        style="font-size: 13px"
+                        (change)="calculPrixTotalEdited(line)">
+                  <option *ngFor="let p of produits;" [ngValue]="p">{{p.productLabel}}</option>
+                </select>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{line.product.productLabel}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td pEditableColumn style="text-align: center;">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input style="font-size: 13px;" pInputText type="text" placeholder="Réference"
+                       class="form-control p-field" [(ngModel)]="line.product.productReference" disabled="true">
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{line.product.productReference}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td pEditableColumn style="text-align: center;">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input style="font-size: 13px;" pInputText type="number" placeholder="nombre des unités"
+                       class="form-control p-field" [(ngModel)]="line.quantity"  (change)="calculPrixTotalEdited(line)" min="1">
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{line.quantity}} {{line.product.productUnite}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+
+
+          <td pEditableColumn style="text-align: center;">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input style="font-size: 13px;" pInputText type="number" placeholder="prixHT"
+                       class="form-control p-field" [(ngModel)]="line.product.prixHT" disabled="true">
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{line.product.productPrixHT}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td pEditableColumn style="text-align: center;">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input style="font-size: 13px;" pInputText type="number" placeholder="Toatal anuiité"
+                       class="form-control p-field" [(ngModel)]="line.product.productTVA" disabled="true">
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{line.product.productTVA}} %
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td pEditableColumn style="text-align: center;">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input style="font-size: 13px;" pInputText type="number" class="form-control p-field"
+                       [(ngModel)]="line.product.productFaudec" disabled="true">
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{line.product.productFodec}}  %
+              </ng-template>
+            </p-cellEditor>
+          </td>
+
+          <td pEditableColumn style="text-align: center;">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input style="font-size: 13px;" pInputText type="number" placeholder="Toatal anuiité"
+                       class="form-control p-field" [(ngModel)]="line.remiseTaux"  (change)="calculPrixTotalEdited(line)">
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{line.remiseTaux}} %
+              </ng-template>
+            </p-cellEditor>
+          </td>
+
+
+
+          <td pEditableColumn style="text-align: center;">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input style="font-size: 13px;" pInputText type="number" class="form-control p-field"
+                       [(ngModel)]="line.montantHt" disabled="true">
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{line.montantHt}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+
+
+          <td style="text-align: center;">
+            <div style="display: flex;">
+
+              <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" style="color: #6200ee"
+                 (click)="deleteLine(rowIndex,line)"></i>
+            </div>
+
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr style="font-size: 13px;">
+          <td colspan="8" style="text-align: left !important;">Aucun line trouvé!</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-panel>
+  <br>
+
+  <div class="row">
+    <div class="col-md-6">
+      <p-panel [toggleable]="false">
+        <div class="p-grid p-fluid">
+
+          <div>
+            <label for="totalTVA" class="p-float-label">Total TVA </label>
+            <div class="p-inputgroup">
+              <input type="number" class="form-control p-field" id="totalTVA" length="3" min="0"
+                     [(ngModel)]="facture.totalTVA" style="font-size: 13px" disabled>
+            </div>
+          </div>
+          <div>
+
+            <label for="tauxFodec" class="p-float-label">Total Fodec </label>
+            <div class="p-inputgroup">
+              <input type="number" class="form-control p-field" id="tauxFodec" length="3" min="0"
+                     [(ngModel)]="facture.totalFodec" style="font-size: 13px" disabled>
+            </div>
+          </div>
+
+
+          <div>
+            <label for="timbreFiscal" class="p-float-label">Timbre Fiscal </label>
+            <div class="p-inputgroup">
+              <input type="number" class="form-control p-field" id="timbreFiscal" length="3" min="0"
+                     [(ngModel)]="facture.timbreFiscal" style="font-size: 13px" (change)="calculPrixTotalFacture()">
+            </div>
+          </div>
+
+          <div>
+            <label for="totalTaxe" class="p-float-label">Total Taxe</label>
+            <div class="p-inputgroup">
+              <input type="number" class="form-control p-field" id="totalTaxe" length="3" min="0"
+                     [(ngModel)]="facture.totalTaxe" style="font-size: 13px" disabled>
+            </div>
+          </div>
+
+        </div>
+      </p-panel>
+    </div>
+    <div class="col-md-6">
+      <p-panel [toggleable]="false">
+        <div class="p-grid p-fluid">
+          <div>
+            <label for="totalHTBrut" class="p-float-label">Total HT Brute </label>
+            <div class="p-inputgroup">
+              <input type="number" class="form-control p-field" id="totalHTBrut" length="3" min="0"
+                     [(ngModel)]="facture.totalHTBrut" style="font-size: 13px" disabled>
+            </div>
+          </div>
+          <div>
+            <label for="remise" class="p-float-label">Remise </label>
+            <div class="p-inputgroup">
+              <input type="number" class="form-control p-field" id="remise" length="3" min="0"
+                     [(ngModel)]="facture.remise" style="font-size: 13px " disabled>
+            </div>
+          </div>
+          <div>
+            <label for="totalHT" class="p-float-label">Total HT</label>
+            <div class="p-inputgroup">
+              <input type="number" class="form-control p-field" id="totalHT" length="3" min="0"
+                     [(ngModel)]="facture.totalHT" style="font-size: 13px" disabled>
+            </div>
+          </div>
+
+          <div >
+            <label for="totalTTC" class="p-float-label">Total TTC</label>
+            <div class="p-inputgroup">
+              <input type="number" class="form-control p-field" id="totalTTC" length="3" min="0"
+                     [(ngModel)]="facture.totalTTC" style="font-size: 13px" disabled>
+            </div>
+          </div>
+
+        </div>
+      </p-panel>
+    </div>
+  </div>
+  <div class="p-panel p-panel-header" style="margin-top: 20px;float: right; padding: 2%;">
+
+    <button pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary"
+            (click)="cancel()"></button>
+
+    <button [disabled]="checkGeneratedFactureValid()" [ngClass]="{'disabled':  checkGeneratedFactureValid()}"
+            pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn" (click)="saveGeneratedFacture()"
+            style="margin-left: 10px;"></button>
+  </div>
+</div>
+
+
+<p-dialog header="Ajouter Produit" [(visible)]="showProduitWindow" [modal]="true" [style]="{ width: '70vw' }"
+          [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+  <ngx-add-new-produit [produit]="produit" (addNewProduitEvent)="saveNewProduit($event)"
+                       (cancelEvent)="hideProduitWindow(); initProduit();"></ngx-add-new-produit>
+</p-dialog>

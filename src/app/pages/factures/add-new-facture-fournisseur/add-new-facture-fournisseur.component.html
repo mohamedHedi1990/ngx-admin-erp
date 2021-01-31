@@ -35,7 +35,7 @@ Modifier une nouvelle facture fournisseur
         </div>
       </div>
       <div style="display: flex">
-        
+
 	  	<div class="mb-1 col-md-6 col-12 p-field">
           <label for="invoiceNumber" class="p-float-label">Numéro</label>
           <div class="p-inputgroup">
@@ -51,7 +51,7 @@ Modifier une nouvelle facture fournisseur
           <label for="type" class="p-float-label">Fournisseur</label>
           <div class="p-inputgroup p-fluid">
             <span class="p-inputgroup-addon"><i class="pi pi-shopping-cart"></i></span>
-            <!-- 
+            <!--
             <input *ngIf="invoice.invoiceId!= null" type="text" placeholder="Date" class="form-control p-field"  id="manager"
                    [(ngModel)]="invoice.provider.providerLabel " style="font-size: 13px" disabled="true">
             -->
@@ -63,14 +63,13 @@ Modifier une nouvelle facture fournisseur
 
             </select>
           </div>
-        </div>  
+        </div>
 		<div class="mb-1 col-md-2 col-12 p-field">
           <label for="invoiceNumber" class="p-float-label">Devise</label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-dollar"></i></span>
             <select class="form-control p-field" id="type" name="side" [(ngModel)]="invoice.invoiceCurrency" style="font-size: 13px">
               <option value="TND">TND</option>
-               <option value="TND">EUR</option>
 
             </select>
           </div>
@@ -85,7 +84,7 @@ Modifier une nouvelle facture fournisseur
             <div class="p-inputgroup">
               <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
               <input type="date" placeholder="Date" class="form-control p-field"  id="manager"
-                     [(ngModel)]="invoice.invoiceDate " style="font-size: 13px" 
+                     [(ngModel)]="invoice.invoiceDate " style="font-size: 13px"
                      [max]="maxDateInvoiceDate"
                      (change)="changeInvoiceDate()">
             </div>
@@ -107,7 +106,7 @@ Modifier une nouvelle facture fournisseur
               <input type="date" class="form-control p-field"  id="fin"
                      [(ngModel)]="invoice.invoiceDeadlineDate "
                      [min]="minDateDeadlineDate"
-                     (change)="changeDeadLineDate()" 
+                     (change)="changeDeadLineDate()"
                      style="font-size: 13px">
             </div>
           </div>
@@ -123,7 +122,7 @@ Modifier une nouvelle facture fournisseur
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
             <input type="number" class="form-control p-field"  id="net"
-                   [(ngModel)]="invoice.invoiceTotalAmount" style="font-size: 13px" 
+                   [(ngModel)]="invoice.invoiceTotalAmount" style="font-size: 13px"
                    (change)="updateNetAmount()">
           </div>
         </div>
@@ -132,14 +131,14 @@ Modifier une nouvelle facture fournisseur
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
             <input type="number" class="form-control p-field"  id="rs"
-                   [(ngModel)]="invoice.invoiceRs " style="font-size: 13px" 
+                   [(ngModel)]="invoice.invoiceRs " style="font-size: 13px"
                    (change)="updateNetAmount()">
           </div>
           <span *ngIf="invoice.invoiceRsType === 'POURCENTAGE'" style="font-size: 12px;"><i>Soit valeur de {{rsAmount}}</i></span>
         </div>
         <div class="mb-12 col-md-4 col-12">
           <label for="rs" class="p-float-label">RS type</label>
-          <select class="form-control p-field" id="type" name="side" 
+          <select class="form-control p-field" id="type" name="side"
           [(ngModel)]="invoice.invoiceRsType"
             (change)="updateNetAmount()" style="font-size: 13px;">
             <option [ngValue]="'VALUE'">Valeur</option>
