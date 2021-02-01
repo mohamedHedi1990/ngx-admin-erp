@@ -27,8 +27,9 @@ padding: 10px 10px 10px 10px !important;
         <th style="text-align: center; font-size: 13px;width: 10%">Numéro</th>
         <th style="text-align: center; font-size: 13px;width: 10%">Client</th>
         <th style="text-align: center; font-size: 13px;width: 15%">Date de facture</th>
-        <!--<th style="text-align: center;font-size: 13px;width: 17%">Date d'échéance</th>-->
-        <th style="text-align: center; font-size: 13px;width: 14%">Montant HT brute</th>
+        <th style="text-align: center; font-size: 13px;width: 15%">Date d'échéance</th>
+        <!--<th style="text-align: center;font-size: 13px;width: 17%">Date d'échéance</th>
+        <th style="text-align: center; font-size: 13px;width: 14%">Montant HT brute</th>-->
         <th style="text-align: center; font-size: 13px;width: 14%">Montant HT</th>
         <!-- <th style="text-align: center; font-size: 13px;width: 14%">Total taxes</th> -->
         <th style="text-align: center; font-size: 13px;width: 14%">Montant TTC</th>
@@ -47,12 +48,16 @@ padding: 10px 10px 10px 10px !important;
         <td style="text-align: center;font-size: 13px;">
           {{facture.factureDate | date: 'dd-MM-yyyy'}}
         </td>
+
+        <td style="text-align: center;font-size: 13px;">
+          {{facture.factureDeadlineDate | date: 'dd-MM-yyyy'}}
+        </td>
         <!-- <td style="text-align: center;font-size: 13px;">
              {{facture.factureDeadlineDate | date: 'dd-MM-yyyy'}}
-         </td> -->
+         </td> 
         <td style="text-align: center;">
           {{facture.totalHTBrutS}} {{facture.factureCurrency}}
-        </td>
+        </td>-->
         <td style="text-align: center;">
           {{facture.totalHTS}} {{facture.factureCurrency}}
         </td>
@@ -67,10 +72,12 @@ padding: 10px 10px 10px 10px !important;
 
         <td style="text-align: center;">
           <div>
-            <i placement="top" ngbTooltip="Visualisation compléte" class="pi pi-eye" (click)="ShowFactureTemplate(facture,true)"
+            <i placement="top" ngbTooltip="Voir facture" class="pi pi-eye" (click)="ShowFactureTemplate(facture,true)"
                style="margin-right: 7px; color: #6200ee"></i>
+               <!-- 
             <i placement="top" ngbTooltip="Visualisation réduite" class="pi pi-eye-slash" (click)="ShowFactureTemplate(facture,false)"
                style="margin-right: 7px; color: #6200ee"></i>
+               -->
             <i placement="top" ngbTooltip="Modifier" class="pi pi-pencil"
                style="margin-right: 7px; color: #6200ee" (click)="editFacture(facture)"></i>
 
