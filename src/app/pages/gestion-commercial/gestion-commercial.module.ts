@@ -28,9 +28,12 @@ import { BonLivraisonTemplateComponent } from './bon-livraison-template/bon-livr
 import { ListFacturesComponent } from './list-factures/list-factures.component';
 import { FactureTemplateComponent } from './facture-template/facture-template.component';
 import { EditFactureComponent } from './edit-facture/edit-facture.component';
+import { AddNewDevisComponent } from './add-new-devis/add-new-devis.component';
+import { ListDevisComponent } from './list-devis/list-devis.component';
+import { DevisTemplateComponent } from './devis-template/devis-template.component';
 
 @NgModule({
-  declarations: [ListProduitsComponent,AddNewProduitComponent, ListBonsLivraisonComponent, AddNewBonLivraisonComponent, BonLivraisonTemplateComponent, ListFacturesComponent, FactureTemplateComponent, EditFactureComponent],
+  declarations: [ListProduitsComponent,AddNewProduitComponent, ListBonsLivraisonComponent, AddNewBonLivraisonComponent, BonLivraisonTemplateComponent, ListFacturesComponent, FactureTemplateComponent, EditFactureComponent, AddNewDevisComponent, ListDevisComponent, DevisTemplateComponent],
   imports: [
     FileUploadModule,
     HttpClientModule,

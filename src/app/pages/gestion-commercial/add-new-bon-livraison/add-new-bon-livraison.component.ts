@@ -244,7 +244,7 @@ export class AddNewBonLivraisonComponent implements OnInit {
     line.montantHtBrut=line.product.productPrixHT*line.quantity
     line.remiseValeur=line.montantHtBrut*(line.remiseTaux/100);
     line.montantHt=line.montantHtBrut-line.remiseValeur;
-    line.montantFaudec=line.montantHt*(line.product.productFaudec/100);
+    line.montantFaudec=line.montantHt*(line.product.productFodec/100);
     line.montantTva=(line.montantHt+line.montantFaudec)*(line.product.productTVA/100);
     this.calculPrixTotalBonLivraison();
   }

@@ -1,0 +1,122 @@
+<h4 *ngIf="!showDevisGeneratedWindow && !showDevisTemplate" style="background: #E7E8E8;
+padding: 10px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;margin-left: 10px">
+  Liste des devis générées
+</h4>
+<div *ngIf="!showDevisGeneratedWindow && !showDevisTemplate" class="card"
+     style=" margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
+  <p-table #dt [value]="deviss" dataKey="devisId" styleClass="p-datatable-customers" [rowHover]="true" [rows]="5"
+           [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading" [paginator]="true"
+           currentPageReportTemplate="" [filterDelay]="0"
+           [(selection)]="selectedBL">
+    <ng-template pTemplate="caption">
+      <div>
+        <div class="p-d-flex p-ai-center p-jc-between" style=" width: 60%; display: inline-block;">
+                    <span class="p-input-icon-left" style="width: 100%">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" style="margin-left: 5%; width: 93%;"
+                               class="searchInput, p-inputtext" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                               placeholder="Chercher une devis.." />
+                    </span>
+        </div>
+        <div style="float:right">
+          <button pButton pRipple label="Ajouter une devis" icon="pi pi-plus" class="primaryBtn"
+                  (click)="showDevisWindow()"></button>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr style="text-align: center; font-size: 15px;">
+        <th style="text-align: center; font-size: 13px;width: 10%">Numéro</th>
+        <th style="text-align: center; font-size: 13px;width: 10%">Client</th>
+        <th style="text-align: center; font-size: 13px;width: 15%">Date de  devis</th>
+        <!--<th style="text-align: center;font-size: 13px;width: 17%">Date d'échéance</th>-->
+        <th style="text-align: center; font-size: 13px;width: 14%">Montant HT brute</th>
+        <th style="text-align: center; font-size: 13px;width: 14%">Montant HT</th>
+        <!-- <th style="text-align: center; font-size: 13px;width: 14%">Total taxes</th> -->
+        <th style="text-align: center; font-size: 13px;width: 14%">Montant TTC</th>
+        <th style="width: 7%;font-size: 13px; text-align: center;">Actions</th>
+      </tr>
+
+    </ng-template>
+    <ng-template pTemplate="body" let-devis>
+      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
+        <td style="text-align: center;font-size: 13px;">
+          {{devis.devisNumber}}
+        </td>
+        <td style="text-align: center;font-size: 13px;">
+          {{devis.customer.customerLabel}}
+        </td>
+        <td style="text-align: center;font-size: 13px;">
+          {{devis.devisDate | date: 'dd-MM-yyyy'}}
+        </td>
+        <!-- <td style="text-align: center;font-size: 13px;">
+             {{devis.devisDeadlineDate | date: 'dd-MM-yyyy'}}
+         </td> -->
+        <td style="text-align: center;">
+          {{devis.totalHTBrutS}} {{devis.devisCurrency}}
+        </td>
+        <td style="text-align: center;">
+          {{devis.totalHTS}} {{devis.devisCurrency}}
+        </td>
+        <!--<td style="text-align: center;font-size: 13px;">
+          {{devis.totalTaxeS}}
+        </td> -->
+        <td style="text-align: center;font-size: 13px;">
+          {{devis.totalTTCS}} {{devis.devisCurrency}}
+        </td>
+
+
+
+        <td style="text-align: center;">
+          <div>
+            <i placement="top" ngbTooltip="Visualisation compléte" class="pi pi-eye" (click)="ShowDevisTemplate(devis,true)"
+               style="margin-right: 7px; color: #6200ee"></i>
+            <i placement="top" ngbTooltip="Visualisation réduite" class="pi pi-eye-slash" (click)="ShowDevisTemplate(devis,false)"
+               style="margin-right: 7px; color: #6200ee"></i>
+            <i placement="top" ngbTooltip="Modifier" class="pi pi-pencil"
+               style="margin-right: 7px; color: #6200ee" (click)="editDevis(devis)"></i>
+            <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" (click)="deleteDevis(devis)"
+               style="margin-right: 7px; color: #6200ee"></i>
+
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr style="font-size: 13px">
+        <td colspan="8" style="text-align: left !important;">Aucune devis trouvée!</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+
+
+<p-dialog header="Supprimer une devis" [(visible)]="displayDeleteDevis" [modal]="true" [style]="{width: '50vw'}"
+          [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+
+  Voulez-vous toujours supprimer la devis  <span
+  class="customer-badge status-negotiation">{{devis.devisNumber}}</span> ?
+
+  <ng-template pTemplate="footer">
+    <div style="margin-top: 20px;">
+      <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
+              (click)="displayDeleteDevis=false"></button>
+
+      <button pButton pRipple label="Supprimer" icon="pi pi-check" class="p-button-danger p-mr-2"
+              (click)="delDevis()"></button>
+
+    </div>
+  </ng-template>
+</p-dialog>
+
+<ngx-add-new-devis *ngIf="showDevisGeneratedWindow" [devis]="devis"
+                           (addNewDevisEvent)="generateInvoice($event)" (cancelEvent)="hideDevisWindow(); initDevis();">
+</ngx-add-new-devis>
+
+
+<ngx-devis-template *ngIf="showDevisTemplate" [devis]="devis" [complet]="complet"
+                            (cancelTemplateEvent)="hideTemplateWindow()">
+</ngx-devis-template>
