@@ -34,14 +34,14 @@ padding: 10px 10px 10px 10px !important;
         </div>
       </div>
       <div style="display: flex">
-        <div class="mb-1 col-md-6 col-12 p-field">
+        <div *ngIf="devis.devisId!=null" class="mb-1 col-md-6 col-12 p-field">
           <label for="devisNumber" class="p-float-label">Numéro</label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
             <input type="text" class="form-control p-field" id="devisNumber"
                    [(ngModel)]="devis.devisNumber"
                  style="font-size: 13px"
-                   disabled="true">
+                  >
           </div>
         </div>
 

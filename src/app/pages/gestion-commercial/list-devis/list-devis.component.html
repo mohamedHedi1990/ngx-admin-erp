@@ -28,15 +28,17 @@ padding: 10px 10px 10px 10px !important;
     </ng-template>
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 15px;">
-        <th style="text-align: center; font-size: 13px;width: 10%">Numéro</th>
-        <th style="text-align: center; font-size: 13px;width: 10%">Client</th>
+        <th style="text-align: center; font-size: 13px;width: 15%">Numéro</th>
+        <th style="text-align: center; font-size: 13px;width: 15%">Client</th>
         <th style="text-align: center; font-size: 13px;width: 15%">Date de  devis</th>
-        <!--<th style="text-align: center;font-size: 13px;width: 17%">Date d'échéance</th>-->
+        <th style="text-align: center;font-size: 13px;width: 15%">Date d'échéance</th>
+        <!-- 
         <th style="text-align: center; font-size: 13px;width: 14%">Montant HT brute</th>
-        <th style="text-align: center; font-size: 13px;width: 14%">Montant HT</th>
+        -->
+        <th style="text-align: center; font-size: 13px;width: 15%">Montant HT</th>
         <!-- <th style="text-align: center; font-size: 13px;width: 14%">Total taxes</th> -->
-        <th style="text-align: center; font-size: 13px;width: 14%">Montant TTC</th>
-        <th style="width: 7%;font-size: 13px; text-align: center;">Actions</th>
+        <th style="text-align: center; font-size: 13px;width: 15%">Montant TTC</th>
+        <th style="width: 10%;font-size: 13px; text-align: center;">Actions</th>
       </tr>
 
     </ng-template>
@@ -51,12 +53,17 @@ padding: 10px 10px 10px 10px !important;
         <td style="text-align: center;font-size: 13px;">
           {{devis.devisDate | date: 'dd-MM-yyyy'}}
         </td>
+        <td style="text-align: center;font-size: 13px;">
+          {{devis.devisDeadlineDate | date: 'dd-MM-yyyy'}}
+        </td>
         <!-- <td style="text-align: center;font-size: 13px;">
              {{devis.devisDeadlineDate | date: 'dd-MM-yyyy'}}
          </td> -->
+         <!-- 
         <td style="text-align: center;">
           {{devis.totalHTBrutS}} {{devis.devisCurrency}}
         </td>
+        -->
         <td style="text-align: center;">
           {{devis.totalHTS}} {{devis.devisCurrency}}
         </td>
@@ -73,8 +80,10 @@ padding: 10px 10px 10px 10px !important;
           <div>
             <i placement="top" ngbTooltip="Visualisation compléte" class="pi pi-eye" (click)="ShowDevisTemplate(devis,true)"
                style="margin-right: 7px; color: #6200ee"></i>
+               <!-- 
             <i placement="top" ngbTooltip="Visualisation réduite" class="pi pi-eye-slash" (click)="ShowDevisTemplate(devis,false)"
                style="margin-right: 7px; color: #6200ee"></i>
+               -->
             <i placement="top" ngbTooltip="Modifier" class="pi pi-pencil"
                style="margin-right: 7px; color: #6200ee" (click)="editDevis(devis)"></i>
             <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" (click)="deleteDevis(devis)"
