@@ -19,7 +19,7 @@
     ></button>
   </div>
   <div
-    id="facture"
+    id="avoir"
     class="col-md-12"
     style="height: 11.6929in; width: 8.2677in; margin-top: 10px"
   >
@@ -48,15 +48,14 @@
           <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7">
             <div style="display: flex; margin-top: 5%;">
               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                <h5 style="font-weight: bold; font-size: 37px;">Facture N°:</h5>
+                <h5 style="font-weight: bold; font-size: 27px;">Facture Avoir N°:</h5>
                 <h5 style="margin-top: 16%;">Date :</h5>
               </div>
               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                <h5 style="font-weight: bold; font-size: 37px;">
-                  {{ facture.factureNumber }}
+                <h5 style="font-weight: bold; font-size: 27px;">
+                  {{ avoir.avoirNumber }}
                 </h5>
-                <h5 style="margin-top: 16%;">{{ facture.factureDate | date: 'dd/MM/yyyy'}}</h5>
-                <h5 style="margin-top: 2%;">(Payée en {{facture.factureDeadlineInNumberOfDays}} jours)</h5>
+                <h5 style="margin-top: 16%;">{{ avoir.avoirDate | date: 'dd/MM/yyyy'}}</h5>
               </div>
             </div>
           </div>
@@ -77,10 +76,10 @@
               font-size: 22px;
               margin-bottom: 10px;
               text-transform: uppercase;">
-                <span>{{ facture.customer.customerLabel }}</span>
+                <span>{{ avoir.customer.customerLabel }}</span>
               </div>
               <div style="text-transform: uppercase">
-                <span>{{ facture.customer.customerAddress }}</span>
+                <span>{{ avoir.customer.customerAddress }}</span>
               </div>
             </div>
             <br />
@@ -97,12 +96,12 @@
               <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
                 <div>
                   <span>{{
-                    facture.customer.customerUniqueIdentifier
+                    avoir.customer.customerUniqueIdentifier
                     }}</span>
                 </div>
 
                 <div style="margin-top: 15px;margin-bottom: 15px;">
-                  <span>{{ facture.customer.customerTel }}</span>
+                  <span>{{ avoir.customer.customerTel }}</span>
                 </div>
 
               </div>
@@ -120,7 +119,7 @@
           <th *ngIf="complet" style="width: 5%">TVA</th>
           <th *ngIf="complet" style="width: 5%">Remise</th>
           <th *ngIf="complet" style="width: 17%">Montant HT</th>
-          <tr *ngFor="let invoiceLine of facture.factureLines">
+          <tr *ngFor="let invoiceLine of avoir.avoirLines">
             <td class="text-left" style="width: 20%">
               {{ invoiceLine.product.productReference }}
             </td>
@@ -137,7 +136,6 @@
               {{ invoiceLine.product.productTVA }}%
             </td>
             <td *ngIf="complet" class="text-right" style="width: 5%">
-              {{ invoiceLine.remiseTaux }}%
             </td>
             <td *ngIf="complet" class="text-right" style="width: 17%">
               {{ invoiceLine.montantHtS }}
@@ -154,19 +152,19 @@
               <th style="width: 40%">Montant</th>
               <tr>
                 <td class="text-left">FODEC</td>
-                <td class="text-right">{{ facture.totalFodecS }}</td>
+                <td class="text-right">{{ avoir.totalFodecS }}</td>
               </tr>
               <tr>
                 <td class="text-left">TVA</td>
-                <td class="text-right">{{ facture.totalTVAS }}</td>
+                <td class="text-right">{{ avoir.totalTVAS }}</td>
               </tr>
               <tr>
                 <td class="text-left">Timbre fiscal</td>
-                <td class="text-right">{{ facture.timbreFiscalS }}</td>
+                <td class="text-right">{{ avoir.timbreFiscalS }}</td>
               </tr>
               <tr style="border-top: 1px solid #000">
                 <td class="text-center font-weight-bold">Total</td>
-                <td class="text-right">{{ facture.totalTaxeS }}</td>
+                <td class="text-right">{{ avoir.totalTaxeS }}</td>
               </tr>
             </table>
           </div>
@@ -176,27 +174,27 @@
               <tr style="height: 40px; border: 1px solid #000; line-height: normal;">
                 <td class="text-left font-weight-bold" style="
                 width: 40%;">Total HT Brut</td>
-                <td class="text-right">{{ facture.totalHTBrutS }}</td>
+                <td class="text-right">{{ avoir.totalHTBrutS }}</td>
               </tr>
               <tr style="height: 40px; border: 1px solid #000">
                 <td style="
                 width: 40%;" class="text-left font-weight-bold">Remise</td>
-                <td class="text-right">{{ facture.remiseS }}</td>
+                <td class="text-right">{{ avoir.remiseS }}</td>
               </tr>
               <tr style="height: 40px; border: 1px solid #000">
                 <td style="
                 width: 40%;" class="text-left font-weight-bold">Total HT</td>
-                <td class="text-right">{{ facture.totalHTS }}</td>
+                <td class="text-right">{{ avoir.totalHTS }}</td>
               </tr>
               <tr style="height: 40px; border: 1px solid #000">
                 <td style="
                 width: 40%;" class="text-left font-weight-bold">Total Taxe</td>
-                <td class="text-right">{{ facture.totalTaxeS }}</td>
+                <td class="text-right">{{ avoir.totalTaxeS }}</td>
               </tr>
               <tr style="height: 40px; border: 1px solid #000">
                 <td style="
                 width: 40%;" class="text-left font-weight-bold">Total TCC</td>
-                <td class="text-right">{{ facture.totalTTCS }}</td>
+                <td class="text-right">{{ avoir.totalTTCS }}</td>
               </tr>
             </table>
           </div>

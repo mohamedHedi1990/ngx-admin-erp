@@ -41,6 +41,8 @@ export class UtilsServiceService {
   public static API_FACTURELINE= UtilsServiceService.REMOTE_ADDRESS+'/'+'api/factureline';
   static API_DEVIS=UtilsServiceService.REMOTE_ADDRESS+'/'+'api/devis';
   public static API_DEVISLINE= UtilsServiceService.REMOTE_ADDRESS+'/'+'api/devisline';
+  public static API_AVOIR=UtilsServiceService.REMOTE_ADDRESS+'/'+'api/avoir';
+  public static API_AVOIRLINE= UtilsServiceService.REMOTE_ADDRESS+'/'+'api/avoirline';
   header = new HttpHeaders();
 
   constructor(private toastrService: NbToastrService, private httpClient: HttpClient,

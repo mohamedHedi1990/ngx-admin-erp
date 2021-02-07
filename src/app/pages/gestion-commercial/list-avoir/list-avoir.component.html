@@ -1,15 +1,15 @@
-<h4 *ngIf="!showFactureWindow && !showFactureTemplate" style="background: #E7E8E8;
+<h4 *ngIf="!showAvoirTemplate" style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
-  Liste des factures générées
+  Liste des avoirs
 </h4>
-<div *ngIf="!showFactureWindow && !showFactureTemplate" class="card"
+<div *ngIf="!showAvoirTemplate" class="card"
      style=" margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
-  <p-table #dt [value]="factures" dataKey="factureId" styleClass="p-datatable-customers" [rowHover]="true" [rows]="5"
+  <p-table #dt [value]="avoirs" dataKey="avoirId" styleClass="p-datatable-customers" [rowHover]="true" [rows]="5"
            [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading" [paginator]="true"
            currentPageReportTemplate="" [filterDelay]="0"
-           >
+         >
     <ng-template pTemplate="caption">
       <div>
         <div class="p-d-flex p-ai-center p-jc-between" style=" width: 60%; display: inline-block;">
@@ -17,7 +17,7 @@ padding: 10px 10px 10px 10px !important;
                         <i class="pi pi-search"></i>
                         <input pInputText type="text" style="margin-left: 5%; width: 93%;"
                                class="searchInput, p-inputtext" (input)="dt.filterGlobal($event.target.value, 'contains')"
-                               placeholder="Chercher une facture.." />
+                               placeholder="Chercher une avoir.." />
                     </span>
         </div>
       </div>
@@ -26,8 +26,7 @@ padding: 10px 10px 10px 10px !important;
       <tr style="text-align: center; font-size: 15px;">
         <th style="text-align: center; font-size: 13px;width: 10%">Numéro</th>
         <th style="text-align: center; font-size: 13px;width: 10%">Client</th>
-        <th style="text-align: center; font-size: 13px;width: 15%">Date de facture</th>
-        <th style="text-align: center; font-size: 13px;width: 15%">Date d'échéance</th>
+        <th style="text-align: center; font-size: 13px;width: 15%">Date de avoir</th>
         <!--<th style="text-align: center;font-size: 13px;width: 17%">Date d'échéance</th>
         <th style="text-align: center; font-size: 13px;width: 14%">Montant HT brute</th>-->
         <th style="text-align: center; font-size: 13px;width: 14%">Montant HT</th>
@@ -37,53 +36,46 @@ padding: 10px 10px 10px 10px !important;
       </tr>
 
     </ng-template>
-    <ng-template pTemplate="body" let-facture>
+    <ng-template pTemplate="body" let-avoir>
       <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
         <td style="text-align: center;font-size: 13px;">
-          {{facture.factureNumber}}
+          {{avoir.avoirNumber}}
         </td>
         <td style="text-align: center;font-size: 13px;">
-          {{facture.customer.customerLabel}}
+          {{avoir.customer.customerLabel}}
         </td>
         <td style="text-align: center;font-size: 13px;">
-          {{facture.factureDate | date: 'dd-MM-yyyy'}}
+          {{avoir.avoirDate | date: 'dd-MM-yyyy'}}
         </td>
 
-        <td style="text-align: center;font-size: 13px;">
-          {{facture.factureDeadlineDate | date: 'dd-MM-yyyy'}}
-        </td>
+
         <!-- <td style="text-align: center;font-size: 13px;">
-             {{facture.factureDeadlineDate | date: 'dd-MM-yyyy'}}
+             {{avoir.avoirDeadlineDate | date: 'dd-MM-yyyy'}}
          </td>
         <td style="text-align: center;">
-          {{facture.totalHTBrutS}} {{facture.factureCurrency}}
+          {{avoir.totalHTBrutS}} {{avoir.avoirCurrency}}
         </td>-->
         <td style="text-align: center;">
-          {{facture.totalHTS}} {{facture.factureCurrency}}
+          {{avoir.totalHTS}} {{avoir.avoirCurrency}}
         </td>
         <!--<td style="text-align: center;font-size: 13px;">
-          {{facture.totalTaxeS}}
+          {{avoir.totalTaxeS}}
         </td> -->
         <td style="text-align: center;font-size: 13px;">
-          {{facture.totalTTCS}} {{facture.factureCurrency}}
+          {{avoir.totalTTCS}} {{avoir.avoirCurrency}}
         </td>
 
 
 
         <td style="text-align: center;">
           <div>
-            <i placement="top" ngbTooltip="Voir facture" class="pi pi-eye" (click)="ShowFactureTemplate(facture,true)"
+            <i placement="top" ngbTooltip="Voir avoir" class="pi pi-eye" (click)="ShowAvoirTemplate(avoir,true)"
                style="margin-right: 7px; color: #6200ee"></i>
-               <!--
-            <i placement="top" ngbTooltip="Visualisation réduite" class="pi pi-eye-slash" (click)="ShowFactureTemplate(facture,false)"
-               style="margin-right: 7px; color: #6200ee"></i>
-               -->
-            <i placement="top" ngbTooltip="Génerer Avoir" class="pi pi pi-cog" (click)="genererAvoir(facture)"
-               style="margin-right: 7px; color: #6200ee"></i>
-            <i placement="top" ngbTooltip="Modifier" class="pi pi-pencil"
-               style="margin-right: 7px; color: #6200ee" (click)="editFacture(facture)"></i>
-
-            <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" (click)="deleteFacture(facture)"
+            <!--
+         <i placement="top" ngbTooltip="Visualisation réduite" class="pi pi-eye-slash" (click)="ShowAvoirTemplate(avoir,false)"
+            style="margin-right: 7px; color: #6200ee"></i>
+            -->
+            <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" (click)="deleteAvoir(avoir)"
                style="margin-right: 7px; color: #6200ee"></i>
 
           </div>
@@ -92,7 +84,7 @@ padding: 10px 10px 10px 10px !important;
     </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr style="font-size: 13px">
-        <td colspan="8" style="text-align: left !important;">Aucune facture générée trouvée!</td>
+        <td colspan="8" style="text-align: left !important;">Aucune avoir trouvée!</td>
       </tr>
     </ng-template>
   </p-table>
@@ -100,27 +92,25 @@ padding: 10px 10px 10px 10px !important;
 
 
 
-<p-dialog header="Supprimer un facture généré" [(visible)]="displayDeleteFacture" [modal]="true" [style]="{width: '50vw'}"
+<p-dialog header="Supprimer un avoir" [(visible)]="displayDeleteAvoir" [modal]="true" [style]="{width: '50vw'}"
           [baseZIndex]="10000" [draggable]="false" [resizable]="false">
 
-  Voulez-vous toujours supprimer le facture  <span
-  class="customer-badge status-negotiation">{{facture.factureNumber}}</span> ?
+  Voulez-vous toujours supprimer l'avoir  <span
+  class="customer-badge status-negotiation">{{avoir.avoirNumber}}</span> ?
 
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
       <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
-              (click)="displayDeleteFacture=false"></button>
+              (click)="displayDeleteAvoir=false"></button>
 
       <button pButton pRipple label="Supprimer" icon="pi pi-check" class="p-button-danger p-mr-2"
-              (click)="delFacture()"></button>
+              (click)="delAvoir()"></button>
 
     </div>
   </ng-template>
 </p-dialog>
 
-<ngx-facture-template *ngIf="showFactureTemplate" [facture]="facture" [complet]="complet"
-                            (cancelTemplateEvent)="hideTemplateWindow()">
-</ngx-facture-template>
-<ngx-edit-facture *ngIf="showFactureWindow" [facture]="facture"
-                           (editFactureEvent)="saveFacture($event)" (cancelEvent)="hideFactureWindow(); initFacture();">
-</ngx-edit-facture>
+<ngx-avoir-template *ngIf="showAvoirTemplate" [avoir]="avoir" [complet]="complet"
+                      (cancelTemplateEvent)="hideTemplateWindow()">
+</ngx-avoir-template>
+

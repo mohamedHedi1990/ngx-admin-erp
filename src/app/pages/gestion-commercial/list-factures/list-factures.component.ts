@@ -15,7 +15,6 @@ export class ListFacturesComponent implements OnInit {
   showFactureTemplate=false;
   showFactureGeneratedWindow=false;
   factures: any[];
-  selectedBL = [];
   facture = null;
   displayDeleteFacture = false;
   titleHeaderInvoice;
@@ -130,6 +129,21 @@ export class ListFacturesComponent implements OnInit {
           'Erreur interne',
           `Un erreur interne a été produit lors de modification de facture`);
       });
+  }
+
+  genererAvoir(facture){
+      this.utilsService.post(UtilsServiceService.API_AVOIR+'/generer-from-facture',facture.factureId).subscribe(response => {
+          this.utilsService.showToast('success',
+            'Avoir Générée avec succés',
+            `L'avoir ${response.factureNumber} a été généré avec succés`)
+          this.getAllFactures();
+        },
+        error => {
+          this.utilsService.showToast('danger',
+            'Erreur interne',
+            `Un erreur interne a été produit lors de géneration du facture`);
+        });
+
   }
 
 
