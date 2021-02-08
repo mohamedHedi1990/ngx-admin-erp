@@ -71,15 +71,15 @@ export class ListDevisComponent implements OnInit {
     const context = this;
     this.utilsService.post(UtilsServiceService.API_DEVIS,devis).subscribe(response => {
         this.utilsService.showToast('success',
-          'Devis Généré avec succé',
-          `La Devis a été généré avec succé`);
+          'Devis crée avec succés',
+          `La Devis ${devis.devisNumber} a été crée avec succés`);
         this.hideDevisWindow();
         context.getAllDeviss();
       },
       error => {
         this.utilsService.showToast('danger',
           'Erreur interne',
-          `Un erreur interne a été produit lors de l'enregistrement de devis générée`);
+          `Un erreur interne a été produit lors de la création du devis`);
       });
   }
 
@@ -104,7 +104,7 @@ export class ListDevisComponent implements OnInit {
     const context = this;
     this.utilsService.delete(UtilsServiceService.API_DEVIS+"/"+this.devis.devisId).subscribe( response => {
         this.utilsService.showToast('success',
-          'devis supprimé avec succés',
+          'Devis supprimé avec succés',
           `La devis  ${this.devis.devisNumber} a été supprimé avec succcés`);
         context.getAllDeviss();
         context.initDevis();
@@ -130,6 +130,21 @@ export class ListDevisComponent implements OnInit {
   showDevisWindow() {
     this.initDevis();
     this.showDevisGeneratedWindow = true;
+  }
+
+  genererFacture(devis){
+    this.utilsService.post(UtilsServiceService.API_FACTURE+'/generer-from-devis',devis.devisId).subscribe(response => {
+        this.utilsService.showToast('success',
+          'Facture Générée avec succés',
+          `La Facture ${response.factureNumber} a été générée avec succés`)
+        this.selectedBL = [];
+        this.getAllDeviss();
+      },
+      error => {
+        this.utilsService.showToast('danger',
+          'Erreur interne',
+          `Un erreur interne a été produit lors de la géneration du facture`);
+      });
   }
 
 }

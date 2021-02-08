@@ -33,20 +33,26 @@ padding: 10px 10px 10px 10px !important;
                     </div>
                 </div>
             </div>
-            <div style="display: flex">
+            <div style="display: flex" *ngIf="bonLivraison.bonLivraisonId != null">
                 <div class="mb-1 col-md-6 col-12 p-field">
                     <label for="bonLivraisonNumber" class="p-float-label">Numéro</label>
                     <div class="p-inputgroup">
                         <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
                         <input type="text" class="form-control p-field" id="bonLivraisonNumber"
-                            [(ngModel)]="bonLivraison.bonLivraisonNumber" [ngClass]="{
-                  'is-invalid': bonLivraison.bonLivraisonNumber == null || bonLivraison.bonLivraisonNumber == '' ,
-                  'is-valid': bonLivraison.bonLivraisonNumber != null && bonLivraison.bonLivraisonNumber !== ''
-                }" style="font-size: 13px">
+                            [(ngModel)]="bonLivraison.bonLivraisonNumber"  style="font-size: 13px"
+                        [disabled]="bonLivraison.bonLivraisonId==null">
                     </div>
                 </div>
 
-                <div class="mb-1 col-md-4 col-12">
+               
+
+                
+            </div>
+
+        </div>
+        <div class="p-grid p-fluid">
+            <div style="display: flex">
+                <div class="mb-1 col-md-6 col-12">
                     <label for="client" class="p-float-label">Client</label>
                     <div class="p-inputgroup p-fluid">
                         <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
@@ -57,7 +63,15 @@ padding: 10px 10px 10px 10px !important;
                         </select>
                     </div>
                 </div>
-
+                <div class="mb-1 col-md-4 col-12">
+                    <label for="bonLivraisonDate" class="p-float-label">Date de bon de livraison </label>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+                        <input type="date" placeholder="Date" class="form-control p-field" id="bonLivraisonDate"
+                            [(ngModel)]="bonLivraison.bonLivraisonDate"
+                             style="font-size: 13px">
+                    </div>
+                </div>
                 <div class="mb-1 col-md-2 col-12 p-field">
                     <label for="bonLivraisonCurrency" class="p-float-label">Devise</label>
                     <div class="p-inputgroup">
@@ -70,22 +84,6 @@ padding: 10px 10px 10px 10px !important;
                         </select>
                     </div>
                 </div>
-            </div>
-
-        </div>
-        <div class="p-grid p-fluid">
-            <div style="display: flex">
-
-                <div class="mb-1 col-md-4 col-12">
-                    <label for="bonLivraisonDate" class="p-float-label">Date de bon de livraison </label>
-                    <div class="p-inputgroup">
-                        <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
-                        <input type="date" placeholder="Date" class="form-control p-field" id="bonLivraisonDate"
-                            [(ngModel)]="bonLivraison.bonLivraisonDate"
-                             style="font-size: 13px">
-                    </div>
-                </div>
-
 
             </div>
         </div>

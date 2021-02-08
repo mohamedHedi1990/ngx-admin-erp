@@ -9,7 +9,8 @@ padding: 10px 10px 10px 10px !important;
   <p-table #dt [value]="factures" dataKey="factureId" styleClass="p-datatable-customers" [rowHover]="true" [rows]="5"
            [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading" [paginator]="true"
            currentPageReportTemplate="" [filterDelay]="0"
-           >
+           [(selection)]="selectedBL"
+           [globalFilterFields]="['factureNumber','customer.customerLabel','createdAt', 'updatedAt']">
     <ng-template pTemplate="caption">
       <div>
         <div class="p-d-flex p-ai-center p-jc-between" style=" width: 60%; display: inline-block;">
