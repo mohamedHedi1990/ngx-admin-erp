@@ -88,8 +88,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
         icon: 'file-text-outline',
       },
       {
-        title: 'Devis Client',
+        title: 'Devis',
         link: '/pages/gestion-commercial/list-devis',
+        icon: 'file-text-outline',
+      },
+      {
+        title: 'Avoirs',
+        link: '/pages/gestion-commercial/list-avoir',
         icon: 'file-text-outline',
       },
 

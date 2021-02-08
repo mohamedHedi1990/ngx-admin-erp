@@ -55,7 +55,7 @@ padding: 10px 10px 10px 10px !important;
         </td>
         <!-- <td style="text-align: center;font-size: 13px;">
              {{facture.factureDeadlineDate | date: 'dd-MM-yyyy'}}
-         </td> 
+         </td>
         <td style="text-align: center;">
           {{facture.totalHTBrutS}} {{facture.factureCurrency}}
         </td>-->
@@ -73,12 +73,15 @@ padding: 10px 10px 10px 10px !important;
 
         <td style="text-align: center;">
           <div>
-            <i placement="top" ngbTooltip="Voir facture" class="pi pi-eye" (click)="ShowFactureTemplate(facture,true)"
+            <i placement="top" ngbTooltip="Annuler" class="pi pi pi-cog" (click)="genererAvoir(facture)"
                style="margin-right: 7px; color: #6200ee"></i>
-               <!-- 
+            <i placement="top" ngbTooltip="Voir" class="pi pi-eye" (click)="ShowFactureTemplate(facture,true)"
+               style="margin-right: 7px; color: #6200ee"></i>
+               <!--
             <i placement="top" ngbTooltip="Visualisation réduite" class="pi pi-eye-slash" (click)="ShowFactureTemplate(facture,false)"
                style="margin-right: 7px; color: #6200ee"></i>
                -->
+            
             <i placement="top" ngbTooltip="Modifier" class="pi pi-pencil"
                style="margin-right: 7px; color: #6200ee" (click)="editFacture(facture)"></i>
 

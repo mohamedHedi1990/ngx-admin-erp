@@ -130,7 +130,7 @@
               {{ invoiceLine.quantity }}
             </td>
             <td *ngIf="complet" class="text-right" style="width: 13%">
-              {{ invoiceLine.product.productPrixHT }}
+              {{ invoiceLine.product.productPrixHTS }}
             </td>
             <td *ngIf="complet" class="text-right" style="width: 5%">
               {{ invoiceLine.product.productTVA }}%
@@ -139,7 +139,7 @@
               {{ invoiceLine.remiseTaux }}%
             </td>
             <td *ngIf="complet" class="text-right" style="width: 17%">
-              {{ invoiceLine.montantHt }}
+              {{ invoiceLine.montantHtS }}
             </td>
           </tr>
         </table>
@@ -153,19 +153,19 @@
               <th style="width: 40%">Montant</th>
               <tr>
                 <td class="text-left">FODEC</td>
-                <td class="text-right">{{ bonLivraison.totalFodec }}</td>
+                <td class="text-right">{{ bonLivraison.totalFodecS }}</td>
               </tr>
               <tr>
                 <td class="text-left">TVA</td>
-                <td class="text-right">{{ bonLivraison.totalTVA }}</td>
+                <td class="text-right">{{ bonLivraison.totalTVAS }}</td>
               </tr>
               <tr>
                 <td class="text-left">Timbre fiscal</td>
-                <td class="text-right">{{ bonLivraison.timbreFiscal }}</td>
+                <td class="text-right">{{ bonLivraison.timbreFiscalS }}</td>
               </tr>
               <tr style="border-top: 1px solid #000">
                 <td class="text-center font-weight-bold">Total</td>
-                <td class="text-right">{{ bonLivraison.totalTaxe }}</td>
+                <td class="text-right">{{ bonLivraison.totalTaxeS }}</td>
               </tr>
             </table>
           </div>
@@ -175,27 +175,27 @@
               <tr style="height: 40px; border: 1px solid #000; line-height: normal;">
                 <td class="text-left font-weight-bold" style="
                 width: 40%;">Total HT Brut</td>
-                <td class="text-right">{{ bonLivraison.totalHTBrut }}</td>
+                <td class="text-right">{{ bonLivraison.totalHTBrutS }}</td>
               </tr>
               <tr style="height: 40px; border: 1px solid #000">
                 <td style="
                 width: 40%;" class="text-left font-weight-bold">Remise</td>
-                <td class="text-right">{{ bonLivraison.remise }}</td>
+                <td class="text-right">{{ bonLivraison.remiseS }}</td>
               </tr>
               <tr style="height: 40px; border: 1px solid #000">
                 <td style="
                 width: 40%;" class="text-left font-weight-bold">Total HT</td>
-                <td class="text-right">{{ bonLivraison.totalHT }}</td>
+                <td class="text-right">{{ bonLivraison.totalHTS }}</td>
               </tr>
               <tr style="height: 40px; border: 1px solid #000">
                 <td style="
                 width: 40%;" class="text-left font-weight-bold">Total Taxe</td>
-                <td class="text-right">{{ bonLivraison.totalTaxe }}</td>
+                <td class="text-right">{{ bonLivraison.totalTaxeS }}</td>
               </tr>
               <tr style="height: 40px; border: 1px solid #000">
                 <td style="
                 width: 40%;" class="text-left font-weight-bold">Total TCC</td>
-                <td class="text-right">{{ bonLivraison.totalTTC }}</td>
+                <td class="text-right">{{ bonLivraison.totalTTCS }}</td>
               </tr>
             </table>
           </div>
