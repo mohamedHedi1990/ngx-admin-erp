@@ -21,13 +21,17 @@ export class AddNewSocieteComponent implements OnInit {
     companyManagerName: '',
     companyPictureUrl: [],
     companyLogoUrl: null,
+    companySignatureUrl: null,
   };
   @Output() addNewSocieteEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();
 
-  imagePath;
-  imgURL: any;
+  signatureImagePath;
+  signatureImgURL: any;
+  logoImagePath;
+  logoImgURL: any;
   logo = null;
+  signature:null;
   messageLogoErrorType ='seulement les fichiers de type image sont autorisés!'
   showerrorTypeLogo = false;
 
@@ -35,14 +39,17 @@ export class AddNewSocieteComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.societe.companyLogoUrl != null) {
-      this.imgURL = this.societe.companyLogoUrl;
+      this.logoImgURL = this.societe.companyLogoUrl;
+      this.signatureImgURL = this.societe.companySignatureUrl;
+
     }
   }
 
   saveSociete() {
     const companyObject = {
       company: this.societe,
-      logo: this.logo
+      logo: this.logo,
+      signature:this.signature
     }
     this.addNewSocieteEvent.emit(companyObject);
   }
@@ -60,7 +67,7 @@ export class AddNewSocieteComponent implements OnInit {
       ;
   }
 
-  preview(files) {
+  previewLogo(files) {
     if (files.length === 0) {
       return;
     }
@@ -72,10 +79,29 @@ export class AddNewSocieteComponent implements OnInit {
     }
 
     const reader = new FileReader();
-    this.imagePath = files;
+    this.logoImagePath = files;
     reader.readAsDataURL(files[0]);
     reader.onload = (_event) => {
-      this.imgURL = reader.result;
+      this.logoImgURL = reader.result;
+    };
+  }
+
+  previewSignature(files) {
+    if (files.length === 0) {
+      return;
+    }
+    this.signature = files[0];
+    const mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.showerrorTypeLogo = true;
+      return;
+    }
+
+    const reader = new FileReader();
+    this.signatureImagePath = files;
+    reader.readAsDataURL(files[0]);
+    reader.onload = (_event) => {
+      this.signatureImgURL = reader.result;
     };
   }
 

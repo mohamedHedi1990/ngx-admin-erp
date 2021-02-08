@@ -16,6 +16,7 @@ export class ListSocietesComponent implements OnInit {
   loading = false;
   showSocieteWindow = false;
   societe = null;
+   success:boolean=true;
 
 
 
@@ -34,8 +35,25 @@ export class ListSocietesComponent implements OnInit {
   }
   async  saveNewSociete(companyObject) {
     let company = await this.UtilsService.post_promise(UtilsServiceService.API_COMPANY, companyObject.company);
-    console.log('company  ', company);
-    this.saveLogo(company.campanyId, companyObject.logo)
+
+    if(companyObject.logo != null) {
+      this.saveLogo(company.campanyId, companyObject.logo);
+    }
+    if(companyObject.signature != null) {
+      this.saveSignature(company.campanyId, companyObject.signature);
+    }
+    if(this.success){
+      this.hideSocieteWindow();
+      if ( this.societe.campanyId == null) {
+        this.UtilsService.showToast('success',
+          'Societe ajoutée avec succés',
+          `Le societé  ${this.societe.campanyName} a été ajoutée avec succcés`);
+      } else {
+        this.UtilsService.showToast('success',
+          'Societé modfiée avec succés',
+          `Le societé  ${this.societe.campanyName} a été modifiée avec succcés`);
+      }
+    }
   }
 
   saveNewSocieteWithoutLogo() {
@@ -61,25 +79,30 @@ export class ListSocietesComponent implements OnInit {
 
   }
 
-  saveLogo(companyId, logo) {
+  async saveLogo(companyId, logo) {
     const formData = new FormData();
     formData.append('file', logo);
     this.UtilsService.post(UtilsServiceService.API_FILE + '/logo/' + companyId, formData).subscribe(response => {
-      this.hideSocieteWindow();
-        if ( this.societe.campanyId == null) {
-          this.UtilsService.showToast('success',
-            'Societe ajoutée avec succés',
-            `Le societé  ${this.societe.campanyName} a été ajoutée avec succcés`);
-        } else {
-          this.UtilsService.showToast('success',
-            'Societé modfiée avec succés',
-            `Le societé  ${this.societe.campanyName} a été modifiée avec succcés`);
-        }
         this.getAllSocietes();
         this.initSociete();
-    },  error => {this.UtilsService.showToast('danger',
+    },  error => {
+      this.success=false;
+      this.UtilsService.showToast('danger',
     'Erreur interne',
-    `Un erreur interne a été produit lors de la souvegarde du societé ${this.societe.campanyName}`); });
+    `Un erreur interne a été produit lors de la souvegarde du Logo du ${this.societe.campanyName}`); });
+  }
+
+  async saveSignature(companyId, signature) {
+    const formData = new FormData();
+    formData.append('file', signature);
+    this.UtilsService.post(UtilsServiceService.API_FILE + '/signature/' + companyId, formData).subscribe(response => {
+      this.getAllSocietes();
+      this.initSociete();
+    },  error => {
+      this.success=false;
+      this.UtilsService.showToast('danger',
+      'Erreur interne',
+      `Un erreur interne a été produit lors de la souvegarde du sognature de societé ${this.societe.campanyName}`); });
   }
 
   getAllSocietes() {

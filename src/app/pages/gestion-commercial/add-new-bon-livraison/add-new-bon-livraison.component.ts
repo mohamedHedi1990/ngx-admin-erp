@@ -188,8 +188,7 @@ export class AddNewBonLivraisonComponent implements OnInit {
     this.cancelEvent.emit();
   }
   checkGeneratedBonLivraisonValid() {
-    return this.bonLivraison.bonLivraisonNumber == "" || this.bonLivraison.bonLivraisonNumber == null ||
-      this.bonLivraison.customer == "" || this.bonLivraison.customer == null ||
+    return this.bonLivraison.customer == "" || this.bonLivraison.customer == null ||
       this.timeLine.timeLineTable.length == 0;
   }
   saveGeneratedBonLivraison(){

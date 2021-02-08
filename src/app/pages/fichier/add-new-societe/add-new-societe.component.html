@@ -35,12 +35,21 @@
   "
 >
   <p-panel header="Configuration génerale" [toggleable]="false">
-    <div>
-      <input type="button" id="loadFile" value="Choisir le logo de votre société" onclick="document.getElementById('file').click();" style="margin-bottom: 2%;" class="primaryBtn"/>
-        <input id="file" #file type="file" accept='image/*' (change)="preview(file.files)" style="display: none" />
+    <div class="row">
+    <div class="mb-1 col-md-6 col-6 p-field">
+      <input type="button" id="loadLogoFile" value="Choisir le logo de votre société" onclick="document.getElementById('logofile').click();" style="margin-bottom: 2%;" class="primaryBtn"/>
+        <input id="logofile" #file type="file" accept='image/*' (change)="previewLogo(file.files)" style="display: none" />
         <div style="padding-bottom: 5%; text-align: center;">
-          <img *ngIf="imgURL" [src]="imgURL" style="width:100%">
+          <img *ngIf="logoImgURL" [src]="logoImgURL" style="width:200px;height: 200px">
         </div>
+    </div>
+    <div class="mb-1 col-md-6 col-6 p-field">
+      <input type="button" id="loadSignatureFile" value="Choisir la signature de votre société" onclick="document.getElementById('signaturefile').click();" style="margin-bottom: 2%;" class="primaryBtn"/>
+      <input id="signaturefile" #file1 type="file" accept='image/*' (change)="previewSignature(file1.files)" style="display: none" />
+      <div style="padding-bottom: 5%; text-align: center;">
+        <img *ngIf="signatureImgURL" [src]="signatureImgURL" style="width:200px;height: 200px">
+      </div>
+    </div>
     </div>
     <div class="p-grid p-fluid">
       <div *ngIf="societe.campanyId != null" style="display: flex">

@@ -23,7 +23,8 @@ export class BonLivraisonTemplateComponent implements OnInit {
     campanyPhoneNumber: '',
     campanyUniqueIdentifier: '',
     companyLogoUrl: '',
-    companyManagerName: ''
+    companyManagerName: '',
+    companySignatureUrl:null
   }
 
   constructor( private utilsService: UtilsServiceService) { }

@@ -2,7 +2,7 @@
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
-    Liste des bons livraison générées
+    Liste des bons de livraison
 </h4>
 <div *ngIf="!showBonLivraisonGeneratedWindow && !showBonLivraisonTemplate" class="card"
     style=" margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
@@ -35,14 +35,14 @@ padding: 10px 10px 10px 10px !important;
             <tr style="text-align: center; font-size: 15px;">
               <th style="text-align: center; font-size: 13px;width: 3%"></th>
               <th style="text-align: center; font-size: 13px;width: 10%">Numéro</th>
-                <th style="text-align: center; font-size: 13px;width: 10%">Client</th>
-                <th style="text-align: center; font-size: 13px;width: 15%">Date de bon de livraison</th>
+                <th style="text-align: center; font-size: 13px;width: 15%">Client</th>
+                <th style="text-align: center; font-size: 13px;width: 10%">Date</th>
                 <!--<th style="text-align: center;font-size: 13px;width: 17%">Date d'échéance</th>-->
-                <th style="text-align: center; font-size: 13px;width: 14%">Montant HT brute</th>
-                <th style="text-align: center; font-size: 13px;width: 14%">Montant HT</th>
+                <th style="text-align: center; font-size: 13px;width: 13%">Montant HT brute</th>
+                <th style="text-align: center; font-size: 13px;width: 12%">Montant HT</th>
                <!-- <th style="text-align: center; font-size: 13px;width: 14%">Total taxes</th> -->
-                <th style="text-align: center; font-size: 13px;width: 14%">Montant TTC</th>
-                <th style="width: 7%;font-size: 13px; text-align: center;">Actions</th>
+                <th style="text-align: center; font-size: 13px;width: 12%">Montant TTC</th>
+                <th style="width: 13%;font-size: 13px; text-align: center;">Actions</th>
             </tr>
 
         </ng-template>
