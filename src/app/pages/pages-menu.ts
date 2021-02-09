@@ -83,7 +83,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
 		    icon: 'clipboard-outline',
       },
       {
-        title: 'Factures Génerées',
+        title: 'Factures génerées',
         link: '/pages/gestion-commercial/list-factures',
         icon: 'file-text-outline',
       },
