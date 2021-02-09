@@ -14,9 +14,10 @@ export class ListDevisComponent implements OnInit {
   showDevisTemplate=false;
   showDevisGeneratedWindow=false;
   deviss: any[];
-  selectedBL = [];
   devis = null;
   displayDeleteDevis = false;
+  displayGenererFacture = false;
+
   titleHeaderInvoice;
   private complet: any;
 
@@ -132,12 +133,16 @@ export class ListDevisComponent implements OnInit {
     this.showDevisGeneratedWindow = true;
   }
 
-  genererFacture(devis){
-    this.utilsService.post(UtilsServiceService.API_FACTURE+'/generer-from-devis',devis.devisId).subscribe(response => {
+  displayGenererFactureWindow(devis){
+    this.devis=devis;
+    this.displayGenererFacture=true;
+  }
+  genererFacture(){
+    this.utilsService.post(UtilsServiceService.API_FACTURE+'/generer-from-devis',this.devis.devisId).subscribe(response => {
         this.utilsService.showToast('success',
           'Facture Générée avec succés',
           `La Facture ${response.factureNumber} a été générée avec succés`)
-        this.selectedBL = [];
+        this.displayGenererFacture=false;
         this.getAllDeviss();
       },
       error => {

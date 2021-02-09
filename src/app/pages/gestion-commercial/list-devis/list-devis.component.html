@@ -9,7 +9,6 @@ padding: 10px 10px 10px 10px !important;
   <p-table #dt [value]="deviss" dataKey="devisId" styleClass="p-datatable-customers" [rowHover]="true" [rows]="5"
            [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading" [paginator]="true"
            currentPageReportTemplate="" [filterDelay]="0"
-           [(selection)]="selectedBL"
            [globalFilterFields]="['devisNumber','customer.customerLabel','createdAt', 'updatedAt']">
     <ng-template pTemplate="caption">
       <div>
@@ -79,7 +78,7 @@ padding: 10px 10px 10px 10px !important;
 
         <td style="text-align: center;">
           <div>
-            <i placement="top" ngbTooltip="Génerer Facture" class="pi pi-cog" (click)="genererFacture(devis)"
+            <i placement="top" ngbTooltip="Génerer Facture" class="pi pi-cog" (click)="displayGenererFactureWindow(devis)"
                style="margin-right: 7px; color: #6200ee"></i>
             <i placement="top" ngbTooltip="Voir" class="pi pi-eye" (click)="ShowDevisTemplate(devis,true)"
                style="margin-right: 7px; color: #6200ee"></i>
@@ -108,7 +107,6 @@ padding: 10px 10px 10px 10px !important;
 
 <p-dialog header="Supprimer une devis" [(visible)]="displayDeleteDevis" [modal]="true" [style]="{width: '50vw'}"
           [baseZIndex]="10000" [draggable]="false" [resizable]="false">
-
   Voulez-vous toujours supprimer la devis  <span
   class="customer-badge status-negotiation">{{devis.devisNumber}}</span> ?
 
@@ -119,6 +117,23 @@ padding: 10px 10px 10px 10px !important;
 
       <button pButton pRipple label="Supprimer" icon="pi pi-check" class="p-button-danger p-mr-2"
               (click)="delDevis()"></button>
+
+    </div>
+  </ng-template>
+</p-dialog>
+<p-dialog header="Génerer une facture" [(visible)]="displayGenererFacture" [modal]="true" [style]="{width: '50vw'}"
+          [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+
+  Voulez vous vraiment génerer une facture à partir du devis  <span
+  class="customer-badge status-negotiation">{{devis.devisNumber}}</span> ?
+
+  <ng-template pTemplate="footer">
+    <div style="margin-top: 20px;">
+      <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
+              (click)="displayGenererFacture=false"></button>
+
+      <button pButton pRipple label="Confirmer" icon="pi pi-check" class="p-button-primary p-mr-2"
+              (click)="genererFacture()"></button>
 
     </div>
   </ng-template>
