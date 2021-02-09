@@ -144,7 +144,7 @@
             </td>
           </tr>
         </table>
-        <div class="row" style="width: 95%; position: absolute; bottom: 110px" *ngIf="complet">
+        <div class="row" style="width: 95%; position: absolute; bottom: 150px" *ngIf="complet">
           <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
             <table
               style="margin-top: 15px"
@@ -202,7 +202,7 @@
           </div>
         </div>
 
-        <div class="row" style="width: 95%; position: absolute; bottom: 80px">
+        <div class="row" style="width: 95%; position: absolute; bottom: 10px">
           <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
             <!--
             <span class="text-center font-weight-bold"
@@ -215,6 +215,11 @@
             <span class="text-center font-weight-bold"
             >Cachet et signature</span
             >
+            <div style="padding-bottom: 5%; text-align: center;">
+              <img *ngIf="company.companySignatureUrl != null" src="{{company.companySignatureUrl}}" style="width:200px;height: 120px">
+            </div>
+            <div *ngIf="company.companySignatureUrl == null" style="padding-bottom: 5%; text-align: center;height: 120px">
+            </div>
           </div>
         </div>
       </nb-card-body>
