@@ -2,7 +2,7 @@
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
-  Liste des factures générées
+  Liste des factures
 </h4>
 <div *ngIf="!showFactureWindow && !showFactureTemplate" class="card"
      style=" margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
@@ -102,12 +102,12 @@ padding: 10px 10px 10px 10px !important;
 
 
 
-<p-dialog header="Supprimer un facture généré" [(visible)]="displayDeleteFacture" [modal]="true" [style]="{width: '50vw'}"
+<p-dialog header="Supprimer une facture" [(visible)]="displayDeleteFacture" [modal]="true" [style]="{width: '50vw'}"
           [baseZIndex]="10000" [draggable]="false" [resizable]="false">
-
-  Voulez-vous toujours supprimer le facture  <span
+          <div style="margin-top: 2%;">
+  Voulez-vous toujours supprimer la facture  <span
   class="customer-badge status-negotiation">{{facture.factureNumber}}</span> ?
-
+          </div>
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
       <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
@@ -121,16 +121,16 @@ padding: 10px 10px 10px 10px !important;
 </p-dialog>
 <p-dialog header="Génerer un avoir" [(visible)]="displayGenererAvoir" [modal]="true" [style]="{width: '50vw'}"
           [baseZIndex]="10000" [draggable]="false" [resizable]="false">
-
-  Voulez vous vraiment génerer un avoir à partir du facture <span
+          <div style="margin-top: 2%;">
+  Voulez vous vraiment génerer un avoir à partir de facture <span
   class="customer-badge status-negotiation">{{facture.factureNumber}}</span> ?
-
+</div>
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
       <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
               (click)="displayGenererAvoir=false"></button>
 
-      <button pButton pRipple label="Confirmer" icon="pi pi-check" class="p-button-primary p-mr-2"
+      <button pButton pRipple label="Confirmer" icon="pi pi-check" class="primaryBtn"
               (click)="genererAvoir()"></button>
 
     </div>

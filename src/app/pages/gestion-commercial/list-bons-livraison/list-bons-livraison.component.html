@@ -21,12 +21,12 @@ padding: 10px 10px 10px 10px !important;
                             placeholder="Chercher une bon livraison.." />
                     </span>
                 </div>
-              <button pButton pRipple label="Génerer Facture
+              <button pButton pRipple label="Génerer une facture
 " icon="pi pi-plus" class="primaryBtn" (click)="genererFacture()"
                       [disabled]="selectedBL.length===0"
                       [ngClass]="{'disabled': selectedBL.length===0}"></button>
                 <div style="float:right">
-                    <button pButton pRipple label="Ajouter un bon de livraison" icon="pi pi-plus" class="primaryBtn"
+                    <button pButton pRipple label="Ajouter un bon de livraison" icon="pi pi-cog" class="primaryBtn"
                         (click)="showBonLivraisonWindow()"></button>
                 </div>
             </div>
@@ -103,12 +103,13 @@ padding: 10px 10px 10px 10px !important;
 
 
 
-<p-dialog header="Supprimer un bon livraison généré" [(visible)]="displayDeleteBonLivraison" [modal]="true" [style]="{width: '50vw'}"
+<p-dialog header="Supprimer un bon de livraison" [(visible)]="displayDeleteBonLivraison" [modal]="true" [style]="{width: '50vw'}"
   [baseZIndex]="10000" [draggable]="false" [resizable]="false">
 
+<div style="margin-top: 2%;">
   Voulez-vous toujours supprimer le bon livraison  <span
     class="customer-badge status-negotiation">{{bonLivraison.bonLivraisonNumber}}</span> ?
-
+  </div>
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
       <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
