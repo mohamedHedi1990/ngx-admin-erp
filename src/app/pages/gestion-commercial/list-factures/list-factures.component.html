@@ -73,7 +73,7 @@ padding: 10px 10px 10px 10px !important;
 
         <td style="text-align: center;">
           <div>
-            <i placement="top" ngbTooltip="Annuler" class="pi pi pi-cog" (click)="genererAvoir(facture)"
+            <i placement="top" ngbTooltip="Annuler" class="pi pi pi-cog" (click)="displayGenererAvoirWindow(facture)"
                style="margin-right: 7px; color: #6200ee"></i>
             <i placement="top" ngbTooltip="Voir" class="pi pi-eye" (click)="ShowFactureTemplate(facture,true)"
                style="margin-right: 7px; color: #6200ee"></i>
@@ -81,7 +81,7 @@ padding: 10px 10px 10px 10px !important;
             <i placement="top" ngbTooltip="Visualisation réduite" class="pi pi-eye-slash" (click)="ShowFactureTemplate(facture,false)"
                style="margin-right: 7px; color: #6200ee"></i>
                -->
-            
+
             <i placement="top" ngbTooltip="Modifier" class="pi pi-pencil"
                style="margin-right: 7px; color: #6200ee" (click)="editFacture(facture)"></i>
 
@@ -119,7 +119,23 @@ padding: 10px 10px 10px 10px !important;
     </div>
   </ng-template>
 </p-dialog>
+<p-dialog header="Génerer un avoir" [(visible)]="displayGenererAvoir" [modal]="true" [style]="{width: '50vw'}"
+          [baseZIndex]="10000" [draggable]="false" [resizable]="false">
 
+  Voulez vous vraiment génerer un avoir à partir du facture <span
+  class="customer-badge status-negotiation">{{facture.factureNumber}}</span> ?
+
+  <ng-template pTemplate="footer">
+    <div style="margin-top: 20px;">
+      <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
+              (click)="displayGenererAvoir=false"></button>
+
+      <button pButton pRipple label="Confirmer" icon="pi pi-check" class="p-button-primary p-mr-2"
+              (click)="genererAvoir()"></button>
+
+    </div>
+  </ng-template>
+</p-dialog>
 <ngx-facture-template *ngIf="showFactureTemplate" [facture]="facture" [complet]="complet"
                             (cancelTemplateEvent)="hideTemplateWindow()">
 </ngx-facture-template>

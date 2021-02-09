@@ -17,6 +17,7 @@ export class ListFacturesComponent implements OnInit {
   factures: any[];
   facture = null;
   displayDeleteFacture = false;
+  displayGenererAvoir=false;
   titleHeaderInvoice;
   private complet: any;
 
@@ -131,12 +132,19 @@ export class ListFacturesComponent implements OnInit {
       });
   }
 
-  genererAvoir(facture){
-      this.utilsService.post(UtilsServiceService.API_AVOIR+'/generer-from-facture',facture.factureId).subscribe(response => {
+  displayGenererAvoirWindow(facture){
+    this.facture=facture;
+    this.displayGenererAvoir=true;
+  }
+
+
+  genererAvoir(){
+      this.utilsService.post(UtilsServiceService.API_AVOIR+'/generer-from-facture',this.facture.factureId).subscribe(response => {
           this.utilsService.showToast('success',
             'Avoir généré avec succés',
             `L'avoir ${response.avoirNumber} a été généré avec succés`)
           this.getAllFactures();
+          this.displayGenererAvoir=false;
         },
         error => {
           this.utilsService.showToast('danger',
