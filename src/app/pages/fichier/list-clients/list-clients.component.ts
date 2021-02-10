@@ -13,12 +13,18 @@ import {ConfirmationService} from 'primeng/api';
   providers: [DialogService],
 })
 export class ListClientsComponent implements OnInit {
+
+  form: any = null;
+  selectedFile: any = null;
+  showImportButton = false;
+
   clients: any[];
   loading = false;
   showClientWindow = false;
   client = null;
   showContactList = false;
   displayDeleteClient = false;
+  displayImporterClient=false;
 
   /*
   settings = {
@@ -188,6 +194,47 @@ export class ListClientsComponent implements OnInit {
       header: contactModalheader,
       width: '70%',
     });
+  }
+
+  selectFile(event) {
+    this.selectedFile = event.target.files[0];
+    //this.form = form;
+    if(this.selectedFile != null) {
+      this.showImportButton = true;
+    }
+  }
+
+
+ /* clear(event) {
+    this.form.clear();
+    this.showImportButton = false;
+  }*/
+
+  importer() {
+    const context = this;
+    let formData = new FormData()
+    formData.append('file', this.selectedFile)
+    this.UtilsService.post(UtilsServiceService.API_CLIENT + "/import", formData).subscribe(
+      (response) => {
+        this.UtilsService.showToast('success',
+          "Document importé avec succés",
+          `La liste des clients ont été importés avec succcés`);
+        this.showClientWindow=false;
+        context.getAllClients();
+      }, (error) => {
+        this.UtilsService.showToast('danger',
+          error.MESSAGE,
+          ``);
+      })
+  }
+
+  showImportWindow(){
+    this.displayImporterClient=true;
+  }
+
+  closeImportWindow() {
+    this.selectedFile = null;
+    this.displayImporterClient=false;
   }
 
 }

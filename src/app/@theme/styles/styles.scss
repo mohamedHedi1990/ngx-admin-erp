@@ -175,3 +175,19 @@ ngx-login nb-layout-column {
 select {
   font-size: 13px  !important;
 }
+
+.p-datatable .p-datatable-tbody > tr > td {
+  text-align: left;
+  border: 1px solid #e9ecef;
+  border-width: 0 0 1px 0;
+  padding: 0.5rem 1rem !important;
+}
+
+.p-paginator {
+  background: #ffffff;
+  color: #6c757d;
+  border: solid #e9ecef;
+  border-width: 0;
+  padding: 0rem 0rem !important;
+  border-radius: 3px;
+}

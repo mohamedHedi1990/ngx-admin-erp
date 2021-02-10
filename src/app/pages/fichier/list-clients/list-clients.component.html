@@ -1,5 +1,5 @@
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
-<h4 *ngIf="!showClientWindow" style="background: #E7E8E8; 
+<h4 *ngIf="!showClientWindow" style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
@@ -13,7 +13,7 @@ padding: 10px 10px 10px 10px !important;
     [globalFilterFields]="['customerLabel','customerUniqueIdentifier','customerAddress','customerTel','customerEmail','customerManagerName','createdAt', 'updatedAt']">
     <ng-template pTemplate="caption">
       <div>
-        <div class="p-d-flex p-ai-center p-jc-between" style=" width: 60%; display: inline-block;">
+        <div class="p-d-flex p-ai-center p-jc-between" style=" width: 50%; display: inline-block;">
           <span class="p-input-icon-left" style="width: 100%">
             <i class="pi pi-search"></i>
             <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"
@@ -22,8 +22,10 @@ padding: 10px 10px 10px 10px !important;
         </div>
 
         <div style="float:right">
-          <button pButton pRipple label="Nouveau client" icon="pi pi-plus" class="primaryBtn"
+          <button pButton pRipple label="Nouveau client" icon="pi pi-plus" class="primaryBtn mr-2"
             (click)="showClientWindow = true"></button>
+          <button pButton pRipple label="Importer" icon="pi pi-file-excel" class="primaryBtn"
+                  (click)="showImportWindow()"></button>
         </div>
       </div>
 
@@ -146,3 +148,26 @@ padding: 10px 10px 10px 10px !important;
 
 <ngx-add-new-client *ngIf="showClientWindow" [client]="client" (addNewClientEvent)="saveNewClient($event)"
   (cancelEvent)="hideClientWindow(); initClient();"></ngx-add-new-client>
+
+<p-dialog header="Importer des clients" [(visible)]="displayImporterClient" [modal]="true" [style]="{width: '30vw'}"
+          [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+  <br>
+  <div class="row justify-content-center align-items-center">
+  <!--<span class="col col-md-12">Voulez vous importer des clients à partir d'une fichier excel ?</span>
+    <br> <br> -->
+   <!-- <p-fileUpload #form id="upload" mode="basic" icon="pi pi-file-excel" [showCancelButton]="true"
+              accept=".xls,.xlsx" [maxFileSize]="1000000" label="Choose"
+              chooseLabel="Choisir un fichier" styleClass="primaryBtn" style="margin-right: 10px;margin-top:10px"
+              (onSelect)="selectFile($event, form)" (onBeforeUpload)="clear($event)"></p-fileUpload>
+  -->
+    <input id="file-field" name="file-field" (change)="selectFile($event)" type="file" accept=".xls,.xlsx">
+
+  </div>
+    <ng-template pTemplate="footer">
+      <div style="margin-top: 20px;">
+        <button [disabled]="!showImportButton" pButton pRipple label="Importer" icon="pi pi-check"
+                (click)="importer()" class="primaryBtn"></button>
+        <button pButton pRipple label="Annuler" icon="pi pi-times"
+                (click)="closeImportWindow()" class="p-button-secondary p-mr-2"></button>
+       </div></ng-template>
+</p-dialog>

@@ -125,12 +125,14 @@ padding: 10px 10px 10px 10px !important;
   Voulez vous vraiment génerer un avoir à partir de facture <span
   class="customer-badge status-negotiation">{{facture.factureNumber}}</span> ?
 </div>
+
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
       <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
               (click)="displayGenererAvoir=false"></button>
 
       <button pButton pRipple label="Confirmer" icon="pi pi-check" class="primaryBtn"
+
               (click)="genererAvoir()"></button>
 
     </div>

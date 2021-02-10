@@ -51,6 +51,7 @@ import {ConfirmationService} from 'primeng/api';
 import { ListSocietesComponent } from './list-societes/list-societes.component';
 import { AddNewSocieteComponent } from './add-new-societe/add-new-societe.component';
 import { InterceptService } from '../../services/InterceptService.service';
+import {FileUploadModule} from "primeng/fileupload";
 @NgModule({
   declarations: [SocietesComponent, SaisirSocieteComponent, DetailsSocieteComponent, ListClientsComponent, ListContactsComponent, AddNewClientComponent, NewContactComponent, ListFournisseursComponent, AddNewProviderComponent, ListeContactsComponent, ListeTarifsBancaireComponent, AddNewTarifsBancaireComponent, AddNewEchanchierComponent,
           ListeEchenaciersComponent, ListComptesComponent, AddNewCompteComponent, NouvelleComissionComponent, ListSocietesComponent, AddNewSocieteComponent],
@@ -76,6 +77,7 @@ import { InterceptService } from '../../services/InterceptService.service';
     DynamicDialogModule,
     NbUserModule, FormsModule,
     ModalModule.forRoot(), Ng2SmartTableModule, PanelModule, DialogModule,
+    FileUploadModule,
   ],
   providers: [UtilsServiceService,
     {
