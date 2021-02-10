@@ -217,14 +217,14 @@ export class ListClientsComponent implements OnInit {
     this.UtilsService.post(UtilsServiceService.API_CLIENT + "/import", formData).subscribe(
       (response) => {
         this.UtilsService.showToast('success',
-          "Document importé avec succés",
-          `La liste des clients ont été importés avec succcés`);
+          "Document importé avec succès",
+          `La liste des clients a été importé avec succès`);
         this.showClientWindow=false;
         context.getAllClients();
       }, (error) => {
         this.UtilsService.showToast('danger',
-          error.MESSAGE,
-          ``);
+          "Erreur interne",
+          `Un erreur interne a été produit lors de l'import des clients. Veuillez verifier le format du fichier importé et verifiez bien qu'elle est compatible avec le format requis! `);
       })
   }
 
