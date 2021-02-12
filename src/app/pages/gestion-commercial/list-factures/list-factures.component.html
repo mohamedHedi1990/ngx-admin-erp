@@ -1,15 +1,14 @@
-<h4 *ngIf="!showFactureWindow && !showFactureTemplate" style="background: #E7E8E8;
+<h4 *ngIf="!showFactureWindow && !showFactureTemplate && !showAvoirWindow && !showAvoirTemplate" style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
   Liste des factures
 </h4>
-<div *ngIf="!showFactureWindow && !showFactureTemplate" class="card"
+<div *ngIf="!showFactureWindow && !showFactureTemplate && !showAvoirWindow && !showAvoirTemplate" class="card"
      style=" margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
   <p-table #dt [value]="factures" dataKey="factureId" styleClass="p-datatable-customers" [rowHover]="true" [rows]="5"
            [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading" [paginator]="true"
            currentPageReportTemplate="" [filterDelay]="0"
-           [(selection)]="selectedBL"
            [globalFilterFields]="['factureNumber','customer.customerLabel','createdAt', 'updatedAt']">
     <ng-template pTemplate="caption">
       <div>
@@ -60,34 +59,33 @@ padding: 10px 10px 10px 10px !important;
           {{facture.totalHTBrutS}} {{facture.factureCurrency}}
         </td>-->
         <td style="text-align: center;">
-          {{facture.totalHTS}} {{facture.factureCurrency}}
+
+            <span *ngIf="facture.factureType === 'AVOIR'">-</span> {{facture.totalHTS}} {{facture.factureCurrency}}
         </td>
+        
         <!--<td style="text-align: center;font-size: 13px;">
           {{facture.totalTaxeS}}
         </td> -->
         <td style="text-align: center;font-size: 13px;">
-          {{facture.totalTTCS}} {{facture.factureCurrency}}
+          <span *ngIf="facture.factureType === 'AVOIR'">-</span> {{facture.totalTTCS}} {{facture.factureCurrency}}
         </td>
-
+        
 
 
         <td style="text-align: center;">
-          <div>
-            <i placement="top" ngbTooltip="Annuler" class="pi pi pi-cog" (click)="displayGenererAvoirWindow(facture)"
-               style="margin-right: 7px; color: #6200ee"></i>
+          <div >
+            <i placement="top" ngbTooltip="Génerer un avoir" class="pi pi pi-cog" (click)="genererAvoir(facture)"
+               style="margin-right: 7px; color: #6200ee" *ngIf="facture.factureType == 'FACTURE'"></i>
             <i placement="top" ngbTooltip="Voir" class="pi pi-eye" (click)="ShowFactureTemplate(facture,true)"
                style="margin-right: 7px; color: #6200ee"></i>
-               <!--
-            <i placement="top" ngbTooltip="Visualisation réduite" class="pi pi-eye-slash" (click)="ShowFactureTemplate(facture,false)"
-               style="margin-right: 7px; color: #6200ee"></i>
-               -->
-
             <i placement="top" ngbTooltip="Modifier" class="pi pi-pencil"
-               style="margin-right: 7px; color: #6200ee" (click)="editFacture(facture)"></i>
-
+               style="margin-right: 7px; color: #6200ee" (click)="editFacture(facture)"
+               *ngIf="facture.factureType == 'FACTURE'"></i>
+            <i placement="top" ngbTooltip="Modifier" class="pi pi-pencil"
+               style="margin-right: 7px; color: #6200ee" (click)="editAvoir(facture)"
+               *ngIf="facture.factureType == 'AVOIR'"></i>
             <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" (click)="deleteFacture(facture)"
                style="margin-right: 7px; color: #6200ee"></i>
-
           </div>
         </td>
       </tr>
@@ -144,3 +142,9 @@ padding: 10px 10px 10px 10px !important;
 <ngx-edit-facture *ngIf="showFactureWindow" [facture]="facture"
                            (editFactureEvent)="saveFacture($event)" (cancelEvent)="hideFactureWindow(); initFacture();">
 </ngx-edit-facture>
+
+<ngx-add-avoir *ngIf="showAvoirWindow" [avoir]="avoir"
+                  (editAvoirEvent)="saveAvoir($event)" (cancelEvent)="hideAvoirWindow(); initAvoir();">
+</ngx-add-avoir>
+
+

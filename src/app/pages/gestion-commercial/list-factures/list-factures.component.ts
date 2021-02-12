@@ -11,11 +11,14 @@ import {ConfirmationService} from "primeng/api";
 })
 export class ListFacturesComponent implements OnInit {
   showFactureWindow=false;
-
+  showAvoirWindow=false;
+  showAvoirTemplate=false;
   showFactureTemplate=false;
   showFactureGeneratedWindow=false;
   factures: any[];
   facture = null;
+  avoir = null;
+
   displayDeleteFacture = false;
   displayGenererAvoir=false;
   titleHeaderInvoice;
@@ -27,6 +30,7 @@ export class ListFacturesComponent implements OnInit {
 
   ngOnInit(): void {
     this.initFacture();
+    this.initAvoir();
     this.getAllFactures();
   }
   getAllFactures()
@@ -63,10 +67,34 @@ export class ListFacturesComponent implements OnInit {
       totalTTC: 0,
       montantFacture: 0,
       factureLines: [],
-
+      factureType:'FACTURE',
     }
   }
 
+  initAvoir()
+  {
+    this.avoir={
+      factureId: null,
+      factureNumber: '',
+      factureDeadlineInNumberOfDays: 0,
+      factureCurrency: 'TND',
+      factureDeadlineDate: null,
+      factureDate: null,
+      customer: null,
+      products: null,
+      totalHTBrut: 0,
+      remise: 0,
+      totalHT: 0,
+      totalTVA: 0,
+      totalFodec: 0,
+      totalTaxe: 0,
+      timbreFiscal: 0.5,
+      totalTTC: 0,
+      montantFacture: 0,
+      factureLines: [],
+      factureType:'AVOIR',
+    }
+  }
 
   ShowFactureTemplate(facture,complet) {
     this.complet=complet;
@@ -85,16 +113,30 @@ export class ListFacturesComponent implements OnInit {
   {
     const context = this;
     this.utilsService.delete(UtilsServiceService.API_FACTURE+"/"+this.facture.factureId).subscribe( response => {
+      if(this.facture.factureType=='FACTURE') {
         this.utilsService.showToast('success',
-          'facture supprimé avec succés',
+          'Facture supprimé avec succés',
           `La facture  ${this.facture.factureNumber} a été supprimé avec succcés`);
+      }else{
+        this.utilsService.showToast('success',
+          'Avoir supprimé avec succés',
+          `L'avoir  ${this.facture.factureNumber} a été supprimé avec succcés`);
+      }
         context.getAllFactures();
         context.initFacture();
         context.displayDeleteFacture = false;
       },
-      error => {this.utilsService.showToast('danger',
-        'Erreur interne',
-        `Un erreur interne a été produit lors de la suppression du facture ${this.facture.factureNumber}`);
+      error => {
+        if (this.facture.factureType == 'FACTURE') {
+          this.utilsService.showToast('danger',
+            'Erreur interne',
+            `Un erreur interne a été produit lors de la suppression du facture ${this.facture.factureNumber}`);
+        }else{
+          this.utilsService.showToast('danger',
+            'Erreur interne',
+            `Un erreur interne a été produit lors de la suppression du l'avoir ${this.facture.factureNumber}`);
+
+        }
         context.displayDeleteFacture = false;
       });
   }
@@ -102,10 +144,14 @@ export class ListFacturesComponent implements OnInit {
 
   hideTemplateWindow() {
     this.showFactureTemplate=false;
+    this.showAvoirTemplate=false;
   }
 
   hideFactureWindow() {
     this.showFactureWindow=false;
+  }
+  hideAvoirWindow() {
+    this.showAvoirWindow=false;
   }
 
 
@@ -114,6 +160,27 @@ export class ListFacturesComponent implements OnInit {
     this.facture=facture;
     this.titleHeaderInvoice="Modifier une facture "+facture.factureNumber;
     this.showFactureWindow = true;
+  }
+
+
+  genererAvoir(facture)
+  {
+    this.avoir=Object.assign(this.avoir,facture);
+    this.avoir.factureId=null;
+    this.avoir.factureType='AVOIR';
+    this.avoir.factureNumber=null;
+    this.avoir.factureLines.forEach(factureLine => {
+      factureLine.factureLineId=null;
+      factureLine.facture=null;
+      });
+    //this.titleHeaderInvoice="Modifier une facture "+facture.factureNumber;
+    this.showAvoirWindow = true;
+  }
+
+  editAvoir(facture)
+  {
+    this.avoir=facture;
+    this.showAvoirWindow = true;
   }
 
   saveFacture(facture) {
@@ -132,27 +199,26 @@ export class ListFacturesComponent implements OnInit {
       });
   }
 
-  displayGenererAvoirWindow(facture){
-    this.facture=facture;
-    this.displayGenererAvoir=true;
+  saveAvoir(avoir) {
+    const context = this;
+    this.utilsService.post(UtilsServiceService.API_FACTURE,avoir).subscribe(response => {
+      if(avoir.factureId == null){
+        this.utilsService.showToast('success',
+          'Avoir ajouté avec succès',
+          `L'avoir a été ajouté avec succès`);
+      }else{
+        this.utilsService.showToast('success',
+          'Avoir modifié avec succès',
+          `L'avoir a été modifié avec succès`);
+      }
+        this.hideAvoirWindow();
+        context.getAllFactures();
+      },
+      error => {
+        this.utilsService.showToast('danger',
+          'Erreur interne',
+          `Un erreur interne a été produit lors de modification de l'avoir`);
+      });
   }
-
-
-  genererAvoir(){
-      this.utilsService.post(UtilsServiceService.API_AVOIR+'/generer-from-facture',this.facture.factureId).subscribe(response => {
-          this.utilsService.showToast('success',
-            'Avoir généré avec succés',
-            `L'avoir ${response.avoirNumber} a été généré avec succés`)
-          this.getAllFactures();
-          this.displayGenererAvoir=false;
-        },
-        error => {
-          this.utilsService.showToast('danger',
-            'Erreur interne',
-            `Un erreur interne a été produit lors de géneration de l'avoir`);
-        });
-
-  }
-
 
 }

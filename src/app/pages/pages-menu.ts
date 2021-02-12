@@ -92,12 +92,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/gestion-commercial/list-devis',
         icon: 'file-text-outline',
       },
-      {
-        title: 'Avoirs',
-        link: '/pages/gestion-commercial/list-avoir',
-        icon: 'file-text-outline',
-      },
-
     ],
   },
   {

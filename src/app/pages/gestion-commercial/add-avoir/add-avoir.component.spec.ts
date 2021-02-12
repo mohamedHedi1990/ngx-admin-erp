@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListAvoirComponent } from './list-avoir.component';
+import { AddAvoirComponent } from './add-avoir.component';
 
-describe('ListAvoirComponent', () => {
-  let component: ListAvoirComponent;
-  let fixture: ComponentFixture<ListAvoirComponent>;
+describe('AddAvoirComponent', () => {
+  let component: AddAvoirComponent;
+  let fixture: ComponentFixture<AddAvoirComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListAvoirComponent ]
+      declarations: [ AddAvoirComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListAvoirComponent);
+    fixture = TestBed.createComponent(AddAvoirComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

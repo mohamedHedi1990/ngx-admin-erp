@@ -4,7 +4,6 @@ import { ListBonsLivraisonComponent } from "./list-bons-livraison/list-bons-livr
 import { ListProduitsComponent } from "./list-produits/list-produits.component";
 import {ListFacturesComponent} from "./list-factures/list-factures.component";
 import {ListDevisComponent} from "./list-devis/list-devis.component";
-import {ListAvoirComponent} from "./list-avoir/list-avoir.component";
 
 const routes: Routes = [{
     path: '',
@@ -25,11 +24,6 @@ const routes: Routes = [{
         path: 'list-devis',
         component: ListDevisComponent,
       },
-      {
-        path: 'list-avoir',
-        component: ListAvoirComponent,
-      },
-
     ],
 
   }];

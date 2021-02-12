@@ -31,11 +31,10 @@ import { EditFactureComponent } from './edit-facture/edit-facture.component';
 import { AddNewDevisComponent } from './add-new-devis/add-new-devis.component';
 import { ListDevisComponent } from './list-devis/list-devis.component';
 import { DevisTemplateComponent } from './devis-template/devis-template.component';
-import { ListAvoirComponent } from './list-avoir/list-avoir.component';
-import { AvoirTemplateComponent } from './avoir-template/avoir-template.component';
+import { AddAvoirComponent } from './add-avoir/add-avoir.component';
 
 @NgModule({
-  declarations: [ListProduitsComponent,AddNewProduitComponent, ListBonsLivraisonComponent, AddNewBonLivraisonComponent, BonLivraisonTemplateComponent, ListFacturesComponent, FactureTemplateComponent, EditFactureComponent, AddNewDevisComponent, ListDevisComponent, DevisTemplateComponent, ListAvoirComponent, AvoirTemplateComponent],
+  declarations: [ListProduitsComponent,AddNewProduitComponent, ListBonsLivraisonComponent, AddNewBonLivraisonComponent, BonLivraisonTemplateComponent, ListFacturesComponent, FactureTemplateComponent, EditFactureComponent, AddNewDevisComponent, ListDevisComponent, DevisTemplateComponent, AddAvoirComponent],
   imports: [
     FileUploadModule,
     HttpClientModule,
