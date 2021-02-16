@@ -43,7 +43,8 @@ export class FactureTemplateComponent implements OnInit {
   }
 
   generatePDF() {
-    var data = document.getElementById('facture');
+    window.print();
+    /*var data = document.getElementById('facture');
     html2canvas(data).then(canvas => {
       var imgWidth = 210;
       var pageHeight = 295;
@@ -66,7 +67,7 @@ export class FactureTemplateComponent implements OnInit {
       }
 
       pdf.save(this.facture.factureNumber + '.pdf');
-    });
+    });*/
   }
 
 

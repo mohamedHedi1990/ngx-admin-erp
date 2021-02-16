@@ -43,7 +43,8 @@ export class BonLivraisonTemplateComponent implements OnInit {
   }
 
   generatePDF() {
-    var data = document.getElementById('bonlivraison');
+    window.print();
+    /*var data = document.getElementById('bonlivraison');
     html2canvas(data).then(canvas => {
       var imgWidth = 210;
       var pageHeight = 295;
@@ -66,7 +67,7 @@ export class BonLivraisonTemplateComponent implements OnInit {
       }
 
       pdf.save(this.bonLivraison.bonLivraisonNumber + '.pdf');
-    });
+    });*/
   }
 
 

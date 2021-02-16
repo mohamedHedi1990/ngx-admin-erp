@@ -43,7 +43,8 @@ export class DevisTemplateComponent implements OnInit {
   }
 
   generatePDF() {
-    var data = document.getElementById('devis');
+    window.print();
+    /*var data = document.getElementById('devis');
     html2canvas(data).then(canvas => {
       var imgWidth = 210;
       var pageHeight = 295;
@@ -66,7 +67,7 @@ export class DevisTemplateComponent implements OnInit {
       }
 
       pdf.save(this.devis.devisNumber + '.pdf');
-    });
+    });*/
   }
 
 
