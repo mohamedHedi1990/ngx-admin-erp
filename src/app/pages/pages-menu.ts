@@ -92,6 +92,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/gestion-commercial/list-devis',
         icon: 'file-text-outline',
       },
+      {
+        title: 'Chiffre affaire',
+        link: '/pages/gestion-commercial/chiffre-affaire',
+        icon: 'file-text-outline',
+      },
     ],
   },
   {
