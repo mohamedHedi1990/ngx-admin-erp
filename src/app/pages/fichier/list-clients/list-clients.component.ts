@@ -198,17 +198,11 @@ export class ListClientsComponent implements OnInit {
 
   selectFile(event) {
     this.selectedFile = event.target.files[0];
-    //this.form = form;
     if(this.selectedFile != null) {
       this.showImportButton = true;
     }
   }
 
-
- /* clear(event) {
-    this.form.clear();
-    this.showImportButton = false;
-  }*/
 
   importer() {
     const context = this;
@@ -220,6 +214,7 @@ export class ListClientsComponent implements OnInit {
           "Document importé avec succès",
           `La liste des clients a été importé avec succès`);
         this.showClientWindow=false;
+        this.displayImporterClient=false;
         context.getAllClients();
       }, (error) => {
         this.UtilsService.showToast('danger',

@@ -14,10 +14,14 @@ export class ListFournisseursComponent implements OnInit {
   providers: any[];
   loading = false;
   showProviderWindow = false;
+  selectedFile: any = null;
   provider = null;
   showProviderList = false;
   contactModalheader = 'List des contacts pour le fournisseur ';
   displayDeleteProvider = false;
+  displayImporterProvider=false;
+  showImportButton=false;
+
   constructor(private service: SmartTableData, private UtilsService: UtilsServiceService,
               public dialogService: DialogService, private confirmationService: ConfirmationService) {
   }
@@ -133,5 +137,40 @@ export class ListFournisseursComponent implements OnInit {
       header: contactModalheader,
       width: '70%',
     });
+  }
+
+  selectFile(event) {
+    this.selectedFile = event.target.files[0];
+    if(this.selectedFile != null) {
+      this.showImportButton = true;
+    }
+  }
+
+  importer() {
+    const context = this;
+    let formData = new FormData()
+    formData.append('file', this.selectedFile)
+    this.UtilsService.post(UtilsServiceService.API_PROVIDER + "/import", formData).subscribe(
+      (response) => {
+        this.UtilsService.showToast('success',
+          "Document importé avec succès",
+          `La liste des fournisseurs a été importé avec succès`);
+        this.showProviderWindow=false;
+        this.displayImporterProvider=false
+        context.getAllProviders();
+      }, (error) => {
+        this.UtilsService.showToast('danger',
+          "Erreur interne",
+          `Un erreur interne a été produit lors de l'import des fournisseurs. Veuillez verifier le format du fichier importé et verifiez bien qu'elle est compatible avec le format requis! `);
+      })
+  }
+
+  showImportWindow(){
+    this.displayImporterProvider=true;
+  }
+
+  closeImportWindow() {
+    this.selectedFile = null;
+    this.displayImporterProvider=false;
   }
 }
