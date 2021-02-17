@@ -191,3 +191,9 @@ select {
   padding: 0rem 0rem !important;
   border-radius: 3px;
 }
+@media print { 
+  /* All your print styles go here */
+  nb-menu, nb-layout-header { display: none !important; }
+  #bonlivraison { display: block; width: 100% !important; height: 100% !important;}
+  #blButtonsTemplate {display: none !important;}
+ }

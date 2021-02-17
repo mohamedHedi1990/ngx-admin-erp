@@ -43,6 +43,10 @@ export class BonLivraisonTemplateComponent implements OnInit {
   }
 
   generatePDF() {
+
+
+
+    
     window.print();
     /*var data = document.getElementById('bonlivraison');
     html2canvas(data).then(canvas => {
