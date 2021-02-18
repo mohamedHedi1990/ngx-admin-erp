@@ -191,3 +191,14 @@ select {
   padding: 0rem 0rem !important;
   border-radius: 3px;
 }
+p-multiSelect {
+  font-size: 13px !important;
+}
+.p-multiselect-label {
+  cursor: pointer;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px !important;
+}

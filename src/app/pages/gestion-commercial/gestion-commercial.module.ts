@@ -32,17 +32,23 @@ import { AddNewDevisComponent } from './add-new-devis/add-new-devis.component';
 import { ListDevisComponent } from './list-devis/list-devis.component';
 import { DevisTemplateComponent } from './devis-template/devis-template.component';
 import { AddAvoirComponent } from './add-avoir/add-avoir.component';
+import { TurnoverComponent } from './turnover/turnover.component';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import {MultiSelectModule} from "primeng/multiselect";
+
 
 @NgModule({
-  declarations: [ListProduitsComponent,AddNewProduitComponent, ListBonsLivraisonComponent, AddNewBonLivraisonComponent, BonLivraisonTemplateComponent, ListFacturesComponent, FactureTemplateComponent, EditFactureComponent, AddNewDevisComponent, ListDevisComponent, DevisTemplateComponent, AddAvoirComponent],
+  declarations: [ListProduitsComponent,AddNewProduitComponent, ListBonsLivraisonComponent, AddNewBonLivraisonComponent, BonLivraisonTemplateComponent, ListFacturesComponent, FactureTemplateComponent, EditFactureComponent, AddNewDevisComponent, ListDevisComponent, DevisTemplateComponent, AddAvoirComponent, TurnoverComponent],
   imports: [
     FileUploadModule,
+    AutoCompleteModule,
     HttpClientModule,
     GestionCommercialRoutingModule,
     CommonModule,
     ConfirmDialogModule,
     TableModule,
     CheckboxModule,
+    MultiSelectModule,
     ButtonModule,
     MatTableModule,
     NgbModule,
