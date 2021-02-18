@@ -35,8 +35,8 @@ export class TurnoverComponent implements OnInit {
       currentTime
 
  dates={
-    "beginDate":new Date(),
-    "endDate":new Date()
+    "beginDate":null,
+    "endDate":null
  }
  company={
    'campanyName':''
@@ -50,11 +50,11 @@ export class TurnoverComponent implements OnInit {
     let date=new Date();
     this.currentDate=this.datePipe.transform(new Date(), 'dd/MM/yyyy');
     this.currentTime=date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()
-    this.maxbeginDate=new Date();
-    this.minEndDate=new Date();
-    this.maxEndDate=new Date();
-    this.dates.endDate=this.maxEndDate;
-    this.dates.beginDate=new Date(this.maxEndDate.getYear()-1,this.maxEndDate.getMonth(),this.maxEndDate.getDay());
+    this.maxbeginDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    this.minEndDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    this.dates.endDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');;
+    this.dates.beginDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');;
+    //this.dates.beginDate=new Date(this.maxEndDate.getYear()-1,this.maxEndDate.getMonth(),this.maxEndDate.getDay());
     this.getChiffreAffaire();
     this.getCompany();
     this.getCustomers();
@@ -87,7 +87,11 @@ export class TurnoverComponent implements OnInit {
   getChiffreAffaire(){
     this.maxbeginDate=this.dates.endDate;
     this.minEndDate=this.dates.beginDate;
-    this.utilsService.post(UtilsServiceService.API_FACTURE + "/by-date-between" , this.dates).subscribe(response => {
+    let dates = {
+      'beginDate':new Date(this.dates.beginDate),
+      'endDate':new Date(this.dates.endDate)
+    }
+    this.utilsService.post(UtilsServiceService.API_FACTURE + "/by-date-between" , dates).subscribe(response => {
       this.initChiffreAffaire();
       this.chiffreAffaire.factures = response;
       //this.filterFactures();
@@ -175,8 +179,8 @@ export class TurnoverComponent implements OnInit {
         let filter={
           'productList':this.selectedProducts,
           'customerList':this.selectedCustomers,
-          'beginDate':this.dates.beginDate,
-          'endDate':this.dates.endDate
+          'beginDate':new Date(this.dates.beginDate),
+          'endDate':new Date(this.dates.endDate)
         }
       if(this.selectedProducts.length >0){
         this.withProduct=true;
