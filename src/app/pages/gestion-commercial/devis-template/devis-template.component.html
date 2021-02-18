@@ -1,5 +1,5 @@
 <div class="row template">
-  <div class="d-flex justify-content-end col-md-12 text-align-left">
+  <div class="d-flex justify-content-end col-md-12 text-align-left hiddenPrintZone">
     <button
       pButton
       pRipple
@@ -14,13 +14,13 @@
       pRipple
       class="primaryBtn"
       (click)="generatePDF()"
-      label="Télécharger PDF"
-      icon="pi pi-file-pdf"
+      label="Imprimer"
+      icon="pi pi-print"
     ></button>
   </div>
   <div
     id="devis"
-    class="col-md-12"
+    class="col-md-12 printZone"
     style="height: 11.6929in; width: 8.2677in; margin-top: 10px"
   >
     <nb-card style="width: 100%; height: 100%">

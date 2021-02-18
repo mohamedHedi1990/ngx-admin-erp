@@ -191,6 +191,22 @@ select {
   padding: 0rem 0rem !important;
   border-radius: 3px;
 }
+
+
+@media print {
+  nb-menu, nb-layout-header { display: none !important; }
+  .hiddenPrintZone{
+    display: none !important;
+  }
+  .printZone { display: block;
+    width: 100% !important; height: 99% !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
+
 p-multiSelect {
   font-size: 13px !important;
 }
@@ -202,3 +218,4 @@ p-multiSelect {
   white-space: nowrap;
   font-size: 13px !important;
 }
+
