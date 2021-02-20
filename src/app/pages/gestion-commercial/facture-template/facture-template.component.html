@@ -20,47 +20,49 @@
   </div>
   <div
     id="facture"
-    class="col-md-12 printZone"
-    style="height: 11.6929in; width: 8.2677in; margin-top: 10px"
+    class="col-md-12 printZone mt-02"
+    style="width: 8.2677in; margin-top: 10px"
   >
     <nb-card style="width: 100%; height: 100%">
       <nb-card-body>
-        <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-4">
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
             <img [src]="company.companyLogoUrl" style="height: 100%;
             width: 60%;
             margin: 2%;" />
           </div>
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6" style="text-align: center;
-          margin-top: 2%;">
-            <span style="font-style: italic;    font-weight: 700;
-            font-size: 29px;
-            line-height: normal;">{{ company.campanyName }}</span><br>
-            <span style="font-style: italic;    font-weight: 700;
-            font-size: 20px;
-            line-height: normal;">{{company.campanyDetail}}</span>
+          margin-top: 4%;">
+            <span style="font-family: Arial,serif;font-size: 18.0px;color: rgb(0,0,0);
+            font-weight: bold;font-style: italic; text-decoration: none;">
+              {{ company.campanyName }}</span><br>
+            <span style="font-family: Arial,serif;font-size: 18.0px;color: rgb(0,0,0);
+            font-weight: bold;font-style: italic; text-decoration: none;">
+              {{company.campanyDetail}}</span>
           </div>
         </div>
         <div
-          style="margin-top: 2%"
+          style="margin-top: 4%"
           class="row col-xl-12 col-lg-12 col-md-12 col-sm-12"
         >
           <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7">
             <div style="display: flex; margin-top: 5%;">
               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                <h5 style="font-weight: bold; font-size: 37px;" *ngIf="facture.factureType == 'FACTURE'">Facture N°:</h5>
-                <h5 style="font-weight: bold; font-size: 27px;" *ngIf="facture.factureType == 'AVOIR'">Facture Avoir N°:</h5>
-                <h5 style="margin-top: 16%;">Date :</h5>
+                <span style="font-family: Arial,serif;font-size: 24.0px;color: rgb(0,0,0);
+                font-weight: bold;font-style: normal; text-decoration: none;" *ngIf="facture.factureType == 'FACTURE'">Facture N°:</span>
+                <span style="font-family: Arial,serif;font-size: 24.0px;color: rgb(0,0,0);
+                font-weight: bold;font-style: normal; text-decoration: none;" *ngIf="facture.factureType == 'AVOIR'">Facture Avoir N°:</span>
+                <br><br>
+                <span style="font-family: Arial,serif;font-size: 18.0px;color: rgb(0,0,0);font-weight: bold;font-style: normal; text-decoration: none;">Date :</span>
               </div>
               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                <h5 style="font-weight: bold; font-size: 37px;" *ngIf="facture.factureType == 'FACTURE'">
+                <span style="font-family: Arial,serif;font-size: 24.0px;color: rgb(0,0,0);
+                font-weight: bold;font-style: normal; text-decoration: none;" >
                   {{ facture.factureNumber }}
-                </h5>
-                <h5 style="font-weight: bold; font-size: 27px;" *ngIf="facture.factureType == 'AVOIR'">
-                  {{ facture.factureNumber }}
-                </h5>
-                <h5 style="margin-top: 16%;">{{ facture.factureDate | date: 'dd/MM/yyyy'}}</h5>
-                <h5 style="margin-top: 2%;" *ngIf="facture.factureType == 'FACTURE'">(Payée en {{facture.factureDeadlineInNumberOfDays}} jours)</h5>
+                </span><br><br>
+                <span style="font-family: Arial,serif;font-size: 18.0px;color: rgb(0,0,0);
+                font-weight: bold;font-style: normal; text-decoration: none;">
+                  {{ facture.factureDate | date: 'dd/MM/yyyy'}}</span>
               </div>
             </div>
           </div>
@@ -73,13 +75,13 @@
               <div style="margin-top: 8px;
               margin-bottom: 18px;">
                 <span
-                  style="font-weight: bold; font-size: 21px; font-style: italic"
+                  style="font-family: Times,serif;font-size: 18.0px;color: rgb(0,0,0);
+                  font-weight: bold;font-style: italic; text-decoration: none;"
                 >Adressée à :
                 </span>
               </div>
-              <div style="font-weight: bold;
-              font-size: 22px;
-              margin-bottom: 10px;
+              <div style="    font-family: Arial,serif;font-size: 12.0px;color:
+              rgb(0,0,0);font-weight: bold;font-style: normal;text-decoration: none;
               text-transform: uppercase;">
                 <span>{{ facture.customer.customerLabel }}</span>
               </div>
@@ -92,20 +94,25 @@
             font-weight: bold; width: 100%">
               <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                 <div>
-                  <span>MF/CIN : </span>
+                  <span style="font-family: Arial,serif;font-size: 16.0px; color: rgb(0,0,0);
+                  font-weight: bold;font-style: normal; text-decoration: none;">MF/CIN : </span>
                 </div>
-                <div style="margin-top: 15px; margin-bottom: 15px;">
-                  <span>TEL : </span>
+                <div style="margin-top: 15px; margin-bottom: 15px;font-family: Arial,serif;font-size: 16.0px; color: rgb(0,0,0);
+                font-weight: bold;font-style: normal; text-decoration: none;">
+                  <span style="font-family: Arial,serif;font-size: 16.0px; color: rgb(0,0,0);
+                  font-weight: bold;font-style: normal; text-decoration: none;">TEL : </span>
                 </div>
               </div>
               <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
                 <div>
-                  <span>{{
+                  <span style="font-family: Arial,serif;font-size: 16.0px; color: rgb(0,0,0);
+                  font-weight: bold;font-style: normal; text-decoration: none;">{{
                     facture.customer.customerUniqueIdentifier
                     }}</span>
                 </div>
 
-                <div style="margin-top: 15px;margin-bottom: 15px;">
+                <div style="margin-top: 15px;margin-bottom: 15px;font-family: Arial,serif;font-size: 16.0px; color: rgb(0,0,0);
+                font-weight: bold;font-style: normal; text-decoration: none;">
                   <span>{{ facture.customer.customerTel }}</span>
                 </div>
 
@@ -147,8 +154,24 @@
               {{ invoiceLine.montantHtS }}
             </td>
           </tr>
+          <tr *ngFor="let item of [].constructor(15 -  facture.factureLines.length )">
+            <td class="text-left" style="width: 20%">
+            </td>
+            <td class="text-left" style="width: 30%">
+            </td>
+            <td class="text-right" style="width: 10%">
+            </td>
+            <td class="text-right" style="width: 13%">
+            </td>
+            <td  class="text-right" style="width: 5%">
+            </td>
+            <td class="text-right" style="width: 5%">
+            </td>
+            <td  class="text-right" style="width: 17%">
+            </td>
+          </tr>
         </table>
-        <div class="row" style="width: 95%; position: absolute; bottom: 150px" *ngIf="complet">
+        <div class="row mt-3" style="width: 95%;" *ngIf="complet">
           <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
             <table
               style="margin-top: 15px"
@@ -170,7 +193,7 @@
               </tr>
               <tr style="border-top: 1px solid #000">
                 <td class="text-center font-weight-bold">Total</td>
-                <td class="text-right">{{ facture.totalTaxeS }}</td>
+                <td class="text-right" style="font-weight: bold;font-size: 12px;">{{ facture.totalTaxeS }}</td>
               </tr>
             </table>
           </div>
@@ -199,14 +222,14 @@
               </tr>
               <tr style="height: 40px; border: 1px solid #000">
                 <td style="
-                width: 40%;" class="text-left font-weight-bold">Total TCC</td>
-                <td class="text-right">{{ facture.totalTTCS }}</td>
+                width: 40%;" class="text-left font-weight-bold; font-size: 12px;">Total TCC</td>
+                <td class="text-right" style="font-weight: bold;font-size: 12px;">{{ facture.totalTTCS }}</td>
               </tr>
             </table>
           </div>
         </div>
 
-        <div class="row" style="width: 95%; position: absolute; bottom: 10px">
+        <div class="row mt-3" style="width: 95%;">
           <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
             <!--
             <span class="text-center font-weight-bold"
@@ -216,7 +239,8 @@
           </div>
           <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3"></div>
           <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-            <span class="text-center font-weight-bold"
+            <span class="text-center" style="font-family: Arial,serif; font-size: 14.0px;color: rgb(0,0,0);
+            font-weight: bold;font-style: normal;text-decoration: none;"
             >Cachet et signature</span
             >
             <div style="padding-bottom: 5%; text-align: center;">
@@ -231,24 +255,32 @@
         <div class="row">
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
             <span class="text-center font-weight-bold"
-                  style="line-height: normal;
-              font-style: italic;">Siége Social : {{ company.campanyAddress }} </span
+                  style="font-family: Arial,serif;font-size: 12.0px;color: rgb(0,0,0);
+                  font-weight: bold;font-style: italic;text-decoration: none;">Siége Social : {{ company.campanyAddress }} </span
             ><br />
           </div>
           <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
-            <span class="text-center font-weight-bold">Tél : </span
-            ><span>+216 {{ company.campanyPhoneNumber }}</span
+            <span class="text-center" style="font-family: Arial,serif; font-size: 12.0px;color: rgb(0,0,0);font-weight: bold;
+            font-style: normal;text-decoration: none;">Tél : </span
+            ><span style="font-family: Arial,serif;font-size: 12.0px;color: rgb(0,0,0);font-weight: normal;
+            font-style: normal;text-decoration: none;">+216 {{ company.campanyPhoneNumber }}</span
           ><br />
-            <span class="text-center font-weight-bold">TVA : </span
-            ><span>{{ company.campanyUniqueIdentifier }}</span
+            <span class="text-center" style="font-family: Arial,serif; font-size: 12.0px;color: rgb(0,0,0);font-weight: bold;
+            font-style: normal;text-decoration: none;">TVA : </span
+            ><span style="font-family: Arial,serif;font-size: 12.0px;color: rgb(0,0,0);font-weight: normal;
+            font-style: normal;text-decoration: none;">{{ company.campanyUniqueIdentifier }}</span
           ><br />
           </div>
           <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
-            <span class="text-center font-weight-bold">FAX : </span
-            ><span>+216 {{ company.campanyFaxNumber }}</span
+             <span class="text-center" style="font-family: Arial,serif; font-size: 12.0px;color: rgb(0,0,0);font-weight: bold;
+            font-style: normal;text-decoration: none;">FAX : </span
+            ><span style="font-family: Arial,serif;font-size: 12.0px;color: rgb(0,0,0);font-weight: normal;
+            font-style: normal;text-decoration: none;">+216 {{ company.campanyFaxNumber }}</span
           ><br />
-            <span class="text-center font-weight-bold">RC : </span
-            ><span>{{ company.campanyRCNumber }}</span
+            <span class="text-center" style="font-family: Arial,serif; font-size: 12.0px;color: rgb(0,0,0);font-weight: bold;
+            font-style: normal;text-decoration: none;">RC : </span
+            ><span style="font-family: Arial,serif;font-size: 12.0px;color: rgb(0,0,0);font-weight: normal;
+            font-style: normal;text-decoration: none;">{{ company.campanyRCNumber }}</span
           ><br />
           </div>
         </div>
