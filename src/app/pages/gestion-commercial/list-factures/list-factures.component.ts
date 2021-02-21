@@ -29,6 +29,8 @@ export class ListFacturesComponent implements OnInit {
               public dialogService: DialogService, private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
+    const nombre_en_lettre = require('../../../../../scripts/number-to-lettre.js');
+    console.log(nombre_en_lettre("85454.98", "dinars", "millimes"));
     this.initFacture();
     this.initAvoir();
     this.getAllFactures();
