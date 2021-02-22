@@ -26,11 +26,14 @@ export class FactureTemplateComponent implements OnInit {
     companyLogoUrl: '',
     companyManagerName: ''
   }
-
+  montantEnLetter=""
   constructor( private utilsService: UtilsServiceService) { }
 
   ngOnInit(): void {
     this.getCompany();
+
+    const nombre_en_lettre = require('../../../../../scripts/number-to-lettre.js');
+    this.montantEnLetter = nombre_en_lettre(this.facture.totalTTC, "dinars", "millimes");
   }
 
   getCompany(){

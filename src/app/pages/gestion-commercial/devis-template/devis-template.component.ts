@@ -27,10 +27,15 @@ export class DevisTemplateComponent implements OnInit {
     companyManagerName: ''
   }
 
+  montantEnLetter="";
+
   constructor( private utilsService: UtilsServiceService) { }
 
   ngOnInit(): void {
     this.getCompany();
+
+    const nombre_en_lettre = require('../../../../../scripts/number-to-lettre.js');
+    this.montantEnLetter = nombre_en_lettre(this.devis.totalTTC, "dinars", "millimes");
   }
 
   getCompany(){

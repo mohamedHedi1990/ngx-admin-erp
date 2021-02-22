@@ -26,11 +26,14 @@ export class BonLivraisonTemplateComponent implements OnInit {
     companyManagerName: '',
     companySignatureUrl:null
   }
+  montantEnLetter="";
 
   constructor( private utilsService: UtilsServiceService) { }
 
   ngOnInit(): void {
     this.getCompany();
+    const nombre_en_lettre = require('../../../../../scripts/number-to-lettre.js');
+    this.montantEnLetter = nombre_en_lettre(this.bonLivraison.totalTTC, "dinars", "millimes");
   }
 
   getCompany(){
