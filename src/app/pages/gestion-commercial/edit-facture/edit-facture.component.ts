@@ -63,6 +63,9 @@ export class EditFactureComponent implements OnInit {
   };
   produit = null;
   showProduitWindow = false;
+  factureNumber="";
+  facturePrefix="";
+
   constructor(private UtilsService: UtilsServiceService, private datePipe: DatePipe) { }
   ngOnInit(): void {
     this.facture.factureDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
@@ -75,6 +78,11 @@ export class EditFactureComponent implements OnInit {
     this.facture.factureLines.forEach(line=>{
       this.timeLine.timeLineTable.push(line)
     })
+
+    if(this.facture.factureNumber != null && this.facture.factureNumber != ""){
+      this.facturePrefix=this.facture.factureNumber.substr(0,10);
+      this.factureNumber=this.facture.factureNumber.substr(10,4);
+    }
   }
 
   initProduit() {
@@ -201,6 +209,7 @@ export class EditFactureComponent implements OnInit {
   }
   saveGeneratedFacture(){
     this.facture.factureLines=this.timeLine.timeLineTable;
+    this.facture.factureNumber=this.facturePrefix+this.factureNumber;
     this.editFactureEvent.emit(this.facture);
   }
   showProduitModal() {

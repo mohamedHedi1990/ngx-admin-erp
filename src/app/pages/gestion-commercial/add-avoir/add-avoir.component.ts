@@ -62,6 +62,9 @@ export class AddAvoirComponent implements OnInit {
   };
   produit = null;
   showProduitWindow = false;
+  factureNumber="";
+  facturePrefix="";
+
   constructor(private UtilsService: UtilsServiceService, private datePipe: DatePipe) { }
   ngOnInit(): void {
     this.initiateLine();
@@ -72,6 +75,10 @@ export class AddAvoirComponent implements OnInit {
       this.timeLine.timeLineTable.push(line)
     })
     this.calculPrixTotalAvoir();
+    if(this.avoir.factureNumber != null && this.avoir.factureNumber != ""){
+      this.facturePrefix=this.avoir.factureNumber.substr(0,8);
+      this.factureNumber=this.avoir.factureNumber.substr(8,4);
+    }
   }
 
   initProduit() {
@@ -196,6 +203,7 @@ export class AddAvoirComponent implements OnInit {
   }
   saveGeneratedAvoir(){
     this.avoir.factureLines=this.timeLine.timeLineTable;
+    this.avoir.factureNumber=this.facturePrefix+this.factureNumber;
     this.editAvoirEvent.emit(this.avoir);
   }
   showProduitModal() {

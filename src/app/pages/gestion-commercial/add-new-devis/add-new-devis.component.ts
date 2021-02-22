@@ -64,6 +64,9 @@ export class AddNewDevisComponent implements OnInit {
   };
   produit = null;
   showProduitWindow = false;
+  private devisNumber="";
+  devisPrefix="";
+
   constructor(private UtilsService: UtilsServiceService, private datePipe: DatePipe) { }
   ngOnInit(): void {
     this.devis.devisDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
@@ -77,6 +80,10 @@ export class AddNewDevisComponent implements OnInit {
     this.devis.devisLines.forEach(line=>{
       this.timeLine.timeLineTable.push(line)
     })
+    if(this.devis.devisNumber != null && this.devis.devisNumber != ""){
+      this.devisPrefix=this.devis.devisNumber.substr(0,9);
+      this.devisNumber=this.devis.devisNumber.substr(9,4);
+    }
   }
 
   initProduit() {
@@ -197,6 +204,7 @@ export class AddNewDevisComponent implements OnInit {
   }
   saveGeneratedDevis(){
     this.devis.devisLines=this.timeLine.timeLineTable;
+    this.devis.devisNumber=this.devisPrefix+this.devisNumber;
     this.addNewDevisEvent.emit(this.devis);
   }
   showProduitModal() {

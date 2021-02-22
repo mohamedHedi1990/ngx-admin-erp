@@ -78,10 +78,17 @@ export class ListDevisComponent implements OnInit {
         context.getAllDeviss();
       },
       error => {
+      if(error.status == 409){
+        this.utilsService.showToast('danger',
+          'Devis existe',
+          `Il existe une devis avec le numero ${devis.devisNumber}`);
+      }else{
         this.utilsService.showToast('danger',
           'Erreur interne',
           `Un erreur interne a été produit lors de la création du devis`);
+      }
       });
+
   }
 
   hideDevisWindow() {
@@ -119,7 +126,7 @@ export class ListDevisComponent implements OnInit {
   }
   editDevis(devis)
   {
-    this.devis=devis;
+    this.devis=Object.assign(this.devis,devis);
     this.titleHeaderInvoice="Modifier un devis "+devis.devisNumber;
     this.showDevisGeneratedWindow = true;
   }

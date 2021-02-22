@@ -157,7 +157,7 @@ export class ListFacturesComponent implements OnInit {
 
   editFacture(facture)
   {
-    this.facture=facture;
+    this.facture=Object.assign(this.facture,facture);
     this.titleHeaderInvoice="Modifier une facture "+facture.factureNumber;
     this.showFactureWindow = true;
   }
@@ -169,6 +169,7 @@ export class ListFacturesComponent implements OnInit {
     this.avoir.factureId=null;
     this.avoir.factureType='AVOIR';
     this.avoir.factureNumber=null;
+    this.avoir.createdAt=null;
     this.avoir.factureLines.forEach(factureLine => {
       factureLine.factureLineId=null;
       factureLine.facture=null;
@@ -179,7 +180,7 @@ export class ListFacturesComponent implements OnInit {
 
   editAvoir(facture)
   {
-    this.avoir=facture;
+    this.avoir=Object.assign(this.avoir,facture);
     this.showAvoirWindow = true;
   }
 
@@ -193,9 +194,15 @@ export class ListFacturesComponent implements OnInit {
         context.getAllFactures();
       },
       error => {
-        this.utilsService.showToast('danger',
-          'Erreur interne',
-          `Un erreur interne a été produit lors de modification de facture`);
+        if(error.status == 409){
+          this.utilsService.showToast('danger',
+            'Facture existe',
+            `Il existe une facture avec le numero ${facture.factureNumber}`);
+        }else {
+          this.utilsService.showToast('danger',
+            'Erreur interne',
+            `Un erreur interne a été produit lors de modification de facture`);
+        }
       });
   }
 
@@ -207,6 +214,7 @@ export class ListFacturesComponent implements OnInit {
           'Avoir ajouté avec succès',
           `L'avoir a été ajouté avec succès`);
       }else{
+
         this.utilsService.showToast('success',
           'Avoir modifié avec succès',
           `L'avoir a été modifié avec succès`);
@@ -215,9 +223,15 @@ export class ListFacturesComponent implements OnInit {
         context.getAllFactures();
       },
       error => {
-        this.utilsService.showToast('danger',
-          'Erreur interne',
-          `Un erreur interne a été produit lors de modification de l'avoir`);
+        if(error.status == 409){
+          this.utilsService.showToast('danger',
+            'Avoir existe',
+            `Il existe un avoir avec le numero ${avoir.factureNumber}`);
+        }else {
+          this.utilsService.showToast('danger',
+            'Erreur interne',
+            `Un erreur interne a été produit lors de modification de l'avoir`);
+        }
       });
   }
 

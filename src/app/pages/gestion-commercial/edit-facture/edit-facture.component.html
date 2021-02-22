@@ -32,10 +32,13 @@ padding: 10px 10px 10px 10px !important;
           <label for="factureNumber" class="p-float-label">Numéro</label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field" id="facturePrefix"
+                   [(ngModel)]="facturePrefix"  style="font-size: 13px;width:40%"
+                   [disabled]="true" >
             <input type="text" class="form-control p-field" id="factureNumber"
-                   [(ngModel)]="facture.factureNumber" [ngClass]="{
-                  'is-invalid': facture.factureNumber == null || facture.factureNumber == '' ,
-                  'is-valid': facture.factureNumber != null && facture.factureNumber !== ''
+                   [(ngModel)]="factureNumber" [ngClass]="{
+                  'is-invalid': factureNumber == null || factureNumber == '' ,
+                  'is-valid': factureNumber != null && factureNumber !== ''
                 }" style="font-size: 13px">
           </div>
         </div>

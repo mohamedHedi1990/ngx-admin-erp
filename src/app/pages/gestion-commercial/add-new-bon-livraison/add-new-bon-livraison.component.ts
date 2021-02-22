@@ -27,6 +27,8 @@ export class AddNewBonLivraisonComponent implements OnInit {
     bonLivraisonLines: [],
 
   }
+  blPrefix="";
+  blNumber="";
   @Output() addNewBonLivraisonEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();
   clients = [];
@@ -73,6 +75,10 @@ export class AddNewBonLivraisonComponent implements OnInit {
    this.bonLivraison.bonLivraisonLines.forEach(line=>{
      this.timeLine.timeLineTable.push(line)
    })
+    if(this.bonLivraison.bonLivraisonId != null && this.bonLivraison.bonLivraisonId != ""){
+      this.blPrefix=this.bonLivraison.bonLivraisonNumber.substr(0,8);
+      this.blNumber=this.bonLivraison.bonLivraisonNumber.substr(8,4);
+    }
   }
 
   initProduit() {
@@ -193,6 +199,7 @@ export class AddNewBonLivraisonComponent implements OnInit {
   }
   saveGeneratedBonLivraison(){
     this.bonLivraison.bonLivraisonLines=this.timeLine.timeLineTable;
+    this.bonLivraison.bonLivraisonNumber=this.blPrefix+this.blNumber;
   this.addNewBonLivraisonEvent.emit(this.bonLivraison);
   }
   showProduitModal() {

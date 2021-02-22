@@ -74,11 +74,18 @@ export class ListBonsLivraisonComponent implements OnInit {
         `La BonLivraison a été généré avec succé`);
          this.hideBonLivraisonWindow();
          context.getAllBonLivraisons();
+         this.initBonLivraison();
        },
        error => {
+         if(error.status == 409){
+           this.utilsService.showToast('danger',
+             'Bon de livraison existe',
+             `Il existe un bon de livraison avec le numero ${bonLivraison.bonLivraisonNumber}`);
+         }else{
          this.utilsService.showToast('danger',
            'Erreur interne',
            `Un erreur interne a été produit lors de l'enregistrement de bon livraison générée`);
+         }
        });
   }
 
@@ -117,7 +124,7 @@ export class ListBonsLivraisonComponent implements OnInit {
   }
   editBonLivraison(bonLivraison)
   {
-    this.bonLivraison=bonLivraison;
+    this.bonLivraison=Object.assign(bonLivraison,this.bonLivraison);
     this.titleHeaderInvoice="Modifier un bon livraison "+bonLivraison.bonLivraisonNumber;
     this.showBonLivraisonGeneratedWindow = true;
   }

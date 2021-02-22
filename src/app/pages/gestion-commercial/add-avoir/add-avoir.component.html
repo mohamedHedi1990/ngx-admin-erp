@@ -38,8 +38,11 @@ padding: 10px 10px 10px 10px !important;
           <label for="factureNumber" class="p-float-label">Numéro</label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input type="text" class="form-control p-field" id="facturePrefix"
+                   [(ngModel)]="facturePrefix"  style="font-size: 13px;width:30%"
+                   [disabled]="true" >
             <input type="text" class="form-control p-field" id="factureNumber"
-                    style="font-size: 13px" [(ngModel)]="avoir.factureNumber">
+                    style="font-size: 13px" [(ngModel)]="factureNumber">
           </div>
         </div>
 
@@ -72,7 +75,7 @@ padding: 10px 10px 10px 10px !important;
       </div>
 
     </div>
-    
+
     <div class="p-grid p-fluid">
       <div style="display: flex">
 
