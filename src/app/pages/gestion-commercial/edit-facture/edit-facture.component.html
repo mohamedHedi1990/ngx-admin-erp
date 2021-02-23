@@ -33,13 +33,13 @@ padding: 10px 10px 10px 10px !important;
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
             <input type="text" class="form-control p-field" id="facturePrefix"
-                   [(ngModel)]="facturePrefix"  style="font-size: 13px;width:40%"
+                   [(ngModel)]="facturePrefix"  style="font-size: 13px;"
                    [disabled]="true" >
-            <input type="text" class="form-control p-field" id="factureNumber"
+            <input type="number" class="form-control p-field" id="factureNumber"
                    [(ngModel)]="factureNumber" [ngClass]="{
                   'is-invalid': factureNumber == null || factureNumber == '' ,
                   'is-valid': factureNumber != null && factureNumber !== ''
-                }" style="font-size: 13px">
+                }" style="font-size: 13px;width:30%">
           </div>
         </div>
 
