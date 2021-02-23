@@ -45,6 +45,7 @@ export class AddNewFactureClientComponent implements OnInit {
       this.rsAmount = 0;
       if (this.invoice.invoiceRsType == 'POURCENTAGE') {
         this.rsAmount = (this.invoice.invoiceRs * this.invoice.invoiceNet) / 100;
+		this.rsAmount = Math.round(this.rsAmount * 1000) / 1000
 
       }
       this.invoice.invoiceDate = this.datePipe.transform(this.invoice.invoiceDate, 'yyyy-MM-dd');
