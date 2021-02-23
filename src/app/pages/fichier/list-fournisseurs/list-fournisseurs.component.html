@@ -7,7 +7,7 @@ Liste des fournisseurs
 </h4>
 <div class="card" *ngIf="!showProviderWindow" style=" margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
   <p-table #dt [value]="providers" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
-           [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+           [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,20]" [loading]="loading"
            [paginator]="true" currentPageReportTemplate=""
            [filterDelay]="0" [globalFilterFields]="['providerLabel','providerUniqueIdentifier','providerAddress','providerTel','providerEmail','providerManagerName','createdAt', 'updatedAt']">
     <ng-template pTemplate="caption" >
