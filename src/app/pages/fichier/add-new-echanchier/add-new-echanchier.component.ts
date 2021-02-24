@@ -13,7 +13,7 @@ export class AddNewEchanchierComponent implements OnInit {
   @Output() cancelEvent = new EventEmitter();
 @Input() timeLine = {
   timeLineId: null,
-  timeLineLabel: '',
+  creditInstitution: '',
   timeLineAccount: null,
   timeLineCreditNumber: null,
   timeLineInitialAmount: 0,

@@ -13,7 +13,7 @@ export class ListeEchenaciersComponent implements OnInit {
   loading = false;
   timeLine = {
     timeLineId: null,
-  timeLineLabel: '',
+    creditInstitution: '',
   timeLineAccount: null,
   timeLineCreditNumber: null,
   timeLineInitialAmount: 0,
@@ -38,7 +38,7 @@ export class ListeEchenaciersComponent implements OnInit {
   initTimeLine() {
     this.timeLine = {
       timeLineId: null,
-  timeLineLabel: '',
+      creditInstitution: '',
   timeLineAccount: null,
   timeLineCreditNumber: null,
   timeLineInitialAmount: 0,
@@ -63,18 +63,18 @@ export class ListeEchenaciersComponent implements OnInit {
         if ( context.timeLine.timeLineId == null) {
           this.UtilsService.showToast('success',
             'Echéancier ajouté avec succés',
-            `L'échéancier  ${this.timeLine.timeLineLabel} a été ajouté avec succcés`);
+            `L'échéancier  ${this.timeLine.timeLineCreditNumber} a été ajouté avec succcés`);
         } else {
           this.UtilsService.showToast('success',
             'Echéancier modfié avec succés',
-            `L'échéancier  ${this.timeLine.timeLineLabel} a été modifié avec succcés`);
+            `L'échéancier  ${this.timeLine.timeLineCreditNumber} a été modifié avec succcés`);
         }
         context.getAllTimeLines();
         context.initTimeLine();
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
-        `Un erreur interne a été produit lors de la souvegarde de l'échénacier ${this.timeLine.timeLineLabel}`); });
+        `Un erreur interne a été produit lors de la souvegarde de l'échénacier ${this.timeLine.timeLineCreditNumber}`); });
 
   }
 
@@ -103,14 +103,14 @@ export class ListeEchenaciersComponent implements OnInit {
         context.echanciers = response;
         this.UtilsService.showToast('success',
           'Echéancier supprimé avec succés',
-          `L'échéancier  ${this.timeLine.timeLineLabel} a été supprimé avec succcés`);
+          `L'échéancier  ${this.timeLine.timeLineCreditNumber} a été supprimé avec succcés`);
           this.getAllTimeLines();
         this.initTimeLine();
         this.displayDeleteTimeLine = false;
       },
       error => {this.UtilsService.showToast('danger',
         'Erreur interne',
-        `Un erreur interne a été produit lors de la suppression de l'échéancier ${this.timeLine.timeLineLabel}`);
+        `Un erreur interne a été produit lors de la suppression de l'échéancier ${this.timeLine.timeLineCreditNumber}`);
         this.initTimeLine(); 
         this.displayDeleteTimeLine = false;});
 
