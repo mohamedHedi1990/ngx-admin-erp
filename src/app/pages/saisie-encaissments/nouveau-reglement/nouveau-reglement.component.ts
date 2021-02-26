@@ -98,7 +98,9 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
 
 
     }
-    this.reglement.paymentRuleDeadlineDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd')
+    if (this.reglement.paymentRuleId == null) {
+      this.reglement.paymentRuleDeadlineDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd')
+    }
     this.getAllAccounts();
   }
   getAllAccounts() {
