@@ -83,14 +83,15 @@ Etat prévisionnel de trésereorie engagé
            [filterDelay]="0">
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 13px;">
-        <th style="text-align: center; font-size: 13px;width: 20%">Date d'échéance</th>
+        <th style="text-align: center; font-size: 13px;width: 15%">Date d'échéance</th>
         <th style="text-align: center; font-size: 13px;width: 30%">Opération</th>
+        <th style="text-align: center; font-size: 13px;width: 15%">Béneficiare / Emetteur</th>
         <!--
         <th style="text-align: center; font-size: 13px;width: 50%">Détails</th>
         -->
-        <th style="text-align: center; font-size: 13px;width: 15%">Montant</th>
+        <th style="text-align: center; font-size: 13px;width: 10%">Montant</th>
         <th style="text-align: center; font-size: 13px;width: 20%">Solde progressive</th>
-        <th style="text-align: center; font-size: 13px;width: 15%">Statut</th>
+        <th style="text-align: center; font-size: 13px;width: 10%">Statut</th>
       </tr>
     </ng-template>
     <!--
@@ -109,6 +110,9 @@ Etat prévisionnel de trésereorie engagé
         <td style="text-align: center;font-size: 13px;">
           <div>{{operation.opperationLabel}}</div>
           <div *ngIf="operation.opperationFacultatifLabel != null || operation.opperationFacultatifLabel !==''"><i> {{operation.opperationFacultatifLabel}}</i></div>
+        </td>
+        <td style="text-align: center;font-size: 13px;">
+          <div>{{operation.beneficiaryName}}</div>
         </td>
         <!--
         <td style="text-align: center;font-size: 13px;">

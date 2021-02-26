@@ -128,7 +128,7 @@ export class PaiementClientComponent implements OnInit {
       console.log("modifier");
       console.log(this.invoice.invoiceId);
       const context = this;
-      this.UtilsService.post(UtilsServiceService.API_INVOICE + '/' + this.invoice.invoiceId, this.paymentRule).subscribe(response => {
+      this.UtilsService.post(UtilsServiceService.API_INVOICE + '/' + this.invoice.invoiceId + '?operationType=REGLEMENT_FACTURE_CLIENT', this.paymentRule).subscribe(response => {
 
         this.UtilsService.showToast('success',
           'Réglement ajoutée avec succés',
