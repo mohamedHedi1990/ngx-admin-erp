@@ -44,7 +44,7 @@ export class AddNewFactureClientComponent implements OnInit {
     } else {
       this.rsAmount = 0;
       if (this.invoice.invoiceRsType == 'POURCENTAGE') {
-        this.rsAmount = (this.invoice.invoiceRs * this.invoice.invoiceNet) / 100;
+        this.rsAmount = (this.invoice.invoiceRs * this.invoice.invoiceTotalAmount) / 100;
 		this.rsAmount = Math.round(this.rsAmount * 1000) / 1000
 
       }
@@ -73,7 +73,7 @@ export class AddNewFactureClientComponent implements OnInit {
   }
 
   checkInvoiceValid(): boolean {
-  
+
     return this.invoice.invoiceNumber == null || this.invoice.invoiceNumber === '' ||this.invoice.customer == null;
   }
   getAllCustomers() {
@@ -130,5 +130,5 @@ export class AddNewFactureClientComponent implements OnInit {
     this.invoice.invoiceDeadlineInNumberOfDays = time;
 
   }
-  
+
 }

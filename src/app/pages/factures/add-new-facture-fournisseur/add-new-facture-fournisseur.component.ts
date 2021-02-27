@@ -45,7 +45,7 @@ export class AddNewFactureFournisseurComponent implements OnInit {
     } else {
       this.rsAmount = 0;
       if (this.invoice.invoiceRsType == 'POURCENTAGE') {
-        this.rsAmount = (this.invoice.invoiceRs * this.invoice.invoiceNet) / 100;
+        this.rsAmount = (this.invoice.invoiceRs * this.invoice.invoiceTotalAmount) / 100;
 
       }
       this.invoice.invoiceDate = this.datePipe.transform(this.invoice.invoiceDate, 'yyyy-MM-dd');

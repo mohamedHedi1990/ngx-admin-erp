@@ -118,14 +118,14 @@ Etat prévisionnel de trésereorie engagé
           <span class="customer-badge"  [ngClass]="{
         'status-blocked': operation.opperationType === 'DECAISSEMENT',
          'status-active': operation.opperationType === 'ENCAISSEMENT'}">
-                      <span *ngIf="operation.opperationType === 'DECAISSEMENT'">-</span>{{operation.operationAmountS}} {{operation.opperationCurrency}}
+                      <span *ngIf="operation.opperationType === 'DECAISSEMENT'">-</span>{{operation.operationAmountS}}
           </span>
         </td>
         <td style="text-align: center;font-size: 13px;">
            <span class="customer-badge"  [ngClass]="{
         'status-blocked': operation.progressiveAmount < 0,
          'status-active': operation.progressiveAmount >= 0}">
-                       <span *ngIf="operation.progressiveAmount < 0">-</span>{{operation.progressiveAmountS}} {{operation.opperationCurrency}}
+                       <span *ngIf="operation.progressiveAmount < 0">-</span>{{operation.progressiveAmountS}}
            </span>
         </td>
       </tr>

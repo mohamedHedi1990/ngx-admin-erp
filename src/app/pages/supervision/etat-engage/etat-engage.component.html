@@ -37,7 +37,7 @@ Etat prévisionnel de trésereorie engagé
       </label>
       <div class="p-inputgroup">
         <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
-        <input 
+        <input
           type="date"
           placeholder="Date"
           class="form-control p-field"
@@ -125,14 +125,14 @@ Etat prévisionnel de trésereorie engagé
           <span class="customer-badge"  [ngClass]="{
         'status-blocked': operation.opperationType === 'DECAISSEMENT',
          'status-active': operation.opperationType === 'ENCAISSEMENT'}">
-                      <span *ngIf="operation.opperationType === 'DECAISSEMENT'">-</span>{{operation.operationAmountS}} {{operation.opperationCurrency}}
+                      <span *ngIf="operation.opperationType === 'DECAISSEMENT'">-</span>{{operation.operationAmountS}}
           </span>
         </td>
         <td style="text-align: center;font-size: 13px;">
            <span class="customer-badge"  [ngClass]="{
         'status-blocked': operation.progressiveAmount < 0,
          'status-active': operation.progressiveAmount >= 0}">
-                       <span *ngIf="operation.progressiveAmount < 0"></span>{{operation.progressiveAmountS}} {{operation.opperationCurrency}}
+                       <span *ngIf="operation.progressiveAmount < 0"></span>{{operation.progressiveAmountS}}
            </span>
         </td>
         <td style="text-align: center;">

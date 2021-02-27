@@ -27,18 +27,18 @@ statusCards = [
       type: 'primary',
       value: '0' ,
       date: '',
-    
+
   },
   {
-    title: 'Total des encaissements',
-    iconClass: 'nb-arrow-dropdown',
+    title: 'Total des encaissements sur la période',
+    iconClass: 'nb-arrow-dropup',
     type: 'success',
     value: '0',
     date: '',
   },
   {
-    title: 'Total des décaissements',
-    iconClass: 'nb-arrow-dropup',
+    title: 'Total des décaissements sur la période',
+    iconClass: 'nb-arrow-dropdown',
     type: 'danger',
     value: '0',
     date: '',
@@ -54,7 +54,7 @@ statusCards = [
 ];
 encaissement = 0;
 decaissement = 0;
-constructor(private UtilsService: UtilsServiceService, private datePipe: DatePipe) { 
+constructor(private UtilsService: UtilsServiceService, private datePipe: DatePipe) {
   // this.tomorrow.setDate(this.today.getDate()+1);
   this.supervision.startDate = this.datePipe.transform(new Date(),'yyyy-MM-dd');
 }
@@ -75,7 +75,7 @@ constructor(private UtilsService: UtilsServiceService, private datePipe: DatePip
       this.getOperationsBetweenTwoDates();
     }
   }
-  
+
   getAllAccounts() {
     const context = this;
     this.loading = true;
@@ -92,7 +92,7 @@ constructor(private UtilsService: UtilsServiceService, private datePipe: DatePip
          console.log('response    ', response);
          context.statusCards[0].date = response.createdAt;
          this.getOperationsBetweenTwoDates();
-       
+
           },
           error => {
             this.loading = false;
@@ -100,7 +100,7 @@ constructor(private UtilsService: UtilsServiceService, private datePipe: DatePip
               'Erreur interne',
               `Un erreur interne a été produit lors du chargement de la date de dernier rapprochement`);
           });
-         
+
         }
       },
       error => {
@@ -137,7 +137,7 @@ constructor(private UtilsService: UtilsServiceService, private datePipe: DatePip
         context.statusCards[2].value = this.UtilsService.convertAmountToString(''+decaissement.toFixed(3));
 
       // const finalAmount = this.supervision.account.accountInitialAmount + encaissement - decaissement;
-       
+
        context.statusCards[3].value = this.UtilsService.convertAmountToString('' + finalAmount.toFixed(3));
        //const finalDate = this.datePipe.transform(new Date(this.supervision.endDate), 'dd-MM-yyyy HH:mm:ss');
        this.statusCards[3].date = this.datePipe.transform(new Date(this.supervision.endDate), 'dd-MM-yyyy');
@@ -147,7 +147,7 @@ constructor(private UtilsService: UtilsServiceService, private datePipe: DatePip
        ).subscribe( response => {
          console.log('response    ', response);
          context.statusCards[0].value = this.UtilsService.convertAmountToString(''+ response.solde.toFixed(3));
-        
+
           },
           error => {
             this.loading = false;
@@ -163,7 +163,7 @@ constructor(private UtilsService: UtilsServiceService, private datePipe: DatePip
           `Un erreur interne a été produit lors du chargement des opérations`);
       });
   }
-  
+
   compareAccount(a: any, b: any): boolean {
     if (a==null || b== null) return true;
     return a.accountId === b.accountId;
