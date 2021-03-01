@@ -37,7 +37,7 @@ padding: 10px 10px 10px 10px !important;
           <label for="label" class="p-float-label">Etablissement de crédit</label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-            <input type="text" class="form-control p-field" id="label" [(ngModel)]="creditInstitution" [ngClass]="{
+            <input type="text" class="form-control p-field" id="label" [(ngModel)]="timeLine.creditInstitution" [ngClass]="{
         'is-invalid': timeLine.creditInstitution== null || timeLine.creditInstitution == '' ,
         'is-valid': timeLine.creditInstitution != null && timeLine.creditInstitution!== ''
       }">
@@ -169,7 +169,7 @@ padding: 10px 10px 10px 10px !important;
           <th style="text-align: center; font-size: 13px; width: 25%;">Echéance principale</th>
           <th style="text-align: center; font-size: 13px;width: 13%">Intérêts</th>
           <th style="text-align: center;font-size: 13px;width: 11%">TVA</th>
-          <th style="text-align: center; font-size: 13px; width: 20%">Total innuité</th>
+          <th style="text-align: center; font-size: 13px; width: 20%">Total annuité</th>
           <th style="width:9%"></th>
         </tr>
 

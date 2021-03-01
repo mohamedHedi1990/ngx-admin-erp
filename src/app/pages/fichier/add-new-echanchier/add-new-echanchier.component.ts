@@ -151,7 +151,7 @@ updateTotalAmount(line?) {
 checkTimeLineValid(): boolean {
     return this.timeLine.timeLineAccount == null || this.timeLine.timeLineAnnuity == null ||
       this.timeLine.timeLineInterestRate == null || this.timeLine.timeLineInitialAmount == null || this.timeLine.timeLineCreditNumber == null
-  && this.timeLine.timeLineCreditNumber === '' || this.timeLine.timeLineLabel == null || this.timeLine.timeLineLabel === '' ||
+  && this.timeLine.timeLineCreditNumber === '' || this.timeLine.creditInstitution == null || this.timeLine.creditInstitution === '' ||
       this.timeLine.timeLineAnnityNumber == null;
 }
 

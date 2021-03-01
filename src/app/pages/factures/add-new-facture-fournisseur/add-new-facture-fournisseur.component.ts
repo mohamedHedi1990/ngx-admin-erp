@@ -92,7 +92,7 @@ export class AddNewFactureFournisseurComponent implements OnInit {
 
   updateNetAmount() {
     if (this.invoice.invoiceRsType === 'POURCENTAGE') {
-      this.rsAmount = (this.invoice.invoiceRs * this.invoice.invoiceNet) / 100;
+      this.rsAmount = (this.invoice.invoiceRs * this.invoice.invoiceTotalAmount) / 100;
     } else {
       this.rsAmount = this.invoice.invoiceRs;
     }
