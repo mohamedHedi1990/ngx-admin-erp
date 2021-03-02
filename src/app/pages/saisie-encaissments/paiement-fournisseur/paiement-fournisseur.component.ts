@@ -164,6 +164,11 @@ export class PaiementFournisseurComponent implements OnInit {
     this.selectedInvoices = [];
   }
 
+  cancelPaymentRule() {
+    this.displayPaymentRuleModal=false
+    this.initPaymentRule();
+    this.selectedInvoices = [];
+  }
 
 
   getAllInvoices() {

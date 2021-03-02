@@ -221,7 +221,7 @@ padding: 10px 10px 10px 10px !important;
     <ng-template pTemplate="footer">
         <div style="margin-top: 20px;">
             <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
-                (click)="displayPaymentRuleModal=false; initPaymentRule()"></button>
+                (click)="cancelPaymentRule()"></button>
             <button *ngIf="selectedInvoices.length === 0"
                 [disabled]="(paymentRule.paymentRulePaymentMethod=='CHEQUE'||paymentRule.paymentRulePaymentMethod=='TRAITE')&& paymentRule.paymentRuleNumber==null"
                 pButton pRipple label="Valider et ajouter" icon="pi pi-check" class="p-button-success p-mr-2"

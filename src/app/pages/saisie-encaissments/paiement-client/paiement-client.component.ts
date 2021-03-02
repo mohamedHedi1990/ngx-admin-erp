@@ -276,5 +276,11 @@ export class PaiementClientComponent implements OnInit {
     };
   }
 
+  cancelPaymentRule() {
+    this.displayPaymentRuleModal=false
+    this.initPaymentRule();
+    this.selectedInvoices = [];
+  }
+
 
 }
