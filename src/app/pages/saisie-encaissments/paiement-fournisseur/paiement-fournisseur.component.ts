@@ -47,7 +47,7 @@ export class PaiementFournisseurComponent implements OnInit {
     this.displayPaymentRuleModal = true;
     this.titleHeader = "Ajouter un reglement";
   }
-  payInvoices() {
+  payInvoices(addAnOtherPaymentRule: boolean) {
     const invoicePayment = {
       selectedInvoices: this.selectedInvoices,
       paymentRule: this.paymentRule,
@@ -57,10 +57,16 @@ export class PaiementFournisseurComponent implements OnInit {
       this.UtilsService.showToast('success',
         'Factures payées avec succés',
         `Les factures selectionnées ont été payées et fermées avec succés`);
-      this.selectedInvoices = [];
+      
+      this.getAllInvoices();
+      if(!addAnOtherPaymentRule) {
+        this.selectedInvoices = [];
       this.initPaymentRule();
       this.displayPaymentRuleModal = false;
-      this.getAllInvoices();
+      } else {
+        this.paymentRule.paymentRuleNumber = null;
+        this.paymentRule.PaymentRulesDetails= null;
+      }
     },
       error => {
         this.UtilsService.showToast('danger',

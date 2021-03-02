@@ -49,7 +49,7 @@ export class PaiementClientComponent implements OnInit {
   addPaymentRule(data) {
     this.invoice = data;
     this.displayPaymentRuleModal = true;
-    this.titleHeader = "Nouvel reglement";
+    this.titleHeader = "Nouveau reglement";
 
   }
 
@@ -65,7 +65,7 @@ export class PaiementClientComponent implements OnInit {
       `Un erreur interne lors de suppression de(s) réglement(s) associés`);
     });
   }
-  payInvoices() {
+  payInvoices(addAnotherPaymentRule: boolean) {
     const invoicePayment = {
       selectedInvoices: this.selectedInvoices,
       paymentRule: this.paymentRule,
@@ -75,10 +75,16 @@ export class PaiementClientComponent implements OnInit {
       this.UtilsService.showToast('success',
         'Factures payées avec succés',
         `Les factures selectionnées ont été payées et fermées avec succés`);
-      this.selectedInvoices = [];
-      this.initPaymentRule();
-      this.displayPaymentRuleModal = false;
+      
       this.getAllInvoices();
+      if(!addAnotherPaymentRule) {
+        this.selectedInvoices = [];
+        this.initPaymentRule();
+        this.displayPaymentRuleModal = false;
+      } else {
+        this.paymentRule.paymentRuleNumber = null;
+        this.paymentRule.PaymentRulesDetails= null;
+      }
     },
       error => {
         this.UtilsService.showToast('danger',

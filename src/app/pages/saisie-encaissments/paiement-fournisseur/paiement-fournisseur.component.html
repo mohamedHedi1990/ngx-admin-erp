@@ -211,8 +211,11 @@ Paiements fournissuers
       <button *ngIf="selectedInvoices.length === 0" [disabled]="(paymentRule.paymentRulePaymentMethod=='CHEQUE'||paymentRule.paymentRulePaymentMethod=='TRAITE')&& paymentRule.paymentRuleNumber==null"
        pButton pRipple label="valider " icon="pi pi-check" class="p-button-success p-mr-2"
               (click)="savePaymentRule(false)"   ></button>
-			   <button *ngIf="selectedInvoices.length !== 0" pButton pRipple label="Payer" icon="pi pi-check" class="p-button-success p-mr-2"
-              (click)="payInvoices()"></button>
+              <button *ngIf="selectedInvoices.length !== 0" [disabled]="(paymentRule.paymentRulePaymentMethod=='CHEQUE'||paymentRule.paymentRulePaymentMethod=='TRAITE')&& paymentRule.paymentRuleNumber==null"
+              pButton pRipple label="Valider et ajouter" icon="pi pi-check" class="p-button-success p-mr-2"
+              (click)="payInvoices(true)"  ></button>
+			   <button *ngIf="selectedInvoices.length !== 0" pButton pRipple label="Valider" icon="pi pi-check" class="p-button-success p-mr-2"
+              (click)="payInvoices(false)" [disabled]="(paymentRule.paymentRulePaymentMethod=='CHEQUE'||paymentRule.paymentRulePaymentMethod=='TRAITE')&& paymentRule.paymentRuleNumber==null"></button>
 
     </div>
   </ng-template>
