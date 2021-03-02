@@ -190,10 +190,10 @@ Paiements fournissuers
             </tr>
         </ng-template>
         <ng-template pTemplate="emptymessage">
-            <tr style="font-size: 13px; text-align: left !important;">
-                <td colspan="8">Aucune facture fournisseur trouvée!</td>
+            <tr style="font-size: 13px">
+              <td colspan="16" style="text-align: left !important;">Aucune facture fournisseur trouvée!</td>
             </tr>
-        </ng-template>
+          </ng-template>
     </p-table>
 </div>
 <p-dialog header="{{titleHeader}}" [(visible)]="displayPaymentRuleModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
