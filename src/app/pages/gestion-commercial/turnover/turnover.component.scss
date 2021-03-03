@@ -79,3 +79,48 @@ th:last-child {
     padding: 0.25rem;
   }
 }
+@media print {
+  .table {
+    border-spacing:0 5px !important;
+    border-collapse:separate !important;
+  }
+  nb-card {
+    border: none !important;
+  }
+  nb-card-footer {
+    border-top:1.75px solid black;
+  }
+  .table th {
+    -webkit-print-color-adjust:exact;
+    background-color: #aba9a9 !important;
+    border: none;
+  }
+  .background-print-white {
+    -webkit-print-color-adjust:exact;
+    background-color: #ffffff !important;
+  }
+  .table td {
+    -webkit-print-color-adjust:exact;
+    background-color: #dbdbdb !important;
+    height: 30px;
+    font-size: 13px;
+    line-height: 1px;
+    border: none;
+  }
+  td:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+  td:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  th:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+  th:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+}

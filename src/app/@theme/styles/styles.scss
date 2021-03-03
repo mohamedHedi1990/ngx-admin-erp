@@ -195,7 +195,7 @@ select {
 
 @media print {
   nb-menu, nb-layout-header { display: none !important; }
-  .hiddenPrintZone{
+  .hiddenPrintZone {
     display: none !important;
   }
   .printZone { display: block;
@@ -203,6 +203,10 @@ select {
     position: absolute;
     left: 0;
     top: 0;
+  }
+  .background-print-white {
+    -webkit-print-color-adjust:exact;
+    background-color: #ffffff !important;
   }
 }
 

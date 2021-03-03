@@ -139,6 +139,8 @@ export class TurnoverComponent implements OnInit {
   }
 
   generatePDF() {
+        window.print();
+    /*
     var data = document.getElementById('chiffreAffaire');
     html2canvas(data).then(canvas => {
       var imgWidth = 210;
@@ -162,7 +164,7 @@ export class TurnoverComponent implements OnInit {
       }
 
       pdf.save( 'CA-.pdf');
-    });
+    }); */
   }
 
 
