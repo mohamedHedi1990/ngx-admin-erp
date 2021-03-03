@@ -69,8 +69,13 @@ export class AddNewDevisComponent implements OnInit {
 
   constructor(private UtilsService: UtilsServiceService, private datePipe: DatePipe) { }
   ngOnInit(): void {
-    this.devis.devisDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-    this.devis.devisDeadlineDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    if (this.devis.devisDate == null) {
+      this.devis.devisDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    }
+    if (this.devis.devisDeadlineDate == null) {
+      this.devis.devisDeadlineDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    }
+    //this.devis.devisDeadlineDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.maxDateDevisDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.minDevisDeadllineDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.initiateLine();
@@ -106,8 +111,8 @@ export class AddNewDevisComponent implements OnInit {
 
     const context = this;
     this.UtilsService.get(UtilsServiceService.API_CLIENT).subscribe(response => {
-        context.clients = response;
-        if (this.clients.length > 0) {
+      context.clients = response;
+      if (this.clients.length > 0 && this.devis.customer == null) {
           this.devis.customer = this.clients[0];
         }
       },

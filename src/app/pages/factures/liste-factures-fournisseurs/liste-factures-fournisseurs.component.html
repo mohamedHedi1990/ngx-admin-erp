@@ -35,8 +35,8 @@ padding: 10px 10px 10px 10px !important;
     </ng-template>
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 15px;">
-        <th style="text-align: center; font-size: 13px;width: 11%">Numéro</th>
-        <th style="text-align: center; font-size: 13px;width: 20%">Fournisseur</th>
+        <th style="text-align: center; font-size: 13px;width: 15%">Numéro</th>
+        <th style="text-align: center; font-size: 13px;width: 15%">Fournisseur</th>
         <th style="text-align: center; font-size: 13px;width: 10%">Date facture</th>
         <th style="text-align: center;font-size: 13px;width: 10%">Date d'échéance</th>
         <th style="text-align: center; font-size: 13px;width: 14%">Montant facture</th>
@@ -60,10 +60,10 @@ padding: 10px 10px 10px 10px !important;
           {{invoice.invoiceDeadlineDate| date: 'dd-MM-yyyy'}}
         </td>
         <td style="text-align: center;">
-          {{invoice.invoiceTotalAmountS}} {{invoice.invoiceCurrency}}
+          {{invoice.invoiceTotalAmountS}}
         </td>
         <td style="text-align: center;">
-          {{invoice.invoicePaymentS}} {{invoice.invoiceCurrency}}
+          {{invoice.invoicePaymentS}}
         </td>
         <td style="text-align: center;">
           <span *ngIf="invoice.invoiceStatus === 'CLOSED'" class="customer-badge status-active">Fermé</span>

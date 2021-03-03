@@ -124,7 +124,8 @@ export class ListBonsLivraisonComponent implements OnInit {
   }
   editBonLivraison(bonLivraison)
   {
-    this.bonLivraison=Object.assign(bonLivraison,this.bonLivraison);
+    //this.bonLivraison=Object.assign(bonLivraison,this.bonLivraison);
+    this.bonLivraison = bonLivraison;
     this.titleHeaderInvoice="Modifier un bon livraison "+bonLivraison.bonLivraisonNumber;
     this.showBonLivraisonGeneratedWindow = true;
   }

@@ -40,21 +40,21 @@ padding: 10px 10px 10px 10px !important;
                 <th style="width: 2rem">
                     
                 </th>
-                <th pSortableColumn="invoiceNumber" style="text-align: center; font-size: 13px;width: 10%">Numéro</th>
-                <th pSortableColumn="customer.customerLabel" style="text-align: center; font-size: 13px;width: 11%">
+                <th pSortableColumn="invoiceNumber" style="text-align: center; font-size: 13px;width: 15%">Numéro</th>
+                <th pSortableColumn="customer.customerLabel" style="text-align: center; font-size: 13px;width: 15%">
                     Client</th>
-                <th pSortableColumn="invoiceDate" style="text-align: center; font-size: 13px;width: 15%">Date facture
+                <th pSortableColumn="invoiceDate" style="text-align: center; font-size: 13px;width: 13%">Date facture
 
                 </th>
-                <th pSortableColumn="invoiceDeadlineDate" style="text-align: center;font-size: 13px;width: 17%">Date
+                <th pSortableColumn="invoiceDeadlineDate" style="text-align: center;font-size: 13px;width: 15%">Date
                     d'échéance
 
                 </th>
-                <th pSortableColumn="invoiceTotalAmount" style="text-align: center; font-size: 13px;width: 13%">Montant
+                <th pSortableColumn="invoiceTotalAmount" style="text-align: center; font-size: 13px;width: 12%">Montant
                     total
 
                 </th>
-                <th pSortableColumn="invoicePayment" style="text-align: center; font-size: 13px;width: 13%">Montant payé
+                <th pSortableColumn="invoicePayment" style="text-align: center; font-size: 13px;width: 12%">Montant payé
 
                 </th>
                 <th pSortableColumn="invoiceStatus" style="text-align: center; font-size: 13px;width: 11%">Statut</th>
@@ -87,10 +87,10 @@ padding: 10px 10px 10px 10px !important;
                     <span *ngIf="invoice.associted">{{invoice.invoiceDeadlineDates}}</span>
                 </td>
                 <td style="text-align: center;">
-                    {{invoice.invoiceTotalAmountS}} {{invoice.invoiceCurrency}}
+                    {{invoice.invoiceTotalAmountS}}
                 </td>
                 <td style="text-align: center;">
-                    {{invoice.invoicePaymentS}} {{invoice.invoiceCurrency}}
+                    {{invoice.invoicePaymentS}}
                     <i *ngIf="invoice.invoiceStatus === 'OPENED' && invoice.associationNumber !== 0" class="pi pi-exclamation-triangle"
                     placement="top" ngbTooltip="Le montant payé pour cette facture n'est pas précis. Cette facture a été associée avec des autres factures sur un ou plusieurs réglements communs"
                     style="margin-right: 7px;"></i>
@@ -163,7 +163,7 @@ padding: 10px 10px 10px 10px !important;
                         {{paymentRule.paymentRulesDetails}} </span>
 
                 </td>
-                <td>{{paymentRule.paymentRuleAmountS}} {{invoice.invoiceCurrency}}</td>
+                <td>{{paymentRule.paymentRuleAmountS}} </td>
                 <td>
                     <span *ngIf="paymentRule.validated" class="customer-badge status-active">Rapproché</span>
                     <span *ngIf="!paymentRule.validated" class="customer-badge status-progress">Non rapproché</span>

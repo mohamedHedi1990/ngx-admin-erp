@@ -101,8 +101,8 @@ export class AddAvoirComponent implements OnInit {
 
     const context = this;
     this.UtilsService.get(UtilsServiceService.API_CLIENT).subscribe(response => {
-        context.clients = response;
-        if (this.clients.length > 0) {
+      context.clients = response;
+      if (this.clients.length > 0 && this.avoir.customer == null) {
           this.avoir.customer = this.clients[0];
         }
       },

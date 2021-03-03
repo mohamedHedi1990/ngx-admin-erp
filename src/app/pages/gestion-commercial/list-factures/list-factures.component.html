@@ -56,18 +56,18 @@ padding: 10px 10px 10px 10px !important;
              {{facture.factureDeadlineDate | date: 'dd-MM-yyyy'}}
          </td>
         <td style="text-align: center;">
-          {{facture.totalHTBrutS}} {{facture.factureCurrency}}
+          {{facture.totalHTBrutS}}
         </td>-->
         <td style="text-align: center;">
 
-            <span *ngIf="facture.factureType === 'AVOIR'">-</span> {{facture.totalHTS}} {{facture.factureCurrency}}
+            <span *ngIf="facture.factureType === 'AVOIR'">-</span> {{facture.totalHTS}}
         </td>
         
         <!--<td style="text-align: center;font-size: 13px;">
           {{facture.totalTaxeS}}
         </td> -->
         <td style="text-align: center;font-size: 13px;">
-          <span *ngIf="facture.factureType === 'AVOIR'">-</span> {{facture.totalTTCS}} {{facture.factureCurrency}}
+          <span *ngIf="facture.factureType === 'AVOIR'">-</span> {{facture.totalTTCS}}
         </td>
         
 

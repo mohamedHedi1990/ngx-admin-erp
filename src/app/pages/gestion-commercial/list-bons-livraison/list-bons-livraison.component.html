@@ -22,11 +22,11 @@ padding: 10px 10px 10px 10px !important;
                     </span>
                 </div>
               <button pButton pRipple label="Génerer une facture
-" icon="pi pi-plus" class="primaryBtn" (click)="genererFacture()"
+" icon="pi pi-cog" class="primaryBtn" (click)="genererFacture()"
                       [disabled]="selectedBL.length===0"
                       [ngClass]="{'disabled': selectedBL.length===0}"></button>
                 <div style="float:right">
-                    <button pButton pRipple label="Ajouter un bon de livraison" icon="pi pi-cog" class="primaryBtn"
+                    <button pButton pRipple label="Ajouter un bon de livraison" icon="pi pi-plus" class="primaryBtn"
                         (click)="showBonLivraisonWindow()"></button>
                 </div>
             </div>
@@ -64,16 +64,16 @@ padding: 10px 10px 10px 10px !important;
                     {{bonLivraison.bonLivraisonDeadlineDate | date: 'dd-MM-yyyy'}}
                 </td> -->
                 <td style="text-align: center;">
-                    {{bonLivraison.totalHTBrutS}} {{bonLivraison.bonLivraisonCurrency}}
+                    {{bonLivraison.totalHTBrutS}}
                 </td>
                 <td style="text-align: center;">
-                    {{bonLivraison.totalHTS}} {{bonLivraison.bonLivraisonCurrency}}
+                    {{bonLivraison.totalHTS}}
                 </td>
               <!--<td style="text-align: center;font-size: 13px;">
                 {{bonLivraison.totalTaxeS}}
               </td> -->
                 <td style="text-align: center;font-size: 13px;">
-                {{bonLivraison.totalTTCS}} {{bonLivraison.bonLivraisonCurrency}}
+                {{bonLivraison.totalTTCS}}
                 </td>
 
 

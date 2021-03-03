@@ -94,6 +94,7 @@ export class TurnoverComponent implements OnInit {
     this.utilsService.post(UtilsServiceService.API_FACTURE + "/by-date-between" , dates).subscribe(response => {
       this.initChiffreAffaire();
       this.chiffreAffaire.factures = response;
+      this.calculTotals();
       //this.filterFactures();
       },
       error => {

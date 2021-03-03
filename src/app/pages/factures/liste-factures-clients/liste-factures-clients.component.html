@@ -34,8 +34,8 @@ padding: 10px 10px 10px 10px !important;
     </ng-template>
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 15px;">
-        <th style="text-align: center; font-size: 13px;width: 10%">Numéro</th>
-        <th style="text-align: center; font-size: 13px;width: 20%">Client</th>
+        <th style="text-align: center; font-size: 13px;width: 15%">Numéro</th>
+        <th style="text-align: center; font-size: 13px;width: 15%">Client</th>
         <th style="text-align: center; font-size: 13px;width: 10%">Date facture</th>
         <th style="text-align: center;font-size: 13px;width: 10%">Date d'échéance</th>
         <th style="text-align: center; font-size: 13px;width: 14%">Montant facture</th>
@@ -47,6 +47,8 @@ padding: 10px 10px 10px 10px !important;
     <ng-template pTemplate="body" let-invoice>
       <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
         <td style="text-align: center;font-size: 13px;">
+          <i class="pi pi-cog" *ngIf="invoice.isGeneratedInvoice == true"
+             placement="top" ngbTooltip="Facture génerée à partir du module gestion commerciale" style="color: gray !important"></i>
           {{invoice.invoiceNumber}}
         </td>
         <td style="text-align: center;font-size: 13px;">
@@ -59,10 +61,10 @@ padding: 10px 10px 10px 10px !important;
           {{invoice.invoiceDeadlineDate  | date: 'dd-MM-yyyy'}}
         </td>
         <td style="text-align: center;">
-          {{invoice.invoiceTotalAmountS}} {{invoice.invoiceCurrency}}
+          {{invoice.invoiceTotalAmountS}}
         </td>
         <td style="text-align: center;">
-          {{invoice.invoicePaymentS}} {{invoice.invoiceCurrency}}
+          {{invoice.invoicePaymentS}}
         </td>
         <td style="text-align: center;">
           <span *ngIf="invoice.invoiceStatus === 'CLOSED'" class="customer-badge status-active">Fermé</span>

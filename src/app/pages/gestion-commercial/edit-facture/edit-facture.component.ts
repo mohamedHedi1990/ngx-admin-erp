@@ -68,7 +68,10 @@ export class EditFactureComponent implements OnInit {
 
   constructor(private UtilsService: UtilsServiceService, private datePipe: DatePipe) { }
   ngOnInit(): void {
-    this.facture.factureDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    if (this.facture.factureDate == null) {
+      this.facture.factureDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+
+    }
     this.maxDateFactureDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.minDateDeadlineDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.initiateLine();
@@ -105,8 +108,8 @@ export class EditFactureComponent implements OnInit {
 
     const context = this;
     this.UtilsService.get(UtilsServiceService.API_CLIENT).subscribe(response => {
-        context.clients = response;
-        if (this.clients.length > 0) {
+      context.clients = response;
+      if (this.clients.length > 0 && this.facture.customer == null) {
           this.facture.customer = this.clients[0];
         }
       },

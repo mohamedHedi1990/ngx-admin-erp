@@ -93,7 +93,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         icon: 'file-text-outline',
       },
       {
-        title: 'Chiffre affaire',
+        title: 'Chiffre d\'affaires',
         link: '/pages/gestion-commercial/chiffre-affaire',
         icon: 'code-download',
       },

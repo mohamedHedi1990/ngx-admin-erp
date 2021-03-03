@@ -65,7 +65,9 @@ export class AddNewBonLivraisonComponent implements OnInit {
   showProduitWindow = false;
   constructor(private UtilsService: UtilsServiceService, private datePipe: DatePipe) { }
   ngOnInit(): void {
-    this.bonLivraison.bonLivraisonDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    if (this.bonLivraison.bonLivraisonDate == null) {
+      this.bonLivraison.bonLivraisonDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    }
     this.maxDateInvoiceDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.minDateDeadlineDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.initiateLine();
@@ -102,7 +104,7 @@ export class AddNewBonLivraisonComponent implements OnInit {
     const context = this;
     this.UtilsService.get(UtilsServiceService.API_CLIENT).subscribe(response => {
       context.clients = response;
-      if (this.clients.length > 0) {
+      if (this.clients.length > 0 && this.bonLivraison.customer == null) {
         this.bonLivraison.customer = this.clients[0];
       }
     },
