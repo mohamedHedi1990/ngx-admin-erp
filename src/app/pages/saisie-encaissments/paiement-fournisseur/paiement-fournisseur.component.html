@@ -200,7 +200,7 @@ Paiements fournissuers
           [draggable]="false" [resizable]="false">
   <br>
   <ngx-nouveau-reglement [reglement]="paymentRule" [seletcedInvoices]="selectedInvoices"
-                         [invoice]="invoice"></ngx-nouveau-reglement>
+                         [invoice]="invoice" [isEncaissement]="false"></ngx-nouveau-reglement>
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
       <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"

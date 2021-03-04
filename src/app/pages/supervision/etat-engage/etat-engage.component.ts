@@ -31,14 +31,14 @@ statusCards = [
   },
   {
     title: 'Total des encaissements sur la période',
-    iconClass: 'nb-arrow-dropup',
+    iconClass: 'nb-arrow-dropdown',
     type: 'success',
     value: '0',
     date: '',
   },
   {
     title: 'Total des décaissements sur la période',
-    iconClass: 'nb-arrow-dropdown',
+    iconClass: 'nb-arrow-dropup',
     type: 'danger',
     value: '0',
     date: '',

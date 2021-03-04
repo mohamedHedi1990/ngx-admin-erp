@@ -49,13 +49,14 @@
       <div class="p-inputgroup">
         <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
         <select class="form-control p-field" id="paie" name="side" [(ngModel)]="reglement.paymentRulePaymentMethod"
-          style="font-size: 13px;">
+                style="font-size: 13px;">
           <!-- <option [ngValue]="null">-- Mode de payment --</option> -->
           <option [ngValue]="'CHEQUE'">CHEQUE</option>
           <option [ngValue]="'VIREMENT'">VIREMENT</option>
           <option [ngValue]="'ESPECE'">ESPECE</option>
-          <option [ngValue]="'TRAITE'">TRAITE</option>
-          <option [ngValue]="'EFFET_ESCOMPTE'">EFFET ESCOMPTE</option>
+          <option *ngIf="!isEncaissement" [ngValue]="'TRAITE'">TRAITE</option>
+          <option *ngIf="isEncaissement" [ngValue]="'TRAITE'">TRAITE A L'ENCAISSEMENT</option>
+          <option *ngIf="isEncaissement" [ngValue]="'EFFET_ESCOMPTE'">TRAITE A L'ESCOMPTE</option>
 
         </select>
       </div>

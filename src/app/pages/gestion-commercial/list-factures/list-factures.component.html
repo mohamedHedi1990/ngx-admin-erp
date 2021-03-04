@@ -38,7 +38,11 @@ padding: 10px 10px 10px 10px !important;
 
     </ng-template>
     <ng-template pTemplate="body" let-facture>
-      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
+      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;"
+          [ngClass]="{
+                  'avoirTr': facture.factureType === 'AVOIR' 
+                  
+                }">
         <td style="text-align: center;font-size: 13px;">
           {{facture.factureNumber}}
         </td>

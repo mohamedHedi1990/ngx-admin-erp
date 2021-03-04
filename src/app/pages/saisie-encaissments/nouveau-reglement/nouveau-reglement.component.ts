@@ -32,6 +32,8 @@ export class NouveauReglementComponent implements OnInit, OnChanges {
 
   isPaymentAmountDisabled = false;
   paymentOlderValue: any;
+
+  @Input() isEncaissement: boolean;
   constructor(private UtilsService: UtilsServiceService,private datePipe: DatePipe) { }
 
   ngOnInit(): void {

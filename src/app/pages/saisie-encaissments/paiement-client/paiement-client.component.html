@@ -216,7 +216,8 @@ padding: 10px 10px 10px 10px !important;
 <p-dialog header="{{titleHeader}}" [(visible)]="displayPaymentRuleModal" [modal]="true" [style]="{width: '50vw'}"
     [baseZIndex]="10000" [draggable]="false" [resizable]="false">
     <br>
-    <ngx-nouveau-reglement [reglement]="paymentRule" [seletcedInvoices]="selectedInvoices" [invoice]="invoice">
+    <ngx-nouveau-reglement [reglement]="paymentRule" [seletcedInvoices]="selectedInvoices" [invoice]="invoice"
+                           [isEncaissement]="true">
     </ngx-nouveau-reglement>
     <ng-template pTemplate="footer">
         <div style="margin-top: 20px;">

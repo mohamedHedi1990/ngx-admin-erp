@@ -31,14 +31,14 @@ statusCards = [
   },
   {
     title: 'Encaissements rapprochés',
-    iconClass: 'nb-arrow-dropup',
+    iconClass: 'nb-arrow-dropdown',
     type: 'success',
     value: '0',
     date: '',
   },
   {
     title: 'Décaissements rapprochés',
-    iconClass: 'nb-arrow-dropdown',
+    iconClass: 'nb-arrow-dropup',
     type: 'danger',
     value: '0',
     date: '',
