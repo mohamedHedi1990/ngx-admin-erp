@@ -210,6 +210,16 @@ select {
   }
 }
 
+@media print {
+  nb-card {
+    border: none !important;
+  }
+
+  nb-card-footer {
+    border-top: 1.75px solid black;
+  }
+}
+
 
 p-multiSelect {
   font-size: 13px !important;

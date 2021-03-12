@@ -33,7 +33,9 @@ export class UtilsServiceService {
   public static API_PAYMENT_RULE = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/paymentRule';
   public static API_SUIVIE_TRESERORIE = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/supervision';
   public static API_GLOBAL_SUPERVISION = UtilsServiceService.API_SUIVIE_TRESERORIE + '/' + 'global';
-  public static API_RAAPROCHEMENT_BANCAIRE= UtilsServiceService.API_SUIVIE_TRESERORIE + '/' + 'rapprochement-bancaire';
+  public static API_NON_ENGAGE_SUPERVISION = UtilsServiceService.API_SUIVIE_TRESERORIE + '/' + 'non-engage';
+
+  public static API_RAAPROCHEMENT_BANCAIRE = UtilsServiceService.API_SUIVIE_TRESERORIE + '/' + 'rapprochement-bancaire';
   public static API_HISTORIC_SOLD = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/historic-account-sold';
   public static API_PROVIDER_ATTACHED_INVOICES = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/provider-attahced-invoices';
   public static API_CUSTOMER_ATTACHED_INVOICES = UtilsServiceService.REMOTE_ADDRESS + '/' + 'api/customer-attahced-invoices';

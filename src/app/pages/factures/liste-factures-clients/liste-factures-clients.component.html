@@ -45,7 +45,11 @@ padding: 10px 10px 10px 10px !important;
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-invoice>
-      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
+      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;"
+          [ngClass]="{
+                  'avoirTr': invoice.invoiceTotalAmount < 0 
+                  
+                }">
         <td style="text-align: center;font-size: 13px;">
           <i class="pi pi-cog" *ngIf="invoice.isGeneratedInvoice == true"
              placement="top" ngbTooltip="Facture génerée à partir du module gestion commerciale" style="color: gray !important"></i>
