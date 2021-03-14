@@ -167,13 +167,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Etat engagé',
         link: '/pages/suivi-tresorerie/etat-engage',
-        icon: 'activity-outline',
+        icon: 'code-download-outline',
       },
-      
+
       {
         title: 'Etat non engagé',
         link: '/pages/suivi-tresorerie/etat-non-engage',
-        icon: 'activity-outline',
+        icon: 'code-outline',
+      },
+      {
+        title: 'Etat global',
+        link: '/pages/suivi-tresorerie/etat-global-engage',
+        icon: 'collapse-outline',
       },
       /*{
         title: 'Tréserorie previsionnel engagé',

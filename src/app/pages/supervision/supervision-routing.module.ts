@@ -5,6 +5,7 @@ import { EtatGlobalTreserorieComponent } from './etat-global-treserorie/etat-glo
 import { EtatNonEngageComponent } from './etat-non-engage/etat-non-engage.component';
 import { GlobalSupervisionComponent } from './global-supervision/global-supervision.component';
 import { RapprochementBancaireComponent } from './rapprochement-bancaire/rapprochement-bancaire.component';
+import {EtatGlobalEngageComponent} from "./etat-global-engage/etat-global-engage.component";
 
 const routes: Routes = [{
   path: '',
@@ -25,7 +26,10 @@ const routes: Routes = [{
     {
       path: 'rapprochement-bancaire',
       component: RapprochementBancaireComponent
-    }
+    } ,{
+      path: 'etat-global-engage',
+      component: EtatGlobalEngageComponent,
+    },
   ],
 
 }];
