@@ -10,12 +10,14 @@ import {
 // RxJS
 import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
+import { Router } from "@angular/router";
 
 /**
  * More information there => https://medium.com/@MetonymyQT/angular-http-interceptors-what-are-they-and-how-to-use-them-52e060321088
  */
 @Injectable()
 export class InterceptService implements HttpInterceptor {
+  constructor(private router: Router){}
   // intercept request and add token
   intercept(
     request: HttpRequest<any>,
@@ -44,6 +46,10 @@ console.log('tttttt');
         },
         (error) => {
           // http response status code
+          if (error.status === 401||error.status === 403){
+            localStorage.clear();
+            this.router.navigateByUrl('/auth/login');
+          }
           console.log("----response----");
           console.error(error.status);
           console.error(error.message);
