@@ -43,7 +43,7 @@ padding: 10px 10px 10px 10px !important;
                    [(ngModel)]="invoice.invoiceNumber" [ngClass]="{
         'is-invalid': invoice.invoiceNumber == null || invoice.invoiceNumber == '' ,
         'is-valid': invoice.invoiceNumber != null && invoice.invoiceNumber !== ''
-      }" style="font-size: 13px">
+      }" style="font-size: 13px" [disabled]="invoice.isGeneratedInvoice==true">
           </div>
         </div>
         <div class="mb-1 col-md-4 col-12">
@@ -59,7 +59,7 @@ padding: 10px 10px 10px 10px !important;
                     [(ngModel)]="invoice.customer" [ngClass]="{
         'is-invalid': invoice.customer == null ,
         'is-valid':invoice.customer != null
-      }" style="font-size: 13px" [compareWith]="compareCustomer">
+      }" style="font-size: 13px" [compareWith]="compareCustomer" [disabled]="invoice.isGeneratedInvoice==true">
               <option *ngFor="let c of clients;" [ngValue]="c">{{c.customerLabel}}</option>
 
             </select>
@@ -70,7 +70,7 @@ padding: 10px 10px 10px 10px !important;
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-dollar"></i></span>
             <select class="form-control p-field" id="devise" name="side" [(ngModel)]="invoice.invoiceCurrency"
-                    style="font-size: 13px" >
+                    style="font-size: 13px" [disabled]="invoice.isGeneratedInvoice==true">
               <option value="TND" >TND</option>
 
             </select>
@@ -89,7 +89,7 @@ padding: 10px 10px 10px 10px !important;
                    [(ngModel)]="invoice.invoiceDate"
                    [max]="maxDateInvoiceDate"
                    (change)="changeInvoiceDate()"
-                   style="font-size: 13px">
+                   style="font-size: 13px" [disabled]="invoice.isGeneratedInvoice==true">
           </div>
         </div>
 
@@ -126,7 +126,7 @@ padding: 10px 10px 10px 10px !important;
         <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
         <input type="number" class="form-control p-field" id="net"
                [(ngModel)]="invoice.invoiceTotalAmount" style="font-size: 13px"
-               (change)="updateNetAmount()">
+               (change)="updateNetAmount()" [disabled]="invoice.isGeneratedInvoice==true">
       </div>
     </div>
     <div class="mb-12 col-md-4 col-12">
