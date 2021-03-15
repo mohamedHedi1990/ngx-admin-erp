@@ -78,11 +78,12 @@ padding: 10px 10px 10px 10px !important;
       <tr style="text-align: center; font-size: 13px;">
         <th style="text-align: center; font-size: 13px;width: 15%">Date d'échéance</th>
         <th style="text-align: center; font-size: 13px;width: 30%">Opération</th>
-        <th style="text-align: center; font-size: 13px;width: 15%">Béneficiare / Emetteur</th>
+        <th style="text-align: center; font-size: 13px;width: 20%">Béneficiare / Emetteur</th>
         <!--
   <th style="text-align: center; font-size: 13px;width: 50%">Détails</th>
   -->
         <th style="text-align: center; font-size: 13px;width: 10%">Montant</th>
+        <th style="text-align: center; font-size: 13px;width: 25%">Solde progressive</th>
         <!--
   <th style="text-align: center; font-size: 13px;width: 20%">Solde progressive</th>
   <th style="text-align: center; font-size: 13px;width: 10%">Statut</th>
@@ -123,6 +124,13 @@ padding: 10px 10px 10px 10px !important;
             <span *ngIf="operation.opperationType === 'DECAISSEMENT && operation.operationAmount > 0'">-</span>{{operation.operationAmountS}}
           </span>
         </td>
+        <td style="text-align: center;font-size: 13px;">
+          <span class="customer-badge"  [ngClass]="{
+       'status-blocked': operation.progressiveAmount < 0,
+        'status-active': operation.progressiveAmount >= 0}">
+                     {{operation.progressiveAmountS}}
+          </span>
+       </td>
         <!--
         <td style="text-align: center;font-size: 13px;">
           <span class="customer-badge" [ngClass]="{
