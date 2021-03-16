@@ -94,13 +94,13 @@ padding: 10px 10px 10px 10px !important;
 
         </td>
         <td style="text-align: center;">
-          <span *ngIf="decaissement.isValidated" class="customer-badge status-active">Rapproché</span>
-          <span *ngIf="!decaissement.isValidated" class="customer-badge status-progress">Non rapproché</span>
+          <span *ngIf="decaissement.validated" class="customer-badge status-active">Rapproché</span>
+          <span *ngIf="!decaissement.validated" class="customer-badge status-progress">Non rapproché</span>
         </td>
 
 
         <td style="text-align: center;">
-          <div *ngIf="!decaissement.isValidated" style="text-align: center;">
+          <div *ngIf="!decaissement.validated" style="text-align: center;">
             <!--
            <i ngbTooltip="Valider"  class="pi pi-check"  style="margin-right: 7px; color: #6200ee" (click)="showValidateDecaisementWindow(decaissement)"></i>
            -->
@@ -109,7 +109,7 @@ padding: 10px 10px 10px 10px !important;
             <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" (click)="deleteDecaissement(decaissement)"
               style="color: #6200ee"></i>
           </div>
-          <div *ngIf="decaissement.isValidated" style="text-align: center">
+          <div *ngIf="decaissement.validated" style="text-align: center">
             - -
           </div>
 
