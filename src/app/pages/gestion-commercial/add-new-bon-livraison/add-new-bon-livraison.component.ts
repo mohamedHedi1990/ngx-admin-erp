@@ -21,7 +21,7 @@ export class AddNewBonLivraisonComponent implements OnInit {
     totalTVA: 0,
     totalFodec: 0,
     totalTaxe: 0,
-    timbreFiscal: 0.5,
+    timbreFiscal: 0.600,
     totalTTC: 0,
     montantBonLivraison: 0,
     bonLivraisonLines: [],

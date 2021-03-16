@@ -22,7 +22,7 @@ export class AddNewDevisComponent implements OnInit {
     totalTVA: 0,
     totalFodec: 0,
     totalTaxe: 0,
-    timbreFiscal: 0.5,
+    timbreFiscal: 0.600,
     totalTTC: 0,
     montantDevis: 0,
     devisLines: [],
