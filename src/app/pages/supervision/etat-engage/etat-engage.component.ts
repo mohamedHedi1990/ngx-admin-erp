@@ -22,7 +22,7 @@ supervision= {
 accountInitialAmount = 0;
 statusCards = [
   {
-      title: 'Montant initial',
+      title: 'Solde initial',
       iconClass: 'nb-square-outline',
       type: 'primary',
       value: '0' ,
@@ -44,7 +44,7 @@ statusCards = [
     date: '',
   },
   {
-    title: 'Montant final',
+    title: 'Solde final',
     iconClass: 'nb-checkmark',
     type: 'success',
     value: '0',
